@@ -765,7 +765,7 @@ header .navbar-default ul.navbar-nav li a {
   background: none;
 }
 header .navbar-default ul.navbar-nav li a.getApp {
-  color: #3c79b4;
+  color: #ee0000;
   background: #ffffff;
   /* Old browsers */
   background: -moz-linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
@@ -784,7 +784,7 @@ header .navbar-default ul.navbar-nav li a.getApp {
   /* IE6-9 fallback on horizontal gradient */
 }
 header .navbar-default ul.navbar-nav li a.getApp:hover {
-  color: #4081bf;
+  color: #cd0000;
   background: #ffffff;
   /* Old browsers */
   background: -moz-linear-gradient(180deg, #ffffff 0%, #cccccc 100%);
@@ -816,33 +816,33 @@ header .navbar-default ul.navbar-nav li a:hover {
   transition: all 0.25s ease-in-out;
 }
 header .navbar-default.scrolled {
-  border-bottom: 3px solid #336799;
+  border-bottom: 3px solid #cd0000;
 }
 header .navbar-default.scrolled ul.navbar-nav li a {
-  color: #336799;
+  color: #ee0000;
 }
 header .navbar-default.scrolled ul.navbar-nav li a:hover {
-  color: #336799;
+  color: #cd0000;
 }
 header .navbar-default.scrolled ul.navbar-nav li a:hover:after {
-  background: #336799;
+  background: #ee0000;
 }
 header .navbar-default.scrolled .navbar-brand {
   background: #336799;
 }
 section .section-heading .divider:after {
-  background: #66cdcc;
+  background: #cd0000;
 }
 section#about .about-item i.fa {
-  border: 2px solid #66cdcc;
-  color: #66cdcc;
+  border: 2px solid #cd0000;
+  color: #cd0000;
 }
 section#about .about-item:hover i.fa {
   color: #ffffff;
-  background: #66cdcc;
+  background: #ee0000;
 }
 section#about .about-item:hover h3 {
-  color: #66cdcc;
+  color: #cd0000;
 }
 section#features {
   background: #f6f6f6;
@@ -866,7 +866,7 @@ section#features .media.active i.fa {
   background: #66cdcc;
 }
 section#features .media.active .media-heading {
-  color: #66cdcc;
+  color: #cd0000;
 }
 section#reviews {
   background: url("../img/freeze/bk-freeze.jpg");
@@ -937,7 +937,7 @@ section#demo header h1:after {
 }
 /* Get app Section */
 section#getApp {
-  background: url("../img/freeze/bk-freeze-ga.jpg");
+  background: url("../img/vermelho_abstrato.jpg");
 }
 section#getApp header {
   color: #ffffff;
@@ -964,18 +964,18 @@ section#getApp .platforms .media:hover a div.media-body {
 }
 /* support section */
 section#support header h1:after {
-  background: #66cdcc;
+  background: #cd0000;
 }
 section#support .media i.fa {
-  border: 2px solid #66cdcc;
-  color: #66cdcc;
+  border: 2px solid #cd0000;
+  color: #cd0000;
 }
 section#support .media a {
-  color: #66cdcc;
+  color: #cd0000;
 }
 section#support .media:hover i.fa {
-  color: #ffffff;
-  background: #66cdcc;
+  color: #ee0000;
+  background: #ffa07a;
 }
 section#support .media:hover h3 {
   color: #66cdcc;
@@ -1024,22 +1024,22 @@ footer .rights a {
   border: 1px solid rgba(0, 0, 0, 0);
 }
 .btn.btn-primary {
-  color: #66cdcc;
-  border-color: #66cdcc;
+  color: #cd0000;
+  border-color: #cd0000;
 }
 .btn.btn-primary:hover {
-  color: #ffffff;
-  background: #66cdcc;
-  border-color: #66cdcc;
+  color: #ee0000;
+  background: #ffa07a;
+  border-color: #cd0000;
 }
 .btn.btn-primary.inverse {
   color: #ffffff;
   border-color: #ffffff;
 }
 .btn.btn-primary.inverse:hover {
-  color: #ffffff;
-  background: #66cdcc;
-  border-color: #66cdcc;
+  color: #ffa07a;
+  background: #cd0000;
+  border-color: #8b0000;
 }
 .btn.btn-default {
   background: #ffffff;
@@ -1064,7 +1064,7 @@ footer .rights a {
   color: #336799;
 }
 form .form-control:focus {
-  border-color: #66cdcc;
+  border-color: #cd0000;
   color: #999999;
 }
 @media screen and (max-width: 640px) {

@@ -216,6 +216,10 @@
     <Compile Include="Models\UsuarioModelcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebService.asmx.cs">
+      <DependentUpon>WebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
@@ -246,11 +250,17 @@
     <Content Include="Content\Home_Css\img\berry\Slides\berry-slide2.png" />
     <Content Include="Content\Home_Css\img\berry\Slides\family-berry.png" />
     <Content Include="Content\Home_Css\img\berry\Slides\hand-berry.png" />
+    <Content Include="Content\Home_Css\img\equipe\andre.png" />
     <Content Include="Content\Home_Css\img\eco\bk-eco-ga.jpg" />
     <Content Include="Content\Home_Css\img\eco\bk-eco.jpg" />
+    <Content Include="Content\Home_Css\img\equipe\daniel_allan.png" />
+    <Content Include="Content\Home_Css\img\equipe\daniel_florencio.png" />
+    <Content Include="Content\Home_Css\img\equipe\diego.png" />
     <Content Include="Content\Home_Css\img\eco\eco-angled2.png" />
+    <Content Include="Content\Home_Css\img\equipe\hugo.png" />
     <Content Include="Content\Home_Css\img\eco\iphone-eco.png" />
     <Content Include="Content\Home_Css\img\eco\logo.png" />
+    <Content Include="Content\Home_Css\img\equipe\natalia.png" />
     <Content Include="Content\Home_Css\img\eco\screens\calendar.jpg" />
     <Content Include="Content\Home_Css\img\eco\screens\menu.jpg" />
     <Content Include="Content\Home_Css\img\eco\screens\options.jpg" />
@@ -261,6 +271,7 @@
     <Content Include="Content\Home_Css\img\eco\Slides\eco-slide2.png" />
     <Content Include="Content\Home_Css\img\eco\Slides\family-eco.png" />
     <Content Include="Content\Home_Css\img\eco\Slides\hand-eco.png" />
+    <Content Include="Content\Home_Css\img\equipe\yuri.png" />
     <Content Include="Content\Home_Css\img\freeze\bk-freeze-ga.jpg" />
     <Content Include="Content\Home_Css\img\freeze\bk-freeze.jpg" />
     <Content Include="Content\Home_Css\img\freeze\freeze-angled2.png" />
@@ -277,6 +288,7 @@
     <Content Include="Content\Home_Css\img\freeze\Slides\freeze-slide2.png" />
     <Content Include="Content\Home_Css\img\freeze\Slides\hand-freeze.png" />
     <Content Include="Content\Home_Css\img\transparent.png" />
+    <Content Include="Content\Home_Css\img\vermelho_abstrato.jpg" />
     <Content Include="Content\Home_Css\js\bootstrap.min.js" />
     <Content Include="Content\Home_Css\js\jquery-1.11.1.min.js" />
     <Content Include="Content\Home_Css\js\less-1.7.0.min.js" />
@@ -376,6 +388,7 @@
     <Content Include="Content\Home_Css\less\styles.less" />
     <Content Include="Content\Home_Css\modal\images\Thumbs.db" />
     <Content Include="Scripts\jquery-1.11.1.min.map" />
+    <Content Include="WebService.asmx" />
     <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\SangueHeroiWeb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
