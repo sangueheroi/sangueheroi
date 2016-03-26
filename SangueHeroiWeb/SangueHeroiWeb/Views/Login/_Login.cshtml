@@ -1,6 +1,6 @@
 ﻿@model SangueHeroiWeb.Models.LoginModel
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @id = "formLogin" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -15,12 +15,12 @@
                     <h2>Login</h2>
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(mode => mode.USUARIO, null, new { @type = "text", @class = "usuario usuario_img_background", @placeholder = "Nome" })
-                    @Html.ValidationMessageFor(model => model.USUARIO)
+                    @Html.TextBoxFor(model => model.EMAIL_USUARIO, null, new { @type = "text", @class = "usuario usuario_img_background", @placeholder = "Nome", required = "required" })
+                    @Html.ValidationMessageFor(model => model.EMAIL_USUARIO)
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.SENHA, null, new { @type = "password", @class = "senha senha_img_background", @placeholder = "Senha" })
-                    @Html.ValidationMessageFor(model => model.USUARIO)
+                    @Html.TextBoxFor(model => model.SENHA, null, new { @type = "password", @class = "senha senha_img_background", @placeholder = "Senha", required = "required" })
+                    @Html.ValidationMessageFor(model => model.SENHA)
                 </div>
                 <div class="form-group">
                     <div class="form-inline">
@@ -79,6 +79,39 @@
     </div>
 }
 
+
+@using Microsoft.Owin.Security
+
+<h4>Use another service to log in.</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+            <p>
+                There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support logging in via external services.
+            </p>
+        </div>
+    }
+    else {
+        using (Html.BeginForm("ExternalLogin", "Account"))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                    }
+                </p>
+            </div>
+        }
+    }
+}
+
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#btnEsqueceuSuaSenha').on("click", function () {
@@ -91,4 +124,50 @@
             ModalRegistrar();
         });
     });
+
+    $(document).ready(function () {
+        $('form#formLogin').submit(function (e) {
+            //Objeto Model
+            var ObjLogin = {
+                EMAIL_USUARIO: "",
+                SENHA: 0,
+            };
+            //Dados Form
+            var data = $(this).serializeArray();
+
+            ObjLogin["EMAIL_USUARIO"] = data[1].value;
+            ObjLogin["SENHA"] = data[2].value;
+           
+           
+            $.ajax({
+                type: 'POST',
+                url: './Login/Login',
+                contentType: 'application/json',
+                data: (JSON.stringify(ObjLogin)),
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    //if(!data.isRedirect)
+                    //{
+                    //    alert(data.msg);
+                    //}
+                    //else
+                    //{
+                    //    window.location.href = data.redirectUrl;
+                    //}
+
+                    alert(data.msg);
+                }
+            });
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                e.returnValue = false;
+            }
+        });
+    });
+
+
 </script>
+
