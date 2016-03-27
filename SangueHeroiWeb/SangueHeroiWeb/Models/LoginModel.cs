@@ -10,7 +10,7 @@ namespace SangueHeroiWeb.Models
     {
         [Required]
         [Display(Name = "Usuario")]
-        public string USUARIO { get; set; }
+        public string EMAIL_USUARIO { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

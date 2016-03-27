@@ -1,16 +1,26 @@
 ﻿@model SangueHeroiWeb.Models.EsqueciMinhaSenhaModel
 @{
     ViewBag.Title = "Sangue Herói";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
-
-
+<link rel="stylesheet" href="~/Content/Home_Css/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/Content/Home_Css/css/animate.css">
 <link rel="stylesheet" href="~/Content/Home_Css/css/font-awesome.min.css">
 <link rel="stylesheet" href="~/Content/Home_Css/css/slick.css">
 <link rel="stylesheet" href="~/Content/Home_Css/js/rs-plugin/css/settings.css">
 <link rel="stylesheet" href="~/Content/Home_Css/css/styles.css">
 <link rel="stylesheet" href="~/Content/bootstrap-social.css" />
+
+@*<link href="~/Content/bootstrap-theme.css.map" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css.map" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css.map" rel="stylesheet" />
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css.map" rel="stylesheet" />*@
+<link href="~/Content/Site.css" rel="stylesheet" />
+
 
 <script type="text/javascript" src="~/Content/Home_Css/js/modernizr.custom.32033.js"></script>
 
@@ -357,12 +367,18 @@
 
 </div>
 <script src="~/Content/Home_Css/js/jquery-1.11.1.min.js"></script>
+
 <script src="~/Content/Home_Css/js/slick.min.js"></script>
 <script src="~/Content/Home_Css/js/placeholdem.min.js"></script>
 <script src="~/Content/Home_Css/js/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
 <script src="~/Content/Home_Css/js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script src="~/Content/Home_Css/js/waypoints.min.js"></script>
 <script src="~/Content/Home_Css/js/scripts.js"></script>
+<script src="~/Scripts/login/login.js"></script>
+
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/respond.js"></script>
+
 <script>
     $(document).ready(function () {
         appMaster.preLoader();
@@ -395,3 +411,4 @@
         });
     });
 </script>
+

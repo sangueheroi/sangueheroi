@@ -54,9 +54,9 @@ namespace SangueHeroiWeb
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1035980633158394",
+               appSecret: "194eb6d99d28f01ea58789e3043d8b13");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

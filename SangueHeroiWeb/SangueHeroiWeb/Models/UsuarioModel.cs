@@ -9,7 +9,7 @@ using System.Web;
 
 namespace SangueHeroiWeb.Models
 {
-    public class UsuarioModelcs
+    public class UsuarioModel
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
