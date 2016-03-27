@@ -1,0 +1,414 @@
+﻿@model SangueHeroiWeb.Models.EsqueciMinhaSenhaModel
+@{
+    ViewBag.Title = "Sangue Herói";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Home_Css/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/Home_Css/css/animate.css">
+<link rel="stylesheet" href="~/Content/Home_Css/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/Home_Css/css/slick.css">
+<link rel="stylesheet" href="~/Content/Home_Css/js/rs-plugin/css/settings.css">
+<link rel="stylesheet" href="~/Content/Home_Css/css/styles.css">
+<link rel="stylesheet" href="~/Content/bootstrap-social.css" />
+
+@*<link href="~/Content/bootstrap-theme.css.map" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css.map" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css.map" rel="stylesheet" />
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css.map" rel="stylesheet" />*@
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+
+<script type="text/javascript" src="~/Content/Home_Css/js/modernizr.custom.32033.js"></script>
+
+
+<div class="pre-loader">
+    <div class="load-con">
+        <img src="~/Content/Home_Css/img/freeze/logo.png" class="animated fadeInDown" alt="">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+</div>
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="fa fa-bars fa-lg"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="~/Content/Home_Css/img/freeze/logo.png" alt="" class="logo">
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">Sobre</a>
+                    </li>
+                    <li>
+                        <a class="getApp" href="#getApp">Baixar App</a>
+                    </li>
+                    <li>
+                        <a href="#support">Contato</a>
+                    </li>
+                    <li>
+                        <a id="btnModalLogin">Login</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+    </nav>
+
+    <div class="tp-banner-container">
+        <div class="tp-banner">
+            <ul>
+
+                <li data-transition="fade" data-slotamount="7" data-masterspeed="1500">
+
+                    <img src="~/Content/Home_Css/img/transparent.png" alt="slidebg1" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+
+                    <div class="tp-caption lfl fadeout hidden-xs"
+                         data-x="left"
+                         data-y="bottom"
+                         data-hoffset="30"
+                         data-voffset="0"
+                         data-speed="500"
+                         data-start="700"
+                         data-easing="Power4.easeOut">
+                        <img src="~/Content/Home_Css/img/freeze/Slides/hand-freeze.png" alt="">
+                    </div>
+                    <div class="tp-caption lfl fadeout visible-xs"
+                         data-x="left"
+                         data-y="center"
+                         data-hoffset="700"
+                         data-voffset="0"
+                         data-speed="500"
+                         data-start="700"
+                         data-easing="Power4.easeOut">
+                        <img src="~/Content/Home_Css/img/freeze/iphone-freeze.png" alt="">
+                    </div>
+                    <div class="tp-caption large_white_bold sft" data-x="550" data-y="center" data-hoffset="0" data-voffset="-80" data-speed="500" data-start="1200" data-easing="Power4.easeOut">
+                        Oleose
+                    </div>
+                    <div class="tp-caption large_white_light sfr" data-x="770" data-y="center" data-hoffset="0" data-voffset="-80" data-speed="500" data-start="1400" data-easing="Power4.easeOut">
+                        App
+                    </div>
+                    <div class="tp-caption large_white_light sfb" data-x="550" data-y="center" data-hoffset="0" data-voffset="0" data-speed="1000" data-start="1500" data-easing="Power4.easeOut">
+                        Landing Theme
+                    </div>
+                    <div class="tp-caption sfb hidden-xs" data-x="550" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1000" data-start="1700" data-easing="Power4.easeOut">
+                        <a href="#about" class="btn btn-primary inverse btn-lg">LEARN MORE</a>
+                    </div>
+                    <div class="tp-caption sfr hidden-xs" data-x="730" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1500" data-start="1900" data-easing="Power4.easeOut">
+                        <a href="#getApp" class="btn btn-default btn-lg">GET APP</a>
+                    </div>
+                </li>
+                <!-- SLIDE 2 -->
+                <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000">
+                    <!-- MAIN IMAGE -->
+                    <img src="~/Content/Home_Css/img/transparent.png" alt="slidebg1" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                    <!-- LAYERS -->
+                    <!-- LAYER NR. 1 -->
+                    <div class="tp-caption lfb fadeout hidden-xs"
+                         data-x="center"
+                         data-y="bottom"
+                         data-hoffset="0"
+                         data-voffset="0"
+                         data-speed="1000"
+                         data-start="700"
+                         data-easing="Power4.easeOut">
+                        <img src="~/Content/Home_Css/img/freeze/Slides/freeze-slide2.png" alt="">
+                    </div>
+
+                    <div class="tp-caption large_white_light sft" data-x="center" data-y="250" data-hoffset="0" data-voffset="0" data-speed="1000" data-start="1400" data-easing="Power4.easeOut">
+                        Every Pixel <i class="fa fa-heart"></i>
+                    </div>
+
+                </li>
+                <!-- SLIDE 3 -->
+                <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000">
+                    <!-- MAIN IMAGE -->
+                    <img src="~/Content/Home_Css/img/transparent.png" alt="slidebg1" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                    <!-- LAYERS -->
+                    <!-- LAYER NR. 1 -->
+                    <div class="tp-caption customin customout hidden-xs"
+                         data-x="right"
+                         data-y="center"
+                         data-hoffset="0"
+                         data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
+                         data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                         data-voffset="50"
+                         data-speed="1000"
+                         data-start="700"
+                         data-easing="Power4.easeOut">
+                        <img src="~/Content/Home_Css/img/freeze/Slides/family-freeze.png" alt="">
+                    </div>
+                    <div class="tp-caption customin customout visible-xs"
+                         data-x="center"
+                         data-y="center"
+                         data-hoffset="0"
+                         data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
+                         data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                         data-voffset="0"
+                         data-speed="1000"
+                         data-start="700"
+                         data-easing="Power4.easeOut">
+                        <img src="~/Content/Home_Css/img/freeze/Slides/family-freeze.png" alt="">
+                    </div>
+                    <div class="tp-caption lfb visible-xs" data-x="center" data-y="center" data-hoffset="0" data-voffset="400" data-speed="1000" data-start="1200" data-easing="Power4.easeOut">
+                        <a href="#" class="btn btn-primary inverse btn-lg">Purchase</a>
+                    </div>
+
+                    <div class="tp-caption mediumlarge_light_white sfl hidden-xs" data-x="left" data-y="center" data-hoffset="0" data-voffset="-50" data-speed="1000" data-start="1000" data-easing="Power4.easeOut">
+                        Powerful Responsive
+                    </div>
+                    <div class="tp-caption mediumlarge_light_white sft hidden-xs" data-x="left" data-y="center" data-hoffset="0" data-voffset="0" data-speed="1000" data-start="1200" data-easing="Power4.easeOut">
+                        App Landing Page
+                    </div>
+                    <div class="tp-caption small_light_white sfb hidden-xs" data-x="left" data-y="center" data-hoffset="0" data-voffset="80" data-speed="1000" data-start="1600" data-easing="Power4.easeOut">
+                        <p>Nulla pretium libero interdum, tempus lorem non, rutrum diam. <br> Quisque pellentesque diam sed pulvinar lobortis. Vestibulum ante <br>ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+                    </div>
+                    <div class="tp-caption lfl hidden-xs" data-x="left" data-y="center" data-hoffset="0" data-voffset="160" data-speed="1000" data-start="1800" data-easing="Power4.easeOut">
+                        <a href="#" class="btn btn-primary inverse btn-lg">Purchase</a>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</header>
+
+<div class="wrapper">
+
+    <section id="about">
+        <div class="container">
+            <div class="section-heading scrollpoint sp-effect3">
+                <h1>Sobre</h1>
+                <div class="divider"></div>
+                <p>Equipe do Projeto Sangue Herói</p>
+                <p style="font-size:18px">Este projeto nasceu com a intenção de salvar vidas, conectar pessoas e torná-las verdadeiros heróis!</p>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="about-item scrollpoint sp-effect2">
+                        <!--<i class="fa fa-download fa-2x"></i>-->
+                        <img src="~/Content/Home_Css/img/equipe/andre.png" width="250" />
+                        <h3>André Jardim</h3>
+                        <p>Responsável por administrar o banco de dados, André já doou sangue este mês!</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="about-item scrollpoint sp-effect5">
+                        <!--<i class="fa fa-mobile fa-2x"></i>-->
+                        <img src="~/Content/Home_Css/img/equipe/daniel_allan.png" width="125" />
+                        <h3>Daniel Costa</h3>
+                        <p>Programador, Daniel é o cara que mais doa sangue na equipe! Um verdadeiro herói!</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="about-item scrollpoint sp-effect5">
+                        <!--<i class="fa fa-users fa-2x"></i>-->
+                        <img src="~/Content/Home_Css/img/equipe/daniel_florencio.png" width="260" />
+                        <h3>Daniel Florêncio</h3>
+                        <p>Programador, é um herói por doar vida a cada 3 meses!</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="about-item scrollpoint sp-effect1">
+                        <!--<i class="fa fa-sliders fa-2x"></i>-->
+                        <img src="~/Content/Home_Css/img/equipe/diego.png" width="260" />
+                        <h3>Diego Lucas</h3>
+                        <p>Programador, Diego se doa pela causa! Um grande herói!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="about-item scrollpoint sp-effect5">
+                        <!--<i class="fa fa-users fa-2x"></i>-->
+                        <img src="~/Content/Home_Css/img/equipe/hugo.png" width="105" />
+                        <h3>Hugo Sá</h3>
+                        <p>Programador, Hugo é responsável pela aplicação Mobile!</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="about-item scrollpoint sp-effect2">
+                        <!--<i class="fa fa-download fa-2x"></i>-->
+                        <img src="~/Content/Home_Css/img/equipe/natalia.png" width="125" />
+                        <h3>Natalia Ribeiro</h3>
+                        <p>Responsável por administrar o banco de dados, Natalia também coordena as mídias sociais!</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="about-item scrollpoint sp-effect5">
+                        <!--<i class="fa fa-mobile fa-2x"></i>-->
+                        <img src="~/Content/Home_Css/img/equipe/yuri.png" width="260" />
+                        <h3>Yuri Oliveira</h3>
+                        <p>Programador, Yuri é o responsável por toda a organização! Além disso, doa sangue 4 vezes ao ano, um herói!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="getApp">
+        <div class="container-fluid">
+            <div class="section-heading inverse scrollpoint sp-effect3">
+                <h1>Baixe o Aplicativo</h1>
+                <div class="divider"></div>
+                <p>Escolha sua plataforma nativa e faça o download!</p>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hanging-phone scrollpoint sp-effect2 hidden-xs">
+                        <img src="~/Content/Home_Css/img/freeze/freeze-angled2.png" alt="">
+                    </div>
+                    <div class="platforms">
+                        <a href="#" class="btn btn-primary inverse scrollpoint sp-effect1">
+                            <i class="fa fa-android fa-3x pull-left"></i>
+                            <span>Download para</span><br>
+                            <b>Android</b>
+                        </a>
+                        <a href="#" class="btn btn-primary inverse scrollpoint sp-effect2">
+                            <i class="fa fa-apple fa-3x pull-left"></i>
+                            <span>Download para</span><br>
+                            <b>Apple IOS</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section id="support" class="doublediagonal">
+        <div class="container">
+            <div class="section-heading scrollpoint sp-effect3">
+                <h1>Contato</h1>
+                <div class="divider"></div>
+                <p>Para mais informações e suporte, nos contate!</p>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 scrollpoint sp-effect1">
+                            <form role="form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Seu nome">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Seu email">
+                                </div>
+                                <div class="form-group">
+                                    <textarea cols="30" rows="10" class="form-control" placeholder="Sua mensagem"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4 col-sm-4 contact-details scrollpoint sp-effect2">
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-map-marker fa-2x"></i>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">4, Some street, California, USA</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-envelope fa-2x"></i>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href="mailto:sangue.heroi@gmail.com">sangue.heroi@gmail.com</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-phone fa-2x"></i>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">+1 234 567890</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <a href="#" class="scrollpoint sp-effect3">
+                <img src="~/Content/Home_Css/img/freeze/logo.png" alt="" class="logo">
+            </a>
+            <div class="social">
+                <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-twitter fa-lg"></i></a>
+                <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-google-plus fa-lg"></i></a>
+                <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg"></i></a>
+            </div>
+            <div class="rights">
+                <p>Todos os direitos reservados &copy; 2016</p>
+                <p>Sangue Herói &reg;</p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<script src="~/Content/Home_Css/js/jquery-1.11.1.min.js"></script>
+
+<script src="~/Content/Home_Css/js/slick.min.js"></script>
+<script src="~/Content/Home_Css/js/placeholdem.min.js"></script>
+<script src="~/Content/Home_Css/js/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+<script src="~/Content/Home_Css/js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script src="~/Content/Home_Css/js/waypoints.min.js"></script>
+<script src="~/Content/Home_Css/js/scripts.js"></script>
+<script src="~/Scripts/login/login.js"></script>
+
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/respond.js"></script>
+
+<script>
+    $(document).ready(function () {
+        appMaster.preLoader();
+    });
+</script>
+
+
+<div class="modal fade bs-example-modal-lg" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLogin">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Local onde sera injetado-->
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" id="modalEsqueciMinhaSenha" tabindex="-1" role="dialog" aria-labelledby="modalEsqueciMinhaSenha">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content modalEMS">
+            <!-- Local onde sera injetado-->
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnModalLogin').on("click", function () {
+            ModalLogin();
+        });
+    });
+</script>
+

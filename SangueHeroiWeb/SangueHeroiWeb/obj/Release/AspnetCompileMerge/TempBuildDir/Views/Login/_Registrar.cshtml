@@ -1,0 +1,113 @@
+﻿@model SangueHeroiWeb.Models.UsuarioModel
+
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="modal-body">
+    <div class="centralizar">
+        <h2>Cadastro</h2>
+    </div>
+    @using (Html.BeginForm())
+            {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="form-group col-md-6">
+
+                @Html.EditorFor(model => model.NOME_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Usuário" } })
+                @Html.ValidationMessageFor(model => model.NOME_USUARIO, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+
+                @Html.EditorFor(model => model.SOBRENOME_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Sobrenome" } })
+                @Html.ValidationMessageFor(model => model.SOBRENOME_USUARIO, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-10">
+
+                @Html.EditorFor(model => model.ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Rua" } })
+                @Html.ValidationMessageFor(model => model.ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-2">
+
+                @Html.EditorFor(model => model.NUMERO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Nº" } })
+                @Html.ValidationMessageFor(model => model.NUMERO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+
+                    @Html.EditorFor(model => model.BAIRRO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Bairro" } })
+                    @Html.ValidationMessageFor(model => model.BAIRRO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-md-4">
+
+                    @Html.EditorFor(model => model.CIDADE_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Cidade" } })
+                    @Html.ValidationMessageFor(model => model.CIDADE_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-md-2">
+
+                    @Html.EditorFor(model => model.ESTADO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Estado" } })
+                    @Html.ValidationMessageFor(model => model.ESTADO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-md-2">
+
+                    @Html.EditorFor(model => model.CEP_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "CEP" } })
+                    @Html.ValidationMessageFor(model => model.CEP_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+                <div class="row">
+                    <div class="form-group col-md-2">
+
+                        @Html.EditorFor(model => model.TIPO_SANGUINEO, new { htmlAttributes = new { @class = "form-control", placeholder = "Tipo Sanguíneo" } })
+                        @Html.ValidationMessageFor(model => model.TIPO_SANGUINEO, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        @Html.EditorFor(model => model.EMAIL_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail" } })
+                        @Html.ValidationMessageFor(model => model.EMAIL_USUARIO, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-3">
+
+                        @Html.EditorFor(model => model.DATA_NASCIMENTO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data de Nascimento" } })
+                        @Html.ValidationMessageFor(model => model.DATA_NASCIMENTO, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-3">
+
+                        @Html.EditorFor(model => model.DATA_ULTIMA_DOACAO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data Ultima Doação" } })
+                        @Html.ValidationMessageFor(model => model.DATA_ULTIMA_DOACAO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="float:left">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+    }
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="sair">Sair</button>
+</div>
+
+<script>
+    $('#sair').on('click', function () {
+        $('#modalCriarConta').modal('hide');
+        $('body').css({ 'padding-right': '0px' });
+    })
+</script>

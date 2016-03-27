@@ -1,0 +1,173 @@
+﻿@model SangueHeroiWeb.Models.LoginModel
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @id = "formLogin" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="centralizar">
+            <div role="form" class="form-horizontal" style="width:50%">
+                <div class="centralizar">
+                    <h2>Login</h2>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.EMAIL_USUARIO, null, new { @type = "text", @class = "usuario usuario_img_background", @placeholder = "Nome", required = "required" })
+                    @Html.ValidationMessageFor(model => model.EMAIL_USUARIO)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.SENHA, null, new { @type = "password", @class = "senha senha_img_background", @placeholder = "Senha", required = "required" })
+                    @Html.ValidationMessageFor(model => model.SENHA)
+                </div>
+                <div class="form-group">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Lembrar-Me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" style="float:right">
+                            @Html.Label("Esqueceu sua senha?", new { style = "color:#ff0000", @class = "btn btn-link", @id = "btnEsqueceuSuaSenha" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="centralizar">
+                        <button type="submit" class="btn btn-lg btn-primary">Login</button>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="form-group">
+                    <div class="centralizar">
+                        <h3>Ou</h3>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-inline">
+                        <div class="centralizar" style="border-bottom: 1px solid #ccc;padding-bottom: 10px;">
+                            <div class="form-group" style="margin-right:10px">
+                                <button type="button" class="btn_social_padrao btn-block btn-social btn-facebook">
+                                    <span class="fa fa-facebook"></span> Facebook
+                                </button>
+                            </div>
+                            <div class="form-group" style="margin-left: 1px">
+                                <button type="button" class="btn_social_padrao btn-block btn-social btn-google">
+                                    <span class="fa fa-google"></span> Google
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="centralizar"><label>Não Possui Conta? Registre-se</label></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="centralizar"><button type="button" class="btn btn-lg btn-primary" id="btnRegistrar">Registrar</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Sair</button>
+    </div>
+}
+
+
+@using Microsoft.Owin.Security
+
+<h4>Use another service to log in.</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+            <p>
+                There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support logging in via external services.
+            </p>
+        </div>
+    }
+    else {
+        using (Html.BeginForm("ExternalLogin", "Account"))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                    }
+                </p>
+            </div>
+        }
+    }
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnEsqueceuSuaSenha').on("click", function () {
+            $('#modalLogin').modal('hide');
+            ModalEsqueciMinhaSenha();
+        });
+
+        $('#btnRegistrar').on("click", function () {
+            $('#modalLogin').modal('hide');
+            ModalRegistrar();
+        });
+    });
+
+    $(document).ready(function () {
+        $('form#formLogin').submit(function (e) {
+            //Objeto Model
+            var ObjLogin = {
+                EMAIL_USUARIO: "",
+                SENHA: 0,
+            };
+            //Dados Form
+            var data = $(this).serializeArray();
+
+            ObjLogin["EMAIL_USUARIO"] = data[1].value;
+            ObjLogin["SENHA"] = data[2].value;
+           
+           
+            $.ajax({
+                type: 'POST',
+                url: './Login/Login',
+                contentType: 'application/json',
+                data: (JSON.stringify(ObjLogin)),
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    //if(!data.isRedirect)
+                    //{
+                    //    alert(data.msg);
+                    //}
+                    //else
+                    //{
+                    //    window.location.href = data.redirectUrl;
+                    //}
+
+                    alert(data.msg);
+                }
+            });
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                e.returnValue = false;
+            }
+        });
+    });
+
+
+</script>
+
