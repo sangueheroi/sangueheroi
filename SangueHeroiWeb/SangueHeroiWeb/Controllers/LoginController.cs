@@ -2,6 +2,7 @@
 using SangueHeroiWeb.DAO;
 using SangueHeroiWeb.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -107,15 +108,29 @@ namespace SangueHeroiWeb.Controllers
         [HttpGet]
         public ActionResult Registrar()
         {
+            UsuarioModel model = new UsuarioModel();
+            ViewBag.ListaTipoSanguineo = model.ListaTipoSanguineo;
             return PartialView("_Registrar");
         }
 
         [HttpPost]
-        public ActionResult Registrar(String emailUsuario)
+        public ActionResult Registrar(UsuarioModel model)
         {
-            return View();
-        }
+            LoginDAO dao = new LoginDAO();
 
-       
+            if(model != null)
+            {
+                dao.Registrar(model);
+            }
+
+            return Json(new
+            {
+                msg = "Conta Realizada com Sucesso",
+                //redirectUrl = "Index",
+                //isRedirect = false
+            });
+
+            //return View();
+        }
     }
 }
