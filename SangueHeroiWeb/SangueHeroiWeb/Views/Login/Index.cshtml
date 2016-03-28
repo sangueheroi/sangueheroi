@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
+<link rel="stylesheet" href="~/Content/jquery-ui.css" />
 <link rel="stylesheet" href="~/Content/Home_Css/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/Content/Home_Css/css/animate.css">
 <link rel="stylesheet" href="~/Content/Home_Css/css/font-awesome.min.css">
@@ -364,7 +365,6 @@
 
 </div>
 <script src="~/Content/Home_Css/js/jquery-1.11.1.min.js"></script>
-
 <script src="~/Content/Home_Css/js/slick.min.js"></script>
 <script src="~/Content/Home_Css/js/placeholdem.min.js"></script>
 <script src="~/Content/Home_Css/js/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
@@ -372,6 +372,7 @@
 <script src="~/Content/Home_Css/js/waypoints.min.js"></script>
 <script src="~/Content/Home_Css/js/scripts.js"></script>
 <script src="~/Scripts/login/login.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
 
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/respond.js"></script>
@@ -418,3 +419,9 @@
     });
 </script>
 
+<style type="text/css">
+   .modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+</style>

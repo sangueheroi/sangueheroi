@@ -12,7 +12,7 @@ namespace SangueHeroiWeb
     /// <summary>
     /// Summary description for WebService
     /// </summary>
-    [WebService(Namespace = "http://sangueheroiweb.azurewebsites.net/")]
+    [WebService(Namespace = "http://sangueheroiweb.azurewebsites.net/WebService.asmx")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 

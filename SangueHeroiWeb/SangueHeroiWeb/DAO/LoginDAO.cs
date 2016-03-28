@@ -106,11 +106,30 @@ namespace SangueHeroiWeb.DAO
             return envioEmailOk;
         }
 
-        public void aaa()
+        public void Registrar(UsuarioModel model)
         {
+            string strQuery = "";
 
+            strQuery = "INSERT" + Environment.CommandLine +
+                    "INTO TB_USUARIO ( NOME_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, SOBRENOME_USUARIO, RUA_ENDEREÇO_USUARIO, " + Environment.CommandLine +
+                    "NUMERO_ENDEREÇO_USUARIO, BAIRRO_ENDEREÇO_USUARIO, CIDADE_ENDEREÇO_USUARIO, ESTADO_ENDEREÇO_USUARIO" + Environment.CommandLine +
+                    "CEP_ENDEREÇO_USUARIO, TIPO_SANGUINEO, DATA_NASCIMENTO, DATA_ULTIMA_DOACAO)" + Environment.CommandLine +
+                    "VALUES(" + model.NOME_USUARIO + " , "
+                     + model.EMAIL_USUARIO + " , " + Environment.CommandLine
+                     + model.SENHA_USUARIO + " , " + Environment.CommandLine
+                     + model.SOBRENOME_USUARIO + " , " + Environment.CommandLine
+                     + model.RUA_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
+                     + model.NUMERO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
+                     + model.BAIRRO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
+                     + model.CIDADE_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
+                     + model.ESTADO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
+                     + model.CEP_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
+                     + model.TIPO_SANGUINEO + " , " + Environment.CommandLine
+                     + model.DATA_NASCIMENTO + " , " + Environment.CommandLine
+                     + model.DATA_ULTIMA_DOACAO + " , " + Environment.CommandLine + " )";
+
+
+            var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
         }
-
-
     }
 }

@@ -20,12 +20,18 @@ namespace SangueHeroiWeb.Models
         public string NOME_USUARIO { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "A {0} Deve Conter ao Menos {2} caracteres.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Senha")]
+        public string SENHA_USUARIO { get; set; }
+
+        [Required]
         [Display(Name = "Sobrenome")]
         public string SOBRENOME_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Endereço")]
-        public string ENDEREÇO_USUARIO { get; set; }
+        public string RUA_ENDEREÇO_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Nº")]
@@ -52,6 +58,7 @@ namespace SangueHeroiWeb.Models
         public string TIPO_SANGUINEO { get; set; }
 
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "E-mail")]
         public string EMAIL_USUARIO { get; set; }
 
@@ -63,8 +70,13 @@ namespace SangueHeroiWeb.Models
         [Required]
         [Display(Name = "Data Ultima Doação")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public string DATA_ULTIMA_DOACAO { get; set; }
+        public DateTime DATA_ULTIMA_DOACAO { get; set; }
 
+        public List<String> ListaTipoSanguineo = new List<String>() { "A+", "A-", "AB+", "AB-", "B+", "B-", "O-", "O+" };
 
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar Senha")]
+        [Compare("SENHA_USUARIO", ErrorMessage = "Erro! Digite a senha Corretamente")]
+        public string ConfirmaSenha { get; set; }
     }
 }
