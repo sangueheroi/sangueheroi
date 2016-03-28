@@ -614,7 +614,7 @@ form textarea.form-control {
 @media screen and (max-width: 640px) {
   .logo {
     width: 100px;
-    height: auto;
+    height: 200px;
   }
   .slick-next {
     right: 0;
@@ -847,7 +847,7 @@ header .navbar-default.scrolled ul.navbar-nav li a:hover:after {
   background: #ee0000;
 }
 header .navbar-default.scrolled .navbar-brand {
-  background: #336799;
+  background: #cd0000;
 }
 section .section-heading .divider:after {
   background: #cd0000;
@@ -957,6 +957,7 @@ section#demo header h1:after {
 /* Get app Section */
 section#getApp {
   background: url("../img/vermelho_abstrato.jpg");
+  background-size: 1350px;
 }
 section#getApp header {
   color: #ffffff;
@@ -1027,7 +1028,7 @@ footer .social a:hover {
   background: #ffffff;
 }
 footer .social a:hover i {
-  color: #66cdcc;
+  color: #cd0000;
 }
 footer .rights {
   color: #ffffff;
