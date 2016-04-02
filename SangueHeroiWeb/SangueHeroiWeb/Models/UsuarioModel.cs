@@ -78,5 +78,10 @@ namespace SangueHeroiWeb.Models
         [Display(Name = "Confirmar Senha")]
         [Compare("SENHA_USUARIO", ErrorMessage = "Erro! Digite a senha Corretamente")]
         public string ConfirmaSenha { get; set; }
+
+        public static implicit operator string(UsuarioModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

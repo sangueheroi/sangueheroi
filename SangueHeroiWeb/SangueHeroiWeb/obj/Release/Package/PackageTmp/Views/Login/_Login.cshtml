@@ -5,7 +5,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <div class="modal-header">
+    <div class="modal-header"  style="padding-bottom: 35px;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="modal-body">
@@ -15,7 +15,7 @@
                     <h2>Login</h2>
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.EMAIL_USUARIO, null, new { @type = "text", @class = "usuario usuario_img_background", @placeholder = "Nome", required = "required" })
+                    @Html.TextBoxFor(model => model.EMAIL_USUARIO, null, new { @type = "text", @class = "usuario usuario_img_background", @placeholder = "E-mail", required = "required" })
                     @Html.ValidationMessageFor(model => model.EMAIL_USUARIO)
                 </div>
                 <div class="form-group">
@@ -80,7 +80,7 @@
 }
 
 
-@using Microsoft.Owin.Security
+@*@using Microsoft.Owin.Security
 
 <h4>Use another service to log in.</h4>
 <hr />
@@ -109,7 +109,7 @@
             </div>
         }
     }
-}
+}*@
 
 
 <script type="text/javascript">
@@ -137,7 +137,6 @@
 
             ObjLogin["EMAIL_USUARIO"] = data[1].value;
             ObjLogin["SENHA"] = data[2].value;
-           
            
             $.ajax({
                 type: 'POST',

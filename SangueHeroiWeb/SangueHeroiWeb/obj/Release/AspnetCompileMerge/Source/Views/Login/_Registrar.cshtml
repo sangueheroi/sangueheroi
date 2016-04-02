@@ -2,26 +2,41 @@
 
 
 
-<div class="modal-header">
+<div class="modal-header" style="padding-bottom: 35px;">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 </div>
 <div class="modal-body">
-    <div class="centralizar">
+    <div class="centralizar" style="padding-bottom: 10px">
         <h2>Cadastro</h2>
     </div>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Registrar", "Login", FormMethod.Post, new { @id = "formRegistrar" }))
             {
         @Html.AntiForgeryToken()
 
         <div class="row">
+            <div class="form-group col-sm-5">
+                @Html.EditorFor(model => model.EMAIL_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail", required = "required", type= "email" } })
+                @Html.ValidationMessageFor(model => model.EMAIL_USUARIO, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-3">
+                @Html.EditorFor(model => model.SENHA_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Senha", required = "required" } })
+                @Html.ValidationMessageFor(model => model.EMAIL_USUARIO, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-3">
+                @Html.EditorFor(model => model.ConfirmaSenha, new { htmlAttributes = new { @class = "form-control", placeholder = "Confirmar Senha", required = "required" } })
+                @Html.ValidationMessageFor(model => model.ConfirmaSenha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
             <div class="form-group col-md-6">
 
-                @Html.EditorFor(model => model.NOME_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Usuário" } })
+                @Html.EditorFor(model => model.NOME_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Usuário", required = "required" } })
                 @Html.ValidationMessageFor(model => model.NOME_USUARIO, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
 
-                @Html.EditorFor(model => model.SOBRENOME_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Sobrenome" } })
+                @Html.EditorFor(model => model.SOBRENOME_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Sobrenome", required = "required" } })
                 @Html.ValidationMessageFor(model => model.SOBRENOME_USUARIO, "", new { @class = "text-danger" })
             </div>
 
@@ -30,74 +45,67 @@
         <div class="row">
             <div class="form-group col-md-10">
 
-                @Html.EditorFor(model => model.ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Rua" } })
-                @Html.ValidationMessageFor(model => model.ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.RUA_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Rua", required = "required" } })
+                @Html.ValidationMessageFor(model => model.RUA_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group col-md-2">
 
-                @Html.EditorFor(model => model.NUMERO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Nº" } })
+                @Html.EditorFor(model => model.NUMERO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Nº", required = "required" } })
                 @Html.ValidationMessageFor(model => model.NUMERO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
             </div>
         </div>
 
-            <div class="row">
-                <div class="form-group col-md-4">
+        <div class="row">
+            <div class="form-group col-md-4">
 
-                    @Html.EditorFor(model => model.BAIRRO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Bairro" } })
-                    @Html.ValidationMessageFor(model => model.BAIRRO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group col-md-4">
-
-                    @Html.EditorFor(model => model.CIDADE_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Cidade" } })
-                    @Html.ValidationMessageFor(model => model.CIDADE_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group col-md-2">
-
-                    @Html.EditorFor(model => model.ESTADO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Estado" } })
-                    @Html.ValidationMessageFor(model => model.ESTADO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group col-md-2">
-
-                    @Html.EditorFor(model => model.CEP_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "CEP" } })
-                    @Html.ValidationMessageFor(model => model.CEP_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
-                </div>
+                @Html.EditorFor(model => model.BAIRRO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Bairro", required = "required" } })
+                @Html.ValidationMessageFor(model => model.BAIRRO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
             </div>
 
-                <div class="row">
-                    <div class="form-group col-md-2">
+            <div class="form-group col-md-4">
 
-                        @Html.EditorFor(model => model.TIPO_SANGUINEO, new { htmlAttributes = new { @class = "form-control", placeholder = "Tipo Sanguíneo" } })
-                        @Html.ValidationMessageFor(model => model.TIPO_SANGUINEO, "", new { @class = "text-danger" })
-                    </div>
+                @Html.EditorFor(model => model.CIDADE_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Cidade", required = "required" } })
+                @Html.ValidationMessageFor(model => model.CIDADE_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+            </div>
 
-                    <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
 
-                        @Html.EditorFor(model => model.EMAIL_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail" } })
-                        @Html.ValidationMessageFor(model => model.EMAIL_USUARIO, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group col-md-3">
+                @Html.EditorFor(model => model.ESTADO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Estado", required = "required" } })
+                @Html.ValidationMessageFor(model => model.ESTADO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+            </div>
 
-                        @Html.EditorFor(model => model.DATA_NASCIMENTO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data de Nascimento" } })
-                        @Html.ValidationMessageFor(model => model.DATA_NASCIMENTO, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
 
-                        @Html.EditorFor(model => model.DATA_ULTIMA_DOACAO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data Ultima Doação" } })
-                        @Html.ValidationMessageFor(model => model.DATA_ULTIMA_DOACAO, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                @Html.EditorFor(model => model.CEP_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "CEP", required = "required" } })
+                @Html.ValidationMessageFor(model => model.CEP_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10" style="float:left">
-                            <input type="submit" value="Create" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                @Html.DropDownListFor(model => model.TIPO_SANGUINEO,
+                                               new SelectList(ViewBag.ListaTipoSanguineo, "TIPO_SANGUINEO"),
+                                               "Tipo Sanguineo",
+                                               new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-3">
+
+                @Html.EditorFor(model => model.DATA_NASCIMENTO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data de Nascimento", id="txtDataNascimento", required = "required" } })
+                @Html.ValidationMessageFor(model => model.DATA_NASCIMENTO, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-3">
+
+                @Html.EditorFor(model => model.DATA_ULTIMA_DOACAO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data Ultima Doação", id="txtDataUltimaDoacao", required = "required" } })
+                @Html.ValidationMessageFor(model => model.DATA_ULTIMA_DOACAO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+         </div>
     }
 
 </div>
@@ -106,8 +114,100 @@
 </div>
 
 <script>
-    $('#sair').on('click', function () {
-        $('#modalCriarConta').modal('hide');
-        $('body').css({ 'padding-right': '0px' });
-    })
+   
+    $(document).ready(function () {
+        $('#sair').on('click', function () {
+            $('#modalCriarConta').modal('hide');
+            $('body').css({ 'padding-right': '0px' });
+        })
+
+        $('#txtDataNascimento').datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1900:2050"
+        });
+        $('#txtDataUltimaDoacao').datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1900:2050"
+        });
+    });
+
+
+    $(document).ready(function () {
+        $('form#formRegistrar').submit(function (e) {
+            //Objeto Model
+            var ObjUsuarioNovo = {
+                NOME_USUARIO: "",
+                EMAIL_USUARIO: "",
+                SENHA_USUARIO: 0,
+                SOBRENOME_USUARIO: "",
+                RUA_ENDEREÇO_USUARIO: "",
+                NUMERO_ENDEREÇO_USUARIO: 0,
+                BAIRRO_ENDEREÇO_USUARIO: "",
+                CIDADE_ENDEREÇO_USUARIO: "",
+                ESTADO_ENDEREÇO_USUARIO: "",
+                CEP_ENDEREÇO_USUARIO: 0,
+                TIPO_SANGUINEO: "",
+                DATA_NASCIMENTO: 0,
+                DATA_ULTIMA_DOACAO: 0
+            };
+            //Dados Form
+            var data = $(this).serializeArray();
+
+            ObjUsuarioNovo["EMAIL_USUARIO"] = data[1].value;
+            ObjUsuarioNovo["SENHA_USUARIO"] = data[2].value;
+            ObjUsuarioNovo["NOME_USUARIO"] = data[3].value;
+            ObjUsuarioNovo["SOBRENOME_USUARIO"] = data[4].value;
+            ObjUsuarioNovo["RUA_ENDEREÇO_USUARIO"] = data[5].value;
+            ObjUsuarioNovo["NUMERO_ENDEREÇO_USUARIO"] = data[6].value;
+            ObjUsuarioNovo["BAIRRO_ENDEREÇO_USUARIO"] = data[7].value;
+            ObjUsuarioNovo["CIDADE_ENDEREÇO_USUARIO"] = data[8].value;
+            ObjUsuarioNovo["ESTADO_ENDEREÇO_USUARIO"] = data[9].value;
+            ObjUsuarioNovo["CEP_ENDEREÇO_USUARIO"] = data[10].value;
+            ObjUsuarioNovo["TIPO_SANGUINEO"] = data[11].value;
+            ObjUsuarioNovo["DATA_NASCIMENTO"] = data[13].value;
+            ObjUsuarioNovo["DATA_ULTIMA_DOACAO"] = data[14].value;
+           
+            $.ajax({
+                type: 'POST',
+                url: './Login/Registrar',
+                contentType: 'application/json',
+                data: (JSON.stringify(ObjUsuarioNovo)),
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    //if(!data.isRedirect)
+                    //{
+                    //    alert(data.msg);
+                    //}
+                    //else
+                    //{
+                    //    window.location.href = data.redirectUrl;
+                    //}
+
+                    alert(data.msg);
+                }
+            });
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                e.returnValue = false;
+            }
+        });
+    });
+
 </script>
