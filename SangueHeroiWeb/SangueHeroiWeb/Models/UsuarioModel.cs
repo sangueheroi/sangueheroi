@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SangueHeroiWeb.Helpers.Util_Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,11 +14,21 @@ namespace SangueHeroiWeb.Models
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int ID_USUARIO { get; set; }
+        public int CODIGO_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Usuário")]
         public string NOME_USUARIO { get; set; }
+
+        [Required]
+        [Display(Name = "Documento")]
+        public string DOCUMENTO_USUARIO { get; set; }
+
+        public int CODIGO_STATUS = UtilHelper.BoolParaInt(STATUS_USUARIO);
+
+        [Required]
+        [Display(Name = "Status")]
+        public static bool STATUS_USUARIO { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "A {0} Deve Conter ao Menos {2} caracteres.", MinimumLength = 6)]
@@ -25,9 +36,16 @@ namespace SangueHeroiWeb.Models
         [Display(Name = "Senha")]
         public string SENHA_USUARIO { get; set; }
 
+        public DateTime DATA_CRIACAO = DateTime.Now;
+
         [Required]
         [Display(Name = "Sobrenome")]
         public string SOBRENOME_USUARIO { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "E-mail")]
+        public string EMAIL_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Endereço")]
@@ -57,11 +75,7 @@ namespace SangueHeroiWeb.Models
         [Display(Name = "Tipo Sanguíneo")]
         public string TIPO_SANGUINEO { get; set; }
 
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "E-mail")]
-        public string EMAIL_USUARIO { get; set; }
-
+        
         [Required]
         [Display(Name = "Data Nascimento")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
@@ -78,10 +92,6 @@ namespace SangueHeroiWeb.Models
         [Display(Name = "Confirmar Senha")]
         [Compare("SENHA_USUARIO", ErrorMessage = "Erro! Digite a senha Corretamente")]
         public string ConfirmaSenha { get; set; }
-
-        public static implicit operator string(UsuarioModel v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

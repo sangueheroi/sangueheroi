@@ -104,14 +104,15 @@ namespace SangueHeroiWeb
             //JObject instaCall = JObject.Parse(json);
             //UsuarioModel resultado = instaCall["usuario"].ToObject<UsuarioModel>();
 
-            usuario.ID_USUARIO = int.Parse(ar_usuario);
+            //usuario.CODIGO_USUARIO = int.Parse(ar_usuario);
             /*
             usuario.ID_USUARIO = int.Parse(ar_usuario[0]);
             usuario.NOME_USUARIO = ar_usuario[1];
             usuario.SOBRENOME_USUARIO = ar_usuario[2];
             usuario.ESTADO_ENDEREÇO_USUARIO = ar_usuario[3];*/
 
-            return usuario;
+            string teste = "Teste";
+            return teste;
         }
 
 

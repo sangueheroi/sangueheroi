@@ -25,7 +25,7 @@ namespace SangueHeroiWeb.DAO
 
             var a = "aaa" + Environment.CommandLine + "aa";
 
-            if (model.ID_USUARIO == 0)
+            if (model.CODIGO_USUARIO == 0)
             {
                 //cadastrar
             }
