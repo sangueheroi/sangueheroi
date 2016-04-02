@@ -19,5 +19,6 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
             public const int HEROI_VERDE = 5;
             public const int HEROI_VERMELHO = 6;
         }
+
     }
 }
