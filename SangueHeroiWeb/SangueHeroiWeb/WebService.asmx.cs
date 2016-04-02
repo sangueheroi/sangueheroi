@@ -31,7 +31,7 @@ namespace SangueHeroiWeb
         [WebMethod]
         public string testarRetorno(string json)
         {
-            var retorno_json = "Hugo, envie algo!";
+            var retorno_json = "Hugo, envie algo!"; 
 
             if (json != "")
             {
@@ -42,12 +42,12 @@ namespace SangueHeroiWeb
             return retorno_json;
         }
 
-        //[SoapHeader("Autenticacao")]
+        [SoapHeader("Autenticacao")]
         [WebMethod]
         public bool efetuarLogin(string login, string senha)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
-            //{
+              if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            {
                 LoginDAO ldao = new LoginDAO();
                 LoginModel lmodel = new LoginModel();
 
@@ -58,11 +58,11 @@ namespace SangueHeroiWeb
                 var retorno = ldao.Logar(lmodel);
 
                 return retorno;
-            //}
-            /*else
+            }
+            else
             {
                 throw new Exception("A autenticação falhou");
-            }*/
+            }
         }
 
         [WebMethod]
