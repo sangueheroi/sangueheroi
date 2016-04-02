@@ -25,17 +25,22 @@ namespace SangueHeroiWeb.DAO
         {
             bool loginOK = true;
 
-            var strQuery = String.Format("SELECT * FROM TB_USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
 
             DataTable dt = new DataTable();
 
             dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            foreach (DataRow data in dt.Rows)
+            if (dt.Rows.Count > 0)
             {
-                if (!model.EMAIL_USUARIO.Equals(data["EMAIL_USUARIO"]) || !model.SENHA.Equals(data["SENHA_USUARIO"]))
-                    loginOK = false;
+                foreach (DataRow data in dt.Rows)
+                {
+                    if (!model.EMAIL_USUARIO.Equals(data["EMAIL_USUARIO"]) || !model.SENHA.Equals(data["SENHA_CRIPTOGRAFADA"]))
+                        loginOK = false;
+                }
             }
+            else
+                loginOK = false;
 
             return loginOK;
         }
