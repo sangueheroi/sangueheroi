@@ -17,8 +17,6 @@ namespace SangueHeroiWeb.DAO
 
         }
 
-
-
         public void IncluiOuAltera(UsuarioModel model)
         {
             var strQuery = "";
@@ -45,6 +43,31 @@ namespace SangueHeroiWeb.DAO
                 var a1 = data["ID_USUARIO"];
                 var b = data["NOME_USUARIO"];
             }
+        }
+
+        public List<UsuarioHeroiModel> GetInformacoesHerois()
+        {
+            var strQuery = String.Format("SELECT * FROM USUARIO_HEROI");
+
+            List<UsuarioHeroiModel> lst = new List<UsuarioHeroiModel>();
+
+            DataTable dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    UsuarioHeroiModel md = new UsuarioHeroiModel();
+
+                    md.CODIGO_HEROI = Convert.ToInt32(data["CODIGO_HEROI"].ToString());
+                    md.NOME_HEROI = data["NOME_HEROI"].ToString();
+                    md.CARACTERISTICA_HEROI = data["CARACTERISTICA_HEROI"].ToString();
+                    md.DESCRICAO_HEROI = data["DESCRICAO_HEROI"].ToString();
+                    lst.Add(md);
+                }
+            }
+
+            return lst;
         }
     }
 }

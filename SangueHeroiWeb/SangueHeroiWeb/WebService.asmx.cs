@@ -61,7 +61,7 @@ namespace SangueHeroiWeb
             //}
             /*else
             {
-                throw new Exception("A autenticação falhou");
+                throw new Exception("A autenticaCão falhou");
             }*/
         }
 
@@ -75,12 +75,12 @@ namespace SangueHeroiWeb
             umodel.SENHA_USUARIO = senha;
             umodel.NOME_USUARIO = nome;
             umodel.SOBRENOME_USUARIO = sobrenome;
-            umodel.RUA_ENDEREÇO_USUARIO = endereco;
-            umodel.NUMERO_ENDEREÇO_USUARIO = numero;
-            umodel.BAIRRO_ENDEREÇO_USUARIO = bairro;
-            umodel.CIDADE_ENDEREÇO_USUARIO = cidade;
-            umodel.ESTADO_ENDEREÇO_USUARIO = estado;
-            umodel.CEP_ENDEREÇO_USUARIO = cep;
+            umodel.RUA_ENDERECO_USUARIO = endereco;
+            umodel.NUMERO_ENDERECO_USUARIO = numero;
+            umodel.BAIRRO_ENDERECO_USUARIO = bairro;
+            umodel.CIDADE_ENDERECO_USUARIO = cidade;
+            umodel.ESTADO_ENDERECO_USUARIO = estado;
+            umodel.CEP_ENDERECO_USUARIO = cep;
             umodel.TIPO_SANGUINEO = tipo_sanguineo;
             umodel.DATA_NASCIMENTO = dtnascimento;
             umodel.DATA_ULTIMA_DOACAO = data_ultima_doacao;
@@ -109,7 +109,7 @@ namespace SangueHeroiWeb
             usuario.ID_USUARIO = int.Parse(ar_usuario[0]);
             usuario.NOME_USUARIO = ar_usuario[1];
             usuario.SOBRENOME_USUARIO = ar_usuario[2];
-            usuario.ESTADO_ENDEREÇO_USUARIO = ar_usuario[3];*/
+            usuario.ESTADO_ENDERECO_USUARIO = ar_usuario[3];*/
 
             string teste = "Teste";
             return teste;
@@ -137,7 +137,7 @@ namespace SangueHeroiWeb
             usuario.ID_USUARIO = 1;
             usuario.NOME_USUARIO = "Daniel";
             usuario.SOBRENOME_USUARIO = "Costa";
-            usuario.ENDEREÇO_USUARIO = "Rua Cel Joao de Oliveira Melo";
+            usuario.ENDERECO_USUARIO = "Rua Cel Joao de Oliveira Melo";
 
             //(1, "Daniel", "Costa", "Rua Cel Joao Oliveira Melo", "565", "Vila Antonieta", "São Paulo", "SP", "03474020", "O+", "daniel@costa.com", 1995 - 02 - 28, 2016 - 02 - 02);
 

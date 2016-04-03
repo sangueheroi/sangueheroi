@@ -28,27 +28,24 @@ namespace SangueHeroiWeb.Controllers
             LoginDAO dao = new LoginDAO();
 
             bool loginOK = dao.Logar(model);
-
+            
             if(!loginOK)
             {
                 return Json(new
                 {
-                    msg = "Login ou Senha Incorretos!",
-                    //redirectUrl = "Index",
-                    //isRedirect = false
+                    msg = "Login ou Senha Incorretos!"
                 });
             }
             else
             {
+                //Quando main estiver criada sera redirecionado para main
                 return Json(new
                 {
-                    msg = "Login Feito com Sucesso"  
+                    msg = "Login Com Sucesso!"
                 });
             }
-
             return View();
         }
-
 
         [HttpPost]
         public ActionResult LogarFacebook(LoginModel model)
@@ -88,7 +85,7 @@ namespace SangueHeroiWeb.Controllers
             {
                 return Json(new
                 {
-                    msg = "Atenção! Foi enviado um e-mail para você com informações para criar uma nova senha",
+                    msg = "AtenCão! Foi enviado um e-mail para você com informaCões para criar uma nova senha",
                     //redirectUrl = "Index",
                     //isRedirect = false
                 });
@@ -108,8 +105,12 @@ namespace SangueHeroiWeb.Controllers
         [HttpGet]
         public ActionResult Registrar()
         {
+            UsuarioDAO ud = new UsuarioDAO();
             UsuarioModel model = new UsuarioModel();
+
             ViewBag.ListaTipoSanguineo = model.ListaTipoSanguineo;
+            ViewBag.ListaHerois = ud.GetInformacoesHerois();
+
             return PartialView("_Registrar");
         }
 

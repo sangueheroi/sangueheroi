@@ -1,4 +1,5 @@
-﻿using SangueHeroiWeb.Models;
+﻿using SangueHeroiWeb.Helpers.Util_Helper;
+using SangueHeroiWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,15 +28,13 @@ namespace SangueHeroiWeb.DAO
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
 
-            DataTable dt = new DataTable();
-
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            DataTable dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    if (!model.EMAIL_USUARIO.Equals(data["EMAIL_USUARIO"]) || !model.SENHA.Equals(data["SENHA_CRIPTOGRAFADA"]))
+                    if (!model.SENHA.Equals(data["SENHA_CRIPTOGRAFADA"]))
                         loginOK = false;
                 }
             }
@@ -49,65 +48,24 @@ namespace SangueHeroiWeb.DAO
         {
             bool envioEmailOk = true;
 
-            var strQuery = String.Format("SELECT * FROM TB_USUARIO WHERE EMAIL_USUARIO = '{0}'", emailUsuario);
+            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", emailUsuario);
 
             DataTable dt = new DataTable();
 
             dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-            
-            if (dt != null)
+
+            if (dt.Rows.Count > 0)
             {
-                try
+                foreach (DataRow data in dt.Rows)
                 {
-                    SmtpClient = new SmtpClient();
-                    SmtpClient.Host = "smtp.gmail.com";
-                    SmtpClient.Port = 587;
-                    SmtpClient.EnableSsl = true;
-                    SmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    SmtpClient.UseDefaultCredentials = false;
-                    SmtpClient.Credentials = new NetworkCredential("sangue.heroi@gmail.com", "appsangueheroi10");
-
-                    foreach (DataRow data in dt.Rows)
-                    {
-                        MailMessage = new MailMessage();
-                        MailMessage.From = new MailAddress("sangue.heroi@gmail.com", "Sangue Heroi", Encoding.UTF8);
-                        MailMessage.To.Add(new MailAddress(data["EMAIL_USUARIO"].ToString(), "Nome Usuario", Encoding.UTF8));
-
-                        MailMessage.Subject = "Solicitação de Nova Senha";
-                        MailMessage.Body = "<div>Email de Troca de Senha </div>";
-                        MailMessage.BodyEncoding = Encoding.UTF8;
-                        MailMessage.BodyEncoding = Encoding.GetEncoding("ISO-8859-1");
-                        bool priority = true;
-
-                        if (priority == false)
-                        {
-                            MailMessage.Priority = MailPriority.Normal;
-                        }
-                        else
-                        {
-                            MailMessage.Priority = MailPriority.High;
-                        }
-                    }
-
-                    SmtpClient.Send(MailMessage);
-                }
-                catch (SmtpFailedRecipientException ex)
-                {
-                    Console.WriteLine("Mensagem : {0} " + ex.Message);
-                }
-                catch (SmtpException ex)
-                {
-                    Console.WriteLine("Mensagem SMPT Fail : {0} " + ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Mensagem Exception : {0} " + ex.Message);
+                    envioEmailOk = EmailHelper.EnviarEmail(data["EMAIL_USUARIO"].ToString(), data["NOME_USUARIO"].ToString(), false);
                 }
             }
             else
             {
                 envioEmailOk = false;
             }
+
             return envioEmailOk;
         }
 
@@ -115,26 +73,27 @@ namespace SangueHeroiWeb.DAO
         {
             string strQuery = "";
 
-            strQuery = "INSERT" + Environment.CommandLine +
-                    "INTO TB_USUARIO ( NOME_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, SOBRENOME_USUARIO, RUA_ENDEREÇO_USUARIO, " + Environment.CommandLine +
-                    "NUMERO_ENDEREÇO_USUARIO, BAIRRO_ENDEREÇO_USUARIO, CIDADE_ENDEREÇO_USUARIO, ESTADO_ENDEREÇO_USUARIO" + Environment.CommandLine +
-                    "CEP_ENDEREÇO_USUARIO, TIPO_SANGUINEO, DATA_NASCIMENTO, DATA_ULTIMA_DOACAO)" + Environment.CommandLine +
+            strQuery = "INSERT" + Environment.NewLine +
+                    "INTO TB_USUARIO ( NOME_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, SOBRENOME_USUARIO, RUA_ENDERECO_USUARIO, " + Environment.NewLine +
+                    "NUMERO_ENDERECO_USUARIO, BAIRRO_ENDERECO_USUARIO, CIDADE_ENDERECO_USUARIO, ESTADO_ENDERECO_USUARIO" + Environment.NewLine +
+                    "CEP_ENDERECO_USUARIO, TIPO_SANGUINEO, DATA_NASCIMENTO, DATA_ULTIMA_DOACAO)" + Environment.NewLine +
                     "VALUES(" + model.NOME_USUARIO + " , "
-                     + model.EMAIL_USUARIO + " , " + Environment.CommandLine
-                     + model.SENHA_USUARIO + " , " + Environment.CommandLine
-                     + model.SOBRENOME_USUARIO + " , " + Environment.CommandLine
-                     + model.RUA_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.NUMERO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.BAIRRO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.CIDADE_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.ESTADO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.CEP_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.TIPO_SANGUINEO + " , " + Environment.CommandLine
-                     + model.DATA_NASCIMENTO + " , " + Environment.CommandLine
-                     + model.DATA_ULTIMA_DOACAO + " , " + Environment.CommandLine + " )";
+                     + model.EMAIL_USUARIO + " , " + Environment.NewLine
+                     + model.SENHA_USUARIO + " , " + Environment.NewLine
+                     + model.SOBRENOME_USUARIO + " , " + Environment.NewLine
+                     + model.RUA_ENDERECO_USUARIO + " , " + Environment.NewLine
+                     + model.NUMERO_ENDERECO_USUARIO + " , " + Environment.NewLine
+                     + model.BAIRRO_ENDERECO_USUARIO + " , " + Environment.NewLine
+                     + model.CIDADE_ENDERECO_USUARIO + " , " + Environment.NewLine
+                     + model.ESTADO_ENDERECO_USUARIO + " , " + Environment.NewLine
+                     + model.CEP_ENDERECO_USUARIO + " , " + Environment.NewLine
+                     + model.TIPO_SANGUINEO + " , " + Environment.NewLine
+                     + model.DATA_NASCIMENTO + " , " + Environment.NewLine
+                     + model.DATA_ULTIMA_DOACAO + " , " + Environment.NewLine + " )";
 
 
             var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
         }
+
     }
 }

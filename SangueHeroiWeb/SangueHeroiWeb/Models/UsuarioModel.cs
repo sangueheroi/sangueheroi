@@ -48,28 +48,28 @@ namespace SangueHeroiWeb.Models
         public string EMAIL_USUARIO { get; set; }
 
         [Required]
-        [Display(Name = "Endereço")]
-        public string RUA_ENDEREÇO_USUARIO { get; set; }
+        [Display(Name = "EndereCo")]
+        public string RUA_ENDERECO_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Nº")]
-        public string NUMERO_ENDEREÇO_USUARIO { get; set; }
+        public string NUMERO_ENDERECO_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Bairro")]
-        public string BAIRRO_ENDEREÇO_USUARIO { get; set; }
+        public string BAIRRO_ENDERECO_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Cidade")]
-        public string CIDADE_ENDEREÇO_USUARIO { get; set; }
+        public string CIDADE_ENDERECO_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Estado")]
-        public string ESTADO_ENDEREÇO_USUARIO { get; set; }
+        public string ESTADO_ENDERECO_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "CEP")]
-        public string CEP_ENDEREÇO_USUARIO { get; set; }
+        public string CEP_ENDERECO_USUARIO { get; set; }
 
         [Required]
         [Display(Name = "Tipo Sanguíneo")]
@@ -82,7 +82,7 @@ namespace SangueHeroiWeb.Models
         public DateTime DATA_NASCIMENTO { get; set; }
 
         [Required]
-        [Display(Name = "Data Ultima Doação")]
+        [Display(Name = "Data Ultima DoaCão")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DATA_ULTIMA_DOACAO { get; set; }
 
@@ -92,6 +92,18 @@ namespace SangueHeroiWeb.Models
         [Display(Name = "Confirmar Senha")]
         [Compare("SENHA_USUARIO", ErrorMessage = "Erro! Digite a senha Corretamente")]
         public string ConfirmaSenha { get; set; }
-        
+
+        public List<UsuarioHeroiModel> ListaHerois = new List<UsuarioHeroiModel>();
+
+        public int CODIGO_HEROI { get; set; }
+
+    }
+
+    public class UsuarioHeroiModel
+    {
+        public string NOME_HEROI { get; set; }
+        public string CARACTERISTICA_HEROI { get; set; }
+        public string DESCRICAO_HEROI { get; set; }
+        public int CODIGO_HEROI { get; set; }
     }
 }
