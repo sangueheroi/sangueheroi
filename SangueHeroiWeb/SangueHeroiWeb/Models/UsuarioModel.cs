@@ -24,8 +24,6 @@ namespace SangueHeroiWeb.Models
         [Display(Name = "Documento")]
         public string DOCUMENTO_USUARIO { get; set; }
 
-        public int CODIGO_STATUS = UtilHelper.BoolParaInt(STATUS_USUARIO);
-
         [Required]
         [Display(Name = "Status")]
         public static bool STATUS_USUARIO { get; set; }

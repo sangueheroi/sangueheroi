@@ -7,7 +7,7 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
 {
     public class UtilHelper
     {
-        public static string QuotedText(string pTexto)
+        public static string TextForSql(string pTexto)
         {
             string Result = "";
 
@@ -38,18 +38,6 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
         public static string DateTimeParaBrDate(DateTime dt)
         {
             return String.Format("{0:dd/MM/yyyy HH:mm:ss}", dt);
-        }
-
-        public static int BoolParaInt(bool _bool)
-        {
-            int retorno = 1;
-
-            if (!_bool)
-                retorno = 2;
-
-            return retorno;
-        }
-
-        
+        }        
     }
 }
