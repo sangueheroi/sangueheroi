@@ -115,14 +115,27 @@ namespace SangueHeroiWeb.DAO
         {
                 string strQuery = "";
 
-                strQuery = "INSERT" + Environment.NewLine +
+                strQuery = "EXECUTE frmRegistraUsuario" + Environment.NewLine
+                     + model.NOME_USUARIO + "' , '" + Environment.NewLine
+                     + model.DOCUMENTO_USUARIO + "' , '" + Environment.NewLine
+                     + model.SENHA_USUARIO + "' , '" + Environment.NewLine
+                     + model.EMAIL_USUARIO + "' , '" 
+                     + model.RUA_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
+                     + model.NUMERO_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
+                     + model.BAIRRO_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
+                     + model.CIDADE_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
+                     + model.ESTADO_ENDEREÇO_USUARIO + "' , '" 
+                     + model.TIPO_SANGUINEO + "' , '" + Environment.NewLine
+                     + model.DATA_NASCIMENTO + "'";
+
+           /* "INSERT" + Environment.NewLine +
                     "INTO USUARIO ( NOME_USUARIO, DOCUMENTO_USUARIO, SENHA_CRIPTOGRAFADA, EMAIL_USUARIO )" + Environment.NewLine +
                     "VALUES('" + model.NOME_USUARIO + "' , '"
                      + model.DOCUMENTO_USUARIO + "' , '" + Environment.NewLine
                      + model.SENHA_USUARIO + "' , '" + Environment.NewLine
                      + model.EMAIL_USUARIO + "') " +
                      "DECLARE @CODIGO_USUARIO_NOVO AS INT " +
-                     "SET @CODIGO_USUARIO_NOVO = SCOPE_IDENTIY() " +
+                     "SET @CODIGO_USUARIO_NOVO = dbo.SCOPE_IDENTIY() " +
                      "INSERT" + Environment.NewLine +
                      "INTO USUARIO_ENDERECO ( CODIGO_USUARIO, LOGRADOURO, NUMERO, BAIRRO, CIDADE, ESTADO )" + Environment.NewLine +
                      "VALUES( @CODIGO_USUARIO_NOVO , '"
@@ -136,8 +149,9 @@ namespace SangueHeroiWeb.DAO
                      "VALUES( '@CODIGO_USUARIO_NOVO', '"
                      + model.TIPO_SANGUINEO + "' , '" + Environment.NewLine
                      + model.DATA_NASCIMENTO + "')";
+            */
 
-                var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+            var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
         }
     }
 }
