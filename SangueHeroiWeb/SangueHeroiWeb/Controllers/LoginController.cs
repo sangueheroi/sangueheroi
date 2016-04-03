@@ -110,6 +110,7 @@ namespace SangueHeroiWeb.Controllers
 
             ViewBag.ListaTipoSanguineo = model.ListaTipoSanguineo;
             ViewBag.ListaHerois = ud.GetInformacoesHerois();
+            ViewBag.ListaEstados = model.ListaEstados;
 
             return PartialView("_Registrar");
         }

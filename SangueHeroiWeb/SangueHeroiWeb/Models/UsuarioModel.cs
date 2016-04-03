@@ -48,28 +48,34 @@ namespace SangueHeroiWeb.Models
         public string EMAIL_USUARIO { get; set; }
 
         [Required]
-        [Display(Name = "EndereCo")]
-        public string RUA_ENDERECO_USUARIO { get; set; }
+        [Display(Name = "Endereço")]
+        public string LOGRADOURO { get; set; }
 
         [Required]
         [Display(Name = "Nº")]
-        public string NUMERO_ENDERECO_USUARIO { get; set; }
+        public string NUMERO { get; set; }
+
+        [Required]
+        [Display(Name = "Complemento")]
+        public string COMPLEMENTO { get; set; }
 
         [Required]
         [Display(Name = "Bairro")]
-        public string BAIRRO_ENDERECO_USUARIO { get; set; }
+        public string BAIRRO { get; set; }
 
         [Required]
         [Display(Name = "Cidade")]
-        public string CIDADE_ENDERECO_USUARIO { get; set; }
+        public string CIDADE { get; set; }
 
         [Required]
         [Display(Name = "Estado")]
-        public string ESTADO_ENDERECO_USUARIO { get; set; }
+        public string ESTADO { get; set; }
+
+        public List<String> ListaEstados = new List<String>() { "Acre", "Alagoa", "Amápa", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" };
 
         [Required]
         [Display(Name = "CEP")]
-        public string CEP_ENDERECO_USUARIO { get; set; }
+        public string CEP { get; set; }
 
         [Required]
         [Display(Name = "Tipo Sanguíneo")]
