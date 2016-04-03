@@ -113,28 +113,31 @@ namespace SangueHeroiWeb.DAO
 
         public void Registrar(UsuarioModel model)
         {
-            string strQuery = "";
+                string strQuery = "";
 
-            strQuery = "INSERT" + Environment.CommandLine +
-                    "INTO TB_USUARIO ( NOME_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, SOBRENOME_USUARIO, RUA_ENDEREÇO_USUARIO, " + Environment.CommandLine +
-                    "NUMERO_ENDEREÇO_USUARIO, BAIRRO_ENDEREÇO_USUARIO, CIDADE_ENDEREÇO_USUARIO, ESTADO_ENDEREÇO_USUARIO" + Environment.CommandLine +
-                    "CEP_ENDEREÇO_USUARIO, TIPO_SANGUINEO, DATA_NASCIMENTO, DATA_ULTIMA_DOACAO)" + Environment.CommandLine +
-                    "VALUES(" + model.NOME_USUARIO + " , "
-                     + model.EMAIL_USUARIO + " , " + Environment.CommandLine
-                     + model.SENHA_USUARIO + " , " + Environment.CommandLine
-                     + model.SOBRENOME_USUARIO + " , " + Environment.CommandLine
-                     + model.RUA_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.NUMERO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.BAIRRO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.CIDADE_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.ESTADO_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.CEP_ENDEREÇO_USUARIO + " , " + Environment.CommandLine
-                     + model.TIPO_SANGUINEO + " , " + Environment.CommandLine
-                     + model.DATA_NASCIMENTO + " , " + Environment.CommandLine
-                     + model.DATA_ULTIMA_DOACAO + " , " + Environment.CommandLine + " )";
+                strQuery = "INSERT" + Environment.NewLine +
+                    "INTO USUARIO ( NOME_USUARIO, DOCUMENTO_USUARIO, SENHA_CRIPTOGRAFADA, EMAIL_USUARIO )" + Environment.NewLine +
+                    "VALUES('" + model.NOME_USUARIO + "' , '"
+                     + model.DOCUMENTO_USUARIO + "' , '" + Environment.NewLine
+                     + model.SENHA_USUARIO + "' , '" + Environment.NewLine
+                     + model.EMAIL_USUARIO + "') " +
+                     "DECLARE @CODIGO_USUARIO_NOVO AS INT " +
+                     "SET @CODIGO_USUARIO_NOVO = SCOPE_IDENTIY() " +
+                     "INSERT" + Environment.NewLine +
+                     "INTO USUARIO_ENDERECO ( CODIGO_USUARIO, LOGRADOURO, NUMERO, BAIRRO, CIDADE, ESTADO )" + Environment.NewLine +
+                     "VALUES( @CODIGO_USUARIO_NOVO , '"
+                     + model.RUA_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
+                     + model.NUMERO_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
+                     + model.BAIRRO_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
+                     + model.CIDADE_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
+                     + model.ESTADO_ENDEREÇO_USUARIO + "') " +
+                     "INSERT" + Environment.NewLine +
+                     "INTO USUARIO_PERFIL ( CODIGO_USUARIO, TIPO_SANGUINEO, DATA_NASCIMENTO )" + Environment.NewLine +
+                     "VALUES( '@CODIGO_USUARIO_NOVO', '"
+                     + model.TIPO_SANGUINEO + "' , '" + Environment.NewLine
+                     + model.DATA_NASCIMENTO + "')";
 
-
-            var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
         }
     }
 }
