@@ -120,11 +120,8 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
                  + true + Environment.NewLine + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.SOBRENOME_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.LOGRADOURO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.NUMERO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.COMPLEMENTO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.BAIRRO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine

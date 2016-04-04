@@ -35,29 +35,8 @@
             </div>
             <div class="form-group col-md-6">
 
-                @Html.EditorFor(model => model.SOBRENOME_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Sobrenome", required = "required" } })
-                @Html.ValidationMessageFor(model => model.SOBRENOME_USUARIO, "", new { @class = "text-danger" })
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-7">
-
                 @Html.EditorFor(model => model.LOGRADOURO, new { htmlAttributes = new { @class = "form-control", placeholder = "Endereço", required = "required" } })
                 @Html.ValidationMessageFor(model => model.LOGRADOURO, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group col-md-2">
-
-                @Html.EditorFor(model => model.NUMERO, new { htmlAttributes = new { @class = "form-control", placeholder = "Nº", required = "required" } })
-                @Html.ValidationMessageFor(model => model.NUMERO, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group col-md-3">
-
-                @Html.EditorFor(model => model.COMPLEMENTO, new { htmlAttributes = new { @class = "form-control", placeholder = "Complemento", required = "required" } })
-                @Html.ValidationMessageFor(model => model.COMPLEMENTO, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -102,7 +81,7 @@
             </div>
             <div class="form-group col-md-3">
 
-                @Html.EditorFor(model => model.DATA_ULTIMA_DOACAO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data Ultima DoaCão", id = "txtDataUltimaDoacao", required = "required" } })
+                @Html.EditorFor(model => model.DATA_ULTIMA_DOACAO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data Ultima Doação", id = "txtDataUltimaDoacao", required = "required" } })
                 @Html.ValidationMessageFor(model => model.DATA_ULTIMA_DOACAO, "", new { @class = "text-danger" })
             </div>
 
@@ -210,10 +189,7 @@
                 NOME_USUARIO: "",
                 EMAIL_USUARIO: "",
                 SENHA_USUARIO: 0,
-                SOBRENOME_USUARIO: "",
                 LOGRADOURO: "",
-                NUMERO: 0,
-                COMPLEMENTO: "",
                 BAIRRO: "",
                 CIDADE: "",
                 ESTADO: "",
@@ -229,17 +205,14 @@
             ObjUsuarioNovo["EMAIL_USUARIO"] = data[1].value;
             ObjUsuarioNovo["SENHA_USUARIO"] = data[2].value;
             ObjUsuarioNovo["NOME_USUARIO"] = data[4].value;
-            ObjUsuarioNovo["SOBRENOME_USUARIO"] = data[5].value;
-            ObjUsuarioNovo["LOGRADOURO"] = data[6].value;
-            ObjUsuarioNovo["NUMERO"] = data[7].value;
-            ObjUsuarioNovo["COMPLEMENTO"] = data[8].value;
-            ObjUsuarioNovo["BAIRRO"] = data[9].value;
-            ObjUsuarioNovo["CIDADE"] = data[10].value;
+            ObjUsuarioNovo["LOGRADOURO"] = data[5].value;
+            ObjUsuarioNovo["BAIRRO"] = data[6].value;
+            ObjUsuarioNovo["CIDADE"] = data[7].value;
             ObjUsuarioNovo["ESTADO"] = $('#ESTADO').val();
-            ObjUsuarioNovo["CEP"] = data[12].value;
+            ObjUsuarioNovo["CEP"] = data[9].value;
             ObjUsuarioNovo["TIPO_SANGUINEO"] = $('#TIPO_SANGUINEO').val();
-            ObjUsuarioNovo["DATA_NASCIMENTO"] = data[14].value;
-            ObjUsuarioNovo["DATA_ULTIMA_DOACAO"] = data[15].value;
+            ObjUsuarioNovo["DATA_NASCIMENTO"] = data[11].value;
+            ObjUsuarioNovo["DATA_ULTIMA_DOACAO"] = data[12].value;
             ObjUsuarioNovo["CODIGO_HEROI"] = $('#CODIGO_HEROI').val();            
 
             $.ajax({
