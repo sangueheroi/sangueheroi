@@ -16,7 +16,7 @@ using SangueHeroiWeb.Helpers.Util_Helper;
 namespace SangueHeroiWeb
 {
     /// <summary>
-    /// WebService utilizado para comunicação com a aplicação Android
+    /// WebService utilizado para comunicaCão com a aplicaCão Android
     /// </summary>
     [WebService(Namespace = "http://sangueheroiweb.azurewebsites.net/WebService.asmx")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -48,7 +48,7 @@ namespace SangueHeroiWeb
             //}
             //else
             //{
-            //    throw new Exception("A autenticação falhou");
+            //    throw new Exception("A autenticaCão falhou");
             //}
         }
 
@@ -66,12 +66,12 @@ namespace SangueHeroiWeb
                 umodel.SENHA_USUARIO = senha;
                 umodel.NOME_USUARIO = nome;
                 //umodel.SOBRENOME_USUARIO = sobrenome;
-                umodel.RUA_ENDEREÇO_USUARIO = endereco;
-                umodel.NUMERO_ENDEREÇO_USUARIO = numero;
-                umodel.BAIRRO_ENDEREÇO_USUARIO = bairro;
-                umodel.CIDADE_ENDEREÇO_USUARIO = cidade;
-                umodel.ESTADO_ENDEREÇO_USUARIO = estado;
-                //umodel.CEP_ENDEREÇO_USUARIO = cep;
+                umodel.LOGRADOURO = endereco;
+                umodel.NUMERO = numero;
+                umodel.BAIRRO = bairro;
+                umodel.CIDADE = cidade;
+                umodel.ESTADO = estado;
+                //umodel.CEP_ENDERECO_USUARIO = cep;
                 umodel.TIPO_SANGUINEO = tipo_sanguineo;
                 umodel.DATA_NASCIMENTO = dtnascimento;
                 //umodel.DATA_ULTIMA_DOACAO = data_ultima_doacao;
@@ -82,7 +82,7 @@ namespace SangueHeroiWeb
             //}
             //else
             //{
-            //    throw new Exception("A autenticação falhou");
+            //    throw new Exception("A autenticaCão falhou");
             //}
         }
 

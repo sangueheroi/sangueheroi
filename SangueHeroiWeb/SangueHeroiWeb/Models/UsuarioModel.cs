@@ -24,8 +24,6 @@ namespace SangueHeroiWeb.Models
         [Display(Name = "Documento")]
         public string DOCUMENTO_USUARIO { get; set; }
 
-        public int CODIGO_STATUS = UtilHelper.BoolParaInt(STATUS_USUARIO);
-
         [Required]
         [Display(Name = "Status")]
         public static bool STATUS_USUARIO { get; set; }
@@ -49,27 +47,33 @@ namespace SangueHeroiWeb.Models
 
         [Required]
         [Display(Name = "Endereço")]
-        public string RUA_ENDEREÇO_USUARIO { get; set; }
+        public string LOGRADOURO { get; set; }
 
         [Required]
         [Display(Name = "Nº")]
-        public string NUMERO_ENDEREÇO_USUARIO { get; set; }
+        public string NUMERO { get; set; }
+
+        [Required]
+        [Display(Name = "Complemento")]
+        public string COMPLEMENTO { get; set; }
 
         [Required]
         [Display(Name = "Bairro")]
-        public string BAIRRO_ENDEREÇO_USUARIO { get; set; }
+        public string BAIRRO { get; set; }
 
         [Required]
         [Display(Name = "Cidade")]
-        public string CIDADE_ENDEREÇO_USUARIO { get; set; }
+        public string CIDADE { get; set; }
 
         [Required]
         [Display(Name = "Estado")]
-        public string ESTADO_ENDEREÇO_USUARIO { get; set; }
+        public string ESTADO { get; set; }
+
+        public List<String> ListaEstados = new List<String>() { "Acre", "Alagoa", "Amápa", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" };
 
         [Required]
         [Display(Name = "CEP")]
-        public string CEP_ENDEREÇO_USUARIO { get; set; }
+        public string CEP { get; set; }
 
         [Required]
         [Display(Name = "Tipo Sanguíneo")]
@@ -82,7 +86,7 @@ namespace SangueHeroiWeb.Models
         public DateTime DATA_NASCIMENTO { get; set; }
 
         [Required]
-        [Display(Name = "Data Ultima Doação")]
+        [Display(Name = "Data Ultima DoaCão")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DATA_ULTIMA_DOACAO { get; set; }
 
@@ -92,6 +96,18 @@ namespace SangueHeroiWeb.Models
         [Display(Name = "Confirmar Senha")]
         [Compare("SENHA_USUARIO", ErrorMessage = "Erro! Digite a senha Corretamente")]
         public string ConfirmaSenha { get; set; }
-        
+
+        public List<UsuarioHeroiModel> ListaHerois = new List<UsuarioHeroiModel>();
+
+        public int CODIGO_HEROI { get; set; }
+
+    }
+
+    public class UsuarioHeroiModel
+    {
+        public string NOME_HEROI { get; set; }
+        public string CARACTERISTICA_HEROI { get; set; }
+        public string DESCRICAO_HEROI { get; set; }
+        public int CODIGO_HEROI { get; set; }
     }
 }

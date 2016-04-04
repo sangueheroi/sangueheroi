@@ -1,4 +1,5 @@
-﻿using SangueHeroiWeb.Models;
+﻿using SangueHeroiWeb.Helpers.Util_Helper;
+using SangueHeroiWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -35,7 +36,7 @@ namespace SangueHeroiWeb.DAO
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    if (!model.EMAIL_USUARIO.Equals(data["EMAIL_USUARIO"]) || !model.SENHA.Equals(data["SENHA_CRIPTOGRAFADA"]))
+                    if (!model.SENHA.Equals(data["SENHA_USUARIO"]))
                         loginOK = false;
                 }
             }
@@ -73,7 +74,7 @@ namespace SangueHeroiWeb.DAO
                         MailMessage.From = new MailAddress("sangue.heroi@gmail.com", "Sangue Heroi", Encoding.UTF8);
                         MailMessage.To.Add(new MailAddress(data["EMAIL_USUARIO"].ToString(), "Nome Usuario", Encoding.UTF8));
 
-                        MailMessage.Subject = "Solicitação de Nova Senha";
+                        MailMessage.Subject = "SolicitaCão de Nova Senha";
                         MailMessage.Body = "<div>Email de Troca de Senha </div>";
                         MailMessage.BodyEncoding = Encoding.UTF8;
                         MailMessage.BodyEncoding = Encoding.GetEncoding("ISO-8859-1");
@@ -113,43 +114,25 @@ namespace SangueHeroiWeb.DAO
 
         public void Registrar(UsuarioModel model)
         {
-                string strQuery = "";
+            string strQuery = "";
 
-                strQuery = "EXECUTE frmRegistraUsuario" + Environment.NewLine
-                     + model.NOME_USUARIO + "' , '" + Environment.NewLine
-                     + model.DOCUMENTO_USUARIO + "' , '" + Environment.NewLine
-                     + model.SENHA_USUARIO + "' , '" + Environment.NewLine
-                     + model.EMAIL_USUARIO + "' , '" 
-                     + model.RUA_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
-                     + model.NUMERO_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
-                     + model.BAIRRO_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
-                     + model.CIDADE_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
-                     + model.ESTADO_ENDEREÇO_USUARIO + "' , '" 
-                     + model.TIPO_SANGUINEO + "' , '" + Environment.NewLine
-                     + model.DATA_NASCIMENTO + "'";
-
-           /* "INSERT" + Environment.NewLine +
-                    "INTO USUARIO ( NOME_USUARIO, DOCUMENTO_USUARIO, SENHA_CRIPTOGRAFADA, EMAIL_USUARIO )" + Environment.NewLine +
-                    "VALUES('" + model.NOME_USUARIO + "' , '"
-                     + model.DOCUMENTO_USUARIO + "' , '" + Environment.NewLine
-                     + model.SENHA_USUARIO + "' , '" + Environment.NewLine
-                     + model.EMAIL_USUARIO + "') " +
-                     "DECLARE @CODIGO_USUARIO_NOVO AS INT " +
-                     "SET @CODIGO_USUARIO_NOVO = dbo.SCOPE_IDENTIY() " +
-                     "INSERT" + Environment.NewLine +
-                     "INTO USUARIO_ENDERECO ( CODIGO_USUARIO, LOGRADOURO, NUMERO, BAIRRO, CIDADE, ESTADO )" + Environment.NewLine +
-                     "VALUES( @CODIGO_USUARIO_NOVO , '"
-                     + model.RUA_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
-                     + model.NUMERO_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
-                     + model.BAIRRO_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
-                     + model.CIDADE_ENDEREÇO_USUARIO + "' , '" + Environment.NewLine
-                     + model.ESTADO_ENDEREÇO_USUARIO + "') " +
-                     "INSERT" + Environment.NewLine +
-                     "INTO USUARIO_PERFIL ( CODIGO_USUARIO, TIPO_SANGUINEO, DATA_NASCIMENTO )" + Environment.NewLine +
-                     "VALUES( '@CODIGO_USUARIO_NOVO', '"
-                     + model.TIPO_SANGUINEO + "' , '" + Environment.NewLine
-                     + model.DATA_NASCIMENTO + "')";
-            */
+            strQuery = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
+                 + true + Environment.NewLine + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.SOBRENOME_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.LOGRADOURO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.NUMERO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.COMPLEMENTO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.BAIRRO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.TIPO_SANGUINEO) + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
+                 + model.CODIGO_HEROI + " ;";
 
             var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
         }

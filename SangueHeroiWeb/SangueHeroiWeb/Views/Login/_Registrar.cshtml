@@ -1,7 +1,6 @@
 ﻿@model SangueHeroiWeb.Models.UsuarioModel
 
 
-
 <div class="modal-header" style="padding-bottom: 35px;">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 </div>
@@ -14,8 +13,8 @@
         @Html.AntiForgeryToken()
 
         <div class="row">
-            <div class="form-group col-sm-5">
-                @Html.EditorFor(model => model.EMAIL_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail", required = "required", type= "email" } })
+            <div class="form-group col-sm-6">
+                @Html.EditorFor(model => model.EMAIL_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail", required = "required", type = "email" } })
                 @Html.ValidationMessageFor(model => model.EMAIL_USUARIO, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-sm-3">
@@ -43,69 +42,127 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-md-10">
+            <div class="form-group col-md-7">
 
-                @Html.EditorFor(model => model.RUA_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Rua", required = "required" } })
-                @Html.ValidationMessageFor(model => model.RUA_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.LOGRADOURO, new { htmlAttributes = new { @class = "form-control", placeholder = "Endereço", required = "required" } })
+                @Html.ValidationMessageFor(model => model.LOGRADOURO, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group col-md-2">
 
-                @Html.EditorFor(model => model.NUMERO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Nº", required = "required" } })
-                @Html.ValidationMessageFor(model => model.NUMERO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.NUMERO, new { htmlAttributes = new { @class = "form-control", placeholder = "Nº", required = "required" } })
+                @Html.ValidationMessageFor(model => model.NUMERO, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-3">
+
+                @Html.EditorFor(model => model.COMPLEMENTO, new { htmlAttributes = new { @class = "form-control", placeholder = "Complemento", required = "required" } })
+                @Html.ValidationMessageFor(model => model.COMPLEMENTO, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-4">
 
-                @Html.EditorFor(model => model.BAIRRO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Bairro", required = "required" } })
-                @Html.ValidationMessageFor(model => model.BAIRRO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.BAIRRO, new { htmlAttributes = new { @class = "form-control", placeholder = "Bairro", required = "required" } })
+                @Html.ValidationMessageFor(model => model.BAIRRO, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group col-md-4">
 
-                @Html.EditorFor(model => model.CIDADE_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Cidade", required = "required" } })
-                @Html.ValidationMessageFor(model => model.CIDADE_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.CIDADE, new { htmlAttributes = new { @class = "form-control", placeholder = "Cidade", required = "required" } })
+                @Html.ValidationMessageFor(model => model.CIDADE, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-2">
+                @Html.DropDownListFor(model => model.ESTADO,
+               new SelectList(ViewBag.ListaEstados, "ESTADO"),
+               "Estado",
+               new { @class = "form-control", required = "required" })
             </div>
 
             <div class="form-group col-md-2">
 
-                @Html.EditorFor(model => model.ESTADO_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "Estado", required = "required" } })
-                @Html.ValidationMessageFor(model => model.ESTADO_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group col-md-2">
-
-                @Html.EditorFor(model => model.CEP_ENDEREÇO_USUARIO, new { htmlAttributes = new { @class = "form-control", placeholder = "CEP", required = "required" } })
-                @Html.ValidationMessageFor(model => model.CEP_ENDEREÇO_USUARIO, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { @class = "form-control", placeholder = "CEP", required = "required" } })
+                @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-3">
                 @Html.DropDownListFor(model => model.TIPO_SANGUINEO,
-                                               new SelectList(ViewBag.ListaTipoSanguineo, "TIPO_SANGUINEO"),
-                                               "Tipo Sanguineo",
-                                               new { @class = "form-control" })
+               new SelectList(ViewBag.ListaTipoSanguineo, "TIPO_SANGUINEO"),
+               "Tipo Sanguineo",
+               new { @class = "form-control", required = "required" })
             </div>
             <div class="form-group col-md-3">
 
-                @Html.EditorFor(model => model.DATA_NASCIMENTO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data de Nascimento", id="txtDataNascimento", required = "required" } })
+                @Html.EditorFor(model => model.DATA_NASCIMENTO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data de Nascimento", id = "txtDataNascimento", required = "required" } })
                 @Html.ValidationMessageFor(model => model.DATA_NASCIMENTO, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-3">
 
-                @Html.EditorFor(model => model.DATA_ULTIMA_DOACAO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data Ultima Doação", id="txtDataUltimaDoacao", required = "required" } })
+                @Html.EditorFor(model => model.DATA_ULTIMA_DOACAO, new { htmlAttributes = new { @class = "form-control", placeholder = "Data Ultima DoaCão", id = "txtDataUltimaDoacao", required = "required" } })
                 @Html.ValidationMessageFor(model => model.DATA_ULTIMA_DOACAO, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.DropDownListFor(model => model.CODIGO_HEROI,
+               new SelectList(ViewBag.ListaHerois, "CODIGO_HEROI", "NOME_HEROI"),   
+              null,
+               new { @class = "form-control", required = "required" })
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <ul class="nav nav-tabs">
+                    @foreach (var usuarioHeroiModel in ViewBag.ListaHerois)
+                    {
+                        @*if (Convert.ToInt32(usuarioHeroiModel.CODIGO_HEROI) == 1)
+                        {
+                            <li class="active"><a class="Heroi_@usuarioHeroiModel.CODIGO_HEROI" data-toggle="tab" href="#heroi_@usuarioHeroiModel.CODIGO_HEROI">@usuarioHeroiModel.NOME_HEROI</a></li>
+                        }
+                        else
+                        {*@
+                            <li><a class="Heroi_@usuarioHeroiModel.CODIGO_HEROI" data-toggle="tab" href="#heroi_@usuarioHeroiModel.CODIGO_HEROI">@usuarioHeroiModel.NOME_HEROI</a></li>
+                        @*}*@
+                    }
+                    @*<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+                    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+                    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>*@
+                </ul>
+                 <div class="tab-content">
+                     @foreach (var usuarioHeroiModel in ViewBag.ListaHerois)
+                     {
+                         @*if (Convert.ToInt32(usuarioHeroiModel.CODIGO_HEROI) == 1)
+                         {
+                            <div id="heroi_@usuarioHeroiModel.CODIGO_HEROI" class="tab-pane fade in active">
+                                <h3>@usuarioHeroiModel.CARACTERISTICA_HEROI</h3>
+                                <p>@usuarioHeroiModel.DESCRICAO_HEROI</p>
+                            </div>
+                         }
+                         else
+                         {*@
+                            <div id="heroi_@usuarioHeroiModel.CODIGO_HEROI" class="tab-pane fade">
+                                <h3>@usuarioHeroiModel.CARACTERISTICA_HEROI</h3>
+                                <p style="border-bottom: 1px solid #ddd; margin-bottom:10px">@usuarioHeroiModel.DESCRICAO_HEROI</p>
+                                <br />
+                            </div>
+                         @*}*@
+
+                     }
+                </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-12">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Criar" class="btn btn-default btn-lg" style="float: right" />
             </div>
-         </div>
+        </div>
     }
 
 </div>
@@ -114,7 +171,7 @@
 </div>
 
 <script>
-   
+
     $(document).ready(function () {
         $('#sair').on('click', function () {
             $('#modalCriarConta').modal('hide');
@@ -123,10 +180,10 @@
 
         $('#txtDataNascimento').datepicker({
             dateFormat: 'dd/mm/yy',
-            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            dayNames: ['Domingo', 'Segunda', 'TerCa', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'MarCo', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
             monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
             changeMonth: true,
             changeYear: true,
@@ -134,10 +191,10 @@
         });
         $('#txtDataUltimaDoacao').datepicker({
             dateFormat: 'dd/mm/yy',
-            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+            dayNames: ['Domingo', 'Segunda', 'TerCa', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
             dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
             dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNames: ['Janeiro', 'Fevereiro', 'MarCo', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
             monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
             changeMonth: true,
             changeYear: true,
@@ -154,33 +211,37 @@
                 EMAIL_USUARIO: "",
                 SENHA_USUARIO: 0,
                 SOBRENOME_USUARIO: "",
-                RUA_ENDEREÇO_USUARIO: "",
-                NUMERO_ENDEREÇO_USUARIO: 0,
-                BAIRRO_ENDEREÇO_USUARIO: "",
-                CIDADE_ENDEREÇO_USUARIO: "",
-                ESTADO_ENDEREÇO_USUARIO: "",
-                CEP_ENDEREÇO_USUARIO: 0,
+                LOGRADOURO: "",
+                NUMERO: 0,
+                COMPLEMENTO: "",
+                BAIRRO: "",
+                CIDADE: "",
+                ESTADO: "",
+                CEP: 0,
                 TIPO_SANGUINEO: "",
                 DATA_NASCIMENTO: 0,
-                DATA_ULTIMA_DOACAO: 0
+                DATA_ULTIMA_DOACAO: 0,
+                CODIGO_HEROI: 0
             };
             //Dados Form
             var data = $(this).serializeArray();
 
             ObjUsuarioNovo["EMAIL_USUARIO"] = data[1].value;
             ObjUsuarioNovo["SENHA_USUARIO"] = data[2].value;
-            ObjUsuarioNovo["NOME_USUARIO"] = data[3].value;
-            ObjUsuarioNovo["SOBRENOME_USUARIO"] = data[4].value;
-            ObjUsuarioNovo["RUA_ENDEREÇO_USUARIO"] = data[5].value;
-            ObjUsuarioNovo["NUMERO_ENDEREÇO_USUARIO"] = data[6].value;
-            ObjUsuarioNovo["BAIRRO_ENDEREÇO_USUARIO"] = data[7].value;
-            ObjUsuarioNovo["CIDADE_ENDEREÇO_USUARIO"] = data[8].value;
-            ObjUsuarioNovo["ESTADO_ENDEREÇO_USUARIO"] = data[9].value;
-            ObjUsuarioNovo["CEP_ENDEREÇO_USUARIO"] = data[10].value;
-            ObjUsuarioNovo["TIPO_SANGUINEO"] = data[11].value;
-            ObjUsuarioNovo["DATA_NASCIMENTO"] = data[13].value;
-            ObjUsuarioNovo["DATA_ULTIMA_DOACAO"] = data[14].value;
-           
+            ObjUsuarioNovo["NOME_USUARIO"] = data[4].value;
+            ObjUsuarioNovo["SOBRENOME_USUARIO"] = data[5].value;
+            ObjUsuarioNovo["LOGRADOURO"] = data[6].value;
+            ObjUsuarioNovo["NUMERO"] = data[7].value;
+            ObjUsuarioNovo["COMPLEMENTO"] = data[8].value;
+            ObjUsuarioNovo["BAIRRO"] = data[9].value;
+            ObjUsuarioNovo["CIDADE"] = data[10].value;
+            ObjUsuarioNovo["ESTADO"] = $('#ESTADO').val();
+            ObjUsuarioNovo["CEP"] = data[12].value;
+            ObjUsuarioNovo["TIPO_SANGUINEO"] = $('#TIPO_SANGUINEO').val();
+            ObjUsuarioNovo["DATA_NASCIMENTO"] = data[14].value;
+            ObjUsuarioNovo["DATA_ULTIMA_DOACAO"] = data[15].value;
+            ObjUsuarioNovo["CODIGO_HEROI"] = $('#CODIGO_HEROI').val();            
+
             $.ajax({
                 type: 'POST',
                 url: './Login/Registrar',
@@ -211,3 +272,29 @@
     });
 
 </script>
+
+<style type="text/css">
+    .Heroi_1 {
+        color: #D3C500 !important;
+    }
+
+    .Heroi_2 {
+        color: #0026ff !important;
+    }
+
+    .Heroi_3 {
+        color: #ff6a00 !important;
+    }
+
+    .Heroi_4 {
+        color: #b200ff !important;
+    }
+
+    .Heroi_5 {
+        color: #00C71A !important;
+    }
+
+    .Heroi_6 {
+        color: #ff0000 !important;
+    }
+</style>

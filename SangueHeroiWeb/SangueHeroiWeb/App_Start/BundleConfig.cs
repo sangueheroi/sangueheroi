@@ -22,7 +22,8 @@ namespace SangueHeroiWeb
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                     "~/Scripts/notify.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap-theme.css",
@@ -37,7 +38,6 @@ namespace SangueHeroiWeb
 
             bundles.Add(new ScriptBundle("~/bundles/controllers").Include(
                        "~/Scripts/login/login.js"));
-
         }
     }
 }
