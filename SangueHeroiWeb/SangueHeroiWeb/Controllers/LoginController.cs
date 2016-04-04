@@ -119,15 +119,19 @@ namespace SangueHeroiWeb.Controllers
         public ActionResult Registrar(UsuarioModel model)
         {
             LoginDAO dao = new LoginDAO();
+            String msg = "Conta realizada com sucesso!";
 
-            if(model != null)
+            if (model != null)
             {
-                dao.Registrar(model);
+                if (!dao.Registrar(model))
+                {
+                    msg = "Erro na realização do cadastro!";
+                }
             }
 
             return Json(new
             {
-                msg = "Conta Realizada com Sucesso",
+                msg = msg
                 //redirectUrl = "Index",
                 //isRedirect = false
             });

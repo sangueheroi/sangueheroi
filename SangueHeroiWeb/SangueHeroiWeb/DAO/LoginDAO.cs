@@ -112,8 +112,8 @@ namespace SangueHeroiWeb.DAO
             return envioEmailOk;
         }
 
-        public void Registrar(UsuarioModel model)
-        {
+        public Boolean Registrar(UsuarioModel model)
+        {          
             string strQuery = "";
 
             strQuery = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
@@ -131,7 +131,17 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
                  + model.CODIGO_HEROI + " ;";
 
-            var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+            try
+            {
+                var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+            }
+            catch (Exception)
+            {
+                throw;
+                return false;
+            }
+
+            return true;            
         }
     }
 }
