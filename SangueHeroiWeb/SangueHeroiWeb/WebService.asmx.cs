@@ -54,31 +54,29 @@ namespace SangueHeroiWeb
 
         //Método utilizado para registrar Usuário no banco de dados a partir do app Android.
         [WebMethod]
-        public void registrarUsuario(string nome, string documento, string login, string senha, string endereco, string numero, string bairro, string cidade, string estado, string tipo_sanguineo, DateTime dtnascimento)
+        public bool registrarUsuario(string nome, string email, string senha, string logradouro, string bairro, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, string codigo_heroi)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
                 LoginDAO ldao = new LoginDAO();
                 UsuarioModel umodel = new UsuarioModel();
 
-                umodel.DOCUMENTO_USUARIO = documento;
-                umodel.EMAIL_USUARIO = login;
-                umodel.SENHA_USUARIO = senha;
                 umodel.NOME_USUARIO = nome;
-                //umodel.SOBRENOME_USUARIO = sobrenome;
-                umodel.LOGRADOURO = endereco;
-                umodel.NUMERO = numero;
+                umodel.EMAIL_USUARIO = email;
+                umodel.SENHA_USUARIO = senha;
+                umodel.LOGRADOURO = logradouro;
                 umodel.BAIRRO = bairro;
                 umodel.CIDADE = cidade;
                 umodel.ESTADO = estado;
-                //umodel.CEP_ENDERECO_USUARIO = cep;
+                umodel.CEP = cep;
                 umodel.TIPO_SANGUINEO = tipo_sanguineo;
-                umodel.DATA_NASCIMENTO = dtnascimento;
-                //umodel.DATA_ULTIMA_DOACAO = data_ultima_doacao;
+                umodel.DATA_NASCIMENTO = Convert.ToDateTime(dtnascimento);
+                umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
+                umodel.CODIGO_HEROI = Convert.ToInt32(codigo_heroi);
 
-                ldao.Registrar(umodel);
+                var retorno = ldao.Registrar(umodel);
 
-                return;
+                return retorno;
             //}
             //else
             //{

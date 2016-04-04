@@ -112,19 +112,16 @@ namespace SangueHeroiWeb.DAO
             return envioEmailOk;
         }
 
-        public void Registrar(UsuarioModel model)
-        {
+        public Boolean Registrar(UsuarioModel model)
+        {          
             string strQuery = "";
 
             strQuery = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
                  + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
                  + true + Environment.NewLine + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.SOBRENOME_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.LOGRADOURO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.NUMERO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.COMPLEMENTO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.BAIRRO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
@@ -134,7 +131,17 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
                  + model.CODIGO_HEROI + " ;";
 
-            var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+            try
+            {
+                var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+            }
+            catch (Exception)
+            {
+                throw;
+                return false;
+            }
+
+            return true;            
         }
     }
 }
