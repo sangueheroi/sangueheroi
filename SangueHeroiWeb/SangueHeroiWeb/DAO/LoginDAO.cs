@@ -14,8 +14,6 @@ namespace SangueHeroiWeb.DAO
     public class LoginDAO
     {
         ContextHelpers context;
-        protected SmtpClient SmtpClient { get; set; }
-        protected MailMessage MailMessage { get; set; }
 
         public LoginDAO()
         {
@@ -50,7 +48,7 @@ namespace SangueHeroiWeb.DAO
         {
             bool envioEmailOk = true;
 
-            var strQuery = String.Format("SELECT * FROM TB_USUARIO WHERE EMAIL_USUARIO = '{0}'", emailUsuario);
+            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", emailUsuario);
 
             DataTable dt = new DataTable();
 
@@ -60,34 +58,9 @@ namespace SangueHeroiWeb.DAO
             {
                 try
                 {
-                    SmtpClient = new SmtpClient();
-                    SmtpClient.Host = "smtp.gmail.com";
-                    SmtpClient.Port = 587;
-                    SmtpClient.EnableSsl = true;
-                    SmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    SmtpClient.UseDefaultCredentials = false;
-                    SmtpClient.Credentials = new NetworkCredential("sangue.heroi@gmail.com", "appsangueheroi10");
-
                     foreach (DataRow data in dt.Rows)
                     {
-                        MailMessage = new MailMessage();
-                        MailMessage.From = new MailAddress("sangue.heroi@gmail.com", "Sangue Heroi", Encoding.UTF8);
-                        MailMessage.To.Add(new MailAddress(data["EMAIL_USUARIO"].ToString(), "Nome Usuario", Encoding.UTF8));
-
-                        MailMessage.Subject = "SolicitaCão de Nova Senha";
-                        MailMessage.Body = "<div>Email de Troca de Senha </div>";
-                        MailMessage.BodyEncoding = Encoding.UTF8;
-                        MailMessage.BodyEncoding = Encoding.GetEncoding("ISO-8859-1");
-                        bool priority = true;
-
-                        if (priority == false)
-                        {
-                            MailMessage.Priority = MailPriority.Normal;
-                        }
-                        else
-                        {
-                            MailMessage.Priority = MailPriority.High;
-                        }
+                        EmailHelper.EnviarEmail(data[""].ToString(), data[""].ToString(), true);
                     }
 
                     SmtpClient.Send(MailMessage);
