@@ -15,7 +15,7 @@
                     <h2>Login</h2>
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.EMAIL_USUARIO, null, new { @type = "text", @class = "usuario usuario_img_background", @placeholder = "E-mail", required = "required" })
+                    @Html.TextBoxFor(model => model.EMAIL_USUARIO, null, new { @type = "email", @class = "usuario usuario_img_background", @placeholder = "E-mail", required = "required" })
                     @Html.ValidationMessageFor(model => model.EMAIL_USUARIO)
                 </div>
                 <div class="form-group">
@@ -147,16 +147,9 @@
                 cache: false,
                 async: true,
                 success: function (data) {
-                    //if(!data.isRedirect)
-                    //{
-                    //    alert(data.msg);
-                    //}
-                    //else
-                    //{
-                    //    window.location.href = data.redirectUrl;
-                    //}
-
-                    alert(data.msg);
+                    $.notify(data.msg, {
+                        autoHideDelay : 1500
+                    });
                 }
             });
             if (e.preventDefault) {
