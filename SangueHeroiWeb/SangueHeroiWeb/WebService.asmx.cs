@@ -84,6 +84,27 @@ namespace SangueHeroiWeb
             //}
         }
 
+        [WebMethod]
+        public string historicoDoacoes(string email)
+        {
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
+
+            DoacaoDAO doacao = new DoacaoDAO();
+
+            List<DoacaoModel> lista = doacao.getHistoricoDoacoes(email);
+
+            string json = JsonConvert.SerializeObject(lista);
+            
+            return json;
+            
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
+        }
+
     }
 
 }
