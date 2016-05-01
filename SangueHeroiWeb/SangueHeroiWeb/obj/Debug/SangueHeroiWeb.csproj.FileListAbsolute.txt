@@ -330,4 +330,3 @@ C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.Twitter.xml
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.dll
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.pdb
-C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache

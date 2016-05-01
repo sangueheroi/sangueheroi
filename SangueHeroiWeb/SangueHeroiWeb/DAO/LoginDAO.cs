@@ -63,7 +63,7 @@ namespace SangueHeroiWeb.DAO
                         EmailHelper.EnviarEmail(data[""].ToString(), data[""].ToString(), true);
                     }
 
-                    SmtpClient.Send(MailMessage);
+                    //SmtpClient.Send(MailMessage);
                 }
                 catch (SmtpFailedRecipientException ex)
                 {

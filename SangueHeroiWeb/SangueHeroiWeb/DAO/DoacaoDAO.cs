@@ -26,7 +26,7 @@ namespace SangueHeroiWeb.DAO
         {
             string strQuery = "";
 
-            strQuery = String.Format("SELECT * FROM DOACAO D INNER JOIN USUARIO U ON D.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}' ", email);
+            strQuery = String.Format("SELECT NOME_HEMOCENTRO, DATA_DOACAO, LOGRADOURO_ENDERECO_DOACAO FROM DOACAO D INNER JOIN USUARIO U ON D.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}' ", email);
 
             DataTable dt = new DataTable();
 
@@ -39,12 +39,9 @@ namespace SangueHeroiWeb.DAO
                 foreach (DataRow data in dt.Rows)
                 {
                     DoacaoModel doacao = new DoacaoModel();
-
-                    doacao.CODIGO_DOACAO = Convert.ToInt32(data["CODIGO_DOACAO"].ToString());
-                    doacao.CODIGO_USUARIO = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
-                    doacao.DATA_DOACAO = Convert.ToDateTime(data["DATA_DOACAO"].ToString());
+                    doacao.NOME_HEMOCENTRO = data["NOME_HEMOCENTRO"].ToString();
+                    doacao.DATA_DOACAO_DT = Convert.ToDateTime(data["DATA_DOACAO"].ToString());
                     doacao.LOGRADOURO_ENDERECO_DOACAO = data["LOGRADOURO_ENDERECO_DOACAO"].ToString();
-                    doacao.CEP_ENDERECO_DOACAO = data["CEP_ENDERECO_DOACAO"].ToString();
 
                     list.Add(doacao);
                 }

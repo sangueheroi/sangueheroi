@@ -94,7 +94,7 @@ namespace SangueHeroiWeb
 
             List<DoacaoModel> lista = doacao.getHistoricoDoacoes(email);
 
-            string json = JsonConvert.SerializeObject(lista);
+            string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
             
             return json;
             
