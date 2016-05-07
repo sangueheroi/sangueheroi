@@ -85,7 +85,7 @@ namespace SangueHeroiWeb.DAO
             return envioEmailOk;
         }
 
-        public Boolean Registrar(UsuarioModel model)
+        public int Registrar(UsuarioModel model)
         {          
             string strQuery = "";
 
@@ -94,8 +94,6 @@ namespace SangueHeroiWeb.DAO
                  + true + Environment.NewLine + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.LOGRADOURO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.BAIRRO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
@@ -111,10 +109,10 @@ namespace SangueHeroiWeb.DAO
             catch (Exception)
             {
                 throw;
-                return false;
+                return 0;
             }
 
-            return true;            
+            return 1;            
         }
     }
 }

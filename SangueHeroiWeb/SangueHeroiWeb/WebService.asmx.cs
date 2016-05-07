@@ -54,7 +54,7 @@ namespace SangueHeroiWeb
 
         //Método utilizado para registrar Usuário no banco de dados a partir do app Android.
         [WebMethod]
-        public bool registrarUsuario(string nome, string email, string senha, string logradouro, string bairro, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, string codigo_heroi)
+        public int registrarUsuario(string nome, string email, string senha, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
@@ -64,15 +64,13 @@ namespace SangueHeroiWeb
                 umodel.NOME_USUARIO = nome;
                 umodel.EMAIL_USUARIO = email;
                 umodel.SENHA_USUARIO = senha;
-                umodel.LOGRADOURO = logradouro;
-                umodel.BAIRRO = bairro;
                 umodel.CIDADE = cidade;
                 umodel.ESTADO = estado;
                 umodel.CEP = cep;
                 umodel.TIPO_SANGUINEO = tipo_sanguineo;
                 umodel.DATA_NASCIMENTO = Convert.ToDateTime(dtnascimento);
                 umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
-                umodel.CODIGO_HEROI = Convert.ToInt32(codigo_heroi);
+                umodel.CODIGO_HEROI = codigo_heroi;
 
                 var retorno = ldao.Registrar(umodel);
 
@@ -98,6 +96,30 @@ namespace SangueHeroiWeb
             
             return json;
             
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
+        }
+
+        public int cadastrarCampanha(string nome, string descricao, string dtinicio, string dtfim)
+        {
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
+
+            CampanhaDAO cdao = new CampanhaDAO();
+            CampanhaModel cmodel = new CampanhaModel();
+
+            cmodel.NOME_CAMPANHA = nome;
+            cmodel.DESCRICAO_CAMPANHA = descricao;
+            cmodel.DATA_INICIO_DT = Convert.ToDateTime(dtinicio);
+            cmodel.DATA_FIM_DT = Convert.ToDateTime(dtfim);
+
+            var retorno = cdao.Cadastrar(cmodel);
+
+            return retorno;
+
             //}
             //else
             //{
