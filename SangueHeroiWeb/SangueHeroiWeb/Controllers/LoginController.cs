@@ -123,7 +123,7 @@ namespace SangueHeroiWeb.Controllers
 
             if (model != null)
             {
-                if (!dao.Registrar(model))
+                if (dao.Registrar(model) == 0)
                 {
                     msg = "Erro na realização do cadastro!";
                 }
