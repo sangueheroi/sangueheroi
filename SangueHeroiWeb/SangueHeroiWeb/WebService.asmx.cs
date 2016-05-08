@@ -31,7 +31,7 @@ namespace SangueHeroiWeb
         //Método utilizado para permitir o login pelo app Android, a partir da consulta de login e senha no banco de dados.    
         //[SoapHeader("Autenticacao")]
         [WebMethod]
-        public bool efetuarLogin(string login, string senha)
+        public int efetuarLogin(string login, string senha)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
@@ -54,11 +54,11 @@ namespace SangueHeroiWeb
 
         //Método utilizado para registrar Usuário no banco de dados a partir do app Android.
         [WebMethod]
-        public int registrarUsuario(string nome, string email, string senha, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi)
+        public int registrarUsuario(string nome, string email, string senha, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
-                UsuarioDAO ldao = new UsuarioDAO();
+                UsuarioDAO udao = new UsuarioDAO();
                 UsuarioModel umodel = new UsuarioModel();
 
                 umodel.NOME_USUARIO = nome;
@@ -71,8 +71,9 @@ namespace SangueHeroiWeb
                 umodel.DATA_NASCIMENTO = Convert.ToDateTime(dtnascimento);
                 umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
                 umodel.CODIGO_HEROI = codigo_heroi;
+                umodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
 
-                var retorno = ldao.Registrar(umodel);
+                var retorno = udao.Registrar(umodel);
 
                 return retorno;
             //}
@@ -103,6 +104,8 @@ namespace SangueHeroiWeb
             //}
         }
 
+
+        [WebMethod]
         public int cadastrarCampanha(string nome, string descricao, string dtinicio, string dtfim)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)

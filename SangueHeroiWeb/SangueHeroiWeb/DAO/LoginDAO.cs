@@ -20,9 +20,9 @@ namespace SangueHeroiWeb.DAO
             context = new ContextHelpers();
         }
 
-        public bool LogarUsuario(LoginUsuarioModel model)
+        public int Logar(LoginModel model)
         {
-            bool loginOK = true;
+            int loginOK = 1;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
 
@@ -35,11 +35,11 @@ namespace SangueHeroiWeb.DAO
                 foreach (DataRow data in dt.Rows)
                 {
                     if (!model.SENHA.Equals(data["SENHA_USUARIO"]))
-                        loginOK = false;
+                        loginOK = 0;
                 }
             }
             else
-                loginOK = false;
+                loginOK = 2;
 
             return loginOK;
         }
@@ -86,7 +86,7 @@ namespace SangueHeroiWeb.DAO
                     {
                         EmailHelper.EnviarEmail(data[""].ToString(), data[""].ToString(), true);
                     }
-                    
+
                 }
                 catch (SmtpFailedRecipientException ex)
                 {

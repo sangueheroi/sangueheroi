@@ -38,6 +38,6 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
         public static string DateTimeParaBrDate(DateTime dt)
         {
             return String.Format("{0:dd/MM/yyyy HH:mm:ss}", dt);
-        }        
+        }
     }
 }

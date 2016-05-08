@@ -47,7 +47,7 @@ namespace SangueHeroiWeb.Controllers
 
             return View();
         }
-        
+
         [HttpGet]
         public ActionResult EsqueciMinhaSenha()
         {

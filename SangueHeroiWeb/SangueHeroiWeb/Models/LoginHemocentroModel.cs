@@ -19,6 +19,7 @@ namespace SangueHeroiWeb.Models
 
         [Display(Name = "Lembrar-me?")]
         public bool LEMBRAR_ME { get; set; }
+
     }
 
     public class EsqueciMinhaSenhaModel

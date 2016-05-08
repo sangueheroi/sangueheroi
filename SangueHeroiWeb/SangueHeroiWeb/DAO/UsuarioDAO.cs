@@ -73,11 +73,20 @@ namespace SangueHeroiWeb.DAO
 
         public int Registrar(UsuarioModel model)
         {
+            int registroOK;
+
             string strQuery = "";
 
-            strQuery = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
+            string strQuery2 = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+
+            DataTable dt = new DataTable();
+
+            dt = (DataTable)context.ExecuteCommand(strQuery2, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count == 0)
+            {
+                strQuery = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
                  + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
-                 + "1 , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
@@ -86,18 +95,24 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.TextForSql(model.TIPO_SANGUINEO) + " , " + Environment.NewLine
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
-                 + model.CODIGO_HEROI + " ;";
+                 + model.CODIGO_HEROI + " , " + Environment.NewLine
+                 + model.FLAG_CADASTRO_REDE_SOCIAL + " ;";
 
-            try
-            {
-                context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                try
+                {
+                    var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                    registroOK = 1;
+                }
+                catch (Exception)
+                {
+                    registroOK = 2;
+                }
             }
-            catch (Exception)
-            {
-                return 0;
-            }
+            else
+                registroOK = 0;
 
-            return 1;
+            return registroOK;
         }
+
     }
 }
