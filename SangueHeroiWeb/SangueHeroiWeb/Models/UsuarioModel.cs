@@ -101,6 +101,8 @@ namespace SangueHeroiWeb.Models
 
         public int CODIGO_HEROI { get; set; }
 
+        public bool FLAG_CADASTRO_REDE_SOCIAL { get; set; }
+
     }
 
     public class UsuarioHeroiModel

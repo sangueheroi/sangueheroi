@@ -52,30 +52,9 @@ namespace SangueHeroiWeb
             //}
         }
 
-        [WebMethod]
-        public int efetuarLoginComRedeSocial(string login, bool flagCadastroIsRedeSocial)
-        {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
-            //{
-            LoginDAO ldao = new LoginDAO();
-            LoginModel lmodel = new LoginModel();
-
-            lmodel.EMAIL_USUARIO = login;
-            lmodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
-            
-            var retorno = ldao.LogarComRedeSocial(lmodel);
-
-            return retorno;
-            //}
-            //else
-            //{
-            //    throw new Exception("A autenticaCão falhou");
-            //}
-        }
-
         //Método utilizado para registrar Usuário no banco de dados a partir do app Android.
         [WebMethod]
-        public int registrarUsuario(string nome, string email, string senha, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi)
+        public int registrarUsuario(string nome, string email, string senha, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
@@ -92,6 +71,7 @@ namespace SangueHeroiWeb
                 umodel.DATA_NASCIMENTO = Convert.ToDateTime(dtnascimento);
                 umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
                 umodel.CODIGO_HEROI = codigo_heroi;
+                umodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
 
                 var retorno = ldao.Registrar(umodel);
 

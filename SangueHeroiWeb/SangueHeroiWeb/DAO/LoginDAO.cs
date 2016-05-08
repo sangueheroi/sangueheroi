@@ -44,30 +44,6 @@ namespace SangueHeroiWeb.DAO
             return loginOK;
         }
 
-        public int LogarComRedeSocial(LoginModel model)
-        {
-            int loginOK = 1;
-
-            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
-
-            DataTable dt = new DataTable();
-
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow data in dt.Rows)
-                {
-                    if (!model.FLAG_CADASTRO_REDE_SOCIAL.Equals(data["FLAG_CADASTRO_REDE_SOCIAL"]))
-                        loginOK = 0;
-                }
-            }
-            else
-                loginOK = 2;
-
-            return loginOK;
-        }
-
         public bool EsqueciMinhaSenha(string emailUsuario)
         {
             bool envioEmailOk = true;
@@ -124,8 +100,9 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.TextForSql(model.TIPO_SANGUINEO) + " , " + Environment.NewLine
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
-                 + model.CODIGO_HEROI + " ;";
-
+                 + model.CODIGO_HEROI + " , " + Environment.NewLine
+                 + model.FLAG_CADASTRO_REDE_SOCIAL + " ;"; 
+                 
             try
             {
                 var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
