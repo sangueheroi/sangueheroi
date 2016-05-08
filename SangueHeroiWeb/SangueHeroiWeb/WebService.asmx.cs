@@ -58,7 +58,7 @@ namespace SangueHeroiWeb
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
-                LoginDAO ldao = new LoginDAO();
+                UsuarioDAO udao = new UsuarioDAO();
                 UsuarioModel umodel = new UsuarioModel();
 
                 umodel.NOME_USUARIO = nome;
@@ -73,7 +73,7 @@ namespace SangueHeroiWeb
                 umodel.CODIGO_HEROI = codigo_heroi;
                 umodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
 
-                var retorno = ldao.Registrar(umodel);
+                var retorno = udao.Registrar(umodel);
 
                 return retorno;
             //}

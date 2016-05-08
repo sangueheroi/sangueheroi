@@ -85,35 +85,5 @@ namespace SangueHeroiWeb.DAO
             return envioEmailOk;
         }
 
-        public int Registrar(UsuarioModel model)
-        {          
-            string strQuery = "";
-
-            strQuery = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
-                 + true + Environment.NewLine + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.TIPO_SANGUINEO) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
-                 + model.CODIGO_HEROI + " , " + Environment.NewLine
-                 + model.FLAG_CADASTRO_REDE_SOCIAL + " ;"; 
-                 
-            try
-            {
-                var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-            }
-            catch (Exception)
-            {
-                throw;
-                return 0;
-            }
-
-            return 1;            
-        }
     }
 }
