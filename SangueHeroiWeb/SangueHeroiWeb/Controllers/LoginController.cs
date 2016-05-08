@@ -27,9 +27,9 @@ namespace SangueHeroiWeb.Controllers
         {
             LoginDAO dao = new LoginDAO();
 
-            bool loginOK = dao.Logar(model);
+            int loginOK = dao.Logar(model);
             
-            if(!loginOK)
+            if(loginOK == 0 || loginOK == 2)
             {
                 return Json(new
                 {

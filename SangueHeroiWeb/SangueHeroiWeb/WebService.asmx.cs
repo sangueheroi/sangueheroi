@@ -31,7 +31,7 @@ namespace SangueHeroiWeb
         //Método utilizado para permitir o login pelo app Android, a partir da consulta de login e senha no banco de dados.    
         //[SoapHeader("Autenticacao")]
         [WebMethod]
-        public bool efetuarLogin(string login, string senha)
+        public int efetuarLogin(string login, string senha)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
@@ -45,6 +45,27 @@ namespace SangueHeroiWeb
                 var retorno = ldao.Logar(lmodel);
 
                 return retorno;
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
+        }
+
+        [WebMethod]
+        public int efetuarLoginComRedeSocial(string login, bool flagCadastroIsRedeSocial)
+        {
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
+            LoginDAO ldao = new LoginDAO();
+            LoginModel lmodel = new LoginModel();
+
+            lmodel.EMAIL_USUARIO = login;
+            lmodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
+            
+            var retorno = ldao.LogarComRedeSocial(lmodel);
+
+            return retorno;
             //}
             //else
             //{
@@ -103,6 +124,8 @@ namespace SangueHeroiWeb
             //}
         }
 
+
+        [WebMethod]
         public int cadastrarCampanha(string nome, string descricao, string dtinicio, string dtfim)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
