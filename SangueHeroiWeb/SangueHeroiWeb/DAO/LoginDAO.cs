@@ -20,7 +20,7 @@ namespace SangueHeroiWeb.DAO
             context = new ContextHelpers();
         }
 
-        public int Logar(LoginModel model)
+        public int LogarUsuario(LoginUsuarioModel model)
         {
             int loginOK = 1;
 
@@ -44,7 +44,7 @@ namespace SangueHeroiWeb.DAO
             return loginOK;
         }
 
-        internal bool LogarHemocentro(HemocentroModel model)
+        public bool LogarHemocentro(HemocentroModel model)
         {
             bool loginOK = true;
 
