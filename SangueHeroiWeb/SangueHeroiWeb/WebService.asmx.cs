@@ -36,13 +36,13 @@ namespace SangueHeroiWeb
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
                 LoginDAO ldao = new LoginDAO();
-                LoginModel lmodel = new LoginModel();
+                LoginUsuarioModel lmodel = new LoginUsuarioModel();
 
                 lmodel.EMAIL_USUARIO = login;
                 lmodel.SENHA = senha;
                 lmodel.LEMBRAR_ME = true;
 
-                var retorno = ldao.Logar(lmodel);
+                var retorno = ldao.LogarUsuario(lmodel);
 
                 return retorno;
             //}
@@ -58,7 +58,7 @@ namespace SangueHeroiWeb
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
-                LoginDAO ldao = new LoginDAO();
+                UsuarioDAO ldao = new UsuarioDAO();
                 UsuarioModel umodel = new UsuarioModel();
 
                 umodel.NOME_USUARIO = nome;

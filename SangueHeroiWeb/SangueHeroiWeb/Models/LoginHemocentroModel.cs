@@ -6,11 +6,11 @@ using System.Web;
 
 namespace SangueHeroiWeb.Models
 {
-    public class LoginModel
+    public class LoginHemocentroModel
     {
         [Required]
-        [Display(Name = "Usuario")]
-        public string EMAIL_USUARIO { get; set; }
+        [Display(Name = "Login")]
+        public string LOGIN_HEMOCENTRO { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -25,6 +25,6 @@ namespace SangueHeroiWeb.Models
     {
         [Required]
         [Display(Name = "Email")]
-        public string EMAIL_USUARIO { get; set; }
+        public string EMAIL_HEMOCENTRO{ get; set; }
     }
 }

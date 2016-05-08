@@ -20,7 +20,7 @@ namespace SangueHeroiWeb.DAO
             context = new ContextHelpers();
         }
 
-        public bool Logar(LoginModel model)
+        public bool LogarUsuario(LoginUsuarioModel model)
         {
             bool loginOK = true;
 
@@ -44,11 +44,35 @@ namespace SangueHeroiWeb.DAO
             return loginOK;
         }
 
-        public bool EsqueciMinhaSenha(string emailUsuario)
+        internal bool LogarHemocentro(HemocentroModel model)
+        {
+            bool loginOK = true;
+
+            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
+
+            DataTable dt = new DataTable();
+
+            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
+                        loginOK = false;
+                }
+            }
+            else
+                loginOK = false;
+
+            return loginOK;
+        }
+
+        public bool EsqueciMinhaSenha(string emailHemocentro)
         {
             bool envioEmailOk = true;
 
-            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", emailUsuario);
+            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE EMAIL_HEMOCENTRO = '{0}'", emailHemocentro);
 
             DataTable dt = new DataTable();
 
@@ -62,8 +86,7 @@ namespace SangueHeroiWeb.DAO
                     {
                         EmailHelper.EnviarEmail(data[""].ToString(), data[""].ToString(), true);
                     }
-
-                    //SmtpClient.Send(MailMessage);
+                    
                 }
                 catch (SmtpFailedRecipientException ex)
                 {
@@ -85,34 +108,5 @@ namespace SangueHeroiWeb.DAO
             return envioEmailOk;
         }
 
-        public int Registrar(UsuarioModel model)
-        {          
-            string strQuery = "";
-
-            strQuery = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
-                 + true + Environment.NewLine + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.TIPO_SANGUINEO) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
-                 + model.CODIGO_HEROI + " ;";
-
-            try
-            {
-                var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-            }
-            catch (Exception)
-            {
-                throw;
-                return 0;
-            }
-
-            return 1;            
-        }
     }
 }
