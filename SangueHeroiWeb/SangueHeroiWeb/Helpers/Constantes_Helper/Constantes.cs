@@ -20,5 +20,12 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
             public const int HEROI_VERMELHO = 6;
         }
 
+        public class CADASTRO_STATUS
+        {
+            public const int Ativo = 1;
+            public const int Bloqueado = 2;
+            public const int Excluido = 3;
+        }
+
     }
 }

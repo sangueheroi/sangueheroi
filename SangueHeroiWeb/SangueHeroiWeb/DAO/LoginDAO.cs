@@ -20,11 +20,47 @@ namespace SangueHeroiWeb.DAO
             context = new ContextHelpers();
         }
 
-        public int Logar(LoginModel model)
+        public string[] LogarUsuario(LoginUsuarioModel model)
         {
+            string[] json = new string[2];
+
+            string nome = "";
+
             int loginOK = 1;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+ 
+            DataTable dt = new DataTable();
+
+            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    nome = data["NOME_USUARIO"].ToString();
+
+                    if (!model.SENHA.Equals(data["SENHA_USUARIO"]))
+                        loginOK = 0;
+                }
+            }
+            else
+            {
+                nome = "";
+                loginOK = 2;
+            }
+
+            json[0] = nome;
+            json[1] = loginOK.ToString();
+
+            return json;
+        }
+
+        public bool LogarHemocentro(HemocentroModel model)
+        {
+            bool loginOK = true;
+
+            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
 
             DataTable dt = new DataTable();
 
@@ -34,21 +70,21 @@ namespace SangueHeroiWeb.DAO
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    if (!model.SENHA.Equals(data["SENHA_USUARIO"]))
-                        loginOK = 0;
+                    if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
+                        loginOK = false;
                 }
             }
             else
-                loginOK = 2;
+                loginOK = false;
 
             return loginOK;
         }
 
-        public bool EsqueciMinhaSenha(string emailUsuario)
+        public bool EsqueciMinhaSenha(string emailHemocentro)
         {
             bool envioEmailOk = true;
 
-            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", emailUsuario);
+            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE EMAIL_HEMOCENTRO = '{0}'", emailHemocentro);
 
             DataTable dt = new DataTable();
 
@@ -63,7 +99,6 @@ namespace SangueHeroiWeb.DAO
                         EmailHelper.EnviarEmail(data[""].ToString(), data[""].ToString(), true);
                     }
 
-                    //SmtpClient.Send(MailMessage);
                 }
                 catch (SmtpFailedRecipientException ex)
                 {

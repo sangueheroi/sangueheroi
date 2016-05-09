@@ -23,13 +23,13 @@ namespace SangueHeroiWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(HemocentroModel model)
         {
             LoginDAO dao = new LoginDAO();
 
-            int loginOK = dao.Logar(model);
+            bool loginOK = dao.LogarHemocentro(model);
             
-            if(loginOK == 0 || loginOK == 2)
+            if(!loginOK)
             {
                 return Json(new
                 {
@@ -44,18 +44,7 @@ namespace SangueHeroiWeb.Controllers
                     msg = "Login Com Sucesso!"
                 });
             }
-            return View();
-        }
 
-        [HttpPost]
-        public ActionResult LogarFacebook(LoginModel model)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult LogarGmail(LoginModel model)
-        {
             return View();
         }
 
@@ -70,7 +59,7 @@ namespace SangueHeroiWeb.Controllers
         {
             LoginDAO dao = new LoginDAO();
 
-            bool emailOK = dao.EsqueciMinhaSenha(model.EMAIL_USUARIO);
+            bool emailOK = dao.EsqueciMinhaSenha(model.EMAIL_HEMOCENTRO);
 
             if(!emailOK)
             {
@@ -102,43 +91,5 @@ namespace SangueHeroiWeb.Controllers
             return RedirectToAction("Index", "Login");
         }
 
-        [HttpGet]
-        public ActionResult Registrar()
-        {
-            UsuarioDAO ud = new UsuarioDAO();
-            UsuarioModel model = new UsuarioModel();
-
-            ViewBag.ListaTipoSanguineo = model.ListaTipoSanguineo;
-            ViewBag.ListaHerois = ud.GetInformacoesHerois();
-            ViewBag.ListaEstados = model.ListaEstados;
-
-            return PartialView("_Registrar");
-        }
-
-        [HttpPost]
-        public ActionResult Registrar(UsuarioModel model)
-        {
-            LoginDAO dao = new LoginDAO();
-            String msg = "";
-
-            if (model != null)
-            {
-                if (dao.Registrar(model) == 2)
-                    msg = "Erro na realização do cadastro!";
-                else if (dao.Registrar(model) == 1)
-                    msg = "Conta realizada com sucesso!";
-                else
-                    msg = "Conta já cadastrada!";
-            }
-
-            return Json(new
-            {
-                msg = msg
-                //redirectUrl = "Index",
-                //isRedirect = false
-            });
-
-            //return View();
-        }
     }
 }

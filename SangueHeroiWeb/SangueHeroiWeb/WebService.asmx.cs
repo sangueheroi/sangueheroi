@@ -31,18 +31,20 @@ namespace SangueHeroiWeb
         //Método utilizado para permitir o login pelo app Android, a partir da consulta de login e senha no banco de dados.    
         //[SoapHeader("Autenticacao")]
         [WebMethod]
-        public int efetuarLogin(string login, string senha)
+        public string[] efetuarLogin(string login, string senha)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
                 LoginDAO ldao = new LoginDAO();
-                LoginModel lmodel = new LoginModel();
+                LoginUsuarioModel lmodel = new LoginUsuarioModel();
 
                 lmodel.EMAIL_USUARIO = login;
                 lmodel.SENHA = senha;
                 lmodel.LEMBRAR_ME = true;
 
-                var retorno = ldao.Logar(lmodel);
+                var retorno = ldao.LogarUsuario(lmodel);
+
+                //string json = JsonConvert.SerializeObject(retorno);
 
                 return retorno;
             //}
@@ -69,7 +71,15 @@ namespace SangueHeroiWeb
                 umodel.CEP = cep;
                 umodel.TIPO_SANGUINEO = tipo_sanguineo;
                 umodel.DATA_NASCIMENTO = Convert.ToDateTime(dtnascimento);
-                umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
+
+                if(dtultimadoacao == "")
+                {
+                    DateTime dt = DateTime.Now.AddDays(-90);
+                    umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dt);
+                }
+                else
+                    umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
+
                 umodel.CODIGO_HEROI = codigo_heroi;
                 umodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
 
