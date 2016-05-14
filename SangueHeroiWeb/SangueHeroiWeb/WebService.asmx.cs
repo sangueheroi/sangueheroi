@@ -31,6 +31,19 @@ namespace SangueHeroiWeb
         //Método utilizado para permitir o login pelo app Android, a partir da consulta de login e senha no banco de dados.    
         //[SoapHeader("Autenticacao")]
         [WebMethod]
+        public int verificarLogin(string login)
+        {
+            LoginDAO ldao = new LoginDAO();
+            LoginUsuarioModel lmodel = new LoginUsuarioModel();
+
+            lmodel.EMAIL_USUARIO = login;
+
+            var retorno = ldao.VerificarLogin(lmodel);
+
+            return retorno;
+        }
+
+        [WebMethod]
         public string[] efetuarLogin(string login, string senha)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
