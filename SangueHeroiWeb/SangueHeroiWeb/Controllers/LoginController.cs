@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
+using SangueHeroiWeb.Helpers.Util_Helper;
 using SangueHeroiWeb.DAO;
 using SangueHeroiWeb.Models;
 using System;

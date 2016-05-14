@@ -5,10 +5,12 @@ using System.Web;
 
 namespace SangueHeroiWeb.Helpers.Util_Helper
 {
+
+    public enum SITUACAO : int { DADOS_INVALIDOS, SUCESSO, NAO_POSSUI_CADASTRO, ERRO_DE_SISTEMA, JA_POSSUI_CADASTRO };
+
     public class Constantes
     {
         public const string PALAVRA_CRIPTOGRAFIA = "usjtsangueheroi";
-
 
         public class HeroiUsuario
         {
