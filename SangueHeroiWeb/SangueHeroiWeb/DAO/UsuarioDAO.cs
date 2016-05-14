@@ -74,7 +74,7 @@ namespace SangueHeroiWeb.DAO
         public int Registrar(UsuarioModel model)
         {
             int registroOK = 1;
-            bool flag = model.FLAG_CADASTRO_REDE_SOCIAL;
+            bool flag = false;
 
             string strQueryUpdate = "";
             string strQueryInsert = "";
@@ -84,6 +84,9 @@ namespace SangueHeroiWeb.DAO
             DataTable dt = new DataTable();
             
             dt = (DataTable)context.ExecuteCommand(strQueryConsultaEmail, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            foreach (DataRow data in dt.Rows)
+                flag = Convert.ToBoolean(data["FLAG_CADASTRO_REDE_SOCIAL"].ToString());
 
             if (dt.Rows.Count != 0 && flag == true)
             {
