@@ -40,7 +40,7 @@ namespace SangueHeroiWeb.Controllers
                 model.SENHA_HEMOCENTRO = Helpers.Util_Helper.GeraSenha.CriaSenha();
                 model.CODIGO_STATUS = Helpers.Util_Helper.Constantes.CADASTRO_STATUS.Bloqueado;
                
-                if (dao.ParceriaHemocentro(model) == 0)
+                if (dao.ParceriaHemocentro(model))
                 {
                     //Enviar email para admns, avisando que existe cadastro para ser validado
                     //Envio email para o hemocentro falando que em 24h o cadastro sera validado

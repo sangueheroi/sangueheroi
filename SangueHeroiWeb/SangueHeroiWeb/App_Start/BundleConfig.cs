@@ -26,14 +26,16 @@ namespace SangueHeroiWeb
                      "~/Scripts/notify.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                        "~/Content/bootstrap-theme.css",
-                        "~/Content/bootstrap-theme.css.map",
-                        "~/Content/bootstrap-theme.min.css",
-                        "~/Content/bootstrap-theme.min.css.map",
+                        //"~/Content/bootstrap-theme.css",
+                        //"~/Content/bootstrap-theme.css.map",
+                        //"~/Content/bootstrap-theme.min.css",
+                        //"~/Content/bootstrap-theme.min.css.map",
                         "~/Content/bootstrap.css",
                         "~/Content/bootstrap.css.map",
-                        "~/Content/bootstrap.min.css",
-                        "~/Content/bootstrap.min.css.map",
+                        //"~/Content/bootstrap.min.css",
+                        //"~/Content/bootstrap.min.css.map",
+                        "~/Content/font-awesome.css",
+                        "~/Content/font-awesome.min.css",
                         "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/controllers").Include(

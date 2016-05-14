@@ -79,13 +79,13 @@ namespace SangueHeroiWeb.DAO
         {
             int loginOK = (int) SITUACAO.SUCESSO;
 
-            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
+            //var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
 
-            DataTable dt = new DataTable();
+            //DataTable dt = new DataTable();
 
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            //dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            if (dt.Rows.Count > 0)
+            /*if (dt.Rows.Count > 0)
             {
                 foreach (DataRow data in dt.Rows)
                 {
@@ -95,7 +95,7 @@ namespace SangueHeroiWeb.DAO
             }
             else
                 loginOK = (int) SITUACAO.NAO_POSSUI_CADASTRO;
-
+            */
             return loginOK;
         }
 
