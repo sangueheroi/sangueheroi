@@ -1,11 +1,11 @@
-﻿@model SangueHeroiWeb.Models.LoginModel
+﻿@model SangueHeroiWeb.Models.HemocentroModel
 
 @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @id = "formLogin" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <div class="modal-header"  style="padding-bottom: 35px;">
+    <div class="modal-header" style="padding-bottom: 35px;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="modal-body">
@@ -15,12 +15,12 @@
                     <h2>Login</h2>
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.EMAIL_USUARIO, null, new { @type = "email", @class = "usuario usuario_img_background", @placeholder = "E-mail", required = "required" })
-                    @Html.ValidationMessageFor(model => model.EMAIL_USUARIO)
+                    @Html.TextBoxFor(model => model.LOGIN_HEMOCENTRO, null, new { @type = "text", @class = "usuario usuario_img_background", @placeholder = "Login", required = "required" })
+                    @Html.ValidationMessageFor(model => model.LOGIN_HEMOCENTRO)
                 </div>
                 <div class="form-group">
-                    @Html.TextBoxFor(model => model.SENHA, null, new { @type = "password", @class = "senha senha_img_background", @placeholder = "Senha", required = "required" })
-                    @Html.ValidationMessageFor(model => model.SENHA)
+                    @Html.TextBoxFor(model => model.SENHA_HEMOCENTRO, null, new { @type = "password", @class = "senha senha_img_background", @placeholder = "Senha", required = "required" })
+                    @Html.ValidationMessageFor(model => model.SENHA_HEMOCENTRO)
                 </div>
                 <div class="form-group">
                     <div class="form-inline">
@@ -43,34 +43,27 @@
                 </div>
                 <div style="clear:both"></div>
                 <div class="form-group">
-                    <div class="centralizar">
-                        <h3>Ou</h3>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-inline">
-                        <div class="centralizar" style="border-bottom: 1px solid #ccc;padding-bottom: 10px;">
-                            <div class="form-group" style="margin-right:10px">
-                                <button type="button" class="btn_social_padrao btn-block btn-social btn-facebook">
-                                    <span class="fa fa-facebook"></span> Facebook
-                                </button>
-                            </div>
-                            <div class="form-group" style="margin-left: 1px">
-                                <button type="button" class="btn_social_padrao btn-block btn-social btn-google">
-                                    <span class="fa fa-google"></span> Google
-                                </button>
-                            </div>
+                    <div class="form-group">
+                        <div class="centralizar">
+                            <button type="button"class="btn btn btn-link" style="color:#cd0000" id="btnParceriaHemocentro">Deseja Ser Um Parceiro? Envie uma Solicitação!
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <div class="centralizar"><label>Não Possui Conta? Registre-se</label></div>
-                    </div>
-                    <div class="form-group">
-                        <div class="centralizar"><button type="button" class="btn btn-lg btn-primary" id="btnRegistrar">Registrar</button></div>
+                <div class="form-group jumbotron">
+                    <div class="form-inline">
+                        <p>Está Área é Destinada aos Hemocentros!</p>
+                        <p>Para Usuarios que Desejam ser um Herói, Baixe o APP!</p>
+                        <div class="platforms">
+                            <a href="#" class="btn btn-sm btn-primary col-sm-6">
+                                <i class="fa fa-android fa-3x pull-left"></i>
+                                <span>Download para</span><br>
+                                <b>Android</b>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -79,39 +72,6 @@
     </div>
 }
 
-
-@*@using Microsoft.Owin.Security
-
-<h4>Use another service to log in.</h4>
-<hr />
-@{
-    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() == 0)
-    {
-        <div>
-            <p>
-                There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support logging in via external services.
-            </p>
-        </div>
-    }
-    else {
-        using (Html.BeginForm("ExternalLogin", "Account"))
-        {
-            @Html.AntiForgeryToken()
-            <div id="socialLoginList">
-                <p>
-                    @foreach (AuthenticationDescription p in loginProviders)
-                    {
-                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                    }
-                </p>
-            </div>
-        }
-    }
-}*@
-
-
 <script type="text/javascript">
     $(document).ready(function () {
         $('#btnEsqueceuSuaSenha').on("click", function () {
@@ -119,9 +79,9 @@
             ModalEsqueciMinhaSenha();
         });
 
-        $('#btnRegistrar').on("click", function () {
+        $('#btnParceriaHemocentro').on("click", function () {
             $('#modalLogin').modal('hide');
-            ModalRegistrar();
+            ModalParceriaHemocentro();
         });
     });
 
@@ -129,15 +89,15 @@
         $('form#formLogin').submit(function (e) {
             //Objeto Model
             var ObjLogin = {
-                EMAIL_USUARIO: "",
+                LOGIN_HEMOCENTRO: "",
                 SENHA: 0,
             };
             //Dados Form
             var data = $(this).serializeArray();
 
-            ObjLogin["EMAIL_USUARIO"] = data[1].value;
+            ObjLogin["LOGIN_HEMOCENTRO"] = data[1].value;
             ObjLogin["SENHA"] = data[2].value;
-           
+
             $.ajax({
                 type: 'POST',
                 url: './Login/Login',
@@ -148,7 +108,7 @@
                 async: true,
                 success: function (data) {
                     $.notify(data.msg, {
-                        autoHideDelay : 1500
+                        autoHideDelay: 1500
                     });
                 }
             });

@@ -25,10 +25,10 @@ function ModalEsqueciMinhaSenha() {
 }
 
 
-function ModalRegistrar()
+function ModalParceriaHemocentro()
 {
     $.ajax({
-        url: './Login/Registrar',
+        url: './Hemocentro/ParceriaHemocentro',
         datatype: 'json',
         contentType: "application/json",
         type: "GET",

@@ -20,8 +20,8 @@ namespace SangueHeroiWeb.DAO
             context = new ContextHelpers();
         }
 
-        public int LogarUsuario(LoginUsuarioModel model)
-        {
+        public int VerificarLogin(LoginUsuarioModel model)
+        { 
             int loginOK = 1;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
@@ -30,18 +30,48 @@ namespace SangueHeroiWeb.DAO
 
             dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
+            if (dt.Rows.Count > 0)       
+                loginOK = 1;
+            else
+                loginOK = 0;
+
+            return loginOK;
+        }
+
+        public string[] LogarUsuario(LoginUsuarioModel model)
+        {
+            string[] json = new string[2];
+
+            string nome = "";
+
+            int loginOK = 1;
+
+            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+ 
+            DataTable dt = new DataTable();
+
+            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow data in dt.Rows)
                 {
+                    nome = data["NOME_USUARIO"].ToString();
+
                     if (!model.SENHA.Equals(data["SENHA_USUARIO"]))
                         loginOK = 0;
                 }
             }
             else
+            {
+                nome = "";
                 loginOK = 2;
+            }
 
-            return loginOK;
+            json[0] = nome;
+            json[1] = loginOK.ToString();
+
+            return json;
         }
 
         public bool LogarHemocentro(HemocentroModel model)

@@ -45,22 +45,64 @@ namespace SangueHeroiWeb.DAO
 
         public int Registrar(UsuarioModel model)
         {
-            int registroOK;
+            int registroOK = 1;
+            bool flag = false;
 
-            string strQuery = "";
+            string strQueryUpdate = "";
+            string strQueryInsert = "";
 
-            string strQuery2 = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
-
+            string strQueryConsultaEmail = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+            
             DataTable dt = new DataTable();
+            
+            dt = (DataTable)context.ExecuteCommand(strQueryConsultaEmail, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            dt = (DataTable)context.ExecuteCommand(strQuery2, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            foreach (DataRow data in dt.Rows)
+                flag = Convert.ToBoolean(data["FLAG_CADASTRO_REDE_SOCIAL"].ToString());
 
-            if (dt.Rows.Count == 0)
+            if (dt.Rows.Count != 0 && flag == true)
             {
-                strQuery = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
+                int codigo_usuario = 0;
+
+                foreach (DataRow data in dt.Rows)
+                    codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
+                
+                model.FLAG_CADASTRO_REDE_SOCIAL = false;
+                strQueryUpdate = "EXECUTE frmAtualizarUsuario " + Environment.NewLine
+                 + codigo_usuario + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.SEXO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.BAIRRO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.TIPO_SANGUINEO) + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
+                 + model.CODIGO_HEROI + " , " + Environment.NewLine
+                 + model.FLAG_CADASTRO_REDE_SOCIAL + " ;";
+
+                 try
+                 {
+                    var a = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                    registroOK = 1;
+                 }
+                 catch (Exception)
+                 {
+                    registroOK = 2;
+                 }
+
+            }
+            if (dt.Rows.Count == 0)
+            {
+                strQueryInsert = "EXECUTE frmRegistrarUsuario " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.SEXO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.BAIRRO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
@@ -75,7 +117,7 @@ namespace SangueHeroiWeb.DAO
 
                 try
                 {
-                    var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                    var a = context.ExecuteCommand(strQueryInsert, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
                     registroOK = 1;
                 }
                 catch (Exception)
@@ -83,7 +125,7 @@ namespace SangueHeroiWeb.DAO
                     registroOK = 2;
                 }
             }
-            else
+            else if(dt.Rows.Count != 0 && flag == false)
                 registroOK = 0;
 
             return registroOK;

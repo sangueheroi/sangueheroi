@@ -31,7 +31,20 @@ namespace SangueHeroiWeb
         //Método utilizado para permitir o login pelo app Android, a partir da consulta de login e senha no banco de dados.    
         //[SoapHeader("Autenticacao")]
         [WebMethod]
-        public int efetuarLogin(string login, string senha)
+        public int verificarLogin(string login)
+        {
+            LoginDAO ldao = new LoginDAO();
+            LoginUsuarioModel lmodel = new LoginUsuarioModel();
+
+            lmodel.EMAIL_USUARIO = login;
+
+            var retorno = ldao.VerificarLogin(lmodel);
+
+            return retorno;
+        }
+
+        [WebMethod]
+        public string[] efetuarLogin(string login, string senha)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
@@ -44,6 +57,8 @@ namespace SangueHeroiWeb
 
                 var retorno = ldao.LogarUsuario(lmodel);
 
+                //string json = JsonConvert.SerializeObject(retorno);
+
                 return retorno;
             //}
             //else
@@ -54,7 +69,7 @@ namespace SangueHeroiWeb
 
         //Método utilizado para registrar Usuário no banco de dados a partir do app Android.
         [WebMethod]
-        public int registrarUsuario(string nome, string email, string senha, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
+        public int registrarUsuario(string nome, string email, string senha, string sexo, string bairro, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
@@ -64,12 +79,22 @@ namespace SangueHeroiWeb
                 umodel.NOME_USUARIO = nome;
                 umodel.EMAIL_USUARIO = email;
                 umodel.SENHA_USUARIO = senha;
+                umodel.SEXO = sexo;
+                umodel.BAIRRO = bairro;
                 umodel.CIDADE = cidade;
                 umodel.ESTADO = estado;
                 umodel.CEP = cep;
                 umodel.TIPO_SANGUINEO = tipo_sanguineo;
                 umodel.DATA_NASCIMENTO = Convert.ToDateTime(dtnascimento);
-                umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
+
+                if(dtultimadoacao == "")
+                {
+                    DateTime dt = DateTime.Now.AddDays(-90);
+                    umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dt);
+                }
+                else
+                    umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
+
                 umodel.CODIGO_HEROI = codigo_heroi;
                 umodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
 
