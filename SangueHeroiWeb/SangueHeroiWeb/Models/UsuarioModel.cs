@@ -24,6 +24,10 @@ namespace SangueHeroiWeb.Models
 
         public string EMAIL_USUARIO { get; set; }
 
+        public string SEXO { get; set; }
+
+        public string BAIRRO { get; set; }
+
         public string CIDADE { get; set; }
 
         public string ESTADO { get; set; }

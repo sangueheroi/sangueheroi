@@ -95,9 +95,11 @@ namespace SangueHeroiWeb.DAO
                 model.FLAG_CADASTRO_REDE_SOCIAL = false;
                 strQueryUpdate = "EXECUTE frmAtualizarUsuario " + Environment.NewLine
                  + codigo_usuario + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.SEXO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.BAIRRO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
@@ -124,6 +126,8 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.TextForSql(model.NOME_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SENHA_USUARIO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.EMAIL_USUARIO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.SEXO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.BAIRRO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CIDADE) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine

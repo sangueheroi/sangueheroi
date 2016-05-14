@@ -69,7 +69,7 @@ namespace SangueHeroiWeb
 
         //Método utilizado para registrar Usuário no banco de dados a partir do app Android.
         [WebMethod]
-        public int registrarUsuario(string nome, string email, string senha, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
+        public int registrarUsuario(string nome, string email, string senha, string sexo, string bairro, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
@@ -79,6 +79,8 @@ namespace SangueHeroiWeb
                 umodel.NOME_USUARIO = nome;
                 umodel.EMAIL_USUARIO = email;
                 umodel.SENHA_USUARIO = senha;
+                umodel.SEXO = sexo;
+                umodel.BAIRRO = bairro;
                 umodel.CIDADE = cidade;
                 umodel.ESTADO = estado;
                 umodel.CEP = cep;
