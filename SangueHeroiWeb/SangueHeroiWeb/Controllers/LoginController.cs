@@ -28,24 +28,23 @@ namespace SangueHeroiWeb.Controllers
             LoginDAO dao = new LoginDAO();
 
             bool loginOK = dao.LogarHemocentro(model);
-            
+  
             if(!loginOK)
             {
                 return Json(new
                 {
-                    msg = "Login ou Senha Incorretos!"
+                    msg = "Login ou Senha Incorretos!",
+                    isRedirect = false
                 });
             }
             else
             {
-                //Quando main estiver criada sera redirecionado para main
                 return Json(new
                 {
-                    msg = "Login Com Sucesso!"
+                    isRedirect = true,
+                    url = "Home/Index"
                 });
             }
-
-            return View();
         }
 
         [HttpGet]

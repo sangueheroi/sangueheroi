@@ -18,34 +18,6 @@ namespace SangueHeroiWeb.DAO
 
         }
 
-        public void IncluiOuAltera(UsuarioModel model)
-        {
-            var strQuery = "";
-
-            var a = "aaa" + Environment.CommandLine + "aa";
-
-            if (model.CODIGO_USUARIO == 0)
-            {
-                //cadastrar
-            }
-            else
-            {
-                //editar
-            }
-
-            var sqlTeste = "SELECT * FROM TB_USUARIO";
-            var dt = new DataTable();
-
-
-            dt = (DataTable)context.ExecuteCommand(sqlTeste, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-
-            foreach (DataRow data in dt.Rows)
-            {
-                var a1 = data["ID_USUARIO"];
-                var b = data["NOME_USUARIO"];
-            }
-        }
-
         public List<UsuarioHeroiModel> GetInformacoesHerois()
         {
             var strQuery = String.Format("SELECT * FROM USUARIO_HEROI");
@@ -93,9 +65,12 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.TIPO_SANGUINEO) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
-                 + model.CODIGO_HEROI + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine;
+
+                if (model.DATA_ULTIMA_DOACAO != null)
+                    strQuery = strQuery + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine;
+                else
+                    strQuery = strQuery + model.CODIGO_HEROI + " , " + Environment.NewLine
                  + model.FLAG_CADASTRO_REDE_SOCIAL + " ;";
 
                 try

@@ -107,9 +107,10 @@
                 cache: false,
                 async: true,
                 success: function (data) {
-                    $.notify(data.msg, {
-                        autoHideDelay: 1500
-                    });
+                    if (data.isRedirect)
+                        window.location.href = data.url;
+                    else
+                        alert(data.msg);
                 }
             });
             if (e.preventDefault) {

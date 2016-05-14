@@ -48,23 +48,24 @@ namespace SangueHeroiWeb.DAO
         {
             bool loginOK = true;
 
-            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
+            //var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
 
-            DataTable dt = new DataTable();
+            //DataTable dt = new DataTable();
 
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            //dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow data in dt.Rows)
-                {
-                    if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
-                        loginOK = false;
-                }
-            }
-            else
-                loginOK = false;
-
+            //if (dt.Rows.Count > 0)
+            //{
+            //    foreach (DataRow data in dt.Rows)
+            //    {
+            //        if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
+            //            loginOK = false;
+            //    }
+            //}
+            //else
+            //{
+            //    loginOK = false;
+            //}
             return loginOK;
         }
 
