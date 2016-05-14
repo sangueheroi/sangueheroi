@@ -27,9 +27,9 @@ namespace SangueHeroiWeb.Controllers
         {
             LoginDAO dao = new LoginDAO();
 
-            bool loginOK = dao.LogarHemocentro(model);
+            int loginOK = dao.LogarHemocentro(model);
             
-            if(!loginOK)
+            if(loginOK == (int) SITUACAO.DADOS_INVALIDOS)
             {
                 return Json(new
                 {

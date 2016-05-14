@@ -8,6 +8,8 @@ using System.Web;
 
 namespace SangueHeroiWeb.DAO
 {
+    public enum SITUACAO : int { DADOS_INVALIDOS, SUCESSO, NAO_POSSUI_CADASTRO, ERRO_DE_SISTEMA, JA_POSSUI_CADASTRO };
+
     public class UsuarioDAO
     {
         ContextHelpers context;
@@ -73,7 +75,7 @@ namespace SangueHeroiWeb.DAO
 
         public int Registrar(UsuarioModel model)
         {
-            int registroOK = 1;
+            int registroOK = (int) SITUACAO.SUCESSO;
             bool flag = false;
 
             string strQueryUpdate = "";
@@ -115,12 +117,12 @@ namespace SangueHeroiWeb.DAO
                  try
                  {
                     var a = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-                    registroOK = 1;
+                    registroOK = (int) SITUACAO.SUCESSO;
                  }
                  catch (Exception)
                  {
-                    registroOK = 2;
-                 }
+                    registroOK = (int) SITUACAO.ERRO_DE_SISTEMA;
+                }
 
             }
             if (dt.Rows.Count == 0)
@@ -143,15 +145,15 @@ namespace SangueHeroiWeb.DAO
                 try
                 {
                     var a = context.ExecuteCommand(strQueryInsert, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-                    registroOK = 1;
+                    registroOK = (int) SITUACAO.SUCESSO;
                 }
                 catch (Exception)
                 {
-                    registroOK = 2;
+                    registroOK = (int) SITUACAO.ERRO_DE_SISTEMA;
                 }
             }
             else if(dt.Rows.Count != 0 && flag == false)
-                registroOK = 0;
+                registroOK = (int) SITUACAO.JA_POSSUI_CADASTRO;
 
             return registroOK;
         }
