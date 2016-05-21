@@ -32,11 +32,19 @@
                             </ul>
                         </li>
                     </ul>
+                    <input type="hidden" value="@Session["TIPO_HEMOCENTRO_LOGADO"]" id="TIPO_HEMOCENTRO_LOGADO" />  
+                                         
                     <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown" id="liAdm">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Administrador <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index","Administrador")"><span class="glyphicon glyphicon-pencil"></span> Validar Cadastro Hemocentro</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Hemocentro<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="@Url.Action("Home","Index")"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
+                                <li><a href="@Url.Action("Editar","Hemocentro")"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
                                 <li><a href="@Url.Action("Home","Index")"><span class="glyphicon glyphicon-ban-circle"></span> Desativar Conta</a></li>
                                 <li class="divider"></li>
                                 <li><a href="@Url.Action("Home","Index")"><span class="glyphicon glyphicon-log-out"></span> Logoff</a></li>
@@ -46,6 +54,11 @@
                 </div>
             </div>
         </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/controllers")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
     
     <div class="container body-content">
         @RenderBody()
@@ -56,10 +69,7 @@
     </div>
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/controllers")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+  
 </body>
 </html>
 
@@ -153,3 +163,11 @@
 			  }
 			}
 </style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if($('#TIPO_HEMOCENTRO_LOGADO').val() == 1)
+        {
+            $('#liAdm').hide();
+        }
+    });
+</script>

@@ -29,7 +29,7 @@ namespace SangueHeroiWeb.Controllers
             LoginDAO dao = new LoginDAO();
 
             int loginOK = dao.LogarHemocentro(model);
-            
+  
             if(loginOK == (int) SITUACAO.DADOS_INVALIDOS)
             {
                 return Json(new
@@ -40,6 +40,12 @@ namespace SangueHeroiWeb.Controllers
             }
             else
             {
+                HemocentroDAO hd = new HemocentroDAO();
+                //Session["TIPO_HEMOCENTRO_LOGADO"] = hd.BuscaHemocentro(" WHERE H.LOGIN = " + model.LOGIN_HEMOCENTRO).TIPO_PERFIL_HEMOCENTRO;
+                Session["TIPO_HEMOCENTRO_LOGADO"] = 0;
+                //Session["ID_HEMOCENTRO"] = hd.BuscaHemocentro(" WHERE H.LOGIN = " + model.LOGIN_HEMOCENTRO).CODIGO_HEMOCENTRO;
+                Session["ID_HEMOCENTRO"] = 1;
+
                 return Json(new
                 {
                     isRedirect = true,

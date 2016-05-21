@@ -29,5 +29,11 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
             public const int Excluido = 3;
         }
 
+        public class TIPO_PERFIL_HEMOCENTRO
+        {
+            public const int ADM = 0;
+            public const int HEMOCENTRO = 1;
+        }
+
     }
 }
