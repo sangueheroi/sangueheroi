@@ -80,9 +80,7 @@ namespace SangueHeroiWeb.DAO
 
             //var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
 
-            //DataTable dt = new DataTable();
-
-            //dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            //DataTable dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
             //if (dt.Rows.Count > 0)
             //{

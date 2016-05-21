@@ -110,9 +110,9 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine;
 
                 if (model.DATA_ULTIMA_DOACAO != null)
-                    strQuery = strQuery + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine;
+                    strQueryInsert = strQueryInsert + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine;
                 else
-                    strQuery = strQuery + model.CODIGO_HEROI + " , " + Environment.NewLine
+                    strQueryInsert = strQueryInsert + model.CODIGO_HEROI + " , " + Environment.NewLine
                  + model.FLAG_CADASTRO_REDE_SOCIAL + " ;";
 
                 try

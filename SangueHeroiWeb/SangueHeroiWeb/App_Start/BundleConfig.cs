@@ -23,7 +23,9 @@ namespace SangueHeroiWeb
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
-                     "~/Scripts/notify.js"));
+                      "~/Scripts/jquery.mask.js",
+                      "~/Scripts/notify.js",
+                      "~/Content/DataTable/js/jquery.dataTables.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         //"~/Content/bootstrap-theme.css",
@@ -36,6 +38,8 @@ namespace SangueHeroiWeb
                         //"~/Content/bootstrap.min.css.map",
                         "~/Content/font-awesome.css",
                         "~/Content/font-awesome.min.css",
+                        "~/Content/DataTable/css/jquery.dataTables.css",
+                        "~/Content/notify.css",
                         "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/controllers").Include(

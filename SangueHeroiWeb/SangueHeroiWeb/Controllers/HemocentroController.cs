@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SangueHeroiWeb.Helpers.Util_Helper;
 
 namespace SangueHeroiWeb.Controllers
 {
@@ -32,7 +33,8 @@ namespace SangueHeroiWeb.Controllers
         public ActionResult ParceriaHemocentro(HemocentroModel model)
         {
             HemocentroDAO dao = new HemocentroDAO();
-            String msg = "Conta realizada com sucesso!";
+            String msg = "Solicitação de Parceira realizada com sucesso!";
+            bool redirect = true;
 
             if (model != null)
             {
@@ -43,19 +45,90 @@ namespace SangueHeroiWeb.Controllers
                 if (dao.ParceriaHemocentro(model))
                 {
                     //Enviar email para admns, avisando que existe cadastro para ser validado
+                    List<Helpers.Constantes_Helper.EmailAdministradorescs> list = new List<Helpers.Constantes_Helper.EmailAdministradorescs>();
+
+                    foreach (var email in list)
+                    {
+                        var emailAdm = email.ToString().Split('|')[0];
+                        var nomeAdm = email.ToString().Split('|')[1];
+
+                        EmailHelper.EnviarEmailSolicitacaoPareriaHemocentro(emailAdm, nomeAdm, true);
+                    }
+
                     //Envio email para o hemocentro falando que em 24h o cadastro sera validado
-                    msg = "Erro na realização do cadastro!";
+
+                    EmailHelper.EnviaEmailParaHemocentro(model.EMAIL_HEMOCENTRO, model.NOME_HEMOCENTRO, true);
+                }
+                else
+                {
+                    msg = "Erro ao Solicitar Parceria, contate os administradores do sistema!";
+                    redirect = false;
                 }
             }
 
             return Json(new
             {
-                msg = msg
-                //redirectUrl = "Index",
-                //isRedirect = false
+                msg = msg,
+                redirectUrl = "Index",
+                isRedirect = redirect
             });
+        }
 
-            //return View();
+        [HttpGet]
+        public ActionResult Editar()
+        {
+            var idHemocentro = Session["ID_HEMOCENTRO"];
+
+            HemocentroDAO hd = new HemocentroDAO();
+            //HemocentroModel model = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
+
+            HemocentroModel model = new HemocentroModel()
+            {
+                CODIGO_HEMOCENTRO = 1,
+                NOME_HEMOCENTRO = "Hemocentro",
+                CNPJ = "11111111",
+                CEP = "111111",
+                CIDADE_HEMOCENTRO = "São Paulo",
+                ESTADO_HEMOCENTRO = "SP",
+                TELEFONE_HEMOCENTRO = "11-11111111"
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(HemocentroModel model)
+        {
+            HemocentroDAO hd = new HemocentroDAO();
+            
+            if(hd.Editar(model))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Inativar()
+        {
+            var idHemocentro = Session["ID_HEMOCENTRO"];
+
+            HemocentroDAO hd = new HemocentroDAO();
+            //HemocentroModel model = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
+
+            HemocentroModel model = new HemocentroModel()
+            {
+                CODIGO_HEMOCENTRO = 1,
+                NOME_HEMOCENTRO = "Hemocentro",
+                CNPJ = "11111111",
+                CEP = "111111",
+                CIDADE_HEMOCENTRO = "São Paulo",
+                ESTADO_HEMOCENTRO = "SP",
+                TELEFONE_HEMOCENTRO = "11-11111111"
+            };
+
+            return View(model);
         }
     }
 }
