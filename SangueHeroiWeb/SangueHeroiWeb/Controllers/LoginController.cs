@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
+using SangueHeroiWeb.Helpers.Util_Helper;
 using SangueHeroiWeb.DAO;
 using SangueHeroiWeb.Models;
 using System;
@@ -27,10 +28,9 @@ namespace SangueHeroiWeb.Controllers
         {
             LoginDAO dao = new LoginDAO();
 
-            //bool loginOK = dao.LogarHemocentro(model);
-            bool loginOK = true;
-              
-            if(!loginOK)
+            int loginOK = dao.LogarHemocentro(model);
+  
+            if(loginOK == (int) SITUACAO.DADOS_INVALIDOS)
             {
                 return Json(new
                 {

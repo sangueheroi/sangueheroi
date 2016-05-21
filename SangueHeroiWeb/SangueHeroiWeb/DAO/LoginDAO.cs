@@ -1,5 +1,6 @@
 ﻿using SangueHeroiWeb.Helpers.Util_Helper;
 using SangueHeroiWeb.Models;
+using SangueHeroiWeb.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +23,7 @@ namespace SangueHeroiWeb.DAO
 
         public int VerificarLogin(LoginUsuarioModel model)
         { 
-            int loginOK = 1;
+            int loginOK = (int) SITUACAO.SUCESSO;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
 
@@ -31,20 +32,20 @@ namespace SangueHeroiWeb.DAO
             dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
             if (dt.Rows.Count > 0)       
-                loginOK = 1;
+                loginOK = (int) SITUACAO.SUCESSO;
             else
-                loginOK = 0;
+                loginOK = (int) SITUACAO.NAO_POSSUI_CADASTRO;
 
             return loginOK;
         }
 
         public string[] LogarUsuario(LoginUsuarioModel model)
         {
-            string[] json = new string[2];
+            string[] usuario = new string[2];
 
             string nome = "";
 
-            int loginOK = 1;
+            int loginOK = (int) SITUACAO.SUCESSO;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
  
@@ -59,41 +60,40 @@ namespace SangueHeroiWeb.DAO
                     nome = data["NOME_USUARIO"].ToString();
 
                     if (!model.SENHA.Equals(data["SENHA_USUARIO"]))
-                        loginOK = 0;
+                        loginOK = (int) SITUACAO.DADOS_INVALIDOS;
                 }
             }
             else
             {
                 nome = "";
-                loginOK = 2;
+                loginOK = (int) SITUACAO.NAO_POSSUI_CADASTRO;
             }
 
-            json[0] = nome;
-            json[1] = loginOK.ToString();
+            usuario[0] = nome;
+            usuario[1] = loginOK.ToString();
 
-            return json;
+            return usuario;
         }
 
-        public bool LogarHemocentro(HemocentroModel model)
+        public int LogarHemocentro(HemocentroModel model)
         {
-            bool loginOK = true;
+            int loginOK = (int) SITUACAO.SUCESSO;
 
             //var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
 
             //DataTable dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            //if (dt.Rows.Count > 0)
-            //{
-            //    foreach (DataRow data in dt.Rows)
-            //    {
-            //        if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
-            //            loginOK = false;
-            //    }
-            //}
-            //else
-            //{
-            //    loginOK = false;
-            //}
+            /*if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
+                        loginOK = (int) SITUACAO.DADOS_INVALIDOS;
+                }
+            }
+            else
+                loginOK = (int) SITUACAO.NAO_POSSUI_CADASTRO;
+            */
             return loginOK;
         }
 

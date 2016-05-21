@@ -8,6 +8,7 @@ using System.Web;
 
 namespace SangueHeroiWeb.DAO
 {
+
     public class UsuarioDAO
     {
         ContextHelpers context;
@@ -45,9 +46,10 @@ namespace SangueHeroiWeb.DAO
 
         public int Registrar(UsuarioModel model)
         {
-            int registroOK = 1;
+            int registroOK = (int) SITUACAO.SUCESSO;
             bool flag = false;
 
+            string strQuery = "";
             string strQueryUpdate = "";
             string strQueryInsert = "";
 
@@ -67,7 +69,6 @@ namespace SangueHeroiWeb.DAO
                 foreach (DataRow data in dt.Rows)
                     codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
                 
-                model.FLAG_CADASTRO_REDE_SOCIAL = false;
                 strQueryUpdate = "EXECUTE frmAtualizarUsuario " + Environment.NewLine
                  + codigo_usuario + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SEXO) + " , " + Environment.NewLine
@@ -82,16 +83,16 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
                  + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
                  + model.CODIGO_HEROI + " , " + Environment.NewLine
-                 + model.FLAG_CADASTRO_REDE_SOCIAL + " ;";
+                 + false + " ;";
 
                  try
                  {
                     var a = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-                    registroOK = 1;
+                    registroOK = (int) SITUACAO.SUCESSO;
                  }
                  catch (Exception)
                  {
-                    registroOK = 2;
+                    registroOK = (int) SITUACAO.ERRO_DE_SISTEMA;
                  }
 
             }
@@ -118,15 +119,15 @@ namespace SangueHeroiWeb.DAO
                 try
                 {
                     var a = context.ExecuteCommand(strQueryInsert, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-                    registroOK = 1;
+                    registroOK = (int) SITUACAO.SUCESSO;
                 }
                 catch (Exception)
                 {
-                    registroOK = 2;
+                    registroOK = (int) SITUACAO.ERRO_DE_SISTEMA;
                 }
             }
             else if(dt.Rows.Count != 0 && flag == false)
-                registroOK = 0;
+                registroOK = (int) SITUACAO.JA_POSSUI_CADASTRO;
 
             return registroOK;
         }
