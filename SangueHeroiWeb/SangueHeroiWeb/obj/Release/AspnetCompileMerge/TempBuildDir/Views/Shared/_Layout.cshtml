@@ -9,26 +9,44 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Sangue Herói", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-file"></span> Relatórios<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Home","Index")"><i class="fa fa-users" aria-hidden="true"></i> Ranking de Doadores</a></li>
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Hemocentro<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Home","Index")"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
+                                <li><a href="@Url.Action("Home","Index")"><span class="glyphicon glyphicon-ban-circle"></span> Desativar Conta</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("Home","Index")"><span class="glyphicon glyphicon-log-out"></span> Logoff</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-
+    
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -45,3 +63,93 @@
 </body>
 </html>
 
+<style>
+			.navbar-default {
+			  background-color: #e74c3c;
+			  border-color: #c0392b;
+			}
+			.navbar-default .navbar-brand {
+			  color: #eef1f2;
+			}
+			.navbar-default .navbar-brand:hover,
+			.navbar-default .navbar-brand:focus {
+			  color: #ffbbbc;
+			}
+			.navbar-default .navbar-text {
+			  color: #eef1f2;
+			}
+			.navbar-default .navbar-nav > li > a {
+			  color: #eef1f2;
+			}
+			.navbar-default .navbar-nav > li > a:hover,
+			.navbar-default .navbar-nav > li > a:focus {
+			  color: #ffbbbc;
+			}
+						.navbar-default .navbar-nav > li > .dropdown-menu {
+			  background-color: #e74c3c;
+			}
+			.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+			  color: #eef1f2;
+			}
+			.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+			.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+			  color: #ffbbbc;
+			  background-color: #c0392b;
+			}
+			.navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
+			  background-color: #e74c3c;
+			}
+			.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+			.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+			.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+			  color: #ffbbbc;
+			  background-color: #c0392b;
+			}
+						.navbar-default .navbar-nav > .active > a,
+			.navbar-default .navbar-nav > .active > a:hover,
+			.navbar-default .navbar-nav > .active > a:focus {
+			  color: #ffbbbc;
+			  background-color: #c0392b;
+			}
+			.navbar-default .navbar-nav > .open > a,
+			.navbar-default .navbar-nav > .open > a:hover,
+			.navbar-default .navbar-nav > .open > a:focus {
+			  color: #ffbbbc;
+			  background-color: #c0392b;
+			}
+			.navbar-default .navbar-toggle {
+			  border-color: #c0392b;
+			}
+			.navbar-default .navbar-toggle:hover,
+			.navbar-default .navbar-toggle:focus {
+			  background-color: #c0392b;
+			}
+			.navbar-default .navbar-toggle .icon-bar {
+			  background-color: #eef1f2;
+			}
+			.navbar-default .navbar-collapse,
+			.navbar-default .navbar-form {
+			  border-color: #eef1f2;
+			}
+			.navbar-default .navbar-link {
+			  color: #eef1f2;
+			}
+			.navbar-default .navbar-link:hover {
+			  color: #ffbbbc;
+			}
+			@@media (max-width: 767px) {
+			  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+			    color: #eef1f2;
+			  }
+			  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+			  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+			    color: #ffbbbc;
+			  }
+			  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+			  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+			  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+			    color: #ffbbbc;
+			    background-color: #c0392b;
+			  }
+			}
+</style>

@@ -33,14 +33,21 @@ namespace SangueHeroiWeb
         [WebMethod]
         public int verificarLogin(string login)
         {
-            LoginDAO ldao = new LoginDAO();
-            LoginUsuarioModel lmodel = new LoginUsuarioModel();
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
+                LoginDAO ldao = new LoginDAO();
+                LoginUsuarioModel lmodel = new LoginUsuarioModel();
 
-            lmodel.EMAIL_USUARIO = login;
+                lmodel.EMAIL_USUARIO = login;
 
-            var retorno = ldao.VerificarLogin(lmodel);
+                var retorno = ldao.VerificarLogin(lmodel);
 
-            return retorno;
+                return retorno;
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
         }
 
         [WebMethod]
@@ -129,25 +136,96 @@ namespace SangueHeroiWeb
             //}
         }
 
+        [WebMethod]
+        public int cadastrarCampanha(string email, string nome_campanha, string descricao, string nome_receptor, string tipo_sanguineo, string dtinicio, string dtfim, string nome_hospital, string logradouro, string bairro, string cidade, string estado, string cep)
+        {
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
+            CampanhaDAO cdao = new CampanhaDAO();
+            CampanhaModel cmodel = new CampanhaModel();
+            UsuarioModel umodel = new UsuarioModel();
+
+            umodel.EMAIL_USUARIO = email;
+            cmodel.NOME_CAMPANHA = nome_campanha;
+            cmodel.DESCRICAO_CAMPANHA = descricao;
+            cmodel.NOME_RECEPTOR = nome_receptor;
+            cmodel.TIPO_SANGUINEO = tipo_sanguineo;
+            cmodel.DATA_INICIO_DT = Convert.ToDateTime(dtinicio);
+            cmodel.DATA_FIM_DT = Convert.ToDateTime(dtfim);
+            cmodel.NOME_HOSPITAL = nome_hospital;
+            cmodel.LOGRADOURO = logradouro;
+            cmodel.BAIRRO = bairro;
+            cmodel.CIDADE = cidade;
+            cmodel.ESTADO = estado;
+            cmodel.CEP = cep;
+
+            var retorno = cdao.CadastrarCampanha(cmodel, umodel);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
+        }
 
         [WebMethod]
-        public int cadastrarCampanha(string nome, string descricao, string dtinicio, string dtfim)
+        public string minhasCampanhas(string email)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
 
+            CampanhaDAO campanha = new CampanhaDAO();
+
+            List<CampanhaModel> lista = campanha.getMinhasCampanhas(email);
+
+            string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+            return json;
+
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
+        }
+
+        [WebMethod]
+        public string consultarCampanhas()
+        {
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
+
+            CampanhaDAO campanha = new CampanhaDAO();
+
+            List<CampanhaModel> lista = campanha.consultarCampanhas();
+
+            string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+            return json;
+
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
+        }
+
+        [WebMethod]
+        public int excluirCampanha(int id, string email)
+        {
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
             CampanhaDAO cdao = new CampanhaDAO();
             CampanhaModel cmodel = new CampanhaModel();
+            UsuarioModel umodel = new UsuarioModel();
 
-            cmodel.NOME_CAMPANHA = nome;
-            cmodel.DESCRICAO_CAMPANHA = descricao;
-            cmodel.DATA_INICIO_DT = Convert.ToDateTime(dtinicio);
-            cmodel.DATA_FIM_DT = Convert.ToDateTime(dtfim);
+            cmodel.CODIGO_CAMPANHA = id;
+            umodel.EMAIL_USUARIO = email;
 
-            var retorno = cdao.Cadastrar(cmodel);
+            var retorno = cdao.deletarCampanha(cmodel, umodel);
 
             return retorno;
-
             //}
             //else
             //{

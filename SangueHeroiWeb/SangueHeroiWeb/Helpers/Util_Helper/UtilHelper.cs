@@ -39,5 +39,17 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
         {
             return String.Format("{0:dd/MM/yyyy HH:mm:ss}", dt);
         }
+
+        public static bool IsNumeric(string valor)
+        {
+            bool isnumeric = false;
+            char[] datachars = valor.ToCharArray();
+
+            foreach (var datachar in datachars)
+                isnumeric = isnumeric ? char.IsDigit(datachar) : isnumeric;
+
+
+            return isnumeric;
+        }
     }
 }
