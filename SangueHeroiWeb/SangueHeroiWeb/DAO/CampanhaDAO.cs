@@ -75,29 +75,6 @@ namespace SangueHeroiWeb.DAO
             return cadastroOK;
         }
 
-        public int Cadastrar(CampanhaModel model)
-        {
-            string strQuery = "";
-
-            strQuery = "EXECUTE frmCadastrarCampanha " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.NOME_CAMPANHA) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.DESCRICAO_CAMPANHA) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_INICIO_DT) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_FIM_DT) + " ;";
-
-            try
-            {
-                var a = context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-            }
-            catch (Exception)
-            {
-                throw;
-                return 0;
-            }
-
-            return 1;
-        }
-
         public List<CampanhaModel> consultarCampanhas()
         {
             string strQuery = "";
@@ -159,6 +136,7 @@ namespace SangueHeroiWeb.DAO
                     campanha.CODIGO_CAMPANHA = Convert.ToInt32(data["CODIGO_CAMPANHA"].ToString());
                     campanha.NOME_CAMPANHA = data["NOME_CAMPANHA"].ToString();
                     campanha.DESCRICAO_CAMPANHA = data["DESCRICAO_CAMPANHA"].ToString();
+                    campanha.NOME_USUARIO = "";
                     campanha.NOME_RECEPTOR = data["NOME_RECEPTOR"].ToString();
                     campanha.TIPO_SANGUINEO = data["TIPO_SANGUINEO"].ToString();
                     campanha.NOME_HOSPITAL = data["NOME_HOSPITAL"].ToString();
