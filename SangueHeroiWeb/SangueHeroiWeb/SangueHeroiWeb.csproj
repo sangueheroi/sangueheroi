@@ -201,6 +201,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RankingDoadoresController.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\HemocentroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -531,6 +532,7 @@
     <Content Include="Views\Hemocentro\_CadastroParceriaHemocentro.cshtml" />
     <Content Include="Views\Administrador\Index.cshtml" />
     <Content Include="Views\Hemocentro\Editar.cshtml" />
+    <Content Include="Views\RankingDoadores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
