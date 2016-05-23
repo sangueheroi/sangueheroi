@@ -6,7 +6,7 @@ using System.Web;
 namespace SangueHeroiWeb.Helpers.Util_Helper
 {
 
-    public enum SITUACAO : int { DADOS_INVALIDOS, SUCESSO, NAO_POSSUI_CADASTRO, ERRO_DE_SISTEMA, JA_POSSUI_CADASTRO };
+    public enum SITUACAO : int { DADOS_INVALIDOS, SUCESSO, NAO_POSSUI_CADASTRO, ERRO_DE_SISTEMA, JA_POSSUI_CADASTRO, CADASTRO_BLOQUEADO };
 
     public class Constantes
     {
@@ -31,8 +31,8 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
 
         public class TIPO_PERFIL_HEMOCENTRO
         {
-            public const int ADM = 0;
-            public const int HEMOCENTRO = 1;
+            public const int ADM = 1;
+            public const int HEMOCENTRO = 2;
         }
 
     }

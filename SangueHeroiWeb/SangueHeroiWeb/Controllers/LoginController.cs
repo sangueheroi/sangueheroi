@@ -38,18 +38,36 @@ namespace SangueHeroiWeb.Controllers
                     isRedirect = false
                 });
             }
+            else if(loginOK == (int)SITUACAO.NAO_POSSUI_CADASTRO)
+            {
+                return Json(new
+                {
+                    msg = "Login Não Cadastrado!",
+                    isRedirect = false
+                });
+            }
+            else if(loginOK == Convert.ToInt32(SITUACAO.CADASTRO_BLOQUEADO))
+            {
+                return Json(new
+                {
+                    msg = "Atenção! Cadastro Bloqueado, entre em contado com um administrador para o desbloqueio!",
+                    isRedirect = false
+                });
+            }
             else
             {
                 HemocentroDAO hd = new HemocentroDAO();
-                //Session["TIPO_HEMOCENTRO_LOGADO"] = hd.BuscaHemocentro(" WHERE H.LOGIN = " + model.LOGIN_HEMOCENTRO).TIPO_PERFIL_HEMOCENTRO;
-                Session["TIPO_HEMOCENTRO_LOGADO"] = 0;
-                //Session["ID_HEMOCENTRO"] = hd.BuscaHemocentro(" WHERE H.LOGIN = " + model.LOGIN_HEMOCENTRO).CODIGO_HEMOCENTRO;
-                Session["ID_HEMOCENTRO"] = 1;
+                HemocentroModel m = hd.BuscaHemocentro(" WHERE H.LOGIN_HEMOCENTRO = " + UtilHelper.TextForSql(model.LOGIN_HEMOCENTRO));
+
+                Session["CODIGO_HEMOCENTRO_PERFIL"] = m.CODIGO_HEMOCENTRO_PERFIL;
+                //Session["TIPO_HEMOCENTRO_LOGADO"] = 0;
+                Session["ID_HEMOCENTRO"] = m.CODIGO_HEMOCENTRO;
+                //Session["ID_HEMOCENTRO"] = 1;
 
                 return Json(new
                 {
                     isRedirect = true,
-                    url = "Home/Index"
+                    url = "./Home/Index"
                 });
             }
         }
@@ -90,10 +108,11 @@ namespace SangueHeroiWeb.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public ActionResult LogOff()
         {
+            Session.Clear();
+            Session.Abandon();
             return RedirectToAction("Index", "Login");
         }
 

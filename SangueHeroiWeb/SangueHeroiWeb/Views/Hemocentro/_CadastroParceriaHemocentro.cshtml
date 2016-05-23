@@ -117,16 +117,25 @@
                 cache: false,
                 async: true,
                 success: function (data) {
-                    //if(!data.isRedirect)
-                    //{
-                    //    alert(data.msg);
-                    //}
-                    //else
-                    //{
-                    //    window.location.href = data.redirectUrl;
-                    //}
+                    if(!data.isRedirect)
+                    {
+                        $.notify({
+                            message: data.msg,
+                            status: "warning",
+                            timeout: 1000,
+                        });
+                    }
+                    else
+                    {
+                        $.notify({
+                            message: data.msg,
+                            status: "warning",
+                            timeout: 1000,
+                            onClose: function () { window.location.reload(true) }
 
-                    alert(data.msg);
+                        });
+                       
+                    }
                 }
             });
             if (e.preventDefault) {

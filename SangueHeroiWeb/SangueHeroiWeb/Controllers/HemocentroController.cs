@@ -45,7 +45,7 @@ namespace SangueHeroiWeb.Controllers
                 if (dao.ParceriaHemocentro(model))
                 {
                     //Enviar email para admns, avisando que existe cadastro para ser validado
-                    List<Helpers.Constantes_Helper.EmailAdministradorescs> list = new List<Helpers.Constantes_Helper.EmailAdministradorescs>();
+                    List<String> list = Helpers.Constantes_Helper.EmailAdministradorescs.Email();
 
                     foreach (var email in list)
                     {
@@ -69,7 +69,7 @@ namespace SangueHeroiWeb.Controllers
             return Json(new
             {
                 msg = msg,
-                redirectUrl = "Index",
+                redirectUrl = "Login/Index",
                 isRedirect = redirect
             });
         }
@@ -80,18 +80,7 @@ namespace SangueHeroiWeb.Controllers
             var idHemocentro = Session["ID_HEMOCENTRO"];
 
             HemocentroDAO hd = new HemocentroDAO();
-            //HemocentroModel model = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
-
-            HemocentroModel model = new HemocentroModel()
-            {
-                CODIGO_HEMOCENTRO = 1,
-                NOME_HEMOCENTRO = "Hemocentro",
-                CNPJ = "11111111",
-                CEP = "111111",
-                CIDADE_HEMOCENTRO = "São Paulo",
-                ESTADO_HEMOCENTRO = "SP",
-                TELEFONE_HEMOCENTRO = "11-11111111"
-            };
+            HemocentroModel model = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
 
             return View(model);
         }
@@ -100,12 +89,14 @@ namespace SangueHeroiWeb.Controllers
         public ActionResult Editar(HemocentroModel model)
         {
             HemocentroDAO hd = new HemocentroDAO();
+            String msg = "Edição Realizada com sucesso";
             
-            if(hd.Editar(model))
+            if(!(hd.Editar(model)))
             {
-                return RedirectToAction("Index", "Home");
+                msg = "Atenção! Ocorreu um Erro ao realizar a edição, favor contatar um administrador";
             }
 
+            ViewBag.Msg = msg;
             return View(model);
         }
 
@@ -113,22 +104,30 @@ namespace SangueHeroiWeb.Controllers
         public ActionResult Inativar()
         {
             var idHemocentro = Session["ID_HEMOCENTRO"];
+            HemocentroDAO hd = new HemocentroDAO();
+
+            if (idHemocentro == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                HemocentroModel model = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
+                return PartialView("_Inativar", model);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult InativarHemocentro()
+        {
+            var idHemocentro = Session["ID_HEMOCENTRO"];
 
             HemocentroDAO hd = new HemocentroDAO();
-            //HemocentroModel model = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
+            hd.Inativar(Convert.ToInt32(idHemocentro));
 
-            HemocentroModel model = new HemocentroModel()
-            {
-                CODIGO_HEMOCENTRO = 1,
-                NOME_HEMOCENTRO = "Hemocentro",
-                CNPJ = "11111111",
-                CEP = "111111",
-                CIDADE_HEMOCENTRO = "São Paulo",
-                ESTADO_HEMOCENTRO = "SP",
-                TELEFONE_HEMOCENTRO = "11-11111111"
-            };
-
-            return View(model);
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
         }
     }
 }

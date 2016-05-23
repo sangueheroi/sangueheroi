@@ -247,6 +247,7 @@ C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.Twitter.xml
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.dll
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.pdb
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\ApplicationInsights.config
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\roslyn\csc.exe
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -330,5 +331,3 @@ C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Secu
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.dll
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.pdb
-C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
-C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache

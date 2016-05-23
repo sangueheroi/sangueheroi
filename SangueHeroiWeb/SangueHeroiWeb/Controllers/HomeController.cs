@@ -10,7 +10,14 @@ namespace SangueHeroiWeb.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if(Session["ID_HEMOCENTRO"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                return View();
+            }            
         }
     }
 }
