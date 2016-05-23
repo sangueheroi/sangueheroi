@@ -24,8 +24,7 @@
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-file"></span> Relatórios<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="@Url.Action("Home","Index")"><i class="fa fa-users" aria-hidden="true"></i> Ranking de Doadores</a></li>
-                                <li><a href="@Url.Action("RelatorioTipoSanguineoLocalidade", "Relatorios")"><i class="fa fa-users" aria-hidden="true"></i> Ranking de Doadores</a></li>
+                                <li><a href="@Url.Action("Index","RankingDoadores")"><i class="fa fa-users" aria-hidden="true"></i> Ranking de Doadores</a></li>
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li class="divider"></li>
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -48,7 +47,7 @@
                                 <li><a href="@Url.Action("Inativar","Hemocentro")"><span class="glyphicon glyphicon-ban-circle"></span> Desativar Conta</a></li>
                                 <li class="divider"></li>
                                 <li><a href="@Url.Action("LogOff","Login")"><span class="glyphicon glyphicon-log-out"></span> Logoff</a></li>
-                             </ul>
+                            </ul>
                         </li>
                     </ul>
                 </div>

@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Web.Services.Protocols;
 using SangueHeroiWeb.Helpers.Util_Helper;
+using System.Web.Mvc;
 
 namespace SangueHeroiWeb
 {

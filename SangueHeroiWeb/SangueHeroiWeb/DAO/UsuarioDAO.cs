@@ -108,12 +108,9 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.TextForSql(model.ESTADO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CEP) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.TIPO_SANGUINEO) + " , " + Environment.NewLine
-                 + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine;
-
-                if (model.DATA_ULTIMA_DOACAO != null)
-                    strQueryInsert = strQueryInsert + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine;
-                else
-                    strQueryInsert = strQueryInsert + model.CODIGO_HEROI + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(model.DATA_NASCIMENTO) + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(model.DATA_ULTIMA_DOACAO) + " , " + Environment.NewLine
+                 + model.CODIGO_HEROI + " , " + Environment.NewLine
                  + model.FLAG_CADASTRO_REDE_SOCIAL + " ;";
 
                 try
