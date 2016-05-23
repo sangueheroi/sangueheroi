@@ -206,6 +206,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RankingDoadoresController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\CampanhaDAO.cs" />
@@ -534,6 +535,7 @@
     <Content Include="Views\Relatorios\RelatorioTipoSanguineoLocalidade.cshtml" />
     <Content Include="Views\Hemocentro\Editar.cshtml" />
     <Content Include="Views\Hemocentro\_Inativar.cshtml" />
+    <Content Include="Views\RankingDoadores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
