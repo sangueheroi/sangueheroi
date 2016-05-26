@@ -201,12 +201,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\RankingDoadoresController.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\HemocentroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RankingDoadoresController.cs" />
+    <Compile Include="Controllers\RelatoriosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\CampanhaDAO.cs" />
     <Compile Include="DAO\DoacaoDAO.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Helpers\DB_Helper\ContextHelpers.cs" />
     <Compile Include="Helpers\Constantes_Helper\Constantes.cs" />
     <Compile Include="Helpers\Util_Helper\EmailHelper.cs" />
+    <Compile Include="Helpers\Util_Helper\Encrypt.cs" />
     <Compile Include="Helpers\Util_Helper\GeraSenha.cs" />
     <Compile Include="Helpers\Util_Helper\UtilHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -475,7 +477,6 @@
     <Content Include="Scripts\jquery.mask.js" />
     <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\notify.js" />
-    <Content Include="Scripts\notify.min.js" />
     <Content Include="WebService.asmx" />
     <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP.pubxml" />
@@ -531,7 +532,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Hemocentro\_CadastroParceriaHemocentro.cshtml" />
     <Content Include="Views\Administrador\Index.cshtml" />
+    <Content Include="Views\Relatorios\RelatorioTipoSanguineoLocalidade.cshtml" />
     <Content Include="Views\Hemocentro\Editar.cshtml" />
+    <Content Include="Views\Hemocentro\_Inativar.cshtml" />
     <Content Include="Views\RankingDoadores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

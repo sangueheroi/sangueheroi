@@ -79,21 +79,30 @@ namespace SangueHeroiWeb.DAO
         {
             int loginOK = (int) SITUACAO.SUCESSO;
 
-            //var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
+            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
 
-            //DataTable dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            DataTable dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            /*if (dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
-                        loginOK = (int) SITUACAO.DADOS_INVALIDOS;
+                    if(!(Convert.ToInt32(data["CODIGO_STATUS"]) == Constantes.CADASTRO_STATUS.Bloqueado))
+                    {
+                        if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
+                            loginOK = (int)SITUACAO.DADOS_INVALIDOS;
+                    }
+                    else
+                    {
+                        loginOK = Convert.ToInt32(SITUACAO.CADASTRO_BLOQUEADO);
+                    }
+                   
                 }
             }
             else
-                loginOK = (int) SITUACAO.NAO_POSSUI_CADASTRO;
-            */
+            {
+                loginOK = (int)SITUACAO.NAO_POSSUI_CADASTRO;
+            }
             return loginOK;
         }
 

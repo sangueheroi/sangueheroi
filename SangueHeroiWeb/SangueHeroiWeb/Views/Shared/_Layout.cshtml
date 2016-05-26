@@ -26,13 +26,12 @@
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("Index","RankingDoadores")"><i class="fa fa-users" aria-hidden="true"></i> Ranking de Doadores</a></li>
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li class="divider"></li>
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             </ul>
                         </li>
                     </ul>
-                    <input type="hidden" value="@Session["TIPO_HEMOCENTRO_LOGADO"]" id="TIPO_HEMOCENTRO_LOGADO" />  
+                    <input type="hidden" value="@Session["CODIGO_HEMOCENTRO_PERFIL"]" id="CODIGO_HEMOCENTRO_PERFIL" />  
                                          
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown" id="liAdm">
@@ -45,9 +44,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Hemocentro<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("Editar","Hemocentro")"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
-                                <li><a href="@Url.Action("Home","Index")"><span class="glyphicon glyphicon-ban-circle"></span> Desativar Conta</a></li>
+                                <li><a href="@Url.Action("Inativar","Hemocentro")"><span class="glyphicon glyphicon-ban-circle"></span> Desativar Conta</a></li>
                                 <li class="divider"></li>
-                                <li><a href="@Url.Action("Home","Index")"><span class="glyphicon glyphicon-log-out"></span> Logoff</a></li>
+                                <li><a href="@Url.Action("LogOff","Login")"><span class="glyphicon glyphicon-log-out"></span> Logoff</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -165,9 +164,14 @@
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
-        if($('#TIPO_HEMOCENTRO_LOGADO').val() == 1)
+        if ($('#CODIGO_HEMOCENTRO_PERFIL').val() == 2)
         {
             $('#liAdm').hide();
+        }
+
+        if($('#CODIGO_HEMOCENTRO_PERFIL').val() == null)
+        {
+            window.location.href = "Login/Index";
         }
     });
 </script>

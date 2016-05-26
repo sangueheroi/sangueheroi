@@ -172,65 +172,6 @@
     });
 
    
-
-    $(document).ready(function () {
-        $('form#formCadastroPraca').submit(function (e) {
-            //Objeto Model
-            var ObjPraca = {
-                PRACA_ID: 0,
-                PAIS_ID: 0,
-                PRACA_DESC: "",
-                PRACA_ABREV: 0,
-                PRACA_GMT: 0,
-                PRACA_QTDEMISSORAS: 0,
-                PRACA_IMAGEPATH: "",
-                PRACA_EQUIVALENTE: 0,
-                PRACA_BASEMINIMA: 0,
-                PRACA_QTDSUBPRACAS: 0,
-                listPais: [],
-                listEmissora: [],
-                ListEmissoraCadastrada: [],
-                listRedes: [],
-                Msg: null
-            };
-            //Dados Form
-            var data = $(this).serializeArray();
-            ObjPraca["PRACA_ID"] = data[1].value;
-            ObjPraca["PAIS_ID"] = data[2].value;
-            ObjPraca["PRACA_DESC"] = data[3].value;
-            ObjPraca["PRACA_ABREV"] = data[4].value;
-            ObjPraca["PRACA_GMT"] = data[5].value;
-            ObjPraca["PRACA_QTDEMISSORAS"] = data[6].value;
-            ObjPraca["PRACA_IMAGEPATH"] = data[7].value;
-            ObjPraca["PRACA_EQUIVALENTE"] = data[8].value;
-            ObjPraca["PRACA_BASEMINIMA"] = data[9].value;
-            ObjPraca["PRACA_QTDSUBPRACAS"] = data[10].value;
-            console.log(ObjPraca);
-            $.ajax({
-                type: 'POST',
-                url: './CadastroPraca',
-                contentType: 'application/json',
-                data: (JSON.stringify(ObjPraca)),
-                dataType: 'html',
-                cache: false,
-                async: true,
-                success: function (data) {
-                    result = $("#Msg", (data));
-                    if (result.val() == "") {
-                        $('#cadastroModal').html(data);
-                    } else {
-                        location.reload();
-                    }
-                }
-            });
-            if (e.preventDefault) {
-                e.preventDefault();
-            } else {
-                e.returnValue = false;
-            }
-
-        });
-    });
 </script>
 
 

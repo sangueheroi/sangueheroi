@@ -53,12 +53,13 @@ namespace SangueHeroiWeb.Models
 
         [Required]
         [Display(Name = "Senha")]
+        [StringLength(255, MinimumLength = 6)]
         public string SENHA_HEMOCENTRO { get; set; }
 
         public DateTime DATA_CRIACAO = DateTime.Now;
 
         public List<String> ListaEstados = new List<String>() { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
 
-        public int TIPO_PERFIL_HEMOCENTRO { get; set; }
+        public int CODIGO_HEMOCENTRO_PERFIL { get; set; }
     }
 }

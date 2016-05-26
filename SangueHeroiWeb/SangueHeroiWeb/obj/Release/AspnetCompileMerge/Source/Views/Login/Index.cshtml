@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="~/Content/Home_Css/js/rs-plugin/css/settings.css">
 <link rel="stylesheet" href="~/Content/Home_Css/css/styles.css">
 <link rel="stylesheet" href="~/Content/bootstrap-social.css" />
+<link rel="stylesheet" href="~/Content/notify.css" />
 
 @*<link href="~/Content/bootstrap-theme.css.map" rel="stylesheet" />
 <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
@@ -316,10 +317,12 @@
                         <div class="col-md-4 col-sm-4 contact-details scrollpoint sp-effect2">
                             <div class="media">
                                 <a class="pull-left" href="#">
-                                    <i class="fa fa-map-marker fa-2x"></i>
+                                    <i class="fa fa-globe fa-2x"></i>
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading">4, Some street, California, USA</h4>
+                                    <h4 class="media-heading">
+                                        <a style="cursor: pointer;" id="btnParceriaIndex">Solicitar Parceria</a>
+                                    </h4>
                                 </div>
                             </div>
                             <div class="media">
@@ -332,14 +335,14 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div class="media">
+                            @*<div class="media">
                                 <a class="pull-left" href="#">
                                     <i class="fa fa-phone fa-2x"></i>
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">+1 234 567890</h4>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>
@@ -377,6 +380,7 @@
 <script src="~/Scripts/jquery.mask.min.js">  </script>
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/respond.js"></script>
+<script src="~/Scripts/notify.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -416,6 +420,14 @@
     $(document).ready(function () {
         $('#btnModalLogin').on("click", function () {
             ModalLogin();
+        });
+    });
+
+    $(document).ready(function () {
+       
+        $('#btnParceriaIndex').on("click", function () {
+            //$('#modalLogin').modal('hide');
+            ModalParceriaHemocentro();
         });
     });
 </script>
