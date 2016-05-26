@@ -171,6 +171,41 @@ namespace SangueHeroiWeb
         }
 
         [WebMethod]
+        public int alterarCampanha(int codigo_campanha, string nome_campanha, string descricao, string nome_receptor, string tipo_sanguineo, string dtinicio, string dtfim, string nome_hospital, string logradouro, string bairro, string cidade, string estado, string cep)
+        {
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
+            CampanhaDAO cdao = new CampanhaDAO();
+            CampanhaModel cmodel = new CampanhaModel();
+            UsuarioModel umodel = new UsuarioModel();
+
+            cmodel.CODIGO_CAMPANHA = codigo_campanha;
+            cmodel.NOME_CAMPANHA = nome_campanha;
+            cmodel.DESCRICAO_CAMPANHA = descricao;
+            cmodel.NOME_RECEPTOR = nome_receptor;
+            cmodel.TIPO_SANGUINEO = tipo_sanguineo;
+            if (dtinicio != "")
+                cmodel.DATA_INICIO_DT = Convert.ToDateTime(dtinicio);
+            if (dtfim != "")
+                cmodel.DATA_FIM_DT = Convert.ToDateTime(dtfim);
+            cmodel.NOME_HOSPITAL = nome_hospital;
+            cmodel.LOGRADOURO = logradouro;
+            cmodel.BAIRRO = bairro;
+            cmodel.CIDADE = cidade;
+            cmodel.ESTADO = estado;
+            cmodel.CEP = cep;
+
+            var retorno = cdao.AlterarCampanha(cmodel);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
+        }
+
+        [WebMethod]
         public string minhasCampanhas(string email)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
