@@ -75,6 +75,82 @@ namespace SangueHeroiWeb.DAO
             return cadastroOK;
         }
 
+        public int AlterarCampanha(CampanhaModel cmodel)
+        {
+            int alteracaoOK = (int)SITUACAO.DADOS_INVALIDOS;
+
+            string strQueryUpdate = "";
+
+            string strQueryConsultaCampanha = String.Format("SELECT * FROM CAMPANHA C INNER JOIN CAMPANHA_ENDERECO CE ON C.CODIGO_CAMPANHA = CE.CODIGO_CAMPANHA WHERE C.CODIGO_CAMPANHA = '{0}'", cmodel.CODIGO_CAMPANHA);
+
+            DataTable dt = new DataTable();
+
+            dt = (DataTable)context.ExecuteCommand(strQueryConsultaCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    if(cmodel.NOME_CAMPANHA == "") 
+                        cmodel.NOME_CAMPANHA = data["NOME_CAMPANHA"].ToString();
+                    if(cmodel.DESCRICAO_CAMPANHA == "")
+                        cmodel.DESCRICAO_CAMPANHA = data["DESCRICAO_CAMPANHA"].ToString();
+                    if(cmodel.NOME_RECEPTOR == "")
+                        cmodel.NOME_RECEPTOR = data["NOME_RECEPTOR"].ToString();
+                    if (cmodel.TIPO_SANGUINEO == "")
+                        cmodel.TIPO_SANGUINEO = data["TIPO_SANGUINEO"].ToString();
+                    if (cmodel.DATA_INICIO_DT == null)
+                        cmodel.DATA_INICIO_DT = Convert.ToDateTime(data["DATA_INICIO"].ToString());
+                    if (cmodel.DATA_FIM_DT == null)
+                        cmodel.DATA_FIM_DT = Convert.ToDateTime(data["DATA_FIM"].ToString());
+                    if (cmodel.NOME_HOSPITAL == "")
+                        cmodel.NOME_HOSPITAL = data["NOME_HOSPITAL"].ToString();
+                    if (cmodel.LOGRADOURO == "")
+                        cmodel.LOGRADOURO = data["LOGRADOURO"].ToString();
+                    if (cmodel.BAIRRO == "")
+                        cmodel.BAIRRO = data["BAIRRO"].ToString();
+                    if (cmodel.CIDADE == "")
+                        cmodel.CIDADE = data["CIDADE"].ToString();
+                    if (cmodel.ESTADO == "")
+                        cmodel.ESTADO = data["ESTADO"].ToString();
+                    if (cmodel.CEP == "")
+                        cmodel.CEP = data["CEP"].ToString();
+                }
+
+                strQueryUpdate = "EXECUTE frmAtualizarCampanha " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.NOME_CAMPANHA) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.DESCRICAO_CAMPANHA) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.NOME_RECEPTOR) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.TIPO_SANGUINEO) + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(cmodel.DATA_INICIO_DT) + " , " + Environment.NewLine
+                 + UtilHelper.DateTimeParaSQLDate(cmodel.DATA_FIM_DT) + " , " + Environment.NewLine
+                 + cmodel.CODIGO_CAMPANHA + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.NOME_HOSPITAL) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.LOGRADOURO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.BAIRRO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.CEP) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.CIDADE) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(cmodel.ESTADO) + " ;";
+
+                try
+                {
+                    var a = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                    alteracaoOK = (int)SITUACAO.SUCESSO;
+                }
+                catch (Exception)
+                {
+                    alteracaoOK = (int)SITUACAO.ERRO_DE_SISTEMA;
+                }
+
+            }
+            else if (dt.Rows.Count == 0)
+            {
+                alteracaoOK = (int)SITUACAO.NAO_POSSUI_CADASTRO;
+            }
+
+            return alteracaoOK;
+        }
+
         public List<CampanhaModel> consultarCampanhas()
         {
             string strQuery = "";
