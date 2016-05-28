@@ -19,7 +19,6 @@ public class AndroidGCMPushNotification
     }
     public string SendNotification(string deviceId, string message)
     {
-        string deviceIdTeste = "c2-R_w1bRvw:APA91bG77mZH8HSs3FQhXYCpk2ESAEIX8m7s1exYAO_DcKN9k9BD5LWyKed10YfnsYL6QbltKTUoyBjJtqtPWW9cD0clrEcnOjslRypt0_sst7LFeYbDPh1CTIjT_y0347wFRSh7srzu";
         string GoogleAppID = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
         var SENDER_ID = "43844248731";
         var value = message;
@@ -31,7 +30,7 @@ public class AndroidGCMPushNotification
 
         tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
 
-        string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle = 1 & data.message = " + value + " & data.time = " + System.DateTime.Now.ToString() + "®istration_id=" + deviceIdTeste + "";
+        string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle = 1 & data.message = " + value + " & data.time = " + System.DateTime.Now.ToString() + "®istration_id=" + deviceId + "";
         Console.WriteLine(postData);
         Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
         tRequest.ContentLength = byteArray.Length;
