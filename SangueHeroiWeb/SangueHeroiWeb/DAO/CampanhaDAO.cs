@@ -155,7 +155,7 @@ namespace SangueHeroiWeb.DAO
         {
             string strQuery = "";
 
-            strQuery = String.Format("SELECT U.NOME_USUARIO, C.CODIGO_CAMPANHA, C.NOME_CAMPANHA, C.DESCRICAO_CAMPANHA, C.NOME_RECEPTOR, C.TIPO_SANGUINEO, C.DATA_INICIO, C.DATA_FIM, CE.NOME_HOSPITAL, CE.LOGRADOURO, CE.BAIRRO, CE.CIDADE, CE.ESTADO, CE.CEP FROM CAMPANHA C INNER JOIN CAMPANHA_ENDERECO CE ON C.CODIGO_CAMPANHA = CE.CODIGO_CAMPANHA INNER JOIN USUARIO U ON C.CODIGO_USUARIO = U.CODIGO_USUARIO ");
+            strQuery = String.Format("SELECT U.NOME_USUARIO, U.EMAIL_USUARIO, C.CODIGO_CAMPANHA, C.NOME_CAMPANHA, C.DESCRICAO_CAMPANHA, C.NOME_RECEPTOR, C.TIPO_SANGUINEO, C.DATA_INICIO, C.DATA_FIM, CE.NOME_HOSPITAL, CE.LOGRADOURO, CE.BAIRRO, CE.CIDADE, CE.ESTADO, CE.CEP FROM CAMPANHA C INNER JOIN CAMPANHA_ENDERECO CE ON C.CODIGO_CAMPANHA = CE.CODIGO_CAMPANHA INNER JOIN USUARIO U ON C.CODIGO_USUARIO = U.CODIGO_USUARIO ");
 
             DataTable dt = new DataTable();
 
@@ -173,6 +173,7 @@ namespace SangueHeroiWeb.DAO
                     campanha.NOME_CAMPANHA = data["NOME_CAMPANHA"].ToString();
                     campanha.DESCRICAO_CAMPANHA = data["DESCRICAO_CAMPANHA"].ToString();
                     campanha.NOME_USUARIO = data["NOME_USUARIO"].ToString();
+                    campanha.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
                     campanha.NOME_RECEPTOR = data["NOME_RECEPTOR"].ToString();
                     campanha.TIPO_SANGUINEO = data["TIPO_SANGUINEO"].ToString();
                     campanha.NOME_HOSPITAL = data["NOME_HOSPITAL"].ToString();
@@ -195,7 +196,7 @@ namespace SangueHeroiWeb.DAO
         {
             string strQuery = "";
 
-            strQuery = String.Format("SELECT C.CODIGO_CAMPANHA, C.NOME_CAMPANHA, C.DESCRICAO_CAMPANHA, C.NOME_RECEPTOR, C.TIPO_SANGUINEO, C.DATA_INICIO, C.DATA_FIM, CE.NOME_HOSPITAL, CE.LOGRADOURO, CE.BAIRRO, CE.CIDADE, CE.ESTADO, CE.CEP FROM CAMPANHA C INNER JOIN USUARIO U ON C.CODIGO_USUARIO = U.CODIGO_USUARIO INNER JOIN CAMPANHA_ENDERECO CE ON C.CODIGO_CAMPANHA = CE.CODIGO_CAMPANHA WHERE U.EMAIL_USUARIO = '{0}' ", email);
+            strQuery = String.Format("SELECT U.NOME_USUARIO, U.EMAIL_USUARIO, C.CODIGO_CAMPANHA, C.NOME_CAMPANHA, C.DESCRICAO_CAMPANHA, C.NOME_RECEPTOR, C.TIPO_SANGUINEO, C.DATA_INICIO, C.DATA_FIM, CE.NOME_HOSPITAL, CE.LOGRADOURO, CE.BAIRRO, CE.CIDADE, CE.ESTADO, CE.CEP FROM CAMPANHA C INNER JOIN USUARIO U ON C.CODIGO_USUARIO = U.CODIGO_USUARIO INNER JOIN CAMPANHA_ENDERECO CE ON C.CODIGO_CAMPANHA = CE.CODIGO_CAMPANHA WHERE U.EMAIL_USUARIO = '{0}' ", email);
 
             DataTable dt = new DataTable();
 
@@ -212,7 +213,8 @@ namespace SangueHeroiWeb.DAO
                     campanha.CODIGO_CAMPANHA = Convert.ToInt32(data["CODIGO_CAMPANHA"].ToString());
                     campanha.NOME_CAMPANHA = data["NOME_CAMPANHA"].ToString();
                     campanha.DESCRICAO_CAMPANHA = data["DESCRICAO_CAMPANHA"].ToString();
-                    campanha.NOME_USUARIO = "";
+                    campanha.NOME_USUARIO = data["NOME_USUARIO"].ToString();
+                    campanha.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
                     campanha.NOME_RECEPTOR = data["NOME_RECEPTOR"].ToString();
                     campanha.TIPO_SANGUINEO = data["TIPO_SANGUINEO"].ToString();
                     campanha.NOME_HOSPITAL = data["NOME_HOSPITAL"].ToString();
