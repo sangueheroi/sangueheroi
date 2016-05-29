@@ -58,11 +58,12 @@ namespace SangueHeroiWeb.Controllers
             {
                 HemocentroDAO hd = new HemocentroDAO();
                 HemocentroModel m = hd.BuscaHemocentro(" WHERE H.LOGIN_HEMOCENTRO = " + UtilHelper.TextForSql(model.LOGIN_HEMOCENTRO));
-
+                
                 Session["CODIGO_HEMOCENTRO_PERFIL"] = m.CODIGO_HEMOCENTRO_PERFIL;
-                //Session["TIPO_HEMOCENTRO_LOGADO"] = 0;
                 Session["ID_HEMOCENTRO"] = m.CODIGO_HEMOCENTRO;
-                //Session["ID_HEMOCENTRO"] = 1;
+                ViewBag.NomeHemocentro = m.NOME_HEMOCENTRO;
+            
+                Session["NOME_HEMOCENTRO"] = m.NOME_HEMOCENTRO;
 
                 return Json(new
                 {

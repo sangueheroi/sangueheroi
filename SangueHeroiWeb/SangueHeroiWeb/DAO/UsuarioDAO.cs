@@ -129,5 +129,52 @@ namespace SangueHeroiWeb.DAO
             return registroOK;
         }
 
+        public List<UsuarioGraficoModel> GetTipoSanguineoPorUsuario(string where = "")
+        {
+
+            string strSQL = " SELECT COUNT (U.NOME_USUARIO) AS QUANTIDADE_USUARIOS_TIPO_SANGUINEO, " + Environment.NewLine
+                          + " UP.TIPO_SANGUINEO FROM USUARIO U " + Environment.NewLine
+                          + " INNER JOIN USUARIO_PERFIL UP " + Environment.NewLine
+                          + " ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO " + Environment.NewLine
+                          + " INNER JOIN USUARIO_ENDERECO UE " + Environment.NewLine
+                          + " ON U.CODIGO_USUARIO = UE.CODIGO_USUARIO " + Environment.NewLine;
+
+            if (where.Trim() != "")
+            {
+                strSQL = strSQL + where + Environment.NewLine + "GROUP BY UP.TIPO_SANGUINEO";
+            }
+            else
+            {
+                strSQL = strSQL + Environment.NewLine + "GROUP BY UP.TIPO_SANGUINEO";
+            }
+
+               
+
+            List<UsuarioGraficoModel> lista = new List<UsuarioGraficoModel>();
+
+            DataTable dt = (DataTable)context.ExecuteCommand(strSQL, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            try
+            {
+                if (dt.Rows.Count > 0)
+                    foreach (DataRow data in dt.Rows)
+                    {
+                        UsuarioGraficoModel ugm = new UsuarioGraficoModel();
+
+                        ugm.NOME_TIPO_SANGUINEO_USUARIO = data["TIPO_SANGUINEO"].ToString();
+                        ugm.QUANTIDADE_USUARIOS_TIPO_SANGUINEO = Convert.ToInt32(data["QUANTIDADE_USUARIOS_TIPO_SANGUINEO"].ToString());
+
+                        lista.Add(ugm);
+                    }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return lista;
+        }
+
+            
     }
 }

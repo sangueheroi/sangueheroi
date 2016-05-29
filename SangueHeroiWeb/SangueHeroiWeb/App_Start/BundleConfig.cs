@@ -33,7 +33,7 @@ namespace SangueHeroiWeb
                         //"~/Content/bootstrap-theme.min.css",
                         //"~/Content/bootstrap-theme.min.css.map",
                         "~/Content/bootstrap.css",
-                        "~/Content/bootstrap.css.map",
+                       // "~/Content/bootstrap.css.map",
                         //"~/Content/bootstrap.min.css",
                         //"~/Content/bootstrap.min.css.map",
                         "~/Content/font-awesome.css",
