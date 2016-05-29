@@ -13,6 +13,8 @@ namespace SangueHeroiWeb.Models
 
         public string NOME_USUARIO { get; set; }
 
+        public string EMAIL_USUARIO { get; set; }
+
         public string NOME_CAMPANHA { get; set; }
 
         public string DESCRICAO_CAMPANHA { get; set; }

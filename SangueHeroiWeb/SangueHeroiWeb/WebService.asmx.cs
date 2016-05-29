@@ -52,6 +52,18 @@ namespace SangueHeroiWeb
         }
 
         [WebMethod]
+        public string testeGCM()
+        {
+            AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();
+
+            String deviceIdTeste = "c2-R_w1bRvw:APA91bG77mZH8HSs3FQhXYCpk2ESAEIX8m7s1exYAO_DcKN9k9BD5LWyKed10YfnsYL6QbltKTUoyBjJtqtPWW9cD0clrEcnOjslRypt0_sst7LFeYbDPh1CTIjT_y0347wFRSh7srzu";
+
+            var retorno = gcm.SendNotification(deviceIdTeste, "Deu certo");
+
+            return retorno;
+        }
+
+        [WebMethod]
         public string[] efetuarLogin(string login, string senha)
         {
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
