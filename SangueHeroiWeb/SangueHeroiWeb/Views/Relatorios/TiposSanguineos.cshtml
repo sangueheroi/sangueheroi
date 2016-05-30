@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Sangue Heroi - Relatorio Numero de Tipos Sanguineos por Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-danger">
+    <div class="panel-heading">Relatorio - Quantidade de Tipos Sanguineos por Usuarios</div>
+    <div class="panel-body">
+        <div id="containerGrafico">
+            <div class="col-md-2">
+                <select class="form-control" id="ddlTipoGrafico">
+                    <option value="colum">Barra</option>
+                    <option value="area">Area</option>
+                    <option value="pie">Pizza</option>
+                    <option value="line">Linha</option>
+                </select>
+            </div>
+            <hr />
+            <hr />
+            <div id="grafico" style="width:1108px; height: 400px;">
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+
+    $(document).ready(function () {
+
+        $("#ddlTipoGrafico").change(function () {
+            drawChart($(this).val());
+        });
+
+        drawChart('colum');
+      
+        function drawChart(tipoGrafico) {
+
+            var idHemocentro = $('#ddlHemocentro').val();
+
+            $.ajax({
+                type: 'GET',
+                url: './GetNiveisSanguineosPorUsuario',
+                contentType: 'application/json',
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+
+                    var tdata = new google.visualization.DataTable();
+
+                    tdata.addColumn('string', 'Tipo Sanguineo');
+                    tdata.addColumn('number', 'Numero de Usuarios');
+
+                    for (var i = 0; i < data.length; i++) {
+                        tdata.addRow([data[i].NOME_TIPO_SANGUINEO_USUARIO, data[i].QUANTIDADE_USUARIOS_TIPO_SANGUINEO]);
+                    }
+                    var chart;
+
+                    if (tipoGrafico == 'colum') {
+                        var option = {
+                            title: $('#ddlHemocentro option:selected').text(),
+                            is3D: true,
+                            colors: ['#e2431e'],
+                            bar: { groupWidth: '50%' }
+                        };
+
+                        chart = new google.visualization.ColumnChart(document.getElementById('grafico'));
+                        chart.draw(tdata, option);
+                    }
+
+                    if (tipoGrafico == 'area') {
+                        var option = {
+                            title: $('#ddlHemocentro option:selected').text(),
+                            is3D: true,
+                            colors: ['#e2431e'],
+                            bar: { groupWidth: '50%' }
+                        };
+
+                        chart = new google.visualization.AreaChart(document.getElementById('grafico'));
+                        chart.draw(tdata, option);
+                    }
+
+                    if (tipoGrafico == 'pie') {
+                        var option = {
+                            title: $('#ddlHemocentro option:selected').text(),
+                            is3D: true
+                        };
+
+                        chart = new google.visualization.PieChart(document.getElementById('grafico'));
+                        chart.draw(tdata, option);
+                    }
+
+                    if (tipoGrafico == 'line') {
+                        var option = {
+                            title: $('#ddlHemocentro option:selected').text(),
+                            is3D: true,
+                            colors: ['#e2431e'],
+                            bar: { groupWidth: '50%' }
+                        };
+
+                        chart = new google.visualization.LineChart(document.getElementById('grafico'));
+                        chart.draw(tdata, option);
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+
+

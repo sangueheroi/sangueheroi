@@ -63,6 +63,8 @@ namespace SangueHeroiWeb.DAO
             return registroOK;
         }
 
+       
+
         public void AtivarHemocentro(int _idHemocentro)
         {
             string strSQL = string.Format(" UPDATE HEMOCENTRO SET CODIGO_STATUS = {0} WHERE CODIGO_HEMOCENTRO = {1} ", Helpers.Util_Helper.Constantes.CADASTRO_STATUS.Ativo, _idHemocentro);
@@ -156,9 +158,176 @@ namespace SangueHeroiWeb.DAO
             return lista;
         }
 
+        public bool CadastrarNiveisSanguineos(HemocentroNiveisSanguineosModel model)
+        {
+            bool registroOK = true;
+
+            string strQuery = "";
+
+            strQuery = "EXECUTE frmCadastrarHemocentroNiveisSanguineos " + Environment.NewLine
+                 + model.CODIGO_HEMOCENTRO + " , " + Environment.NewLine
+                 + model.On + " , " + Environment.NewLine
+                 + model.Op + " , " + Environment.NewLine
+                 + model.An + " , " + Environment.NewLine
+                 + model.Ap + " , " + Environment.NewLine
+                 + model.Bn + " , " + Environment.NewLine
+                 + model.Bp + " , " + Environment.NewLine
+                 + model.ABn + " , " + Environment.NewLine
+                 + model.ABp;
+
+            try
+            {
+                context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+            }
+            catch (Exception ex)
+            {
+                registroOK = false;
+            }
+
+            return registroOK;
+        }
+
+        public bool EditarNiveisSanguineos(HemocentroNiveisSanguineosModel model)
+        {
+            bool registroOK = true;
+
+            string strQuery = "";
+
+            strQuery = "EXECUTE frmAtualizarHemocentroNiveisSanguineos " + Environment.NewLine
+                 + model.CODIGO_HEMOCENTRO_NIVEIS_SANGUINEOS + " , " + Environment.NewLine
+                 + model.CODIGO_HEMOCENTRO + " , " + Environment.NewLine
+                 + model.On + " , " + Environment.NewLine
+                 + model.Op + " , " + Environment.NewLine
+                 + model.An + " , " + Environment.NewLine
+                 + model.Ap + " , " + Environment.NewLine
+                 + model.Bn + " , " + Environment.NewLine
+                 + model.Bp + " , " + Environment.NewLine
+                 + model.ABn + " , " + Environment.NewLine
+                 + model.ABp;
+
+            try
+            {
+                context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+            }
+            catch (Exception ex)
+            {
+                registroOK = false;
+            }
+
+            return registroOK;
+        }
+
         public HemocentroModel BuscaHemocentro(string where = "")
         {
             return Lista(where).FirstOrDefault();
+        }
+
+        public HemocentroNiveisSanguineosModel BuscaNiveisPorHemocentro(string where = "")
+        {
+            string strSQL = " SELECT H.CODIGO_HEMOCENTRO, " + Environment.NewLine
+                          + " H.NOME_HEMOCENTRO, " + Environment.NewLine
+                          + " HNS.CODIGO_HEMOCENTRO_NIVEIS_SANGUINEOS, " + Environment.NewLine
+                          + " HNS.One, " + Environment.NewLine
+                          + " HNS.Opo, " + Environment.NewLine
+                          + " HNS.Ane, " + Environment.NewLine
+                          + " HNS.Apo, " + Environment.NewLine
+                          + " HNS.Bne, " + Environment.NewLine
+                          + " HNS.Bpo, " + Environment.NewLine
+                          + " HNS.ABne, " + Environment.NewLine
+                          + " HNS.ABpo " + Environment.NewLine
+                          + " FROM HEMOCENTRO_NIVEIS_SANGUINEOS HNS     " + Environment.NewLine
+                          + " LEFT JOIN HEMOCENTRO H (NOLOCK)  " + Environment.NewLine
+                          + " ON H.CODIGO_HEMOCENTRO = HNS.CODIGO_HEMOCENTRO ";
+
+            if (where.Trim() != "")
+                strSQL = strSQL + where;
+
+            HemocentroNiveisSanguineosModel hnsm = new HemocentroNiveisSanguineosModel();
+
+            DataTable dt = (DataTable)context.ExecuteCommand(strSQL, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            try
+            {
+                if (dt.Rows.Count > 0)
+                    foreach (DataRow data in dt.Rows)
+                    {
+                       
+                        hnsm.CODIGO_HEMOCENTRO_NIVEIS_SANGUINEOS = Convert.ToInt32(data["CODIGO_HEMOCENTRO_NIVEIS_SANGUINEOS"].ToString());
+                        hnsm.CODIGO_HEMOCENTRO = Convert.ToInt32(data["CODIGO_HEMOCENTRO"].ToString());
+                        hnsm.NOME_HEMOCENTRO = data["NOME_HEMOCENTRO"].ToString();
+                        hnsm.On = Convert.ToInt32(data["One"].ToString());
+                        hnsm.Op = Convert.ToInt32(data["Opo"].ToString());
+                        hnsm.An = Convert.ToInt32(data["Ane"].ToString());
+                        hnsm.Ap = Convert.ToInt32(data["Apo"].ToString());
+                        hnsm.Bn = Convert.ToInt32(data["Bne"].ToString());
+                        hnsm.Bp = Convert.ToInt32(data["Bpo"].ToString());
+                        hnsm.ABp = Convert.ToInt32(data["ABpo"].ToString());
+                        hnsm.ABn = Convert.ToInt32(data["ABne"].ToString());
+                    }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return hnsm;
+        }
+
+        public List<HemocentroNiveisSanguineosModelGrafico> GetNiveisSanguineos(string where = "")
+        {
+            string strSQL = " SELECT " + Environment.NewLine
+                          + " H.NOME_HEMOCENTRO,"
+                          + " HNS.One, " + Environment.NewLine
+                          + " HNS.Opo, " + Environment.NewLine
+                          + " HNS.Ane, " + Environment.NewLine
+                          + " HNS.Apo, " + Environment.NewLine
+                          + " HNS.Bne, " + Environment.NewLine
+                          + " HNS.Bpo, " + Environment.NewLine
+                          + " HNS.ABne, " + Environment.NewLine
+                          + " HNS.ABpo " + Environment.NewLine
+                          + " FROM HEMOCENTRO_NIVEIS_SANGUINEOS HNS     " + Environment.NewLine
+                          + " LEFT JOIN HEMOCENTRO H (NOLOCK)  " + Environment.NewLine
+                          + " ON H.CODIGO_HEMOCENTRO = HNS.CODIGO_HEMOCENTRO ";
+
+            if (where.Trim() != "")
+                strSQL = strSQL + where;
+
+            List<HemocentroNiveisSanguineosModelGrafico> list = new List<HemocentroNiveisSanguineosModelGrafico>();
+            HemocentroNiveisSanguineosModel hnsm = new HemocentroNiveisSanguineosModel();
+
+            DataTable dt = (DataTable)context.ExecuteCommand(strSQL, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            try
+            {
+                if (dt.Rows.Count > 0)
+                    foreach (DataRow data in dt.Rows)
+                    {
+                        hnsm.NOME_HEMOCENTRO = data["NOME_HEMOCENTRO"].ToString();
+                        hnsm.On = Convert.ToInt32(data["One"].ToString());
+                        hnsm.Op = Convert.ToInt32(data["Opo"].ToString());
+                        hnsm.An = Convert.ToInt32(data["Ane"].ToString());
+                        hnsm.Ap = Convert.ToInt32(data["Apo"].ToString());
+                        hnsm.Bn = Convert.ToInt32(data["Bne"].ToString());
+                        hnsm.Bp = Convert.ToInt32(data["Bpo"].ToString());
+                        hnsm.ABp = Convert.ToInt32(data["ABpo"].ToString());
+                        hnsm.ABn = Convert.ToInt32(data["ABne"].ToString());
+                    }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            list.Add(new HemocentroNiveisSanguineosModelGrafico() { NOME_TIPO_SANGUINEO = "O-", VALOR_TIPO_SANGUINEO = hnsm.On, NOME_HEMOCENTRO = hnsm.NOME_HEMOCENTRO });
+            list.Add(new HemocentroNiveisSanguineosModelGrafico() { NOME_TIPO_SANGUINEO = "O+", VALOR_TIPO_SANGUINEO = hnsm.Op, NOME_HEMOCENTRO = hnsm.NOME_HEMOCENTRO });
+            list.Add(new HemocentroNiveisSanguineosModelGrafico() { NOME_TIPO_SANGUINEO = "A-", VALOR_TIPO_SANGUINEO = hnsm.An, NOME_HEMOCENTRO = hnsm.NOME_HEMOCENTRO });
+            list.Add(new HemocentroNiveisSanguineosModelGrafico() { NOME_TIPO_SANGUINEO = "A+", VALOR_TIPO_SANGUINEO = hnsm.Ap, NOME_HEMOCENTRO = hnsm.NOME_HEMOCENTRO });
+            list.Add(new HemocentroNiveisSanguineosModelGrafico() { NOME_TIPO_SANGUINEO = "B-", VALOR_TIPO_SANGUINEO = hnsm.Bn, NOME_HEMOCENTRO = hnsm.NOME_HEMOCENTRO });
+            list.Add(new HemocentroNiveisSanguineosModelGrafico() { NOME_TIPO_SANGUINEO = "B+", VALOR_TIPO_SANGUINEO = hnsm.Bp, NOME_HEMOCENTRO = hnsm.NOME_HEMOCENTRO });
+            list.Add(new HemocentroNiveisSanguineosModelGrafico() { NOME_TIPO_SANGUINEO = "AB+", VALOR_TIPO_SANGUINEO = hnsm.ABp, NOME_HEMOCENTRO = hnsm.NOME_HEMOCENTRO });
+            list.Add(new HemocentroNiveisSanguineosModelGrafico() { NOME_TIPO_SANGUINEO = "AB-", VALOR_TIPO_SANGUINEO = hnsm.ABn, NOME_HEMOCENTRO = hnsm.NOME_HEMOCENTRO });
+
+            return list;
         }
     }
 }

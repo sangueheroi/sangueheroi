@@ -14,8 +14,6 @@ namespace SangueHeroiWeb.DAO
     public class DoacaoDAO
     {
         ContextHelpers context;
-        protected SmtpClient SmtpClient { get; set; }
-        protected MailMessage MailMessage { get; set; }
 
         public DoacaoDAO()
         {

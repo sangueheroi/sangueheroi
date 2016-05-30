@@ -200,12 +200,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\Company.cs" />
     <Compile Include="Controllers\HemocentroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RankingDoadoresController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -218,6 +217,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Constantes_Helper\EmailAdministradorescs.cs" />
+    <Compile Include="Helpers\Constantes_Helper\TiposSanguineos.cs" />
     <Compile Include="Helpers\DB_Helper\ConnectionDB.cs" />
     <Compile Include="Helpers\DB_Helper\ContextHelpers.cs" />
     <Compile Include="Helpers\Constantes_Helper\Constantes.cs" />
@@ -225,14 +225,14 @@
     <Compile Include="Helpers\Util_Helper\Encrypt.cs" />
     <Compile Include="Helpers\Util_Helper\GeraSenha.cs" />
     <Compile Include="Helpers\Util_Helper\UtilHelper.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CampanhaModel.cs" />
     <Compile Include="Models\DoacaoModel.cs" />
     <Compile Include="Models\HemocentroModel.cs" />
+    <Compile Include="Models\HemocentroNiveisSanguineosModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginHemocentroModel.cs" />
     <Compile Include="Models\LoginUsuarioModel.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UsuarioGraficoModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="AndroidGCMPushNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -246,6 +246,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap-slider.css" />
     <Content Include="Content\bootstrap-social.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -439,6 +440,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -466,7 +468,6 @@
     <Content Include="Content\Home_Css\less\styles.less" />
     <Content Include="Content\Home_Css\modal\images\Thumbs.db" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -506,24 +507,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\_Login.cshtml" />
@@ -537,6 +520,11 @@
     <Content Include="Views\Hemocentro\Editar.cshtml" />
     <Content Include="Views\Hemocentro\_Inativar.cshtml" />
     <Content Include="Views\RankingDoadores\Index.cshtml" />
+    <Content Include="Views\Hemocentro\ConsultaNiveisSanguineos.cshtml" />
+    <Content Include="Views\Hemocentro\EditarNiveisSanguineos.cshtml" />
+    <Content Include="Views\Hemocentro\CadastrarNiveisSanguineos.cshtml" />
+    <Content Include="Views\Relatorios\NiveisSanguineos.cshtml" />
+    <Content Include="Views\Relatorios\TiposSanguineos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -41,7 +41,7 @@ namespace SangueHeroiWeb.Controllers
                 model.LOGIN_HEMOCENTRO = model.EMAIL_HEMOCENTRO.Split('@')[0];
                 model.SENHA_HEMOCENTRO = Helpers.Util_Helper.GeraSenha.CriaSenha();
                 model.CODIGO_STATUS = Helpers.Util_Helper.Constantes.CADASTRO_STATUS.Bloqueado;
-               
+
                 if (dao.ParceriaHemocentro(model))
                 {
                     //Enviar email para admns, avisando que existe cadastro para ser validado
@@ -90,11 +90,13 @@ namespace SangueHeroiWeb.Controllers
         {
             HemocentroDAO hd = new HemocentroDAO();
             String msg = "Edição Realizada com sucesso";
-            
-            if(!(hd.Editar(model)))
+
+            if (!(hd.Editar(model)))
             {
                 msg = "Atenção! Ocorreu um Erro ao realizar a edição, favor contatar um administrador";
             }
+
+            Session["NOME_HEMOCENTRO"] = model.NOME_HEMOCENTRO;
 
             ViewBag.Msg = msg;
             return View(model);
@@ -128,6 +130,85 @@ namespace SangueHeroiWeb.Controllers
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Index", "Login");
+        }
+
+        [HttpGet]
+        public ActionResult ConsultaNiveisSanguineos()
+        {
+            var idHemocentro = Session["ID_HEMOCENTRO"];
+
+            HemocentroDAO hd = new HemocentroDAO();
+            HemocentroNiveisSanguineosModel model = hd.BuscaNiveisPorHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
+
+            ViewBag.model = model;
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditarNiveisSanguineos()
+        {
+            var idHemocentro = Session["ID_HEMOCENTRO"];
+
+            HemocentroDAO hd = new HemocentroDAO();
+            HemocentroModel hm = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
+            HemocentroNiveisSanguineosModel model = hd.BuscaNiveisPorHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
+           
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditarNiveisSanguineos(HemocentroNiveisSanguineosModel model)
+        {
+            HemocentroDAO hd = new HemocentroDAO();
+            String msg = "Alteração Realizada com Sucesso";
+
+            if (model.CODIGO_HEMOCENTRO_NIVEIS_SANGUINEOS != 0)
+            {
+                if (!(hd.EditarNiveisSanguineos(model)))
+                {
+                    msg = "Atenção! Ocorreu um Erro ao realizar a edição, favor contatar um administrador";
+                }
+            }
+
+            model = hd.BuscaNiveisPorHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + model.CODIGO_HEMOCENTRO);
+
+            ViewBag.Msg = msg;
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult CadastrarNiveisSanguineos()
+        {
+            var idHemocentro = Session["ID_HEMOCENTRO"];
+
+            HemocentroDAO hd = new HemocentroDAO();
+            HemocentroModel hm = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
+            HemocentroNiveisSanguineosModel model = new HemocentroNiveisSanguineosModel();
+
+            model.CODIGO_HEMOCENTRO = hm.CODIGO_HEMOCENTRO;
+            model.NOME_HEMOCENTRO = hm.NOME_HEMOCENTRO;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CadastrarNiveisSanguineos(HemocentroNiveisSanguineosModel model)
+        {
+            HemocentroDAO hd = new HemocentroDAO();
+            String msg = "Cadastro Realizado com Sucesso";
+
+            if (model.CODIGO_HEMOCENTRO_NIVEIS_SANGUINEOS == 0)
+            {
+                if (!(hd.CadastrarNiveisSanguineos(model)))
+                {
+                    msg = "Atenção! Ocorreu um Erro ao realizar o cadastro, favor contatar um administrador";
+                }
+            }
+           
+
+            ViewBag.Msg = msg;
+            return View(model);
         }
     }
 }

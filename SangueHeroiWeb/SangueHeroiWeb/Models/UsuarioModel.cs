@@ -53,4 +53,6 @@ namespace SangueHeroiWeb.Models
         public string DESCRICAO_HEROI { get; set; }
         public int CODIGO_HEROI { get; set; }
     }
+
+    
 }
