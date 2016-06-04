@@ -130,8 +130,7 @@ namespace SangueHeroiWeb.DAO
 
             //if (dt.Rows.Count == 0)
             //{
-                strQueryInsert = "INSERT INTO DISPOSITIVO (TOKEN) VALUES " + Environment.NewLine
-                 + "('" + UtilHelper.TextForSql(dmodel.TOKEN) + "');";
+                strQueryInsert = "INSERT INTO DISPOSITIVO (TOKEN) VALUES (" + UtilHelper.TextForSql(dmodel.TOKEN) + ");";
 
                 try
                 {
