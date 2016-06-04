@@ -50,7 +50,7 @@ public class AndroidGCMPushNotification
 
             wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
 
-            string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":108,\"delay_while_idle\":true,\"data\": { \"message\" : " + "\"" + value + "\",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
+            string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + "\"" + value + "\",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
 
             Byte[] bytes = Encoding.UTF8.GetBytes(postData);
             wRequest.ContentLength = bytes.Length;
