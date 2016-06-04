@@ -52,6 +52,26 @@ namespace SangueHeroiWeb
         }
 
         [WebMethod]
+        public int cadastrarDispositivo(string token)
+        {
+            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //{
+            DispositivoDAO ddao = new DispositivoDAO();
+            DispositivoModel dmodel = new DispositivoModel();
+
+            dmodel.TOKEN = token;
+            
+            var retorno = ddao.CadastrarDispositivo(dmodel);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    throw new Exception("A autenticaCão falhou");
+            //}
+        }
+
+        /*[WebMethod]
         public string testeGCM()
         {
             AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();
@@ -61,7 +81,7 @@ namespace SangueHeroiWeb
             var retorno = gcm.SendNotification(deviceIdTeste, "Deu certo");
 
             return retorno;
-        }
+        }*/
 
         [WebMethod]
         public string[] efetuarLogin(string login, string senha)
@@ -155,6 +175,7 @@ namespace SangueHeroiWeb
             //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
             //{
             CampanhaDAO cdao = new CampanhaDAO();
+            DispositivoDAO ddao = new DispositivoDAO();
             CampanhaModel cmodel = new CampanhaModel();
             UsuarioModel umodel = new UsuarioModel();
 
@@ -173,6 +194,9 @@ namespace SangueHeroiWeb
             cmodel.CEP = cep;
 
             var retorno = cdao.CadastrarCampanha(cmodel, umodel);
+
+            if (retorno == 1)
+                ddao.DispararNotificacao(cmodel);
 
             return retorno;
             //}

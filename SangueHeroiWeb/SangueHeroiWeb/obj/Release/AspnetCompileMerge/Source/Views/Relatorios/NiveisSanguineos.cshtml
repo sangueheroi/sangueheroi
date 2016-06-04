@@ -1,0 +1,161 @@
+﻿@model SangueHeroiWeb.Models.HemocentroModel
+
+@{
+    ViewBag.Title = "Sangue Heroi - Relatorio Niveis Sanguineos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-danger">
+    <div class="panel-heading">Relatorio - Níveis Sanguíneos</div>
+    <div class="panel-body">
+        <div class="form-inline">
+            <div class="form-group">
+                <label>Nome Hemocentro</label>
+                @Html.DropDownList("name", new SelectList(ViewBag.ListaHemocentros, "CODIGO_HEMOCENTRO", "NOME_HEMOCENTRO"),
+                            String.Empty, new { @class = "form-control", @id = "ddlHemocentro" })
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger" id="btnFiltro"><i class="fa fa-filter" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <hr />
+
+        <div id="containerGrafico">
+            <div class="form-inline" style="display: none">
+                <div class="form-group">
+                    <label>Nome Hemocentro</label>
+                    @Html.DropDownList("name", new SelectList(ViewBag.ListaHemocentros, "CODIGO_HEMOCENTRO", "NOME_HEMOCENTRO"),
+                            String.Empty, new { @class = "form-control", @id = "ddlHemocentro" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" id="ddlTipoGrafico">
+                    <option value="colum">Barra</option>
+                    <option value="area">Area</option>
+                    <option value="pie">Pizza</option>
+                    <option value="line">Linha</option>
+                </select>
+            </div>
+            <hr />
+            <hr />
+            <div id="grafico" style="width:1108px; height: 400px;">
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+
+    $(document).ready(function () {
+
+        $("#ddlTipoGrafico").change(function () {
+            drawChart($(this).val());
+        });
+
+
+        $('#btnFiltro').on('click', function () {
+            drawChart('colum');
+        });
+
+        function drawChart(tipoGrafico) {
+
+            var idHemocentro = $('#ddlHemocentro').val();
+
+            $.ajax({
+                type: 'GET',
+                url: './GetDadosNiveisSanguineosGrafico',
+                contentType: 'application/json',
+                data: ({ idHemocentro: idHemocentro }),
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+
+                    var tdata = new google.visualization.DataTable();
+
+                    tdata.addColumn('string', 'Tipo Sanguineo');
+                    tdata.addColumn('number', 'Valor(%)');
+
+                    for (var i = 0; i < data.length; i++) {
+                        tdata.addRow([data[i].NOME_TIPO_SANGUINEO, data[i].VALOR_TIPO_SANGUINEO]);
+                    }
+                    var chart;
+
+                    if (tipoGrafico == 'colum') {
+                        var option = {
+                            title: $('#ddlHemocentro option:selected').text(),
+                            is3D: true,
+                            colors: ['#e2431e'],
+                            bar: { groupWidth: '50%' },
+                            vAxis: {
+                                viewWindowMode: 'explicit',
+                                viewWindow: {
+                                    max: 100,
+                                    min: 0
+                                }
+                            }
+                        };
+
+                        chart = new google.visualization.ColumnChart(document.getElementById('grafico'));
+                        chart.draw(tdata, option);
+                    }
+
+                    if (tipoGrafico == 'area') {
+                        var option = {
+                            title: $('#ddlHemocentro option:selected').text(),
+                            is3D: true,
+                            colors: ['#e2431e'],
+                            bar: { groupWidth: '50%' },
+                            vAxis: {
+                                viewWindowMode: 'explicit',
+                                viewWindow: {
+                                    max: 100,
+                                    min: 0
+                                }
+                            }
+                        };
+
+                        chart = new google.visualization.AreaChart(document.getElementById('grafico'));
+                        chart.draw(tdata, option);
+                    }
+
+                    if (tipoGrafico == 'pie') {
+                        var option = {
+                            title: $('#ddlHemocentro option:selected').text(),
+                            is3D: true
+                        };
+
+                        chart = new google.visualization.PieChart(document.getElementById('grafico'));
+                        chart.draw(tdata, option);
+                    }
+
+                    if (tipoGrafico == 'line') {
+                        var option = {
+                            title: $('#ddlHemocentro option:selected').text(),
+                            is3D: true,
+                            colors: ['#e2431e'],
+                            bar: { groupWidth: '50%' },
+                            vAxis: {
+                                viewWindowMode: 'explicit',
+                                viewWindow: {
+                                    max: 100,
+                                    min: 0
+                                }
+                            }
+                        };
+
+                        chart = new google.visualization.LineChart(document.getElementById('grafico'));
+                        chart.draw(tdata, option);
+                    }
+                }
+            });
+        }
+    });
+</script>
+

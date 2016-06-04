@@ -9,48 +9,83 @@ using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using System.Collections.Specialized;
 using System.Web.Script.Serialization;
+using SangueHeroiWeb.Models;
 
 public class AndroidGCMPushNotification
 {
+    private class Notificacao
+    {
+        public string Titulo;
+        public string Mensagem;
+        public long ItemId;
+    }
+
     public AndroidGCMPushNotification()
     {
         //
         // TODO: Add constructor logic here
         //
     }
-    public string SendNotification(string deviceId, string message)
+
+    public string EnviarNotificacao(List<DispositivoModel> deviceRegIds, string mensagem, string titulo, long id)
     {
-        string GoogleAppID = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
-        var SENDER_ID = 43844248731;
-        var value = message;
-        WebRequest tRequest;
-        tRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
-        tRequest.Method = "post";
-        tRequest.ContentType = " application/x-www-form-urlencoded;charset=UTF-8";
-        tRequest.Headers.Add(string.Format("Authorization: key={0}", GoogleAppID));
+        try
+        {
+            string regIds = string.Join("\",\"", deviceRegIds);
 
-        tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
+            string AppId = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
+            var SenderId = 43844248731;
 
-        string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle = 1 & data.message = " + value + " & data.time = " + System.DateTime.Now.ToString() + "&registration_id=" + deviceId + "";
-        Console.WriteLine(postData);
-        Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-        tRequest.ContentLength = byteArray.Length;
+            Notificacao n = new Notificacao();
+            n.Titulo = titulo;
+            n.Mensagem = mensagem;
+            n.ItemId = id;
 
-        Stream dataStream = tRequest.GetRequestStream();
-        dataStream.Write(byteArray, 0, byteArray.Length);
-        dataStream.Close();
+            var value = new JavaScriptSerializer().Serialize(n);
+            WebRequest wRequest;
+            wRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+            wRequest.Method = "post";
+            wRequest.ContentType = " application/json;charset=UTF-8";
+            wRequest.Headers.Add(string.Format("Authorization: key={0}", AppId));
 
-        WebResponse tResponse = tRequest.GetResponse();
+            wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
 
-        dataStream = tResponse.GetResponseStream();
+            string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":108,\"delay_while_idle\":true,\"data\": { \"message\" : " + "\"" + value + "\",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
 
-        StreamReader tReader = new StreamReader(dataStream);
+            Byte[] bytes = Encoding.UTF8.GetBytes(postData);
+            wRequest.ContentLength = bytes.Length;
 
-        String sResponseFromServer = tReader.ReadToEnd();
+            Stream stream = wRequest.GetRequestStream();
+            stream.Write(bytes, 0, bytes.Length);
+            stream.Close();
 
-        tReader.Close();
-        dataStream.Close();
-        tResponse.Close();
-        return sResponseFromServer;
+            WebResponse wResponse = wRequest.GetResponse();
+
+            stream = wResponse.GetResponseStream();
+
+            StreamReader reader = new StreamReader(stream);
+
+            String response = reader.ReadToEnd();
+
+            HttpWebResponse httpResponse = (HttpWebResponse)wResponse;
+            string status = httpResponse.StatusCode.ToString();
+
+            reader.Close();
+            stream.Close();
+            wResponse.Close();
+
+            if (status == "")
+            {
+                return response;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        catch
+        {
+            return "";
+        }
     }
 }

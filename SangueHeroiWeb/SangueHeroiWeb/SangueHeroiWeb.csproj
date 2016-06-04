@@ -208,6 +208,7 @@
     <Compile Include="Controllers\RankingDoadoresController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="DAO\DispositivoDAO.cs" />
     <Compile Include="DAO\CampanhaDAO.cs" />
     <Compile Include="DAO\DoacaoDAO.cs" />
     <Compile Include="DAO\HemocentroDAO.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Helpers\Util_Helper\GeraSenha.cs" />
     <Compile Include="Helpers\Util_Helper\UtilHelper.cs" />
     <Compile Include="Models\CampanhaModel.cs" />
+    <Compile Include="Models\DispositivoModel.cs" />
     <Compile Include="Models\DoacaoModel.cs" />
     <Compile Include="Models\HemocentroModel.cs" />
     <Compile Include="Models\HemocentroNiveisSanguineosModel.cs" />
