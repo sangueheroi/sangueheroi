@@ -17,7 +17,7 @@ public class AndroidGCMPushNotification
     {
         public string Titulo;
         public string Mensagem;
-        public long ItemId;
+        public string ItemId;
     }
 
     public AndroidGCMPushNotification()
@@ -27,10 +27,10 @@ public class AndroidGCMPushNotification
         //
     }
 
-    public string EnviarNotificacao(List<DispositivoModel> deviceRegIds, string mensagem, string titulo, long id)
+    public string EnviarNotificacao(List<string> deviceRegIds, string mensagem, string titulo, string id)
     {
-        try
-        {
+        //try
+        //{
             string regIds = string.Join("\",\"", deviceRegIds);
 
             string AppId = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
@@ -50,7 +50,7 @@ public class AndroidGCMPushNotification
 
             wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
 
-            string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + "\"" + value + "\",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
+            string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
 
             Byte[] bytes = Encoding.UTF8.GetBytes(postData);
             wRequest.ContentLength = bytes.Length;
@@ -74,18 +74,20 @@ public class AndroidGCMPushNotification
             stream.Close();
             wResponse.Close();
 
-            if (status == "")
+            return response;
+
+           /* if (status == "")
             {
                 return response;
             }
             else
             {
-                return "";
+                return response;
             }
         }
         catch
         {
-            return "";
-        }
+            return response;
+        }*/
     }
 }

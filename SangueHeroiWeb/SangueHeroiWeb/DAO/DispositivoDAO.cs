@@ -28,27 +28,35 @@ namespace SangueHeroiWeb.DAO
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
             string strQuerySelectDispositivo = "";
+            string strQuerySelectCampanha = "";
             string envio = "";
 
             strQuerySelectDispositivo = String.Format("SELECT TOKEN FROM DISPOSITIVO");
+            strQuerySelectCampanha = String.Format("SELECT MAX(CODIGO_CAMPANHA) AS CODIGO_CAMPANHA FROM CAMPANHA");
 
-            List<DispositivoModel> dispositivos = new List<DispositivoModel>();
+            List<string> dispositivos = new List<string>();
 
             dt = (DataTable)context.ExecuteCommand(strQuerySelectDispositivo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            dt2 = (DataTable)context.ExecuteCommand(strQuerySelectCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow data in dt.Rows)
                 {
                     DispositivoModel dispositivo = new DispositivoModel();
-
-                    dispositivo.TOKEN = data["TOKEN"].ToString();
-
-                    dispositivos.Add(dispositivo);
+                    dispositivos.Add(data["TOKEN"].ToString());
                 }
             }
 
-            envio = gcm.EnviarNotificacao(dispositivos, cmodel.DESCRICAO_CAMPANHA, cmodel.NOME_CAMPANHA, cmodel.CODIGO_CAMPANHA);
+            if (dt2.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt2.Rows)
+                {
+                    cmodel.CODIGO_CAMPANHA = Convert.ToInt32(data["CODIGO_CAMPANHA"].ToString());
+                }
+            }
+
+            envio = gcm.EnviarNotificacao(dispositivos, cmodel.DESCRICAO_CAMPANHA, cmodel.NOME_CAMPANHA, cmodel.CODIGO_CAMPANHA.ToString());
                 
             return envio;
         }
@@ -77,7 +85,7 @@ namespace SangueHeroiWeb.DAO
                
             }
        
-            List<DispositivoModel> dispositivos = new List<DispositivoModel>();
+            List<string> dispositivos = new List<string>();
 
             dt = (DataTable)context.ExecuteCommand(strQuerySelectDispositivo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
             
@@ -86,10 +94,7 @@ namespace SangueHeroiWeb.DAO
                 foreach (DataRow data in dt.Rows)
                 {
                     DispositivoModel dispositivo = new DispositivoModel();
-
-                    dispositivo.TOKEN = data["TOKEN"].ToString();
-
-                    dispositivos.Add(dispositivo);
+                    dispositivos.Add(data["TOKEN"].ToString());
                 }
             }
            
@@ -101,11 +106,11 @@ namespace SangueHeroiWeb.DAO
                 {
                     CampanhaModel campanha = new CampanhaModel();
 
-                    campanha.CODIGO_CAMPANHA = Convert.ToInt32(data["DEVICE_ID"].ToString());
+                    campanha.CODIGO_CAMPANHA = Convert.ToInt32(data["CODIGO_CAMPANHA"].ToString());
                     campanha.NOME_CAMPANHA = data["NOME_CAMPANHA"].ToString();
                     campanha.DESCRICAO_CAMPANHA = data["DESCRICAO_CAMPANHA"].ToString();
 
-                    envio = gcm.EnviarNotificacao(dispositivos, campanha.DESCRICAO_CAMPANHA, campanha.NOME_CAMPANHA, campanha.CODIGO_CAMPANHA);
+                    envio = gcm.EnviarNotificacao(dispositivos, campanha.DESCRICAO_CAMPANHA, campanha.NOME_CAMPANHA, campanha.CODIGO_CAMPANHA.ToString());
                 }    
             }
 
