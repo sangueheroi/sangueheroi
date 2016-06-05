@@ -27,17 +27,19 @@ namespace SangueHeroiWeb.DAO
             AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
+            DataTable dt3 = new DataTable();
             string strQuerySelectDispositivo = "";
+            string strQuerySelectCodigoCampanha = "";
             string strQuerySelectCampanha = "";
             string envio = "";
 
             strQuerySelectDispositivo = String.Format("SELECT TOKEN FROM DISPOSITIVO");
-            strQuerySelectCampanha = String.Format("SELECT MAX(CODIGO_CAMPANHA) AS CODIGO_CAMPANHA FROM CAMPANHA");
+            strQuerySelectCodigoCampanha = String.Format("SELECT MAX(CODIGO_CAMPANHA) AS CODIGO_CAMPANHA FROM CAMPANHA");
 
             List<string> dispositivos = new List<string>();
 
             dt = (DataTable)context.ExecuteCommand(strQuerySelectDispositivo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-            dt2 = (DataTable)context.ExecuteCommand(strQuerySelectCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            dt2 = (DataTable)context.ExecuteCommand(strQuerySelectCodigoCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
             if (dt.Rows.Count > 0)
             {
@@ -56,8 +58,21 @@ namespace SangueHeroiWeb.DAO
                 }
             }
 
-            envio = gcm.EnviarNotificacao(dispositivos, cmodel.DESCRICAO_CAMPANHA, cmodel.NOME_CAMPANHA, cmodel.CODIGO_CAMPANHA.ToString());
-                
+            strQuerySelectCampanha = String.Format("SELECT U.NOME_USUARIO, U.EMAIL_USUARIO FROM USUARIO U INNER JOIN CAMPANHA C ON C.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE CODIGO_CAMPANHA = '{0}'", cmodel.CODIGO_CAMPANHA);
+
+            dt3 = (DataTable)context.ExecuteCommand(strQuerySelectCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt3.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt3.Rows)
+                {
+                    cmodel.NOME_USUARIO = data["NOME_USUARIO"].ToString();
+                    cmodel.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
+                }
+            }
+
+            envio = gcm.EnviarNotificacaoCompleta(dispositivos, cmodel.DESCRICAO_CAMPANHA, cmodel.NOME_CAMPANHA, cmodel.CODIGO_CAMPANHA.ToString(), cmodel.NOME_USUARIO, cmodel.EMAIL_USUARIO, cmodel.NOME_RECEPTOR, cmodel.TIPO_SANGUINEO, cmodel.NOME_HOSPITAL, cmodel.ESTADO, cmodel.CIDADE, cmodel.BAIRRO, cmodel.LOGRADOURO, cmodel.CEP, cmodel.DATA_INICIO, cmodel.DATA_FIM);
+                          
             return envio;
         }
 
