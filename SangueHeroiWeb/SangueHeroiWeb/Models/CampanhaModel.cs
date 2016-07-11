@@ -11,6 +11,8 @@ namespace SangueHeroiWeb.Models
     {
         public int CODIGO_CAMPANHA { get; set; }
 
+        public string CODIGO_CAMPANHA_STR { get; set; }
+
         public string NOME_USUARIO { get; set; }
 
         public string EMAIL_USUARIO { get; set; }
@@ -39,8 +41,8 @@ namespace SangueHeroiWeb.Models
 
         public DateTime DATA_FIM_DT { get; set; }
 
-        public string DATA_INICIO { get { return DATA_INICIO_DT.ToString("dd/MM/yy"); } }
+        public string DATA_INICIO { get { return DATA_INICIO_DT.ToString("dd/MM/yyyy"); } }
 
-        public string DATA_FIM { get { return DATA_FIM_DT.ToString("dd/MM/yy"); } }
+        public string DATA_FIM { get { return DATA_FIM_DT.ToString("dd/MM/yyyy"); } }
     }
 }

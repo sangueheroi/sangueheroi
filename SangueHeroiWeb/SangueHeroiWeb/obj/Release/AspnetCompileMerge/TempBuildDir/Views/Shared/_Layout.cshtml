@@ -25,9 +25,9 @@
                             <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-file"></span> Relatórios<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("Index","RankingDoadores")"><i class="fa fa-users" aria-hidden="true"></i> Ranking de Doadores</a></li>
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li><a href="@Url.Action("NiveisSanguineos","Relatorios")"><i class="fa fa-bar-chart" aria-hidden="true"></i> Nivel de Sangue Hemocentros</a></li>
+                                <li><a href="@Url.Action("TiposSanguineos","Relatorios")"><i class="fa fa-line-chart" aria-hidden="true"></i> Tipos Sanguíneos por Usuario</a></li>
                                 <li class="divider"></li>
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             </ul>
                         </li>
                     </ul>
@@ -41,10 +41,11 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Hemocentro<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> @Session["NOME_HEMOCENTRO"].ToString() <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("Editar","Hemocentro")"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
                                 <li><a href="@Url.Action("Inativar","Hemocentro")"><span class="glyphicon glyphicon-ban-circle"></span> Desativar Conta</a></li>
+                                <li><a href="@Url.Action("ConsultaNiveisSanguineos","Hemocentro")"><span class="glyphicon glyphicon-tint"></span> Nivel Banco de Sague </a></li>
                                 <li class="divider"></li>
                                 <li><a href="@Url.Action("LogOff","Login")"><span class="glyphicon glyphicon-log-out"></span> Logoff</a></li>
                             </ul>
@@ -73,94 +74,7 @@
 </html>
 
 <style>
-			.navbar-default {
-			  background-color: #e74c3c;
-			  border-color: #c0392b;
-			}
-			.navbar-default .navbar-brand {
-			  color: #eef1f2;
-			}
-			.navbar-default .navbar-brand:hover,
-			.navbar-default .navbar-brand:focus {
-			  color: #ffbbbc;
-			}
-			.navbar-default .navbar-text {
-			  color: #eef1f2;
-			}
-			.navbar-default .navbar-nav > li > a {
-			  color: #eef1f2;
-			}
-			.navbar-default .navbar-nav > li > a:hover,
-			.navbar-default .navbar-nav > li > a:focus {
-			  color: #ffbbbc;
-			}
-						.navbar-default .navbar-nav > li > .dropdown-menu {
-			  background-color: #e74c3c;
-			}
-			.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
-			  color: #eef1f2;
-			}
-			.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
-			.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
-			  color: #ffbbbc;
-			  background-color: #c0392b;
-			}
-			.navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
-			  background-color: #e74c3c;
-			}
-			.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-			.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-			.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-			  color: #ffbbbc;
-			  background-color: #c0392b;
-			}
-						.navbar-default .navbar-nav > .active > a,
-			.navbar-default .navbar-nav > .active > a:hover,
-			.navbar-default .navbar-nav > .active > a:focus {
-			  color: #ffbbbc;
-			  background-color: #c0392b;
-			}
-			.navbar-default .navbar-nav > .open > a,
-			.navbar-default .navbar-nav > .open > a:hover,
-			.navbar-default .navbar-nav > .open > a:focus {
-			  color: #ffbbbc;
-			  background-color: #c0392b;
-			}
-			.navbar-default .navbar-toggle {
-			  border-color: #c0392b;
-			}
-			.navbar-default .navbar-toggle:hover,
-			.navbar-default .navbar-toggle:focus {
-			  background-color: #c0392b;
-			}
-			.navbar-default .navbar-toggle .icon-bar {
-			  background-color: #eef1f2;
-			}
-			.navbar-default .navbar-collapse,
-			.navbar-default .navbar-form {
-			  border-color: #eef1f2;
-			}
-			.navbar-default .navbar-link {
-			  color: #eef1f2;
-			}
-			.navbar-default .navbar-link:hover {
-			  color: #ffbbbc;
-			}
-			@@media (max-width: 767px) {
-			  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-			    color: #eef1f2;
-			  }
-			  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-			  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-			    color: #ffbbbc;
-			  }
-			  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-			  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-			  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-			    color: #ffbbbc;
-			    background-color: #c0392b;
-			  }
-			}
+			   
 </style>
 <script type="text/javascript">
     $(document).ready(function () {

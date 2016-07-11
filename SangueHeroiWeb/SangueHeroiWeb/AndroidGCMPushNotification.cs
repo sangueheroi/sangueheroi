@@ -9,48 +9,182 @@ using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using System.Collections.Specialized;
 using System.Web.Script.Serialization;
+using SangueHeroiWeb.Models;
 
 public class AndroidGCMPushNotification
 {
+    private class Notificacao
+    {
+        public string Titulo;
+        public string Mensagem;
+        public string ItemId;
+    }
+
+    private class NotificacaoCompleta
+    {
+        public string NOME_CAMPANHA;
+        public string DESCRICAO_CAMPANHA;
+        public string CODIGO_CAMPANHA;
+        public string NOME_USUARIO;
+        public string EMAIL_USUARIO;
+        public string NOME_RECEPTOR;
+        public string TIPO_SANGUINEO;
+        public string NOME_HOSPITAL;
+        public string ESTADO;
+        public string CIDADE;
+        public string BAIRRO;
+        public string LOGRADOURO;
+        public string CEP;
+        public string DATA_INICIO;
+        public string DATA_FIM;
+    }
+
     public AndroidGCMPushNotification()
     {
         //
         // TODO: Add constructor logic here
         //
     }
-    public string SendNotification(string deviceId, string message)
+
+    public string EnviarNotificacaoCompleta(List<string> deviceRegIds, string mensagem, string titulo, string id, string nome_usuario, string email_usuario, string nome_receptor, string tipo_sanguineo, string nome_hospital, string estado, string cidade, string bairro, string logradouro, string cep, string data_inicio, string data_fim)
     {
-        string GoogleAppID = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
-        var SENDER_ID = 43844248731;
-        var value = message;
-        WebRequest tRequest;
-        tRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
-        tRequest.Method = "post";
-        tRequest.ContentType = " application/x-www-form-urlencoded;charset=UTF-8";
-        tRequest.Headers.Add(string.Format("Authorization: key={0}", GoogleAppID));
+        //try
+        //{
+        
+        string regIds = string.Join("\",\"", deviceRegIds);
 
-        tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
+        string AppId = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
+        var SenderId = 43844248731;
 
-        string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle = 1 & data.message = " + value + " & data.time = " + System.DateTime.Now.ToString() + "&registration_id=" + deviceId + "";
-        Console.WriteLine(postData);
-        Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-        tRequest.ContentLength = byteArray.Length;
+        NotificacaoCompleta n = new NotificacaoCompleta();
+ 
+        n.NOME_CAMPANHA = titulo;
+        n.DESCRICAO_CAMPANHA = mensagem;
+        n.CODIGO_CAMPANHA = id;
+        n.NOME_USUARIO = nome_usuario;
+        n.EMAIL_USUARIO = email_usuario;
+        n.NOME_RECEPTOR = nome_receptor;
+        n.TIPO_SANGUINEO = tipo_sanguineo;
+        n.NOME_HOSPITAL = nome_hospital;
+        n.ESTADO = estado;
+        n.CIDADE = cidade;
+        n.BAIRRO = bairro;
+        n.LOGRADOURO = logradouro;
+        n.CEP = cep;
+        n.DATA_INICIO = data_inicio;
+        n.DATA_FIM = data_fim;
 
-        Stream dataStream = tRequest.GetRequestStream();
-        dataStream.Write(byteArray, 0, byteArray.Length);
-        dataStream.Close();
+    var value = new JavaScriptSerializer().Serialize(n);
+        WebRequest wRequest;
+        wRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+        wRequest.Method = "post";
+        wRequest.ContentType = " application/json;charset=UTF-8";
+        wRequest.Headers.Add(string.Format("Authorization: key={0}", AppId));
 
-        WebResponse tResponse = tRequest.GetResponse();
+        wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
 
-        dataStream = tResponse.GetResponseStream();
+        string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
 
-        StreamReader tReader = new StreamReader(dataStream);
+        Byte[] bytes = Encoding.UTF8.GetBytes(postData);
+        wRequest.ContentLength = bytes.Length;
 
-        String sResponseFromServer = tReader.ReadToEnd();
+        Stream stream = wRequest.GetRequestStream();
+        stream.Write(bytes, 0, bytes.Length);
+        stream.Close();
 
-        tReader.Close();
-        dataStream.Close();
-        tResponse.Close();
-        return sResponseFromServer;
+        WebResponse wResponse = wRequest.GetResponse();
+
+        stream = wResponse.GetResponseStream();
+
+        StreamReader reader = new StreamReader(stream);
+
+        String response = reader.ReadToEnd();
+
+        HttpWebResponse httpResponse = (HttpWebResponse)wResponse;
+        string status = httpResponse.StatusCode.ToString();
+
+        reader.Close();
+        stream.Close();
+        wResponse.Close();
+
+        return response;
+
+        /* if (status == "")
+         {
+             return response;
+         }
+         else
+         {
+             return response;
+         }
+     }
+     catch
+     {
+         return response;
+     }*/
+    }
+
+    public string EnviarNotificacao(List<string> deviceRegIds, string mensagem, string titulo, string id)
+    {
+        //try
+        //{
+            string regIds = string.Join("\",\"", deviceRegIds);
+
+            string AppId = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
+            var SenderId = 43844248731;
+
+            Notificacao n = new Notificacao();
+            n.Titulo = titulo;
+            n.Mensagem = mensagem;
+            n.ItemId = id;
+
+            var value = new JavaScriptSerializer().Serialize(n);
+            WebRequest wRequest;
+            wRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+            wRequest.Method = "post";
+            wRequest.ContentType = " application/json;charset=UTF-8";
+            wRequest.Headers.Add(string.Format("Authorization: key={0}", AppId));
+
+            wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
+
+            string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
+
+            Byte[] bytes = Encoding.UTF8.GetBytes(postData);
+            wRequest.ContentLength = bytes.Length;
+
+            Stream stream = wRequest.GetRequestStream();
+            stream.Write(bytes, 0, bytes.Length);
+            stream.Close();
+
+            WebResponse wResponse = wRequest.GetResponse();
+
+            stream = wResponse.GetResponseStream();
+
+            StreamReader reader = new StreamReader(stream);
+
+            String response = reader.ReadToEnd();
+
+            HttpWebResponse httpResponse = (HttpWebResponse)wResponse;
+            string status = httpResponse.StatusCode.ToString();
+
+            reader.Close();
+            stream.Close();
+            wResponse.Close();
+
+            return response;
+
+           /* if (status == "")
+            {
+                return response;
+            }
+            else
+            {
+                return response;
+            }
+        }
+        catch
+        {
+            return response;
+        }*/
     }
 }

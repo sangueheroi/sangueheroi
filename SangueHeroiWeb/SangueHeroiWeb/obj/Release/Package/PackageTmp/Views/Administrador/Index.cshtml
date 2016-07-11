@@ -15,13 +15,13 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-danger">
+        <div class="panel panel-danger" >
             <div class="panel-heading">
                 <strong>Hemocentros</strong>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover " id="gridHemocentros" style="width:100%;">
+                    <table class="table table-striped table-bordered table-hover " id="gridHemocentros" style="width:100%;height:100%">
                         <thead>
                             <tr>
                                 <th>Cód Hemocentro</th>
@@ -108,7 +108,6 @@
             "filter": false,
             'info': true,
             'lengthChange': false,
-            "pageLength": 10,
             "columns": [
                 { "data": "CODIGO_HEMOCENTRO" },
                 { "data": "NOME_HEMOCENTRO" },
@@ -160,6 +159,11 @@
 
                 if (result.length > 0) {
                     table.rows.add(result).draw();
+                    $.notify({
+                        message: "Hemocentro Ativdado com Sucesso",
+                        status: "success",
+                        timeout: 1000
+                    });
                 } else {
                     $.notify({
                         message: "Nenhum Hemocentro Encontrado",
