@@ -1,0 +1,90 @@
+﻿@model SangueHeroiWeb.Models.EsqueciMinhaSenhaModel
+
+@using (Html.BeginForm("EsqueciMinhaSenha", "Login", FormMethod.Post, new { @id = "formEsqueciMinhaSenha" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+<div class="modal-header" style="padding-bottom: 35px;">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="modal-body">
+    <div class="centralizar">
+        <div role="form" class="form-horizontal" style="width:50%">
+            <div class="centralizar">
+                <h2>Esqueci Minha Senha</h2>
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.EMAIL_USUARIO, null, new { @type = "text", @class = "email email_img_background", @placeholder = "E-mail", required = "required" })
+                @Html.ValidationMessageFor(model => model.EMAIL_USUARIO)
+            </div>
+            <div class="form-group">
+                <div class="centralizar">
+                    <button type="submit" class="btn btn-lg btn-primary">Enviar E-mail</button>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="sair">Sair</button>
+</div>
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sair').on("click", function () {
+            $('#modalEsqueciMinhaSenha').modal('hide');
+            $('body').css({ 'padding-right': '0px'});
+        });
+
+        $('body').css({ 'padding-right': '0px' });
+    });
+
+    $(document).ready(function () {
+        $('form#formEsqueciMinhaSenha').submit(function (e) {
+            //Objeto Model
+            var ObjEmail = {
+                EMAIL_USUARIO: "",
+            };
+
+            //Dados Form
+            var data = $(this).serializeArray();
+
+            ObjEmail["EMAIL_USUARIO"] = data[1].value;
+            
+            $.ajax({
+                type: 'POST',
+                url: './Login/EsqueciMinhaSenha',
+                contentType: 'application/json',
+                data: (JSON.stringify(ObjEmail)),
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    //if(!data.isRedirect)
+                    //{
+                    //    alert(data.msg);
+                    //}
+                    //else
+                    //{
+                    //    window.location.href = data.redirectUrl;
+                    //}
+
+                    alert(data.msg);
+                }
+            });
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                e.returnValue = false;
+            }
+        });
+    });
+</script>
+<style>
+    .modal {
+        overflow-y: scroll;
+    }
+</style>
