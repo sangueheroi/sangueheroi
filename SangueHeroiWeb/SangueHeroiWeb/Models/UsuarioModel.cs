@@ -54,5 +54,21 @@ namespace SangueHeroiWeb.Models
         public int CODIGO_HEROI { get; set; }
     }
 
-    
+    public class UsuarioGrupoModel
+    {
+        public int CODIGO_GRUPO { get; set; }
+
+        public string NOME_GRUPO { get; set; }
+
+        public string DESCRICAO_GRUPO { get; set; }
+
+        public DateTime DATA_CRIACAO = DateTime.Now;
+
+        public string EMAIL_USUARIO { get; set; }
+
+        public List<UsuarioModel> INTEGRANTES { get; set; }
+
+    }
+
+
 }

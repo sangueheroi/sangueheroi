@@ -13,61 +13,74 @@ using Newtonsoft.Json.Linq;
 using System.Web.Services.Protocols;
 using SangueHeroiWeb.Helpers.Util_Helper;
 using System.Web.Mvc;
+using System.ServiceModel.Activities;
+using System.ServiceModel.Channels;
+using System.Net.Http;
 
 namespace SangueHeroiWeb
 {
+
     /// <summary>
     /// WebService utilizado para comunicaCão com a aplicaCão Android
     /// </summary>
+
     [WebService(Namespace = "http://sangueheroiweb.azurewebsites.net/WebService.asmx")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
+
     // Para permitir que este Web Service seja chamado de um script, usando ASP.NET AJAX, tire o comentário da próxima linha. 
     [System.Web.Script.Services.ScriptService]
+
     public class WebService : System.Web.Services.WebService
     {
-        //public ValidacaoSoapHeader Autenticacao;
-        //private const string DEV_TOKEN = "sh10app";
+        public ValidacaoSoapHeader Autenticacao;
+        private const string DEV_TOKEN = "sh10app";
+
+        //MessageContext context = MessageContext.getCurrentContext();
+
+        //HttpServletRequest req = (HttpServletRequest)context.getProperty(HTTPConstants.MC_HTTP_SERVLETREQUEST);
+        //req.getHeader(Autenticacao));
 
         //Método utilizado para permitir o login pelo app Android, a partir da consulta de login e senha no banco de dados.    
         //[SoapHeader("Autenticacao")]
         [WebMethod]
         public int verificarLogin(string login)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
-                LoginDAO ldao = new LoginDAO();
-                LoginUsuarioModel lmodel = new LoginUsuarioModel();
+            LoginDAO ldao = new LoginDAO();
+            LoginUsuarioModel lmodel = new LoginUsuarioModel();
 
-                lmodel.EMAIL_USUARIO = login;
+            lmodel.EMAIL_USUARIO = login;
 
-                var retorno = ldao.VerificarLogin(lmodel);
+            var retorno = ldao.VerificarLogin(lmodel);
 
-                return retorno;
+            return retorno;
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
             //}
         }
 
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public int cadastrarDispositivo(string token)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
             DispositivoDAO ddao = new DispositivoDAO();
             DispositivoModel dmodel = new DispositivoModel();
 
             dmodel.TOKEN = token;
-            
+
             var retorno = ddao.CadastrarDispositivo(dmodel);
 
             return retorno;
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
             //}
         }
 
@@ -83,96 +96,102 @@ namespace SangueHeroiWeb
             return retorno;
         }*/
 
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public string[] efetuarLogin(string login, string senha)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
-                LoginDAO ldao = new LoginDAO();
-                LoginUsuarioModel lmodel = new LoginUsuarioModel();
+            LoginDAO ldao = new LoginDAO();
+            LoginUsuarioModel lmodel = new LoginUsuarioModel();
 
-                lmodel.EMAIL_USUARIO = login;
-                lmodel.SENHA = senha;
-                lmodel.LEMBRAR_ME = true;
+            lmodel.EMAIL_USUARIO = login;
+            lmodel.SENHA = senha;
+            lmodel.LEMBRAR_ME = true;
 
-                var retorno = ldao.LogarUsuario(lmodel);
+            var retorno = ldao.LogarUsuario(lmodel);
 
-                //string json = JsonConvert.SerializeObject(retorno);
+            //string json = JsonConvert.SerializeObject(retorno);
 
-                return retorno;
+            return retorno;
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return null; ;
             //}
         }
 
         //Método utilizado para registrar Usuário no banco de dados a partir do app Android.
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public int registrarUsuario(string nome, string email, string senha, string sexo, string bairro, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
-                UsuarioDAO udao = new UsuarioDAO();
-                UsuarioModel umodel = new UsuarioModel();
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioModel umodel = new UsuarioModel();
 
-                umodel.NOME_USUARIO = nome;
-                umodel.EMAIL_USUARIO = email;
-                umodel.SENHA_USUARIO = senha;
-                umodel.SEXO = sexo;
-                umodel.BAIRRO = bairro;
-                umodel.CIDADE = cidade;
-                umodel.ESTADO = estado;
-                umodel.CEP = cep;
-                umodel.TIPO_SANGUINEO = tipo_sanguineo;
-                umodel.DATA_NASCIMENTO = Convert.ToDateTime(dtnascimento);
+            umodel.NOME_USUARIO = nome;
+            umodel.EMAIL_USUARIO = email;
+            umodel.SENHA_USUARIO = senha;
+            umodel.SEXO = sexo;
+            umodel.BAIRRO = bairro;
+            umodel.CIDADE = cidade;
+            umodel.ESTADO = estado;
+            umodel.CEP = cep;
+            umodel.TIPO_SANGUINEO = tipo_sanguineo;
+            umodel.DATA_NASCIMENTO = Convert.ToDateTime(dtnascimento);
 
-                if(dtultimadoacao == "")
-                {
-                    DateTime dt = DateTime.Now.AddDays(-90);
-                    umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dt);
-                }
-                else
-                    umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
+            if (dtultimadoacao == "")
+            {
+                DateTime dt = DateTime.Now.AddDays(-90);
+                umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dt);
+            }
+            else
+                umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
 
-                umodel.CODIGO_HEROI = codigo_heroi;
-                umodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
+            umodel.CODIGO_HEROI = codigo_heroi;
+            umodel.FLAG_CADASTRO_REDE_SOCIAL = flagCadastroIsRedeSocial;
 
-                var retorno = udao.Registrar(umodel);
+            var retorno = udao.Registrar(umodel);
 
-                return retorno;
+            return retorno;
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return (int) SITUACAO.ERRO_DE_SISTEMA;
             //}
         }
 
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public string historicoDoacoes(string email)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
-            //{
+            //Encrypt enc = new Encrypt();
+            //string chave = Autenticacao.token;
+            //bool autenticado = enc.CompararToken(chave);
 
+            //if (autenticado)
+            //{
             DoacaoDAO doacao = new DoacaoDAO();
 
             List<DoacaoModel> lista = doacao.getHistoricoDoacoes(email);
 
             string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
-            
+
             return json;
-            
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return "ERRO";
             //}
         }
 
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public int cadastrarCampanha(string email, string nome_campanha, string descricao, string nome_receptor, string tipo_sanguineo, string dtinicio, string dtfim, string nome_hospital, string logradouro, string bairro, string cidade, string estado, string cep)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
             CampanhaDAO cdao = new CampanhaDAO();
             DispositivoDAO ddao = new DispositivoDAO();
@@ -202,14 +221,15 @@ namespace SangueHeroiWeb
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
             //}
         }
 
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public int alterarCampanha(int codigo_campanha, string nome_campanha, string descricao, string nome_receptor, string tipo_sanguineo, string dtinicio, string dtfim, string nome_hospital, string logradouro, string bairro, string cidade, string estado, string cep)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
             CampanhaDAO cdao = new CampanhaDAO();
             CampanhaModel cmodel = new CampanhaModel();
@@ -237,16 +257,16 @@ namespace SangueHeroiWeb
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
             //}
         }
 
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public string minhasCampanhas(string email)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
-
             CampanhaDAO campanha = new CampanhaDAO();
 
             List<CampanhaModel> lista = campanha.getMinhasCampanhas(email);
@@ -254,20 +274,19 @@ namespace SangueHeroiWeb
             string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
 
             return json;
-
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return "ERRO";
             //}
         }
 
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public string consultarCampanhas()
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
-
             CampanhaDAO campanha = new CampanhaDAO();
 
             List<CampanhaModel> lista = campanha.consultarCampanhas();
@@ -275,18 +294,22 @@ namespace SangueHeroiWeb
             string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
 
             return json;
-
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return "ERRO";
             //}
         }
 
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public int excluirCampanha(int id, string email)
         {
-            //if (Autenticacao != null && Autenticacao.DevToken == DEV_TOKEN)
+            //Encrypt enc = new Encrypt();
+            //string chave = Autenticacao.token;
+            //bool autenticado = enc.CompararToken(chave);
+
+            //if(autenticado)
             //{
             CampanhaDAO cdao = new CampanhaDAO();
             CampanhaModel cmodel = new CampanhaModel();
@@ -301,11 +324,264 @@ namespace SangueHeroiWeb
             //}
             //else
             //{
-            //    throw new Exception("A autenticaCão falhou");
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
             //}
         }
 
-    }
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public bool compararToken()
+        {
+            Encrypt enc = new Encrypt();
 
+            string chave = Autenticacao.token;
+            //string chave = "AWGdG20yigfOugXBNXiOgipOjk83TDU0IDXATy6N7g20D1hwoSpoqm8puvgCRhuidc1mfKqb5Zht 2v5jjbxNrF12G7XZxR5Z+x9uVTQc0r/BuSzP5Ye9B/xUVxsYKv1MUK2yCiphxqx9YrRJ5qrkBTywurWU3EEhaFeIgHma+uw=";
+
+            return enc.CompararToken(chave);
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public string consultarUsuarios()
+        {
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            //{
+            UsuarioDAO usuario = new UsuarioDAO();
+
+            List<UsuarioModel> lista = usuario.consultarUsuarios();
+
+            string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+
+            return json;
+            //}
+            //else
+            //{
+            //    return "ERRO";
+            //}
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int cadastrarGrupo(string nome_grupo, string descricao, string email_criador, string json)
+        {
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            //{
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+
+            ugmodel.NOME_GRUPO = nome_grupo;
+            ugmodel.DESCRICAO_GRUPO = descricao;
+            ugmodel.EMAIL_USUARIO = email_criador;
+
+            var retorno = udao.CadastrarGrupo(ugmodel, json);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int alterarGrupo(int id, string nome_grupo, string descricao, string email_criador)
+        {
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            //{
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+
+            ugmodel.CODIGO_GRUPO = id;
+            ugmodel.NOME_GRUPO = nome_grupo;
+            ugmodel.DESCRICAO_GRUPO = descricao;
+            ugmodel.EMAIL_USUARIO = email_criador;
+
+            var retorno = udao.AlterarGrupo(ugmodel);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public string consultarMeusGrupos(string email_criador)
+        {
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            //{
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+
+            ugmodel.EMAIL_USUARIO = email_criador;
+
+            List<UsuarioGrupoModel> lista = udao.consultarMeusGrupos(ugmodel);
+
+            string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+            return json;
+            //}
+            //else
+            //{
+            //    return "ERRO";
+            //}
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int excluirGrupo(int id, string email)
+        {
+            //Encrypt enc = new Encrypt();
+            //string chave = Autenticacao.token;
+            //bool autenticado = enc.CompararToken(chave);
+
+            //if(autenticado)
+            //{
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+
+            ugmodel.CODIGO_GRUPO = id;
+            ugmodel.EMAIL_USUARIO = email;
+
+            var retorno = udao.deletarGrupo(ugmodel);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int desvincularGrupo(int id, string email)
+        {
+            //Encrypt enc = new Encrypt();
+            //string chave = Autenticacao.token;
+            //bool autenticado = enc.CompararToken(chave);
+
+            //if(autenticado)
+            //{
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+
+            ugmodel.CODIGO_GRUPO = id;
+            ugmodel.EMAIL_USUARIO = email;
+
+            var retorno = udao.desvincularGrupo(ugmodel);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int desvincularGrupoEmMassa(int id, string email, string json)
+        {
+            //Encrypt enc = new Encrypt();
+            //string chave = Autenticacao.token;
+            //bool autenticado = enc.CompararToken(chave);
+
+            //if(autenticado)
+            //{
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+
+            ugmodel.CODIGO_GRUPO = id;
+            ugmodel.EMAIL_USUARIO = email;
+
+            var retorno = udao.desvincularGrupoEmMassa(ugmodel, json);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int vincularGrupo(int id, string email)
+        {
+            //Encrypt enc = new Encrypt();
+            //string chave = Autenticacao.token;
+            //bool autenticado = enc.CompararToken(chave);
+
+            //if(autenticado)
+            //{
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+
+            ugmodel.CODIGO_GRUPO = id;
+            ugmodel.EMAIL_USUARIO = email;
+
+            var retorno = udao.vincularGrupo(ugmodel);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
+        }
+
+        //[SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int vincularGrupoEmMassa(int id, string email, string json)
+        {
+            //Encrypt enc = new Encrypt();
+            //string chave = Autenticacao.token;
+            //bool autenticado = enc.CompararToken(chave);
+
+            //if(autenticado)
+            //{
+            UsuarioDAO udao = new UsuarioDAO();
+            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+
+            ugmodel.CODIGO_GRUPO = id;
+            ugmodel.EMAIL_USUARIO = email;
+
+            var retorno = udao.vincularGrupoEmMassa(ugmodel, json);
+
+            return retorno;
+            //}
+            //else
+            //{
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
+        }
+
+
+        //[WebMethod]
+        public List<UsuarioModel> testeIntegrantes()
+        {
+            string json = @"{""INTEGRANTES"":[{""EMAIL_USUARIO"":""diego.lucasilva@gmail.com""}, {""EMAIL_USUARIO"":""yuri.oli@gmail.com""}, {""EMAIL_USUARIO"":""df@gmail.com""}]}";
+   
+            UsuarioGrupoModel integrantes = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<UsuarioGrupoModel>(json);
+
+            List<UsuarioModel> list = new List<UsuarioModel>();
+
+            foreach (var item in integrantes.INTEGRANTES)
+            {
+                UsuarioModel umodel = new UsuarioModel();
+
+                umodel.EMAIL_USUARIO = item.EMAIL_USUARIO;
+
+                list.Add(umodel);                
+            }
+
+            return list;
+        }
+    }
 }
 

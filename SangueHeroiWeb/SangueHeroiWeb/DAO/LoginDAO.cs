@@ -145,6 +145,6 @@ namespace SangueHeroiWeb.DAO
             }
             return envioEmailOk;
         }
-
+        
     }
 }

@@ -18,18 +18,18 @@ namespace SangueHeroiWeb
     /// </summary>
     public class ValidacaoSoapHeader : SoapHeader
     {
-        private string _devToken;
+        private string _token;
         public ValidacaoSoapHeader()
         {
         }
-        public ValidacaoSoapHeader(string devToken)
+        public ValidacaoSoapHeader(string token)
         {
-            this._devToken = devToken;
+            this._token = token;
         }
-        public string DevToken
+        public string token
         {
-            get { return this._devToken; }
-            set { this._devToken = value; }
+            get { return this._token; }
+            set { this._token = value; }
         }
     }
 }
