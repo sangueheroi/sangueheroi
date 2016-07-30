@@ -2842,7 +2842,7 @@
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
-		var input = '<input type="search" class="'+classes.sFilterInput+'"/>';
+		var input = '<input type="search" class="form-control-custom ' + classes.sFilterInput + '"/>';
 	
 		var str = language.sSearch;
 		str = str.match(/_INPUT_/) ?
