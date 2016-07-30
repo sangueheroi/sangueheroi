@@ -215,7 +215,7 @@ namespace SangueHeroiWeb
             var retorno = cdao.CadastrarCampanha(cmodel, umodel);
 
             if (retorno == 1)
-                ddao.DispararNotificacao(cmodel);
+                ddao.DispararNotificacao(cmodel,false);
 
             return retorno;
             //}

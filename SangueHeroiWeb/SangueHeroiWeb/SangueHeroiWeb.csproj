@@ -206,6 +206,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\CampanhaController.cs" />
     <Compile Include="Controllers\Company.cs" />
     <Compile Include="Controllers\HemocentroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -532,10 +533,14 @@
     <Content Include="Views\Hemocentro\CadastrarNiveisSanguineos.cshtml" />
     <Content Include="Views\Relatorios\NiveisSanguineos.cshtml" />
     <Content Include="Views\Relatorios\TiposSanguineos.cshtml" />
+    <Content Include="Views\Campanha\Index.cshtml" />
+    <Content Include="Views\Campanha\_Editar.cshtml" />
+    <Content Include="Views\Campanha\CriarCampanha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Doacao\" />
+    <Folder Include="Views\ManterCampanha\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>

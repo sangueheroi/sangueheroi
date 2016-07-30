@@ -22,7 +22,7 @@ namespace SangueHeroiWeb.DAO
             context = new ContextHelpers();
         }
 
-        public string DispararNotificacao(CampanhaModel cmodel)
+        public string DispararNotificacao(CampanhaModel cmodel, bool isHemocentro)
         {
             AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();
             DataTable dt = new DataTable();
@@ -58,18 +58,38 @@ namespace SangueHeroiWeb.DAO
                 }
             }
 
-            strQuerySelectCampanha = String.Format("SELECT U.NOME_USUARIO, U.EMAIL_USUARIO FROM USUARIO U INNER JOIN CAMPANHA C ON C.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE CODIGO_CAMPANHA = '{0}'", cmodel.CODIGO_CAMPANHA);
-
-            dt3 = (DataTable)context.ExecuteCommand(strQuerySelectCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-
-            if (dt3.Rows.Count > 0)
+            if (!isHemocentro)
             {
-                foreach (DataRow data in dt3.Rows)
+                strQuerySelectCampanha = String.Format("SELECT U.NOME_USUARIO, U.EMAIL_USUARIO FROM USUARIO U INNER JOIN CAMPANHA C ON C.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE CODIGO_CAMPANHA = '{0}'", cmodel.CODIGO_CAMPANHA);
+
+                dt3 = (DataTable)context.ExecuteCommand(strQuerySelectCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+                if (dt3.Rows.Count > 0)
                 {
-                    cmodel.NOME_USUARIO = data["NOME_USUARIO"].ToString();
-                    cmodel.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
+                    foreach (DataRow data in dt3.Rows)
+                    {
+                        cmodel.NOME_USUARIO = data["NOME_USUARIO"].ToString();
+                        cmodel.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
+                    }
                 }
             }
+            else
+            {
+                strQuerySelectCampanha = String.Format("SELECT E.NOME_HEMOCENTRO, E.EMAIL FROM HEMOCENTRO E INNER JOIN CAMPANHA C ON C.CODIGO_HEMOCENTRO = E.CODIGO_HEMOCENTRO WHERE CODIGO_CAMPANHA = '{0}'", cmodel.CODIGO_CAMPANHA);
+
+                dt3 = (DataTable)context.ExecuteCommand(strQuerySelectCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+                if (dt3.Rows.Count > 0)
+                {
+                    foreach (DataRow data in dt3.Rows)
+                    {
+                        cmodel.NOME_USUARIO = data["NOME_HEMOCENTRO"].ToString();
+                        cmodel.EMAIL_USUARIO = data["EMAIL"].ToString();
+                    }
+                }
+            }
+
+            
 
             envio = gcm.EnviarNotificacaoCompleta(dispositivos, cmodel.DESCRICAO_CAMPANHA, cmodel.NOME_CAMPANHA, cmodel.CODIGO_CAMPANHA.ToString(), cmodel.NOME_USUARIO, cmodel.EMAIL_USUARIO, cmodel.NOME_RECEPTOR, cmodel.TIPO_SANGUINEO, cmodel.NOME_HOSPITAL, cmodel.ESTADO, cmodel.CIDADE, cmodel.BAIRRO, cmodel.LOGRADOURO, cmodel.CEP, cmodel.DATA_INICIO, cmodel.DATA_FIM);
                           

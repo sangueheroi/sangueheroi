@@ -21,6 +21,7 @@ namespace SangueHeroiWeb
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/jquery-ui.js",
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/jquery.mask.js",
@@ -36,6 +37,7 @@ namespace SangueHeroiWeb
                        // "~/Content/bootstrap.css.map",
                         //"~/Content/bootstrap.min.css",
                         //"~/Content/bootstrap.min.css.map",
+                        "~/Content/jquery-ui.css",
                         "~/Content/font-awesome.css",
                         "~/Content/font-awesome.min.css",
                         "~/Content/DataTable/css/jquery.dataTables.css",
