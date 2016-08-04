@@ -367,8 +367,8 @@ namespace SangueHeroiWeb
         {
             //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+            GrupoUsuarioDAO udao = new GrupoUsuarioDAO();
+            GrupoUsuarioModel ugmodel = new GrupoUsuarioModel();
 
             ugmodel.NOME_GRUPO = nome_grupo;
             ugmodel.DESCRICAO_GRUPO = descricao;
@@ -390,8 +390,8 @@ namespace SangueHeroiWeb
         {
             //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+            GrupoUsuarioDAO udao = new GrupoUsuarioDAO();
+            GrupoUsuarioModel ugmodel = new GrupoUsuarioModel();
 
             ugmodel.CODIGO_GRUPO = id;
             ugmodel.NOME_GRUPO = nome_grupo;
@@ -414,12 +414,12 @@ namespace SangueHeroiWeb
         {
             //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+            GrupoUsuarioDAO udao = new GrupoUsuarioDAO();
+            GrupoUsuarioModel ugmodel = new GrupoUsuarioModel();
 
             ugmodel.EMAIL_USUARIO = email_criador;
 
-            List<UsuarioGrupoModel> lista = udao.consultarMeusGrupos(ugmodel);
+            List<GrupoUsuarioModel> lista = udao.consultarMeusGrupos(ugmodel);
 
             string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
 
@@ -441,8 +441,8 @@ namespace SangueHeroiWeb
 
             //if(autenticado)
             //{
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+            GrupoUsuarioDAO udao = new GrupoUsuarioDAO();
+            GrupoUsuarioModel ugmodel = new GrupoUsuarioModel();
 
             ugmodel.CODIGO_GRUPO = id;
             ugmodel.EMAIL_USUARIO = email;
@@ -467,8 +467,8 @@ namespace SangueHeroiWeb
 
             //if(autenticado)
             //{
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+            GrupoUsuarioDAO udao = new GrupoUsuarioDAO();
+            GrupoUsuarioModel ugmodel = new GrupoUsuarioModel();
 
             ugmodel.CODIGO_GRUPO = id;
             ugmodel.EMAIL_USUARIO = email;
@@ -493,8 +493,8 @@ namespace SangueHeroiWeb
 
             //if(autenticado)
             //{
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+            GrupoUsuarioDAO udao = new GrupoUsuarioDAO();
+            GrupoUsuarioModel ugmodel = new GrupoUsuarioModel();
 
             ugmodel.CODIGO_GRUPO = id;
             ugmodel.EMAIL_USUARIO = email;
@@ -519,8 +519,8 @@ namespace SangueHeroiWeb
 
             //if(autenticado)
             //{
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+            GrupoUsuarioDAO udao = new GrupoUsuarioDAO();
+            GrupoUsuarioModel ugmodel = new GrupoUsuarioModel();
 
             ugmodel.CODIGO_GRUPO = id;
             ugmodel.EMAIL_USUARIO = email;
@@ -545,8 +545,8 @@ namespace SangueHeroiWeb
 
             //if(autenticado)
             //{
-            UsuarioDAO udao = new UsuarioDAO();
-            UsuarioGrupoModel ugmodel = new UsuarioGrupoModel();
+            GrupoUsuarioDAO udao = new GrupoUsuarioDAO();
+            GrupoUsuarioModel ugmodel = new GrupoUsuarioModel();
 
             ugmodel.CODIGO_GRUPO = id;
             ugmodel.EMAIL_USUARIO = email;
@@ -567,7 +567,7 @@ namespace SangueHeroiWeb
         {
             string json = @"{""INTEGRANTES"":[{""EMAIL_USUARIO"":""diego.lucasilva@gmail.com""}, {""EMAIL_USUARIO"":""yuri.oli@gmail.com""}, {""EMAIL_USUARIO"":""df@gmail.com""}]}";
    
-            UsuarioGrupoModel integrantes = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<UsuarioGrupoModel>(json);
+            GrupoUsuarioModel integrantes = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<GrupoUsuarioModel>(json);
 
             List<UsuarioModel> list = new List<UsuarioModel>();
 
