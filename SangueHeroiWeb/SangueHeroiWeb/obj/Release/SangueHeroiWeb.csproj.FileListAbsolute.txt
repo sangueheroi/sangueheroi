@@ -245,7 +245,6 @@ C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.OAuth.xml
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.Google.xml
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.Twitter.xml
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Release\SangueHeroiWeb.csprojResolveAssemblyReference.cache
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Release\SangueHeroiWeb.dll
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Release\SangueHeroiWeb.pdb
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\ApplicationInsights.config

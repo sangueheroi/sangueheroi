@@ -386,7 +386,7 @@ namespace SangueHeroiWeb
 
         //[SoapHeader("Autenticacao")]
         [WebMethod]
-        public int alterarGrupo(int id, string nome_grupo, string descricao, string email_criador)
+        public int alterarGrupo(int id, string nome_grupo, string descricao, string email_criador, string json)
         {
             //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             //{
@@ -398,7 +398,7 @@ namespace SangueHeroiWeb
             ugmodel.DESCRICAO_GRUPO = descricao;
             ugmodel.EMAIL_USUARIO = email_criador;
 
-            var retorno = udao.AlterarGrupo(ugmodel);
+            var retorno = udao.AlterarGrupo(ugmodel, json);
 
             return retorno;
             //}
@@ -558,6 +558,25 @@ namespace SangueHeroiWeb
             //else
             //{
             //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
+        }
+
+        [WebMethod]
+        public string consultarNiveisSanguineos(string where)
+        {
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            //{
+            HemocentroDAO hdao = new HemocentroDAO();
+            
+            List<HemocentroNiveisSanguineosModelGrafico> lista = hdao.GetNiveisSanguineos(where);
+
+            string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+            return json;
+            //}
+            //else
+            //{
+            //    return "ERRO";
             //}
         }
 
