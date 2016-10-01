@@ -99,12 +99,16 @@ namespace SangueHeroiWeb.DAO
             return list;      
         }
 
-        public DateTime getUltimaDoacao(UsuarioModel model)
+        public string[] getInfoDoacao(UsuarioModel model)
         {
-            DateTime dt_ultima_doacao = Convert.ToDateTime(null);
+            string[] doacao = new string[3];
+
+            string dt_ultima_doacao = "";
+            string dt_proxima_doacao = "";
+            string nome_hemocentro = "";
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
-            var strQuerySelectDataUltimaDoacao = String.Format("SELECT UP.DATA_ULTIMA_DOACAO FROM USUARIO_PERFIL UP INNER JOIN USUARIO U ON UP.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+            var strQuerySelectDataUltimaDoacao = String.Format("SELECT UP.DATA_ULTIMA_DOACAO, UP.DATA_PROXIMA_DOACAO, D.NOME_HEMOCENTRO FROM USUARIO_PERFIL UP INNER JOIN USUARIO U ON UP.CODIGO_USUARIO = U.CODIGO_USUARIO INNER JOIN DOACAO D ON UP.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
 
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
@@ -114,15 +118,70 @@ namespace SangueHeroiWeb.DAO
 
             if (dt.Rows.Count > 0)
             {
-                foreach (DataRow data in dt2.Rows)             
-                    dt_ultima_doacao = Convert.ToDateTime(data["DATA_ULTIMA_DOACAO"].ToString());
-            }
-            else
-            {
-                dt_ultima_doacao = Convert.ToDateTime(null);
+                foreach (DataRow data in dt2.Rows)
+                {
+                    dt_ultima_doacao = data["DATA_ULTIMA_DOACAO"].ToString();
+                    dt_proxima_doacao = data["DATA_PROXIMA_DOACAO"].ToString();
+                    nome_hemocentro = data["NOME_HEMOCENTRO"].ToString();
+                }
             }
 
-            return dt_ultima_doacao;
+            doacao[0] = dt_ultima_doacao;
+            doacao[1] = dt_proxima_doacao;
+            doacao[2] = nome_hemocentro;
+
+            return doacao;
         }
+
+        public int CadastrarDoacao(DoacaoModel dmodel)
+        {
+            int cadastroOK = (int)SITUACAO.DADOS_INVALIDOS;
+
+            int codigo_usuario = 0;
+            string sexo = "";
+
+            string strQueryInsert = "";
+            string strQueryUpdate = "";
+
+            string strQueryConsultaCodigo = String.Format("SELECT U.CODIGO_USUARIO, UP.SEXO FROM USUARIO U INNER JOIN USUARIO_PERFIL UP ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", dmodel.EMAIL_USUARIO);
+
+            DataTable dt = new DataTable();
+
+            dt = (DataTable)context.ExecuteCommand(strQueryConsultaCodigo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
+                    sexo = data["SEXO"].ToString();
+                }
+                
+                strQueryInsert = "INSERT INTO DOACAO (CODIGO_USUARIO, NOME_HEMOCENTRO, LOGRADOURO_ENDERECO_DOACAO, CEP_ENDERECO_DOACAO, PONTUACAO, QTD_VIDAS_SALVAS, DATA_DOACAO) VALUES (" + codigo_usuario + ", '" + dmodel.NOME_HEMOCENTRO + "', '" + dmodel.LOGRADOURO_ENDERECO_DOACAO + "', '" + dmodel.CEP_ENDERECO_DOACAO + "', '3', '4', '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + "';";
+
+                if(sexo == "M")
+                    strQueryUpdate = "UPDATE USUARIO_PERFIL SET DATA_ULTIMA_DOACAO = '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + "', DATA_PROXIMA_DOACAO = '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now.AddDays(90)) + "' WHERE CODIGO_USUSARIO = " + codigo_usuario+ " ;"; 
+                else if (sexo == "F")
+                    strQueryUpdate = "UPDATE USUARIO_PERFIL SET DATA_ULTIMA_DOACAO = '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + "', DATA_PROXIMA_DOACAO = '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now.AddDays(120)) + "' WHERE CODIGO_USUSARIO = " + codigo_usuario + " ;";
+
+
+                try
+                {
+                    var a = context.ExecuteCommand(strQueryInsert, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                    var b = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                    cadastroOK = (int)SITUACAO.SUCESSO;
+                }
+                catch (Exception)
+                {
+                    cadastroOK = (int)SITUACAO.ERRO_DE_SISTEMA;
+                }
+            }
+            else if (dt.Rows.Count == 0)
+            {
+                cadastroOK = (int)SITUACAO.NAO_POSSUI_CADASTRO;
+            }
+            return cadastroOK;
+        }
+
     }
 }

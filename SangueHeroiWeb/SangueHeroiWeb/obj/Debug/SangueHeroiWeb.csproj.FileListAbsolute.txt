@@ -331,4 +331,12 @@ C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Secu
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.dll
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.pdb
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
-C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Common.Logging.Core.dll
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Common.Logging.dll
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Quartz.dll
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Common.Logging.pdb
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Common.Logging.xml
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Common.Logging.Core.pdb
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Common.Logging.Core.xml
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Quartz.pdb
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Quartz.xml
