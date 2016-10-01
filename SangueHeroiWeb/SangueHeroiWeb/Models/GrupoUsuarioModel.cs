@@ -19,6 +19,8 @@ namespace SangueHeroiWeb.Models
 
         public List<UsuarioModel> INTEGRANTES { get; set; }
 
+        public List<GrupoUsuarioModel> DESTINATARIOS { get; set; }
+
         public int QUANTIDADE_INTEGRANTES
         {
             get
@@ -28,5 +30,7 @@ namespace SangueHeroiWeb.Models
         }
 
         public string DATA_CRIACAO_STR { get { return DATA_CRIACAO.ToString("dd/MM/yyyy"); } }
+
     }
+
 }

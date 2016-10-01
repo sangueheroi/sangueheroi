@@ -11,6 +11,8 @@ namespace SangueHeroiWeb.Models
     {
         public int CODIGO_DISPOSITIVO { get; set; }
 
+        public string EMAIL_USUARIO { get; set; }
+
         public string TOKEN { get; set; }
     }
 }

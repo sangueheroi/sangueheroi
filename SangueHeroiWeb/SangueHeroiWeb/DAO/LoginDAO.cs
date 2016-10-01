@@ -41,9 +41,13 @@ namespace SangueHeroiWeb.DAO
 
         public string[] LogarUsuario(LoginUsuarioModel model)
         {
+            Encrypt enc = new Encrypt();
+
             string[] usuario = new string[2];
 
             string nome = "";
+
+            string senha_banco = "";
 
             int loginOK = (int) SITUACAO.SUCESSO;
 
@@ -57,9 +61,13 @@ namespace SangueHeroiWeb.DAO
             {
                 foreach (DataRow data in dt.Rows)
                 {
+                    senha_banco = data["SENHA_USUARIO"].ToString();
                     nome = data["NOME_USUARIO"].ToString();
 
-                    if (!model.SENHA.Equals(data["SENHA_USUARIO"]))
+                    //model.SENHA = enc.DecryptoRSA(model.SENHA);
+                    //senha_banco = enc.DecryptoRSA(senha_banco);
+
+                    if (!model.SENHA.Equals(senha_banco))
                         loginOK = (int) SITUACAO.DADOS_INVALIDOS;
                 }
             }

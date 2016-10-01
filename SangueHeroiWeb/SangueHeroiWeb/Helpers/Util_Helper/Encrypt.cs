@@ -127,7 +127,8 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
         {
             context = new ContextHelpers();
 
-            token_externo = DecryptoRSA(token_externo);
+            //token_externo = DecryptoRSA(token_externo);
+            token_externo = DecryptoRSA("cPYUDPhl0kgZpQc4UndKRU6ydhOjh261/AZGmTlnEBed8vhr2g4VwSm6mPjEQ9QpVxpP6VPbRocDZhp34RojRPQZg+Bxfo7AytGeq3Vw8oMEtIsMQAsuDc1GCdawlpxopUYKX9iTcBOZlRsBP275iMlZTKN16yS+zLJZ1XA7F14=");
 
             var strQuery = String.Format("SELECT CODIGO_AUTENTICACAO FROM AUTENTICACAO WHERE PWDCOMPARE('{0}', TOKEN) = 1", token_externo);
 

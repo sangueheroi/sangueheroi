@@ -48,8 +48,9 @@ namespace SangueHeroiWeb.Controllers
             String msg = "Edição Realizada com sucesso";
             bool redirect = true;
 
-            
-            if (campanhaDAO.AlterarCampanha(model) != (int)SITUACAO.SUCESSO)
+            string destinatario = "";
+
+            if (campanhaDAO.AlterarCampanha(model, destinatario) != (int)SITUACAO.SUCESSO)
             {
                 msg = "Atenção! Ocorreu um Erro ao realizar a edição, favor contatar um administrador";
                 redirect = false;
@@ -126,7 +127,7 @@ namespace SangueHeroiWeb.Controllers
 
             if (retorno == (int)SITUACAO.SUCESSO)
             {
-                ddao.DispararNotificacao(model,true);
+                ddao.DispararNotificacao(model,true,"");
             }
             else
             {

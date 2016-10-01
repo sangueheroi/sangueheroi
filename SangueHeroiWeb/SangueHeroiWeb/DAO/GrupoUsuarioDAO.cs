@@ -114,24 +114,24 @@ namespace SangueHeroiWeb.DAO
 
             string strQueryUpdate = "";
             string strQueryInsert = "";
-            string email_usuario = "";
+            string strQueryDelete = "";
             int codigo_usuario = 0;
 
             string strQueryConsultaCodigo = String.Format("SELECT * FROM GRUPO WHERE CODIGO_GRUPO = {0} AND EMAIL_USUARIO = '{1}'", ugmodel.CODIGO_GRUPO, ugmodel.EMAIL_USUARIO);
-            string strQueryConsultaEmailBD = String.Format("SELECT UG.CODIGO_USUARIO, U.EMAIL_USUARIO FROM USUARIO U INNER JOIN USUARIO_GRUPO UG ON U.CODIGO_USUARIO = UG.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0}", ugmodel.CODIGO_GRUPO);
-
+            
             DataTable dt = new DataTable();
             DataTable dt4 = new DataTable();
 
             dt = (DataTable)context.ExecuteCommand(strQueryConsultaCodigo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-            dt4 = (DataTable)context.ExecuteCommand(strQueryConsultaEmailBD, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-
+            
             if (dt.Rows.Count != 0)
             {
                 strQueryUpdate = String.Format("UPDATE GRUPO SET NOME_GRUPO = '" + ugmodel.NOME_GRUPO + "', DESCRICAO_GRUPO = '" + ugmodel.DESCRICAO_GRUPO + "', EMAIL_USUARIO = '" + ugmodel.EMAIL_USUARIO + "' WHERE CODIGO_GRUPO = " + ugmodel.CODIGO_GRUPO + "");
+                strQueryDelete = String.Format("DELETE UG FROM USUARIO_GRUPO UG INNER JOIN USUARIO U ON UG.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0}", ugmodel.CODIGO_GRUPO);
 
                 try
                 {
+                    var c = context.ExecuteCommand(strQueryDelete, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
                     var a = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
                     alteracaoOK = (int)SITUACAO.SUCESSO;
                 }
@@ -145,7 +145,7 @@ namespace SangueHeroiWeb.DAO
                 foreach (var item in integrantes.INTEGRANTES)
                 {
                     string strQueryConsultaEmailUsuario = String.Format("SELECT UG.CODIGO_USUARIO, U.EMAIL_USUARIO FROM USUARIO U INNER JOIN USUARIO_GRUPO UG ON UG.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}' AND UG.CODIGO_GRUPO = {1}", item.EMAIL_USUARIO, ugmodel.CODIGO_GRUPO);
-                    string strQueryConsultaCodigoUsuario = String.Format("SELECT CODIGO_USUARIO FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", item.EMAIL_USUARIO);
+                    string strQueryConsultaCodigoUsuario = String.Format("SELECT CODIGO_USUARIO, EMAIL_USUARIO FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", item.EMAIL_USUARIO);
 
                     DataTable dt2 = new DataTable();
                     DataTable dt3 = new DataTable();
@@ -155,13 +155,9 @@ namespace SangueHeroiWeb.DAO
 
                     if (dt2.Rows.Count == 0)
                     {
-
                         foreach (DataRow data in dt3.Rows)
-                        {
                             codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
-                            //email_usuario = data["EMAIL_USUARIO"].ToString();
-                        }
-
+                  
                         strQueryInsert = "INSERT INTO USUARIO_GRUPO (CODIGO_GRUPO, CODIGO_USUARIO) VALUES (" + ugmodel.CODIGO_GRUPO + ", " + codigo_usuario + ");";
 
                         try
@@ -178,35 +174,6 @@ namespace SangueHeroiWeb.DAO
                     {
                         alteracaoOK = (int)SITUACAO.JA_POSSUI_CADASTRO;
                     }
-                    else if (dt4.Rows.Count != 0)
-                    {
-                        /*for (int i = 0; i < dt4.Rows.Count; i++)
-                        {
-                            for (int j = 0; j < integrantes.INTEGRANTES.Count; i++)
-                            {
-                                if(dt4.Rows.)
-                            }
-                        }*/
-
-                        foreach (DataRow data in dt4.Rows)
-                        {
-                            email_usuario = data["EMAIL_USUARIO"].ToString();
-
-                            if (!(email_usuario.Equals(item.EMAIL_USUARIO)))
-                            {
-                                try
-                                {
-                                    var strQueryDelete = String.Format("DELETE UG FROM USUARIO_GRUPO UG INNER JOIN USUARIO U ON UG.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0} AND U.EMAIL_USUARIO = '{1}'", ugmodel.CODIGO_GRUPO, email_usuario);
-                                    var b = context.ExecuteCommand(strQueryDelete, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-                                    alteracaoOK = (int)SITUACAO.SUCESSO;
-                                }
-                                catch (Exception)
-                                {
-                                    alteracaoOK = (int)SITUACAO.ERRO_DE_SISTEMA;
-                                }
-                            }
-                        }
-                    }
                 }
             }
             else if (dt.Rows.Count == 0)
@@ -221,7 +188,7 @@ namespace SangueHeroiWeb.DAO
             string strQuerySelect = "";
             string strQuerySelect2 = "";
 
-            strQuerySelect = String.Format("SELECT DISTINCT G.CODIGO_GRUPO, G.NOME_GRUPO, G.DESCRICAO_GRUPO FROM GRUPO G INNER JOIN USUARIO_GRUPO UG ON G.CODIGO_GRUPO = UG.CODIGO_GRUPO INNER JOIN USUARIO U ON UG.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}' OR G.EMAIL_USUARIO = '{1}'", ugmodel.EMAIL_USUARIO, ugmodel.EMAIL_USUARIO);
+            strQuerySelect = String.Format("SELECT DISTINCT G.CODIGO_GRUPO, G.NOME_GRUPO, G.DESCRICAO_GRUPO, G.EMAIL_USUARIO FROM GRUPO G INNER JOIN USUARIO_GRUPO UG ON G.CODIGO_GRUPO = UG.CODIGO_GRUPO INNER JOIN USUARIO U ON UG.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}' OR G.EMAIL_USUARIO = '{1}'", ugmodel.EMAIL_USUARIO, ugmodel.EMAIL_USUARIO);
 
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
@@ -241,6 +208,7 @@ namespace SangueHeroiWeb.DAO
                     grupo.CODIGO_GRUPO = Convert.ToInt32(data["CODIGO_GRUPO"].ToString());
                     grupo.NOME_GRUPO = data["NOME_GRUPO"].ToString();
                     grupo.DESCRICAO_GRUPO = data["DESCRICAO_GRUPO"].ToString();
+                    grupo.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
 
                     strQuerySelect2 = String.Format("SELECT U.NOME_USUARIO, U.EMAIL_USUARIO FROM USUARIO U INNER JOIN USUARIO_GRUPO UG ON U.CODIGO_USUARIO = UG.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0}", grupo.CODIGO_GRUPO);
                     dt2 = (DataTable)context.ExecuteCommand(strQuerySelect2, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);

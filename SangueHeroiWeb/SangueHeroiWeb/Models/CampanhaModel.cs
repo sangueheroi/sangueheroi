@@ -79,5 +79,7 @@ namespace SangueHeroiWeb.Models
 
         public int CODIGO_HEMOCENTRO { get; set; }
 
+        public List<GrupoUsuarioModel> DESTINATARIOS { get; set; }
+
     }
 }

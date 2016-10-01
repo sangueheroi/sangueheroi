@@ -98,5 +98,31 @@ namespace SangueHeroiWeb.DAO
 
             return list;      
         }
+
+        public DateTime getUltimaDoacao(UsuarioModel model)
+        {
+            DateTime dt_ultima_doacao = Convert.ToDateTime(null);
+
+            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+            var strQuerySelectDataUltimaDoacao = String.Format("SELECT UP.DATA_ULTIMA_DOACAO FROM USUARIO_PERFIL UP INNER JOIN USUARIO U ON UP.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+
+            DataTable dt = new DataTable();
+            DataTable dt2 = new DataTable();
+
+            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            dt2 = (DataTable)context.ExecuteCommand(strQuerySelectDataUltimaDoacao, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt2.Rows)             
+                    dt_ultima_doacao = Convert.ToDateTime(data["DATA_ULTIMA_DOACAO"].ToString());
+            }
+            else
+            {
+                dt_ultima_doacao = Convert.ToDateTime(null);
+            }
+
+            return dt_ultima_doacao;
+        }
     }
 }

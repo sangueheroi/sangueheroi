@@ -330,3 +330,4 @@ C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Secu
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Release\SangueHeroiWeb.dll
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Release\SangueHeroiWeb.pdb
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Release\SangueHeroiWeb.csprojResolveAssemblyReference.cache

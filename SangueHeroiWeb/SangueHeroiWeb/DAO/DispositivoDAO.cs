@@ -22,7 +22,7 @@ namespace SangueHeroiWeb.DAO
             context = new ContextHelpers();
         }
 
-        public string DispararNotificacao(CampanhaModel cmodel, bool isHemocentro)
+        /*public string DispararNotificacao(CampanhaModel cmodel, bool isHemocentro)
         {
             AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();
             DataTable dt = new DataTable();
@@ -89,7 +89,98 @@ namespace SangueHeroiWeb.DAO
                 }
             }
 
-            
+            envio = gcm.EnviarNotificacaoCompleta(dispositivos, cmodel.DESCRICAO_CAMPANHA, cmodel.NOME_CAMPANHA, cmodel.CODIGO_CAMPANHA.ToString(), cmodel.NOME_USUARIO, cmodel.EMAIL_USUARIO, cmodel.NOME_RECEPTOR, cmodel.TIPO_SANGUINEO, cmodel.NOME_HOSPITAL, cmodel.ESTADO, cmodel.CIDADE, cmodel.BAIRRO, cmodel.LOGRADOURO, cmodel.CEP, cmodel.DATA_INICIO, cmodel.DATA_FIM);
+
+            return envio;
+        }*/
+
+        public string DispararNotificacao(CampanhaModel cmodel, bool isHemocentro, string destinatario)
+        {
+            AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();
+            DataTable dt = new DataTable();
+            DataTable dt2 = new DataTable();
+            DataTable dt3 = new DataTable();
+            DataTable dt4 = new DataTable();
+            DataTable dt5 = new DataTable();
+            string strQuerySelectDispositivo = "";
+            string strQuerySelectCodigoCampanha = "";
+            string strQuerySelectCampanha = "";
+            string envio = "";
+
+            strQuerySelectDispositivo = String.Format("SELECT TOKEN FROM DISPOSITIVO");
+            strQuerySelectCodigoCampanha = String.Format("SELECT MAX(CODIGO_CAMPANHA) AS CODIGO_CAMPANHA FROM CAMPANHA");
+
+            List<string> dispositivos = new List<string>();
+
+            dt = (DataTable)context.ExecuteCommand(strQuerySelectDispositivo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            dt2 = (DataTable)context.ExecuteCommand(strQuerySelectCodigoCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count > 0)
+            {
+                GrupoUsuarioModel destinatarios = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<GrupoUsuarioModel>(destinatario);
+
+                if (destinatarios.DESTINATARIOS != null)
+                {
+                    foreach (var item in destinatarios.DESTINATARIOS)
+                    {
+                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO INNER JOIN USUARIO_GRUPO UG ON U.CODIGO_USUARIO = UG.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0}", item.CODIGO_GRUPO);
+                        dt4 = (DataTable)context.ExecuteCommand(strQueryConsultaToken, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+                        foreach (DataRow data4 in dt4.Rows)
+                        {
+                            DispositivoModel dispositivo = new DispositivoModel();
+                            dispositivos.Add(data4["TOKEN"].ToString());
+                        }
+                    }
+                }
+                else if (destinatarios.DESTINATARIOS == null)
+                {
+                    foreach (DataRow data in dt.Rows)
+                    {
+                        DispositivoModel dispositivo = new DispositivoModel();
+                        dispositivos.Add(data["TOKEN"].ToString());
+                    }
+                }
+            }
+
+            if (dt2.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt2.Rows)
+                {
+                    cmodel.CODIGO_CAMPANHA = Convert.ToInt32(data["CODIGO_CAMPANHA"].ToString());
+                }
+            }
+
+            if (!isHemocentro)
+            {
+                strQuerySelectCampanha = String.Format("SELECT U.NOME_USUARIO, U.EMAIL_USUARIO FROM USUARIO U INNER JOIN CAMPANHA C ON C.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE CODIGO_CAMPANHA = '{0}'", cmodel.CODIGO_CAMPANHA);
+
+                dt3 = (DataTable)context.ExecuteCommand(strQuerySelectCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+                if (dt3.Rows.Count > 0)
+                {
+                    foreach (DataRow data in dt3.Rows)
+                    {
+                        cmodel.NOME_USUARIO = data["NOME_USUARIO"].ToString();
+                        cmodel.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
+                    }
+                }
+            }
+            else
+            {
+                strQuerySelectCampanha = String.Format("SELECT E.NOME_HEMOCENTRO, E.EMAIL FROM HEMOCENTRO E INNER JOIN CAMPANHA C ON C.CODIGO_HEMOCENTRO = E.CODIGO_HEMOCENTRO WHERE CODIGO_CAMPANHA = '{0}'", cmodel.CODIGO_CAMPANHA);
+
+                dt3 = (DataTable)context.ExecuteCommand(strQuerySelectCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+                if (dt3.Rows.Count > 0)
+                {
+                    foreach (DataRow data in dt3.Rows)
+                    {
+                        cmodel.NOME_USUARIO = data["NOME_HEMOCENTRO"].ToString();
+                        cmodel.EMAIL_USUARIO = data["EMAIL"].ToString();
+                    }
+                }
+            }
 
             envio = gcm.EnviarNotificacaoCompleta(dispositivos, cmodel.DESCRICAO_CAMPANHA, cmodel.NOME_CAMPANHA, cmodel.CODIGO_CAMPANHA.ToString(), cmodel.NOME_USUARIO, cmodel.EMAIL_USUARIO, cmodel.NOME_RECEPTOR, cmodel.TIPO_SANGUINEO, cmodel.NOME_HOSPITAL, cmodel.ESTADO, cmodel.CIDADE, cmodel.BAIRRO, cmodel.LOGRADOURO, cmodel.CEP, cmodel.DATA_INICIO, cmodel.DATA_FIM);
                           
@@ -158,19 +249,26 @@ namespace SangueHeroiWeb.DAO
             int cadastroOK = (int)SITUACAO.DADOS_INVALIDOS;
 
             string strQueryInsert = "";
-            //string strQueryConsultaCodigo = "";
-
-            /*
-            strQueryConsultaCodigo = String.Format("SELECT CODIGO_DISPOSITIVO FROM DISPOSITIVO WHERE TOKEN = '{0}'", dmodel.TOKEN);
+            string strQueryUpdate = "";
+            int codigo_usuario = 0;
+            string strQueryConsultaCodigoUsuario = "";
+            string strQueryConsultaCodigoUsuarioDispositivo = "";
+  
+            strQueryConsultaCodigoUsuario = String.Format("SELECT CODIGO_USUARIO FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", dmodel.EMAIL_USUARIO);
+            strQueryConsultaCodigoUsuarioDispositivo = String.Format("SELECT CODIGO_USUARIO FROM DISPOSITIVO WHERE TOKEN = '{0}'", dmodel.TOKEN);
 
             DataTable dt = new DataTable();
+            DataTable dt2 = new DataTable();
 
-            dt = (DataTable)context.ExecuteCommand(strQueryConsultaCodigo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-            */
+            dt = (DataTable)context.ExecuteCommand(strQueryConsultaCodigoUsuarioDispositivo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            dt2 = (DataTable)context.ExecuteCommand(strQueryConsultaCodigoUsuario, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            
+            if (dt.Rows.Count == 0)
+            {
+                foreach (DataRow data in dt2.Rows)
+                    codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
 
-            //if (dt.Rows.Count == 0)
-            //{
-                strQueryInsert = "INSERT INTO DISPOSITIVO (TOKEN) VALUES (" + UtilHelper.TextForSql(dmodel.TOKEN) + ");";
+                strQueryInsert = String.Format("INSERT INTO DISPOSITIVO (TOKEN, CODIGO_USUARIO) VALUES ('{0}', {1})", dmodel.TOKEN, codigo_usuario);
 
                 try
                 {
@@ -181,12 +279,26 @@ namespace SangueHeroiWeb.DAO
                 {
                     cadastroOK = (int)SITUACAO.ERRO_DE_SISTEMA;
                 }
-            /*
             }
             else if (dt.Rows.Count > 0)
             {
-                cadastroOK = (int)SITUACAO.JA_POSSUI_CADASTRO;
-            }*/
+                foreach (DataRow data in dt2.Rows)
+                    codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
+
+                strQueryUpdate = String.Format("UPDATE DISPOSITIVO SET TOKEN = '{0}' WHERE CODIGO_USUARIO = {1}", dmodel.TOKEN, codigo_usuario);
+
+                try
+                {
+                    var a = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                    cadastroOK = (int)SITUACAO.SUCESSO;
+                }
+                catch (Exception)
+                {
+                    cadastroOK = (int)SITUACAO.ERRO_DE_SISTEMA;
+                }
+            
+                //cadastroOK = (int)SITUACAO.JA_POSSUI_CADASTRO;
+            }
 
             return cadastroOK;
         }

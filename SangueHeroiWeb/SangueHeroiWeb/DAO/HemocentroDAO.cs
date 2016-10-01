@@ -273,6 +273,70 @@ namespace SangueHeroiWeb.DAO
             return hnsm;
         }
 
+        public List<HemocentroModel> ConsultarNiveisSanguineosTodosOsHemocentros()
+        {
+            string strQuerySelect = "";
+            string strQuerySelect2 = "";
+
+            strQuerySelect = String.Format("SELECT * FROM HEMOCENTRO");
+
+            DataTable dt = new DataTable();
+            DataTable dt2 = new DataTable();
+
+            List<HemocentroModel> list = new List<HemocentroModel>();
+
+            dt = (DataTable)context.ExecuteCommand(strQuerySelect, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    HemocentroModel hemocentro = new HemocentroModel();
+                    List<HemocentroNiveisSanguineosModel> lista_tipos_sanguineos = new List<HemocentroNiveisSanguineosModel>();
+
+                    hemocentro.ListaEstados = null;
+                    hemocentro.CODIGO_HEMOCENTRO = Convert.ToInt32(data["CODIGO_HEMOCENTRO"].ToString());
+                    hemocentro.NOME_HEMOCENTRO = data["NOME_HEMOCENTRO"].ToString();
+                    hemocentro.CNPJ = null;
+                    hemocentro.RAZAO_SOCIAL = null;
+                    hemocentro.CODIGO_STATUS = Convert.ToInt32(null);
+                    hemocentro.LOGIN_HEMOCENTRO = null;
+                    hemocentro.SENHA_HEMOCENTRO = null;
+                    hemocentro.CODIGO_HEMOCENTRO_PERFIL = Convert.ToInt32(null);
+                    hemocentro.EMAIL_HEMOCENTRO = null;
+                    hemocentro.DATA_CRIACAO = Convert.ToDateTime(null);
+                    hemocentro.TELEFONE_HEMOCENTRO = null;
+                    hemocentro.PERIODO_FUNCIONAMENTO_HEMOCENTRO = null;
+
+                    strQuerySelect2 = String.Format("SELECT HNS.One, HNS.Opo, HNS.Ane, HNS.Apo, HNS.Bne, HNS.Bpo, HNS.ABne, HNS.ABpo FROM HEMOCENTRO_NIVEIS_SANGUINEOS HNS INNER JOIN HEMOCENTRO H ON HNS.CODIGO_HEMOCENTRO = H.CODIGO_HEMOCENTRO WHERE HNS.CODIGO_HEMOCENTRO = {0}", hemocentro.CODIGO_HEMOCENTRO);
+                    dt2 = (DataTable)context.ExecuteCommand(strQuerySelect2, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+                    foreach (DataRow data2 in dt2.Rows)
+                    {
+                        HemocentroNiveisSanguineosModel niveis_sanguineos = new HemocentroNiveisSanguineosModel();
+
+                        niveis_sanguineos.CODIGO_HEMOCENTRO_NIVEIS_SANGUINEOS = Convert.ToInt32(null);
+                        niveis_sanguineos.CODIGO_HEMOCENTRO = Convert.ToInt32(null);
+                        niveis_sanguineos.NOME_HEMOCENTRO = null;
+                        niveis_sanguineos.On = Convert.ToInt32(data2["One"].ToString());
+                        niveis_sanguineos.Op = Convert.ToInt32(data2["Opo"].ToString());
+                        niveis_sanguineos.An = Convert.ToInt32(data2["Ane"].ToString());
+                        niveis_sanguineos.Ap = Convert.ToInt32(data2["Apo"].ToString());
+                        niveis_sanguineos.Bn = Convert.ToInt32(data2["Bne"].ToString());
+                        niveis_sanguineos.Bp = Convert.ToInt32(data2["Bpo"].ToString());
+                        niveis_sanguineos.ABn = Convert.ToInt32(data2["ABne"].ToString());
+                        niveis_sanguineos.ABp = Convert.ToInt32(data2["ABpo"].ToString());
+
+                        lista_tipos_sanguineos.Add(niveis_sanguineos);      
+                    }
+
+                    hemocentro.TIPOS_SANGUINEOS = lista_tipos_sanguineos;
+                    list.Add(hemocentro);
+                }
+            }
+            return list;
+        }
+
         public List<HemocentroNiveisSanguineosModelGrafico> GetNiveisSanguineos(string where = "")
         {
             string strSQL = " SELECT " + Environment.NewLine
