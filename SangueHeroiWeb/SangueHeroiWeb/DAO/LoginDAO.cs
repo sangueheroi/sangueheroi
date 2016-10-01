@@ -63,7 +63,6 @@ namespace SangueHeroiWeb.DAO
                 {
                     senha_banco = data["SENHA_USUARIO"].ToString();
                     nome = data["NOME_USUARIO"].ToString();
-
                     //model.SENHA = enc.DecryptoRSA(model.SENHA);
                     //senha_banco = enc.DecryptoRSA(senha_banco);
 
