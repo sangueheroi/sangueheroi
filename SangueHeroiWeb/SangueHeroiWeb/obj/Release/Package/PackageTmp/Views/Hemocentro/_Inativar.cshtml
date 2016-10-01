@@ -1,0 +1,30 @@
+﻿@model SangueHeroiWeb.Models.HemocentroModel
+@{
+    ViewBag.Title = "Sangue Herói - Inativar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("InativarHemocentro", "Hemocentro", FormMethod.Post, new { @id = "formInativar" }))
+{
+<div class="modal fade bs-example-modal-sm" id="modalConfirmaInativacao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                Desativar Hemocentro
+            </div>
+            <div class="modal-body">
+                Deseja Realmente Desativar o perfil do Hemocentro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success" id="btnConfirmaInativacao">Desativar</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+
+<script>
+    $('#modalConfirmaInativacao').modal('show');
+</script>
