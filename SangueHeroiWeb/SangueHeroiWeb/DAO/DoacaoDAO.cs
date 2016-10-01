@@ -157,12 +157,12 @@ namespace SangueHeroiWeb.DAO
                     sexo = data["SEXO"].ToString();
                 }
                 
-                strQueryInsert = "INSERT INTO DOACAO (CODIGO_USUARIO, NOME_HEMOCENTRO, LOGRADOURO_ENDERECO_DOACAO, CEP_ENDERECO_DOACAO, PONTUACAO, QTD_VIDAS_SALVAS, DATA_DOACAO) VALUES (" + codigo_usuario + ", '" + dmodel.NOME_HEMOCENTRO + "', '" + dmodel.LOGRADOURO_ENDERECO_DOACAO + "', '" + dmodel.CEP_ENDERECO_DOACAO + "', '3', '4', '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + "';";
+                strQueryInsert = "INSERT INTO DOACAO (CODIGO_USUARIO, NOME_HEMOCENTRO, LOGRADOURO_ENDERECO_DOACAO, CEP_ENDERECO_DOACAO, PONTUACAO, QTD_VIDAS_SALVAS, DATA_DOACAO) VALUES (" + codigo_usuario + ", '" + dmodel.NOME_HEMOCENTRO + "', '" + dmodel.LOGRADOURO_ENDERECO_DOACAO + "', '" + dmodel.CEP_ENDERECO_DOACAO + "', '3', '4', " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + ");";
 
                 if(sexo == "M")
-                    strQueryUpdate = "UPDATE USUARIO_PERFIL SET DATA_ULTIMA_DOACAO = '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + "', DATA_PROXIMA_DOACAO = '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now.AddDays(90)) + "' WHERE CODIGO_USUSARIO = " + codigo_usuario+ " ;"; 
+                    strQueryUpdate = "UPDATE USUARIO_PERFIL SET DATA_ULTIMA_DOACAO = " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + ", DATA_PROXIMA_DOACAO = " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now.AddDays(90)) + " WHERE CODIGO_USUARIO = " + codigo_usuario+ " ;"; 
                 else if (sexo == "F")
-                    strQueryUpdate = "UPDATE USUARIO_PERFIL SET DATA_ULTIMA_DOACAO = '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + "', DATA_PROXIMA_DOACAO = '" + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now.AddDays(120)) + "' WHERE CODIGO_USUSARIO = " + codigo_usuario + " ;";
+                    strQueryUpdate = "UPDATE USUARIO_PERFIL SET DATA_ULTIMA_DOACAO = " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + ", DATA_PROXIMA_DOACAO = " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now.AddDays(120)) + " WHERE CODIGO_USUARIO = " + codigo_usuario + " ;";
 
 
                 try
@@ -171,7 +171,7 @@ namespace SangueHeroiWeb.DAO
                     var b = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
                     cadastroOK = (int)SITUACAO.SUCESSO;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     cadastroOK = (int)SITUACAO.ERRO_DE_SISTEMA;
                 }
