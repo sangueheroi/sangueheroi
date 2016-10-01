@@ -632,7 +632,7 @@ namespace SangueHeroiWeb
 
         [SoapHeader("Autenticacao")]
         [WebMethod]
-        public DateTime consultarUltimaDoacao(string email_usuario)
+        public string[] consultarInfoDoacao(string email_usuario)
         {
             if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             {
@@ -641,15 +641,45 @@ namespace SangueHeroiWeb
 
                 umodel.EMAIL_USUARIO = email_usuario;
 
-                var retorno = ddao.getUltimaDoacao(umodel);
+                var retorno = ddao.getInfoDoacao(umodel);
 
                 return retorno;
             }
             else
             {
-                return Convert.ToDateTime(null);
+                string[] retorno = new string[3];
+                retorno[0] = "Erro Autenticação do Webservice";
+                retorno[1] = "Erro Autenticação do Webservice";
+                retorno[2] = "Erro Autenticação do Webservice";
+
+                return retorno; 
             }
         }
+
+        [SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int realizarDoacao(string email_usuario, string nome_hemocentro, string endereco_hemocentro, string cep_hemocentro)
+        {
+            if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            {
+                DoacaoDAO ddao = new DoacaoDAO();
+                DoacaoModel dmodel = new DoacaoModel();
+
+                dmodel.EMAIL_USUARIO = email_usuario;
+                dmodel.NOME_HEMOCENTRO = nome_hemocentro;
+                dmodel.LOGRADOURO_ENDERECO_DOACAO = endereco_hemocentro;
+                dmodel.CEP_ENDERECO_DOACAO = cep_hemocentro;
+
+                var retorno = ddao.CadastrarDoacao(dmodel);
+
+                return retorno;
+            }
+            else
+            {
+                return (int)SITUACAO.ERRO_DE_SISTEMA;
+            }
+        }
+
     }
 }
 
