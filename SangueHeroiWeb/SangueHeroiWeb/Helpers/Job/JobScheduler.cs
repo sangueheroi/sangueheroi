@@ -19,11 +19,11 @@ namespace SangueHeroiWeb.Helpers.Job
             var job = JobBuilder.Create<Job>().Build();
 
             var trigger = TriggerBuilder.Create()
-                .WithIdentity(@"Job", "JobGroup")
+                .WithIdentity(nameof(Job), "JobGroup")
                 .StartNow()
                 .WithSimpleSchedule(s => s 
-                //.WithIntervalInSeconds(10)
-                .WithIntervalInHours(24)
+                .WithIntervalInSeconds(120)
+                //.WithIntervalInHours(24)
                 .RepeatForever())
                 .Build();
 

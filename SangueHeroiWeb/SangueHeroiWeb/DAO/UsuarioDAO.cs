@@ -46,7 +46,7 @@ namespace SangueHeroiWeb.DAO
 
         public int Registrar(UsuarioModel model)
         {
-            int registroOK = (int) SITUACAO.SUCESSO;
+            int registroOK = (int)SITUACAO.SUCESSO;
             bool flag = false;
 
             string strQuery = "";
@@ -54,9 +54,9 @@ namespace SangueHeroiWeb.DAO
             string strQueryInsert = "";
 
             string strQueryConsultaEmail = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
-            
+
             DataTable dt = new DataTable();
-            
+
             dt = (DataTable)context.ExecuteCommand(strQueryConsultaEmail, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
             foreach (DataRow data in dt.Rows)
@@ -68,7 +68,7 @@ namespace SangueHeroiWeb.DAO
 
                 foreach (DataRow data in dt.Rows)
                     codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
-                
+
                 strQueryUpdate = "EXECUTE frmAtualizarUsuario " + Environment.NewLine
                  + codigo_usuario + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.SEXO) + " , " + Environment.NewLine
@@ -85,15 +85,15 @@ namespace SangueHeroiWeb.DAO
                  + model.CODIGO_HEROI + " , " + Environment.NewLine
                  + false + " ;";
 
-                 try
-                 {
+                try
+                {
                     var a = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-                    registroOK = (int) SITUACAO.SUCESSO;
-                 }
-                 catch (Exception)
-                 {
-                    registroOK = (int) SITUACAO.ERRO_DE_SISTEMA;
-                 }
+                    registroOK = (int)SITUACAO.SUCESSO;
+                }
+                catch (Exception)
+                {
+                    registroOK = (int)SITUACAO.ERRO_DE_SISTEMA;
+                }
 
             }
             if (dt.Rows.Count == 0)
@@ -116,42 +116,54 @@ namespace SangueHeroiWeb.DAO
                 try
                 {
                     var a = context.ExecuteCommand(strQueryInsert, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
-                    registroOK = (int) SITUACAO.SUCESSO;
+                    registroOK = (int)SITUACAO.SUCESSO;
                 }
                 catch (Exception)
                 {
-                    registroOK = (int) SITUACAO.ERRO_DE_SISTEMA;
+                    registroOK = (int)SITUACAO.ERRO_DE_SISTEMA;
                 }
             }
-            else if(dt.Rows.Count != 0 && flag == false)
-                registroOK = (int) SITUACAO.JA_POSSUI_CADASTRO;
+            else if (dt.Rows.Count != 0 && flag == false)
+                registroOK = (int)SITUACAO.JA_POSSUI_CADASTRO;
 
             return registroOK;
         }
 
         public List<UsuarioModel> consultarUsuarios()
         {
-            string strQuery = "";
+            var strQuery = "";
 
-            strQuery = String.Format("SELECT NOME_USUARIO, EMAIL_USUARIO FROM USUARIO");
+            strQuery =  " SELECT * " + Environment.NewLine
+                      + " FROM USUARIO U " + Environment.NewLine
+                      + " INNER JOIN USUARIO_PERFIL UP " + Environment.NewLine
+                      + " ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO " + Environment.NewLine
+                      + " INNER JOIN USUARIO_ENDERECO UE " + Environment.NewLine
+                      + " ON U.CODIGO_USUARIO = UE.CODIGO_USUARIO " + Environment.NewLine
+                      + " WHERE U.CODIGO_USUARIO = 141";       
 
-            DataTable dt = new DataTable();
+            var dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            List<UsuarioModel> list = new List<UsuarioModel>();
-
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            var list = new List<UsuarioModel>();
 
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    UsuarioModel usuario = new UsuarioModel();
-
-                    usuario.DATA_CRIACAO = Convert.ToDateTime(null);
-                    usuario.NOME_USUARIO = data["NOME_USUARIO"].ToString();
-                    usuario.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
-                   
-                    list.Add(usuario);
+                    list.Add(new UsuarioModel
+                    {
+                        CODIGO_USUARIO = Convert.ToInt32(data["CODIGO_USUARIO"].ToString()),
+                        NOME_USUARIO = data["NOME_USUARIO"].ToString(),
+                        EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString(),
+                        TIPO_SANGUINEO = data["TIPO_SANGUINEO"].ToString(),
+                        DATA_NASCIMENTO = Convert.ToDateTime(data["DATA_NASCIMENTO"].ToString()),
+                        DATA_ULTIMA_DOACAO = Convert.ToDateTime(data["DATA_ULTIMA_DOACAO"].ToString()),
+                        SEXO = data["SEXO"].ToString(),
+                        DATA_PROXIMA_DOACAO = Convert.ToDateTime(data["DATA_PROXIMA_DOACAO"].ToString()),
+                        BAIRRO = data["BAIRRO"].ToString(),
+                        CIDADE = data["CIDADE"].ToString(),
+                        ESTADO = data["ESTADO"].ToString(),
+                        CEP = data["CEP"].ToString(),
+                    });
                 }
             }
 
@@ -177,7 +189,7 @@ namespace SangueHeroiWeb.DAO
                 strSQL = strSQL + Environment.NewLine + "GROUP BY UP.TIPO_SANGUINEO";
             }
 
-               
+
 
             List<UsuarioGraficoModel> lista = new List<UsuarioGraficoModel>();
 
@@ -298,7 +310,7 @@ namespace SangueHeroiWeb.DAO
         public int AlterarGrupo(UsuarioGrupoModel ugmodel, string json)
         {
             int alteracaoOK = (int)SITUACAO.DADOS_INVALIDOS;
-            
+
             string strQueryUpdate = "";
             string strQueryInsert = "";
             string email_usuario = "";
@@ -415,8 +427,8 @@ namespace SangueHeroiWeb.DAO
 
             List<UsuarioGrupoModel> list = new List<UsuarioGrupoModel>();
 
-            dt  = (DataTable)context.ExecuteCommand(strQuerySelect, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-            
+            dt = (DataTable)context.ExecuteCommand(strQuerySelect, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow data in dt.Rows)
@@ -443,7 +455,7 @@ namespace SangueHeroiWeb.DAO
                         lista_usuarios.Add(usuario);
                         grupo.INTEGRANTES = lista_usuarios;
                     }
-                               
+
                     list.Add(grupo);
                 }
             }
@@ -497,10 +509,10 @@ namespace SangueHeroiWeb.DAO
             {
                 foreach (DataRow data in dt.Rows)
                     codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
-        
+
                 try
                 {
-                    var strQueryDelete = String.Format("DELETE UG FROM USUARIO_GRUPO UG INNER JOIN USUARIO U ON UG.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0} AND UG.CODIGO_USUARIO = " + codigo_usuario + "", ugmodel.CODIGO_GRUPO); 
+                    var strQueryDelete = String.Format("DELETE UG FROM USUARIO_GRUPO UG INNER JOIN USUARIO U ON UG.CODIGO_USUARIO = U.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0} AND UG.CODIGO_USUARIO = " + codigo_usuario + "", ugmodel.CODIGO_GRUPO);
                     var b = context.ExecuteCommand(strQueryDelete, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
                     desvincula_grupo = (int)SITUACAO.SUCESSO;
                 }
@@ -518,11 +530,11 @@ namespace SangueHeroiWeb.DAO
         public int desvincularGrupoEmMassa(UsuarioGrupoModel ugmodel, string json)
         {
             int deleteOK = (int)SITUACAO.DADOS_INVALIDOS;
-            
+
             int codigo_usuario = 0;
 
             string strQueryDelete = "";
-            
+
             string strQueryConsultaCodigo = String.Format("SELECT * FROM GRUPO WHERE EMAIL_USUARIO = '{0}' AND CODIGO_GRUPO = {1}", ugmodel.EMAIL_USUARIO, ugmodel.CODIGO_GRUPO);
 
             DataTable dt = new DataTable();
@@ -530,7 +542,7 @@ namespace SangueHeroiWeb.DAO
             dt = (DataTable)context.ExecuteCommand(strQueryConsultaCodigo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
             if (dt.Rows.Count != 0)
-            {              
+            {
                 UsuarioGrupoModel integrantes = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<UsuarioGrupoModel>(json);
 
                 foreach (var item in integrantes.INTEGRANTES)
