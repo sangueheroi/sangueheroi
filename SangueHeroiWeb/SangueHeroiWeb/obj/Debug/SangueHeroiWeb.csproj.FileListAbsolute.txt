@@ -331,7 +331,6 @@ C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Secu
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.dll
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.pdb
 C:\Projetos\SangueHeroiWeb\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
-C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
 C:\Projeto-Tcc\SangueHeroiWeb\SangueHeroiWeb\bin\ApplicationInsights.config
 C:\Projeto-Tcc\SangueHeroiWeb\SangueHeroiWeb\bin\roslyn\csc.exe
 C:\Projeto-Tcc\SangueHeroiWeb\SangueHeroiWeb\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll

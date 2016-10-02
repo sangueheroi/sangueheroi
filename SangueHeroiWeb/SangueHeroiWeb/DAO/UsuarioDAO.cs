@@ -170,6 +170,33 @@ namespace SangueHeroiWeb.DAO
             return list;
         }
 
+        public List<UsuarioModel> consultarEmailUsuarioPorTipoSanguineo(string tipo_sanguineo)
+        {
+            var strQuery = "";
+
+            strQuery = " SELECT EMAIL_USUARIO " + Environment.NewLine
+                      + " FROM USUARIO U " + Environment.NewLine
+                      + " INNER JOIN USUARIO_PERFIL UP " + Environment.NewLine
+                      + " ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO " + Environment.NewLine
+                      + " WHERE UP.TIPO_SANGUINEO = '" + tipo_sanguineo + "';";
+                                  
+            var dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+            var list = new List<UsuarioModel>();
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    UsuarioModel usuario = new UsuarioModel();
+                    usuario.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
+                    list.Add(usuario);
+                }
+            }
+
+            return list;
+        }
+
         public List<UsuarioGraficoModel> GetTipoSanguineoPorUsuario(string where = "")
         {
 
