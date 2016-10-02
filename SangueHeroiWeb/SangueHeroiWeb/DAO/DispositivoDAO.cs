@@ -187,6 +187,53 @@ namespace SangueHeroiWeb.DAO
             return envio;
         }
 
+        public string DispararNotificacaoNiveisSanguineos(string nome_hemocentro, string titulo, string mensagem, string tipo_sanguineo, int valor_tipo_sanguineo, string destinatario)
+        {
+            AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();
+            DataTable dt = new DataTable(); 
+            DataTable dt4 = new DataTable();
+            string strQuerySelectDispositivo = "";
+            string envio = "";
+            
+            strQuerySelectDispositivo = String.Format("SELECT TOKEN FROM DISPOSITIVO");
+
+            List<string> dispositivos = new List<string>();
+
+            dt = (DataTable)context.ExecuteCommand(strQuerySelectDispositivo, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            
+            if (dt.Rows.Count > 0)
+            {
+                UsuarioModel destinatarios = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<UsuarioModel>(destinatario);
+
+                if (destinatarios.EMAIL_USUARIO != null)
+                {
+                    foreach (var item in destinatarios.EMAIL_USUARIO)
+                    {
+                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = {0}", item);
+                        dt4 = (DataTable)context.ExecuteCommand(strQueryConsultaToken, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
+                        foreach (DataRow data4 in dt4.Rows)
+                        {
+                            DispositivoModel dispositivo = new DispositivoModel();
+                            dispositivos.Add(data4["TOKEN"].ToString());
+                        }
+                    }
+                }
+                else if (destinatarios.EMAIL_USUARIO == null)
+                {
+                    foreach (DataRow data in dt.Rows)
+                    {
+                        DispositivoModel dispositivo = new DispositivoModel();
+                        dispositivos.Add(data["TOKEN"].ToString());
+                    }
+                }
+            }
+
+            envio = gcm.EnviarNotificacaoNiveisSanguineos(dispositivos, mensagem, titulo, nome_hemocentro, tipo_sanguineo, valor_tipo_sanguineo);
+
+            return envio;
+        }
+
         public string DispararNotificacao()
         {
             AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();

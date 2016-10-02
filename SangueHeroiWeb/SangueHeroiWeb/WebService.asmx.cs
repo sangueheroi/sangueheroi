@@ -658,7 +658,7 @@ namespace SangueHeroiWeb
 
         [SoapHeader("Autenticacao")]
         [WebMethod]
-        public int realizarDoacao(string email_usuario, string nome_hemocentro, string endereco_hemocentro, string cep_hemocentro)
+        public int registrarDoacao(string email_usuario, string nome_hemocentro, string endereco_hemocentro, string cep_hemocentro)
         {
             if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             {

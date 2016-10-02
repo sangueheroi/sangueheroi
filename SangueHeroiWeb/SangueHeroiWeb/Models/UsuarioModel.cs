@@ -46,6 +46,8 @@ namespace SangueHeroiWeb.Models
 
         public bool FLAG_CADASTRO_REDE_SOCIAL { get; set; }
 
+        public List<UsuarioModel> DESTINATARIOS { get; set; }
+
     }
 
     public class UsuarioHeroiModel

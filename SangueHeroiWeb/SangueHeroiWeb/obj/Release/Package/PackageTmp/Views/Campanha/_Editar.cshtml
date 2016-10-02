@@ -1,0 +1,263 @@
+﻿
+@model SangueHeroiWeb.Models.CampanhaModel
+
+@using (Html.BeginForm("Editar", "Campanha", FormMethod.Post, new { @id = "formEditarCampanha" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Informações da Campanha</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CODIGO_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.CODIGO_CAMPANHA, new { htmlAttributes = new { @class = "form-control CODIGO_CAMPANHA", disabled = "true" } })
+                    
+                </div>
+                @Html.LabelFor(model => model.NOME_USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.NOME_USUARIO, new { htmlAttributes = new { @class = "form-control NOME_USUARIO", disabled = "true" } })
+                  
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.EMAIL_USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.EMAIL_USUARIO, new { htmlAttributes = new { @class = "form-control EMAIL_USUARIO", disabled = "true" } })
+                    
+                </div>
+                @Html.LabelFor(model => model.NOME_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.NOME_CAMPANHA, new { htmlAttributes = new { @class = "form-control NOME_CAMPANHA", disabled = "true" } })
+                 
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DESCRICAO_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.DESCRICAO_CAMPANHA, new { @class = "form-control DESCRICAO_CAMPANHA", disabled = "true" })
+                 </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NOME_RECEPTOR, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.NOME_RECEPTOR, new { htmlAttributes = new { @class = "form-control NOME_RECEPTOR", disabled = "true" } })
+                 
+                </div>
+                @Html.LabelFor(model => model.TIPO_SANGUINEO, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.TIPO_SANGUINEO, new { htmlAttributes = new { @class = "form-control TIPO_SANGUINEO", disabled = "true" } })
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NOME_HOSPITAL, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.NOME_HOSPITAL, new { htmlAttributes = new { @class = "form-control NOME_HOSPITAL", disabled = "true" } })
+                   
+                </div>
+                @Html.LabelFor(model => model.LOGRADOURO, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.LOGRADOURO, new { htmlAttributes = new { @class = "form-control LOGRADOURO", disabled = "true" } })
+                   
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BAIRRO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.BAIRRO, new { htmlAttributes = new { @class = "form-control BAIRRO", disabled = "true" } })
+                    
+                </div>
+                @Html.LabelFor(model => model.CIDADE, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.CIDADE, new { htmlAttributes = new { @class = "form-control CIDADE", disabled = "true" } })
+                   
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ESTADO, new { htmlAttributes = new { @class = "form-control ESTADO", disabled = "true" } })
+                   
+                </div>
+                @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { @class = "form-control CEP", disabled = "true" } })
+                   
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DATA_INICIO_DT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.DATA_INICIO_DT, new { htmlAttributes = new { @class = "form-control DATA_INICIO_DT", disabled = "true" } })
+                   
+                </div>
+                @Html.LabelFor(model => model.DATA_FIM_DT, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.DATA_FIM_DT, new { htmlAttributes = new { @class = "form-control DATA_FIM_DT", disabled = "true" } })
+                   
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-success" id='btnEditarCampanha' type='button' title='Encerrar Campanha'>Editar</button>
+                    <button class="btn btn-info" id='btnSalvar' type='submit' title='Encerrar Campanha' style="visibility:hidden">Salvar</button>
+                    <button class="btn btn-warning" id='btnCancelarEdicao' type='button' title='Encerrar Campanha' style="visibility:hidden">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="modal-footer">
+    <button type="button" id="" class="btn btn-default" data-dismiss="modal" >Sair</button>
+</div>
+<input type="hidden" value="@Session["NOME_HEMOCENTRO"]" id="NOME_HEMOCENTRO" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var nomeHemocentro = $('#NOME_HEMOCENTRO').val();
+        var nomeCriadorCampanha = $('#NOME_USUARIO').val();
+
+        if (nomeHemocentro == nomeCriadorCampanha) {
+            $('.btnEditarCampanha').prop('disabled', false);
+        }
+
+        $('#btnEditarCampanha').on('click', function () {
+            $('#CODIGO_CAMPANHA').prop('disabled', false);
+            $('#NOME_USUARIO').prop('disabled', false);
+            $('#EMAIL_USUARIO').prop('disabled', false);
+            $('#NOME_CAMPANHA').prop('disabled', false);
+            $('#DESCRICAO_CAMPANHA').prop('disabled', false);
+            $('#NOME_RECEPTOR').prop('disabled', false);
+            $('#TIPO_SANGUINEO').prop('disabled', false);
+            $('#NOME_HOSPITAL').prop('disabled', false);
+            $('#LOGRADOURO').prop('disabled', false);
+            $('#BAIRRO').prop('disabled', false);
+            $('#CIDADE').prop('disabled', false);
+            $('#ESTADO').prop('disabled', false);
+            $('#CEP').prop('disabled', false);
+            $('#DATA_INICIO_DT').prop('disabled', false);
+            $('#DATA_FIM_DT').prop('disabled', false);
+
+            $('#btnEditarCampanha').css('visibility', 'hidden');
+            $('#btnSalvar').css('visibility', '')
+            $('#btnCancelarEdicao').css('visibility', '')
+        });
+
+        $('#btnCancelarEdicao').on('click', function () {
+            $('#CODIGO_CAMPANHA').prop('disabled', true);
+            $('#NOME_USUARIO').prop('disabled', true);
+            $('#EMAIL_USUARIO').prop('disabled', true);
+            $('#NOME_CAMPANHA').prop('disabled', true);
+            $('#DESCRICAO_CAMPANHA').prop('disabled', true);
+            $('#NOME_RECEPTOR').prop('disabled', true);
+            $('#TIPO_SANGUINEO').prop('disabled', true);
+            $('#NOME_HOSPITAL').prop('disabled', true);
+            $('#LOGRADOURO').prop('disabled', true);
+            $('#BAIRRO').prop('disabled', true);
+            $('#CIDADE').prop('disabled', true);
+            $('#ESTADO').prop('disabled', true);
+            $('#CEP').prop('disabled', true);
+            $('#DATA_INICIO_DT').prop('disabled', true);
+            $('#DATA_FIM_DT').prop('disabled', true);
+
+            $('#btnEditarCampanha').css('visibility', '');
+            $('#btnSalvar').css('visibility', 'hidden')
+            $('#btnCancelarEdicao').css('visibility', 'hidden')
+        });
+    });
+
+    $(document).ready(function () {
+        $('form#formEditarCampanha').submit(function (e) {
+            //Objeto Model
+            var ObjCampanha = {
+                CODIGO_CAMPANHA: 0,
+                NOME_USUARIO: "",
+                EMAIL_USUARIO: "",
+                NOME_CAMPANHA: "",
+                DESCRICAO_CAMPANHA: "",
+                NOME_RECEPTOR: "",
+                TIPO_SANGUINEO: "",
+                NOME_HOSPITAL: "",
+                LOGRADOURO: "",
+                BAIRRO: "",
+                CIDADE: "",
+                ESTADO: "",
+                CEP: "",
+                DATA_INICIO_DT: 0,
+                DATA_FIM_DT: 0
+            };
+          
+            ObjCampanha["CODIGO_CAMPANHA"] = $('#CODIGO_CAMPANHA').val();
+            ObjCampanha["NOME_USUARIO"] = $('#NOME_USUARIO').val();
+            ObjCampanha["EMAIL_USUARIO"] = $('#EMAIL_USUARIO').val();
+            ObjCampanha["NOME_CAMPANHA"] = $('#NOME_CAMPANHA').val();
+            ObjCampanha["DESCRICAO_CAMPANHA"] = $('#DESCRICAO_CAMPANHA').val();
+            ObjCampanha["NOME_RECEPTOR"] = $('#NOME_RECEPTOR').val();
+            ObjCampanha["TIPO_SANGUINEO"] = $('#TIPO_SANGUINEO').val();
+            ObjCampanha["NOME_HOSPITAL"] = $('#NOME_HOSPITAL').val();
+            ObjCampanha["LOGRADOURO"] = $('#LOGRADOURO').val();
+            ObjCampanha["BAIRRO"] = $('#BAIRRO').val();
+            ObjCampanha["CIDADE"] = $('#CIDADE').val();
+            ObjCampanha["ESTADO"] = $('#ESTADO').val();
+            ObjCampanha["CEP"] = $('#CEP').val();
+            ObjCampanha["DATA_INICIO_DT"] = $('.DATA_INICIO_DT').val();
+            ObjCampanha["DATA_FIM_DT"] = $('.DATA_FIM_DT').val();
+
+            $.ajax({
+                type: 'POST',
+                url: 'Campanha/Editar',
+                contentType: 'application/json',
+                data: (JSON.stringify(ObjCampanha)),
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    if (data.isRedirect) {
+                        $.notify({
+                            message: data.msg,
+                            status: "success",
+                            timeout: 1000,
+                            onClose: function () {
+                                window.location.href = 'Campanha';
+                            }
+                        });
+                    }
+                    else
+                        $.notify({
+                            message: data.msg,
+                            status: "info",
+                            timeout: 2000,
+                        });
+                }
+            });
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                e.returnValue = false;
+            }
+        });
+    });
+
+
+</script>
+
+
+

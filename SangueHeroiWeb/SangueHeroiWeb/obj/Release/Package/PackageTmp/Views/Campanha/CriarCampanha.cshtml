@@ -1,0 +1,449 @@
+﻿@model SangueHeroiWeb.Models.CampanhaModel
+
+@{
+    ViewBag.Title = "Sangue Heroi - Criar Campanha";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("CriarCampanha", "Campanha", FormMethod.Post, new { @id = "formCadastrarCampanha" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-12" style="float: initial;">
+            <div class="panel with-nav-tabs panel-danger">
+                <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tipoCampanha" data-toggle="tab">Tipo da Campanha</a></li>
+                        <li><a href="#infoCampanha" data-toggle="tab">Informações da Campanha</a></li>
+                        <li><a href="#localCampanha" data-toggle="tab">Local da Campanha</a></li>
+                        <li><a href="#finalizarCampanha" data-toggle="tab">Finalizar Campanha</a></li>
+                        @*<li class="dropdown">
+                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#finalizarCampanha" data-toggle="tab">Danger 4</a></li>
+                                    <li><a href="#tab5danger" data-toggle="tab">Danger 5</a></li>
+                                </ul>
+                            </li>*@
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tipoCampanha">
+                            <div class="col-sm-6">
+                                <h2>Campanha Especifica</h2>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="rbtCampanhaEspecifica" value="option1">
+                                        <p>
+                                            Este tipo de campanha foi idealizada para pessoas que necessitam de sangue,
+                                            logo é criado uma campanha para os usuarios do sistema fazerem a doação para está pessoa.
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h2>Campanha Geral</h2>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="rbtCampanhaGeral" value="option2" checked>
+                                        <p>
+                                            Este tipo de campanha é voltada para todas as necessidades dos usuarios, podem
+                                            ser criadas campanhas para tipos sanguíneos, para localidades, grupos de amigos etc.
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <a class="btn btn-danger btnNext" style="float:right;border-radius: 50px;" title="Próximo"><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="infoCampanha">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CODIGO_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.CODIGO_CAMPANHA, new { htmlAttributes = new { @class = "form-control", disabled = "true" } })
+                                        @Html.ValidationMessageFor(model => model.CODIGO_CAMPANHA, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group">
+                                        @Html.LabelFor(model => model.NOME_USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.NOME_USUARIO, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.NOME_USUARIO, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.EMAIL_USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.EMAIL_USUARIO, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.EMAIL_USUARIO, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.NOME_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.NOME_CAMPANHA, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NOME_CAMPANHA, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DESCRICAO_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(model => model.DESCRICAO_CAMPANHA, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DESCRICAO_CAMPANHA, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div id="inputNomeReceptor" class="form-group" style="display:none">
+                                    @Html.LabelFor(model => model.NOME_RECEPTOR, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.NOME_RECEPTOR, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NOME_RECEPTOR, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div id="inputTipoSanguineo" class="form-group">
+                                    @Html.LabelFor(model => model.TIPO_SANGUINEO, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-2">
+                                        @Html.DropDownListFor(model => model.TIPO_SANGUINEO, new SelectList(ViewBag.TipoSanguineo,
+                                       "CODIGO_TIPO_SANGUINEO", "NOME_TIPO_SANGUINEO"), String.Empty, new { @class = "form-control", @id = "ddlTipoSanguineo" })
+                                        @Html.ValidationMessageFor(model => model.TIPO_SANGUINEO, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.NOME_HOSPITAL, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.NOME_HOSPITAL, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NOME_HOSPITAL, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DATA_INICIO_DT, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.DATA_INICIO_DT, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DATA_INICIO_DT, "", new { @class = "text-danger" })
+                                    </div>
+                                    @Html.LabelFor(model => model.DATA_FIM_DT, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.DATA_FIM_DT, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DATA_FIM_DT, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <a class="btn btn-danger btnPrevious" style="float:left;border-radius: 50px;" title="Próximo"><span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+                                <a class="btn btn-danger btnNext" style="float:right;border-radius: 50px;" title="Próximo"><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="localCampanha">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.LOGRADOURO, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.LOGRADOURO, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.LOGRADOURO, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BAIRRO, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.BAIRRO, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BAIRRO, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CIDADE, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.CIDADE, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.CIDADE, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-2">
+                                        @Html.DropDownListFor(model => model.ESTADO, new SelectList(ViewBag.Estados), String.Empty, new { @class = "form-control", @id = "ddlEstados" })
+                                        @Html.ValidationMessageFor(model => model.ESTADO, "", new { @class = "text-danger" })
+                                    </div>
+                                    @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-2">
+                                        @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <a class="btn btn-danger btnPrevious" style="float:left;border-radius: 50px;" title="Próximo"><span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+                                <a class="btn btn-danger btnNext" style="float:right;border-radius: 50px;" title="Próximo"><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="finalizarCampanha">
+                            <div class="col-sm-12">
+                                <h2>Informações da Campanha</h2>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <p style="font-weight: bold;">Tipo Campanha - <span style="font-weight: normal;" id="spanTipoCampanha">Geral</span></p>
+                                        <p style="font-weight: bold;">Nome da Campanha - <span style="font-weight: normal;" id="spanNomeCampanha"></span></p>
+                                        <p style="font-weight: bold;">Descrição Campanha - <span style="font-weight: normal;" id="spanDescricaoCampanha"></span></p>
+                                        <p style="font-weight: bold;" id="tipoSanguineoP">Tipo Sanguineo - <span style="font-weight: normal;" id="spanTipoSanguineo"></span></p>
+                                        <p style="font-weight: bold;display:none" id="nomeReceptorP">Nome Receptor - <span style="font-weight: normal;" id="spanNomeReceptor"></span></p>
+                                        <p style="font-weight: bold;">Nome Hospital - <span style="font-weight: normal;" id="spanNomeHospital"></span></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <p style="font-weight: bold;">Logradouro - <span style="font-weight: normal;" id="spanLogradouro"></span></p>
+                                        <p style="font-weight: bold;">Bairro - <span style="font-weight: normal;" id="spanBairro"></span></p>
+                                        <p style="font-weight: bold;">Cidade - <span style="font-weight: normal;" id="spanCidade"></span></p>
+                                        <p style="font-weight: bold;">Estado - <span style="font-weight: normal;" id="spanEstado"></span></p>
+                                        <p style="font-weight: bold;">CEP - <span style="font-weight: normal;" id="spanCEP"></span></p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-sm-12">
+                                <a class="btn btn-danger btnPrevious" style="float:left;border-radius: 50px;" title="Próximo"><span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+                                <button type="submit" class="btn btn-danger" style="float:right;" title="Finalizar">Finalizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<style type="text/css">
+    .panel.with-nav-tabs .panel-heading {
+        padding: 5px 5px 0 5px;
+    }
+
+    .panel.with-nav-tabs .nav-tabs {
+        border-bottom: none;
+    }
+
+    .panel.with-nav-tabs .nav-justified {
+        margin-bottom: -1px;
+    }
+    /********************************************************************/
+    /*** PANEL DANGER ***/
+    .with-nav-tabs.panel-danger .nav-tabs > li > a,
+    .with-nav-tabs.panel-danger .nav-tabs > li > a:hover,
+    .with-nav-tabs.panel-danger .nav-tabs > li > a:focus {
+        color: #a94442;
+    }
+
+        .with-nav-tabs.panel-danger .nav-tabs > .open > a,
+        .with-nav-tabs.panel-danger .nav-tabs > .open > a:hover,
+        .with-nav-tabs.panel-danger .nav-tabs > .open > a:focus,
+        .with-nav-tabs.panel-danger .nav-tabs > li > a:hover,
+        .with-nav-tabs.panel-danger .nav-tabs > li > a:focus {
+            color: #a94442;
+            background-color: #ebccd1;
+            border-color: transparent;
+        }
+
+    .with-nav-tabs.panel-danger .nav-tabs > li.active > a,
+    .with-nav-tabs.panel-danger .nav-tabs > li.active > a:hover,
+    .with-nav-tabs.panel-danger .nav-tabs > li.active > a:focus {
+        color: #a94442;
+        background-color: #fff;
+        border-color: #ebccd1;
+        border-bottom-color: transparent;
+    }
+
+    .with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu {
+        background-color: #f2dede; /* bg color */
+        border-color: #ebccd1; /* border color */
+    }
+
+        .with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > li > a {
+            color: #a94442; /* normal text color */
+        }
+
+            .with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+            .with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+                background-color: #ebccd1; /* hover bg color */
+            }
+
+        .with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+        .with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+        .with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+            color: #fff; /* active text color */
+            background-color: #a94442; /* active bg color */
+        }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#rbtCampanhaEspecifica").on("click", function () {
+            $('#inputNomeReceptor').css('display', '');
+            $('#inputTipoSanguineo').css('display', 'none');
+            $('#spanTipoCampanha').text('Especifica');
+            $('#tipoSanguineoP').css('display', 'none');
+            $('#nomeReceptorP').css('display', '');
+        });
+
+        $("#rbtCampanhaGeral").on("click", function () {
+            $('#inputNomeReceptor').css('display', 'none');
+            $('#inputTipoSanguineo').css('display', '');
+            $('#spanTipoCampanha').text('Geral');
+            $('#nomeReceptorP').css('display', 'none');
+            $('#tipoSanguineoP').css('display', '');
+        });
+
+        $('.btnNext').click(function () {
+            $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        });
+
+        $('.btnPrevious').click(function () {
+            $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+        });
+
+        $('#NOME_CAMPANHA').keyup(function () {
+            $('#spanNomeCampanha').text($(this).val());
+        });
+
+        $('#DESCRICAO_CAMPANHA').keyup(function () {
+            $('#spanDescricaoCampanha').text($(this).val());
+        });
+
+        $('#ddlTipoSanguineo').change(function () {
+            $('#spanTipoSanguineo').text($('#ddlTipoSanguineo :selected').text());
+            
+        });
+
+        $('#NOME_RECEPTOR').keyup(function () {
+            $('#spanNomeReceptor').text($(this).val());
+        });
+
+        $('#NOME_HOSPITAL').keyup(function () {
+            $('#spanNomeHospital').text($(this).val());
+        });
+
+        $('#LOGRADOURO').keyup(function () {
+            $('#spanLogradouro').text($(this).val());
+        });
+
+        $('#BAIRRO').keyup(function () {
+            $('#spanBairro').text($(this).val());
+        });
+
+        $('#CIDADE').keyup(function () {
+            $('#spanCidade').text($(this).val());
+        });
+
+        $('#ddlEstados').change(function () {
+            $('#spanEstado').text($('#ddlEstados :selected').text());
+        });
+
+        $('#CEP').keyup(function () {
+            $('#spanCEP').text($(this).val());
+        });
+
+        $("#DATA_INICIO_DT").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior'
+        }).datepicker("setDate", new Date());
+
+        $("#DATA_FIM_DT").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior'
+        }).datepicker("setDate", new Date());
+
+        $('#CEP').mask('99999-999');
+
+
+        $('form#formCadastrarCampanha').submit(function (e) {
+            //Objeto Model
+            var ObjCampanha = {
+                CODIGO_CAMPANHA: 0,
+                NOME_USUARIO: "",
+                EMAIL_USUARIO: "",
+                NOME_CAMPANHA: "",
+                DESCRICAO_CAMPANHA: "",
+                NOME_RECEPTOR: "",
+                TIPO_SANGUINEO: "",
+                NOME_HOSPITAL: "",
+                LOGRADOURO: "",
+                BAIRRO: "",
+                CIDADE: "",
+                ESTADO: "",
+                CEP: "",
+                DATA_INICIO_DT: 0,
+                DATA_FIM_DT: 0
+            };
+
+            ObjCampanha["NOME_USUARIO"] = $('#NOME_USUARIO').val();
+            ObjCampanha["EMAIL_USUARIO"] = $('#EMAIL_USUARIO').val();
+            ObjCampanha["NOME_CAMPANHA"] = $('#NOME_CAMPANHA').val();
+            ObjCampanha["DESCRICAO_CAMPANHA"] = $('#DESCRICAO_CAMPANHA').val();
+            ObjCampanha["NOME_RECEPTOR"] = $('#NOME_RECEPTOR').val();
+            ObjCampanha["TIPO_SANGUINEO"] = $('#ddlTipoSanguineo :selected').text();
+            ObjCampanha["NOME_HOSPITAL"] = $('#NOME_HOSPITAL').val();
+            ObjCampanha["LOGRADOURO"] = $('#LOGRADOURO').val();
+            ObjCampanha["BAIRRO"] = $('#BAIRRO').val();
+            ObjCampanha["CIDADE"] = $('#CIDADE').val();
+            ObjCampanha["ESTADO"] = $('#ddlEstados :selected').text();
+            ObjCampanha["CEP"] = $('#CEP').val();
+            ObjCampanha["DATA_INICIO_DT"] = $('#DATA_INICIO_DT').val();
+            ObjCampanha["DATA_FIM_DT"] = $('#DATA_FIM_DT').val();
+
+            $.ajax({
+                type: 'POST',
+                url: './CriarCampanha',
+                contentType: 'application/json',
+                data: (JSON.stringify(ObjCampanha)),
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    if (data.isRedirect) {
+                        $.notify({
+                            message: data.msg,
+                            status: "success",
+                            timeout: 1000,
+                            onClose: function () {
+                                window.location.href = data.url;
+                            }
+                        });
+                    }
+                    else
+                        $.notify({
+                            message: data.msg,
+                            status: "info",
+                            timeout: 2000,
+                        });
+                }
+            });
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                e.returnValue = false;
+            }
+        });
+
+    });
+</script>

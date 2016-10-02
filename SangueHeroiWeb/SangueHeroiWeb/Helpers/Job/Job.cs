@@ -1,4 +1,5 @@
-﻿using Quartz;
+﻿using Newtonsoft.Json;
+using Quartz;
 using SangueHeroiWeb.DAO;
 using SangueHeroiWeb.Models;
 using System;
@@ -39,6 +40,9 @@ namespace SangueHeroiWeb.Helpers.Job
         private static void VerificaNiveisSanguineos()
         {
             var hDao = new HemocentroDAO();
+            var uDao = new UsuarioDAO();
+            var dDao = new DispositivoDAO();
+
             var lstHemocentros = hDao.Lista();
 
             foreach (var hemocentro in lstHemocentros)
@@ -49,7 +53,11 @@ namespace SangueHeroiWeb.Helpers.Job
                 {
                     if (tipoSanguineo.VALOR_TIPO_SANGUINEO <= 10)
                     {
-                        //Chama MEtodo de envio de notificacao
+                        var lstUsuarios = uDao.consultarEmailUsuarioPorTipoSanguineo(tipoSanguineo.NOME_TIPO_SANGUINEO);
+
+                        string destinatarios = JsonConvert.SerializeObject(lstUsuarios, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+                        dDao.DispararNotificacaoNiveisSanguineos(hemocentro.NOME_HEMOCENTRO, "Baixo nível sanguíneo!", "Identificamos que você possui o tipo sanguíneo que está abaixo do nível esperado neste hemocentro. Por favor, doe e salve vidas!", tipoSanguineo.NOME_TIPO_SANGUINEO, tipoSanguineo.VALOR_TIPO_SANGUINEO, destinatarios);
                     }
                 }
             }
