@@ -242,6 +242,8 @@
     <Compile Include="Helpers\DB_Helper\ConnectionDB.cs" />
     <Compile Include="Helpers\DB_Helper\ContextHelpers.cs" />
     <Compile Include="Helpers\Constantes_Helper\Constantes.cs" />
+    <Compile Include="Helpers\Job\Job.cs" />
+    <Compile Include="Helpers\Job\JobScheduler.cs" />
     <Compile Include="Helpers\Util_Helper\EmailHelper.cs" />
     <Compile Include="Helpers\Util_Helper\Encrypt.cs" />
     <Compile Include="Helpers\Util_Helper\GeraSenha.cs" />
