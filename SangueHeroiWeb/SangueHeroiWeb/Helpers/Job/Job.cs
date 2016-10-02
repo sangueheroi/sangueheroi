@@ -25,7 +25,16 @@ namespace SangueHeroiWeb.Helpers.Job
 
             foreach (var usuario in lstUsuario)
             {
-                
+                var dif = usuario.DATA_PROXIMA_DOACAO - DateTime.Now;
+                var dif2 = DateTime.Now - usuario.DATA_PROXIMA_DOACAO;
+
+
+                if (dif.Days == 1)
+                {
+                    var AAAAA = ";";
+                }
+                    //envia notificacao para o usuario = usuario.CODIGO_USUARIO
+
             }
         }
 

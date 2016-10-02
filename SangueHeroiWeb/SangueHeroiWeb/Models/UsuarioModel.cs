@@ -40,6 +40,8 @@ namespace SangueHeroiWeb.Models
 
         public DateTime DATA_ULTIMA_DOACAO { get; set; }
 
+        public DateTime DATA_PROXIMA_DOACAO { get; set; }
+
         public int CODIGO_HEROI { get; set; }
 
         public bool FLAG_CADASTRO_REDE_SOCIAL { get; set; }
