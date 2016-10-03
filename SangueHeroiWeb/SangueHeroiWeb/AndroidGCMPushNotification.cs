@@ -29,6 +29,13 @@ public class AndroidGCMPushNotification
         public int VALOR_TIPO_SANGUINEO;
     }
 
+    private class NotificacaoProximaDoacao
+    {
+        public string Titulo;
+        public string Mensagem;
+        public DateTime DATA_PROXIMA_DOACAO;
+    }
+
     private class NotificacaoCompleta
     {
         public string NOME_CAMPANHA;
@@ -149,6 +156,70 @@ public class AndroidGCMPushNotification
         n.TIPO_SANGUINEO = tipo_sanguineo;
         n.VALOR_TIPO_SANGUINEO = valor_tipo_sanguineo;
 
+        var value = new JavaScriptSerializer().Serialize(n);
+        WebRequest wRequest;
+        wRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+        wRequest.Method = "post";
+        wRequest.ContentType = " application/json;charset=UTF-8";
+        wRequest.Headers.Add(string.Format("Authorization: key={0}", AppId));
+
+        wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
+
+        string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
+
+        Byte[] bytes = Encoding.UTF8.GetBytes(postData);
+        wRequest.ContentLength = bytes.Length;
+
+        Stream stream = wRequest.GetRequestStream();
+        stream.Write(bytes, 0, bytes.Length);
+        stream.Close();
+
+        WebResponse wResponse = wRequest.GetResponse();
+
+        stream = wResponse.GetResponseStream();
+
+        StreamReader reader = new StreamReader(stream);
+
+        String response = reader.ReadToEnd();
+
+        HttpWebResponse httpResponse = (HttpWebResponse)wResponse;
+        string status = httpResponse.StatusCode.ToString();
+
+        reader.Close();
+        stream.Close();
+        wResponse.Close();
+
+        return response;
+
+        /* if (status == "")
+         {
+             return response;
+         }
+         else
+         {
+             return response;
+         }
+     }
+     catch
+     {
+         return response;
+     }*/
+    }
+
+    public string EnviarNotificacaoProximaDoacao(List<string> deviceRegIds, string mensagem, string titulo, DateTime data_proxima_doacao)
+    {
+        //try
+        //{
+        string regIds = string.Join("\",\"", deviceRegIds);
+
+        string AppId = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
+        var SenderId = 43844248731;
+
+        NotificacaoProximaDoacao n = new NotificacaoProximaDoacao();
+        n.Titulo = titulo;
+        n.Mensagem = mensagem;
+        n.DATA_PROXIMA_DOACAO = data_proxima_doacao;
+        
         var value = new JavaScriptSerializer().Serialize(n);
         WebRequest wRequest;
         wRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");

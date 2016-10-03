@@ -21,17 +21,20 @@ namespace SangueHeroiWeb.Helpers.Job
         {
             var uDao = new UsuarioDAO();
             var dDao = new DoacaoDAO();
+            var disDao = new DispositivoDAO();
 
             var lstUsuario = uDao.consultarUsuarios();
 
             foreach (var usuario in lstUsuario)
             {
                 var diferenca = usuario.DATA_PROXIMA_DOACAO - DateTime.Now;
-               
+
+                //Se a diferenca for 0 significa que a data da proxima doacao é o próximo dia então envia a notificacao
                 if (diferenca.Days == 0)
                 {
-                    //Se a diferenca for 0 significa que a data da proxima doacao é o próximo dia então envia a notificacao
-                    //envia notificacao para o usuario = usuario.CODIGO_USUARIO
+                    string destinatarios = JsonConvert.SerializeObject(usuario.EMAIL_USUARIO, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+                    disDao.DispararNotificacaoProximaDoacao(usuario.DATA_PROXIMA_DOACAO, "O dia de sua doação está próximo!", "Identificamos que a data que você pode realizar sua doação está bem próxima! Doe sangue, salve vidas!", destinatarios);
                 }
 
             }

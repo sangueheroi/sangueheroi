@@ -433,4 +433,3 @@ C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Common.Logging.Core.pdb
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Common.Logging.Core.xml
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Quartz.pdb
 C:\TCC\SangueHeroiWeb\SangueHeroiWeb\bin\Quartz.xml
-C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
