@@ -205,11 +205,11 @@ namespace SangueHeroiWeb.DAO
             {
                 UsuarioModel destinatarios = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<UsuarioModel>(destinatario);
 
-                if (destinatarios.EMAIL_USUARIO != null)
+                if (destinatarios.DESTINATARIOS != null)
                 {
-                    foreach (var item in destinatarios.EMAIL_USUARIO)
+                    foreach (var item in destinatarios.DESTINATARIOS)
                     {
-                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = {0}", item);
+                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = {0}", item.EMAIL_USUARIO);
                         dt4 = (DataTable)context.ExecuteCommand(strQueryConsultaToken, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
                         foreach (DataRow data4 in dt4.Rows)
@@ -219,7 +219,7 @@ namespace SangueHeroiWeb.DAO
                         }
                     }
                 }
-                else if (destinatarios.EMAIL_USUARIO == null)
+                else if (destinatarios.DESTINATARIOS == null)
                 {
                     foreach (DataRow data in dt.Rows)
                     {
@@ -252,11 +252,11 @@ namespace SangueHeroiWeb.DAO
             {
                 UsuarioModel destinatarios = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<UsuarioModel>(destinatario);
 
-                if (destinatarios.EMAIL_USUARIO != null)
+                if (destinatarios.DESTINATARIOS != null)
                 {
-                    foreach (var item in destinatarios.EMAIL_USUARIO)
+                    foreach (var item in destinatarios.DESTINATARIOS)
                     {
-                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = {0}", item);
+                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", item.EMAIL_USUARIO);
                         dt4 = (DataTable)context.ExecuteCommand(strQueryConsultaToken, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
                         foreach (DataRow data4 in dt4.Rows)
@@ -266,7 +266,7 @@ namespace SangueHeroiWeb.DAO
                         }
                     }
                 }
-                else if (destinatarios.EMAIL_USUARIO == null)
+                else if (destinatarios.DESTINATARIOS == null)
                 {
                     foreach (DataRow data in dt.Rows)
                     {

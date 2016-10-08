@@ -14,7 +14,7 @@ namespace SangueHeroiWeb.Helpers.Job
         public void Execute(IJobExecutionContext context)
         {
             VerificaNiveisSanguineos();
-            VerificaUltimaDataDoacaoUsuario();
+            //VerificaUltimaDataDoacaoUsuario();
         }
 
         private static void VerificaUltimaDataDoacaoUsuario()
@@ -25,19 +25,22 @@ namespace SangueHeroiWeb.Helpers.Job
 
             var lstUsuario = uDao.consultarUsuarios();
 
-            foreach (var usuario in lstUsuario)
-            {
-                var diferenca = usuario.DATA_PROXIMA_DOACAO - DateTime.Now;
+            var usuario = new UsuarioModel { DESTINATARIOS = new List<UsuarioModel>() };
 
-                //Se a diferenca for 0 significa que a data da proxima doacao é o próximo dia então envia a notificacao
+            foreach (var u in lstUsuario)
+            {
+                var diferenca = u.DATA_PROXIMA_DOACAO - DateTime.Now;
+
+                //Se a diferenca for 0 significa que a data da proxima doacao é o próximo dia então remove o usuario da lista de usuarios que irão receber a notificacao
                 if (diferenca.Days == 0)
                 {
-                    string destinatarios = JsonConvert.SerializeObject(usuario.EMAIL_USUARIO, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
-
-                    disDao.DispararNotificacaoProximaDoacao(usuario.DATA_PROXIMA_DOACAO, "O dia de sua doação está próximo!", "Identificamos que a data que você pode realizar sua doação está bem próxima! Doe sangue, salve vidas!", destinatarios);
+                    usuario.DESTINATARIOS.Add(u);
                 }
-
             }
+
+            string destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+            disDao.DispararNotificacaoProximaDoacao(usuario.DESTINATARIOS.FirstOrDefault().DATA_PROXIMA_DOACAO, "O dia de sua doação está próximo!", "Identificamos que a data que você pode realizar sua doação está bem próxima! Doe sangue, salve vidas!", destinatarios);
         }
 
         private static void VerificaNiveisSanguineos()
@@ -48,9 +51,11 @@ namespace SangueHeroiWeb.Helpers.Job
 
             var lstHemocentros = hDao.Lista();
 
-            foreach (var hemocentro in lstHemocentros)
+            var usuario = new UsuarioModel { DESTINATARIOS = new List<UsuarioModel>() };
+
+            foreach (var h in lstHemocentros)
             {
-                var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO =  {hemocentro.CODIGO_HEMOCENTRO}");
+                var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO =  {h.CODIGO_HEMOCENTRO}");
 
                 foreach (var tipoSanguineo in lstNiveisSanguineos)
                 {
@@ -58,12 +63,19 @@ namespace SangueHeroiWeb.Helpers.Job
                     {
                         var lstUsuarios = uDao.consultarEmailUsuarioPorTipoSanguineo(tipoSanguineo.NOME_TIPO_SANGUINEO);
 
-                        string destinatarios = JsonConvert.SerializeObject(lstUsuarios, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
-
-                        dDao.DispararNotificacaoNiveisSanguineos(hemocentro.NOME_HEMOCENTRO, "Baixo nível sanguíneo!", "Identificamos que você possui o tipo sanguíneo que está abaixo do nível esperado neste hemocentro. Por favor, doe e salve vidas!", tipoSanguineo.NOME_TIPO_SANGUINEO, tipoSanguineo.VALOR_TIPO_SANGUINEO, destinatarios);
+                        foreach (var u in lstUsuarios)
+                        {
+                            usuario.DESTINATARIOS.Add(u);
+                        }
                     }
+
+                    string destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+                    dDao.DispararNotificacaoNiveisSanguineos(h.NOME_HEMOCENTRO, "Baixo nível sanguíneo!", "Identificamos que você possui o tipo sanguíneo que está abaixo do nível esperado neste hemocentro. Por favor, doe e salve vidas!", tipoSanguineo.NOME_TIPO_SANGUINEO, tipoSanguineo.VALOR_TIPO_SANGUINEO, destinatarios);
+
                 }
             }
+
         }
 
     }
