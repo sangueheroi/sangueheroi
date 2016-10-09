@@ -118,7 +118,7 @@ namespace SangueHeroiWeb.DAO
                     var a = context.ExecuteCommand(strQueryInsert, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
                     registroOK = (int)SITUACAO.SUCESSO;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     registroOK = (int)SITUACAO.ERRO_DE_SISTEMA;
                 }

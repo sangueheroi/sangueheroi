@@ -13,7 +13,7 @@ namespace SangueHeroiWeb.Helpers.Job
     {
         public void Execute(IJobExecutionContext context)
         {
-            VerificaNiveisSanguineos();
+            //VerificaNiveisSanguineos();
             //VerificaUltimaDataDoacaoUsuario();
         }
 
