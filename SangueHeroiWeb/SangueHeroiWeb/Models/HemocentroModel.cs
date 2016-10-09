@@ -63,5 +63,7 @@ namespace SangueHeroiWeb.Models
         public int CODIGO_HEMOCENTRO_PERFIL { get; set; }
 
         public List<HemocentroNiveisSanguineosModel> TIPOS_SANGUINEOS { get; set; }
+
+        public List<HemocentroModel> DESTINATARIOS { get; set; }
     }
 }

@@ -139,7 +139,7 @@ namespace SangueHeroiWeb.DAO
                       + " ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO " + Environment.NewLine
                       + " INNER JOIN USUARIO_ENDERECO UE " + Environment.NewLine
                       + " ON U.CODIGO_USUARIO = UE.CODIGO_USUARIO " + Environment.NewLine
-                      + " WHERE U.CODIGO_USUARIO = 141";       
+                      + " WHERE U.CODIGO_USUARIO = 117";       
 
             var dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
