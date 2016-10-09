@@ -526,3 +526,4 @@ C:\Projetos\SangueHeroi\SangueHeroiWeb\SangueHeroiWeb\bin\Microsoft.Owin.Securit
 C:\Projetos\SangueHeroi\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
 C:\Projetos\SangueHeroi\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.dll
 C:\Projetos\SangueHeroi\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.pdb
+C:\TCC\SangueHeroiWeb\SangueHeroiWeb\obj\Debug\SangueHeroiWeb.csprojResolveAssemblyReference.cache
