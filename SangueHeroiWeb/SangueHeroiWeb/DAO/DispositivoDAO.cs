@@ -209,7 +209,7 @@ namespace SangueHeroiWeb.DAO
                 {
                     foreach (var item in destinatarios.DESTINATARIOS)
                     {
-                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = {0}", item.EMAIL_USUARIO);
+                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", item.EMAIL_USUARIO);
                         dt4 = (DataTable)context.ExecuteCommand(strQueryConsultaToken, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
                         foreach (DataRow data4 in dt4.Rows)

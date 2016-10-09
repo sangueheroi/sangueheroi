@@ -55,7 +55,8 @@ namespace SangueHeroiWeb.Helpers.Job
 
             foreach (var h in lstHemocentros)
             {
-                var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO =  {h.CODIGO_HEMOCENTRO}");
+                //var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO =  {h.CODIGO_HEMOCENTRO}");
+                var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO = 7");
 
                 foreach (var tipoSanguineo in lstNiveisSanguineos)
                 {
@@ -67,11 +68,11 @@ namespace SangueHeroiWeb.Helpers.Job
                         {
                             usuario.DESTINATARIOS.Add(u);
                         }
+
+                        string destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+                        dDao.DispararNotificacaoNiveisSanguineos(h.NOME_HEMOCENTRO, "Baixo nível sanguíneo!", "Identificamos que você possui o tipo sanguíneo que está abaixo do nível esperado neste hemocentro. Por favor, doe e salve vidas!", tipoSanguineo.NOME_TIPO_SANGUINEO, tipoSanguineo.VALOR_TIPO_SANGUINEO, destinatarios);
                     }
-
-                    string destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
-
-                    dDao.DispararNotificacaoNiveisSanguineos(h.NOME_HEMOCENTRO, "Baixo nível sanguíneo!", "Identificamos que você possui o tipo sanguíneo que está abaixo do nível esperado neste hemocentro. Por favor, doe e salve vidas!", tipoSanguineo.NOME_TIPO_SANGUINEO, tipoSanguineo.VALOR_TIPO_SANGUINEO, destinatarios);
 
                 }
             }
