@@ -127,8 +127,8 @@ namespace SangueHeroiWeb
         [WebMethod]
         public int registrarUsuario(string nome, string email, string senha, string sexo, string bairro, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
         {
-            if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
-            {
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            //{
                 UsuarioDAO udao = new UsuarioDAO();
                 UsuarioModel umodel = new UsuarioModel();
 
@@ -157,11 +157,11 @@ namespace SangueHeroiWeb
                 var retorno = udao.Registrar(umodel);
 
                 return retorno;
-            }
-            else
-            {
-                return (int) SITUACAO.ERRO_DE_SISTEMA;
-            }
+            //}
+            //else
+            //{
+            //    return (int) SITUACAO.ERRO_DE_SISTEMA;
+            //}
         }
 
         [SoapHeader("Autenticacao")]

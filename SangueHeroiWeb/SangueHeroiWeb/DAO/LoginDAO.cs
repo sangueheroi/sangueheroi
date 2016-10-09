@@ -22,16 +22,18 @@ namespace SangueHeroiWeb.DAO
         }
 
         public int VerificarLogin(LoginUsuarioModel model)
-        { 
+        {
             int loginOK = (int) SITUACAO.SUCESSO;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
 
             DataTable dt = new DataTable();
 
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            dt =
+                (DataTable)
+                context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            if (dt.Rows.Count > 0)       
+            if (dt.Rows.Count > 0)
                 loginOK = (int) SITUACAO.SUCESSO;
             else
                 loginOK = (int) SITUACAO.NAO_POSSUI_CADASTRO;
@@ -52,32 +54,44 @@ namespace SangueHeroiWeb.DAO
             int loginOK = (int) SITUACAO.SUCESSO;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
- 
+
             DataTable dt = new DataTable();
 
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            dt =
+                (DataTable)
+                context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-            if (dt.Rows.Count > 0)
+            try
             {
-                foreach (DataRow data in dt.Rows)
+                if (dt.Rows.Count > 0)
                 {
-                    senha_banco = data["SENHA_USUARIO"].ToString();
-                    nome = data["NOME_USUARIO"].ToString();
-                    //model.SENHA = enc.DecryptoRSA(model.SENHA);
-                    //senha_banco = enc.DecryptoRSA(senha_banco);
+                    foreach (DataRow data in dt.Rows)
+                    {
+                        senha_banco = data["SENHA_USUARIO"].ToString();
+                        nome = data["NOME_USUARIO"].ToString();
 
-                    if (!model.SENHA.Equals(senha_banco))
-                        loginOK = (int) SITUACAO.DADOS_INVALIDOS;
+                        model.SENHA = enc.DecryptoRSA(model.SENHA);
+                        senha_banco = enc.DecryptoRSA(senha_banco);
+
+                        if (!model.SENHA.Equals(senha_banco))
+                            loginOK = (int)SITUACAO.DADOS_INVALIDOS;
+                    }
                 }
-            }
-            else
-            {
-                nome = "";
-                loginOK = (int) SITUACAO.NAO_POSSUI_CADASTRO;
-            }
+                else
+                {
+                    nome = "";
+                    loginOK = (int)SITUACAO.NAO_POSSUI_CADASTRO;
+                }
 
-            usuario[0] = nome;
-            usuario[1] = loginOK.ToString();
+                usuario[0] = nome;
+                usuario[1] = loginOK.ToString();
+            }
+            catch (Exception exception)
+            {
+                usuario[0] = exception.Message;
+                usuario[1] = exception.Message;
+            }
+           
 
             return usuario;
         }
