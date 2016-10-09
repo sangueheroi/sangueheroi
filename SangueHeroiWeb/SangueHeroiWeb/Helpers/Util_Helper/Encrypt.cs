@@ -53,7 +53,9 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
 
             DataTable dt = new DataTable();
 
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            dt =
+                (DataTable)
+                context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
             if (dt.Rows.Count > 0)
             {
@@ -77,25 +79,35 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
 
         public string DecryptoRSA(string valor)
         {
-            const int PROVIDER_RSA_FULL = 1;
-            const string CONTAINER_NAME = "Tracker";
+            string decryptedString = string.Empty;
 
-            CspParameters cspParams;
-            cspParams = new CspParameters(PROVIDER_RSA_FULL);
-            cspParams.KeyContainerName = CONTAINER_NAME;
-            RSACryptoServiceProvider rsa1 = new RSACryptoServiceProvider(cspParams);
+            try
+            {
+                const int PROVIDER_RSA_FULL = 1;
+                const string CONTAINER_NAME = "Tracker";
 
-            String[] chaves = ConsultarChaves();
+                CspParameters cspParams;
+                cspParams = new CspParameters(PROVIDER_RSA_FULL);
+                cspParams.KeyContainerName = CONTAINER_NAME;
+                RSACryptoServiceProvider rsa1 = new RSACryptoServiceProvider(cspParams);
 
-            rsa1.FromXmlString(chaves[1]);
+                String[] chaves = ConsultarChaves();
 
-            string data2Decrypt = valor;
+                rsa1.FromXmlString(chaves[1]);
 
-            byte[] encryptedBytes = Convert.FromBase64String(data2Decrypt);
+                string data2Decrypt = valor;
 
-            byte[] plain = rsa1.Decrypt(encryptedBytes, false);
-            string decryptedString = System.Text.Encoding.UTF8.GetString(plain);
+                byte[] encryptedBytes = Convert.FromBase64String(data2Decrypt);
 
+                byte[] plain = rsa1.Decrypt(encryptedBytes, false);
+                decryptedString = System.Text.Encoding.UTF8.GetString(plain);
+
+            }
+            catch (Exception exception)
+            {
+                return exception.Message;
+            }
+            
             return decryptedString;
         }
 
