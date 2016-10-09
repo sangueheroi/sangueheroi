@@ -72,7 +72,7 @@ namespace SangueHeroiWeb.DAO
 
                         model.SENHA = enc.DecryptoRSA(model.SENHA);
                         senha_banco = enc.DecryptoRSA(senha_banco);
-
+                        
                         if (!model.SENHA.Equals(senha_banco))
                             loginOK = (int)SITUACAO.DADOS_INVALIDOS;
                     }
@@ -92,7 +92,6 @@ namespace SangueHeroiWeb.DAO
                 usuario[1] = exception.Message;
             }
            
-
             return usuario;
         }
 

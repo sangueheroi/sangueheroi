@@ -116,7 +116,8 @@ namespace SangueHeroiWeb.DAO
 
             string strSQL = " SELECT * FROM HEMOCENTRO H " + Environment.NewLine
                           + " INNER JOIN HEMOCENTRO_ENDERECO HE" + Environment.NewLine
-                          + " ON H.CODIGO_HEMOCENTRO = HE.CODIGO_HEMOCENTRO " + Environment.NewLine;
+                          + " ON H.CODIGO_HEMOCENTRO = HE.CODIGO_HEMOCENTRO " + Environment.NewLine
+                          + " WHERE H.CODIGO_HEMOCENTRO = 7";
 
             if (where.Trim() != "")
                 strSQL = strSQL + where;
