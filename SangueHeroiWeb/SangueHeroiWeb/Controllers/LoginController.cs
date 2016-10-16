@@ -24,10 +24,10 @@ namespace SangueHeroiWeb.Controllers
             return PartialView("_Login");
         }
 
+
         [HttpPost]
         public ActionResult Login(HemocentroModel model)
         {
-
             LoginDAO dao = new LoginDAO();
             
             int loginOK = dao.LogarHemocentro(model);
