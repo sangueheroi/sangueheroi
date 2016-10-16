@@ -27,6 +27,7 @@ namespace SangueHeroiWeb.Controllers
         [HttpPost]
         public ActionResult Login(HemocentroModel model)
         {
+
             LoginDAO dao = new LoginDAO();
             
             int loginOK = dao.LogarHemocentro(model);
