@@ -651,6 +651,7 @@ namespace SangueHeroiWeb
                 retorno[0] = "Erro Autenticação do Webservice";
                 retorno[1] = "Erro Autenticação do Webservice";
                 retorno[2] = "Erro Autenticação do Webservice";
+                retorno[3] = "Erro Autenticação do Webservice";
 
                 return retorno; 
             }

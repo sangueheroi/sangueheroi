@@ -101,11 +101,12 @@ namespace SangueHeroiWeb.DAO
 
         public string[] getInfoDoacao(UsuarioModel model)
         {
-            string[] doacao = new string[3];
+            string[] doacao = new string[4];
 
             string dt_ultima_doacao = "";
             string dt_proxima_doacao = "";
             string nome_hemocentro = "";
+            int consultaOK = (int)SITUACAO.DADOS_INVALIDOS;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
             var strQuerySelectDataUltimaDoacao = String.Format("SELECT UP.DATA_ULTIMA_DOACAO, UP.DATA_PROXIMA_DOACAO, D.NOME_HEMOCENTRO FROM USUARIO_PERFIL UP INNER JOIN USUARIO U ON UP.CODIGO_USUARIO = U.CODIGO_USUARIO INNER JOIN DOACAO D ON UP.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
@@ -113,9 +114,17 @@ namespace SangueHeroiWeb.DAO
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
 
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-            dt2 = (DataTable)context.ExecuteCommand(strQuerySelectDataUltimaDoacao, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-
+            try
+            {
+                dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+                dt2 = (DataTable)context.ExecuteCommand(strQuerySelectDataUltimaDoacao, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+                consultaOK = (int)SITUACAO.SUCESSO;
+            }
+            catch (Exception)
+            {
+                consultaOK = (int)SITUACAO.ERRO_DE_SISTEMA;
+            }
+            
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow data in dt2.Rows)
@@ -129,6 +138,7 @@ namespace SangueHeroiWeb.DAO
             doacao[0] = dt_ultima_doacao;
             doacao[1] = dt_proxima_doacao;
             doacao[2] = nome_hemocentro;
+            doacao[3] = consultaOK.ToString();
 
             return doacao;
         }
