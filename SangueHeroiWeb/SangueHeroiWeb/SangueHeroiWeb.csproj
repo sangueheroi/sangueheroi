@@ -509,6 +509,8 @@
     <Content Include="Scripts\jquery.mask.js" />
     <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\notify.js" />
+    <Content Include="Scripts\validaCNPJ_CPF.js" />
+    <Content Include="Views\Shared\TemplateEmail.html" />
     <Content Include="WebService.asmx" />
     <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP.pubxml" />

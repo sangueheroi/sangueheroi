@@ -35,5 +35,12 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
             public const int HEMOCENTRO = 2;
         }
 
+        public class PARCERIA_HEMOCENTRO
+        {
+            public const int SUCESSO = 1;
+            public const int USUARIO_EXISTENTE = 2;
+            public const int ERRO = 3;
+
+        }
     }
 }

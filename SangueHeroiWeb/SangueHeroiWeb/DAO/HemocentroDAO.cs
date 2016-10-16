@@ -21,53 +21,54 @@ namespace SangueHeroiWeb.DAO
             context = new ContextHelpers();
         }
 
-        public bool ParceriaHemocentro(HemocentroModel model)
+        public int ParceriaHemocentro(HemocentroModel model)
         {
-            bool registroOK = true;
+            var registroOk = Constantes.PARCERIA_HEMOCENTRO.SUCESSO;
 
-            string strQuery = "";
-
-            DataTable dt = (DataTable)context.ExecuteCommand(String.Format("SELECT * FROM HEMOCENTRO WHERE CNPJ = '{0}' AND EMAIL = '{1}'", model.CNPJ, model.EMAIL_HEMOCENTRO), CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-
-            if (dt.Rows.Count == 0)
+            try
             {
-                strQuery = "EXECUTE frmCadastrarHemocentro " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.NOME_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.CNPJ) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.RAZAO_SOCIAL) + " , " + Environment.NewLine
-                 + model.CODIGO_STATUS.ToString() + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.LOGIN_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.SENHA_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.EMAIL_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.TELEFONE_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.PERIODO_FUNCIONAMENTO_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.CIDADE_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.ESTADO_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.CEP);
+                var dt =
+                    (DataTable)
+                    context.ExecuteCommand(
+                        $"SELECT * FROM HEMOCENTRO WHERE CNPJ = '{model.CNPJ}' OR EMAIL = '{model.EMAIL}'",
+                        CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
-
-                try
+                if (dt.Rows.Count == 0)
                 {
+                    var strQuery = "EXECUTE frmCadastrarHemocentro " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.NOME_HEMOCENTRO) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.CNPJ) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.RAZAO_SOCIAL) + " , " + Environment.NewLine
+                                      + model.CODIGO_STATUS + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.LOGIN_HEMOCENTRO) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.SENHA_HEMOCENTRO) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.EMAIL) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.TELEFONE_HEMOCENTRO) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.PERIODO_FUNCIONAMENTO_HEMOCENTRO) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.CIDADE_HEMOCENTRO) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.ESTADO_HEMOCENTRO) + " , " + Environment.NewLine
+                                      + UtilHelper.TextForSql(model.CEP);
+
                     context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
                 }
-                catch (Exception)
+                else
                 {
-                    registroOK = false;
+                    registroOk = Constantes.PARCERIA_HEMOCENTRO.USUARIO_EXISTENTE;
                 }
             }
-            else
+            catch (Exception)
             {
-                registroOK = false;
+                registroOk = Constantes.PARCERIA_HEMOCENTRO.ERRO;
             }
 
-            return registroOK;
-        }
+           
 
-       
+            return registroOk;
+        }
 
         public void AtivarHemocentro(int _idHemocentro)
         {
-            string strSQL = string.Format(" UPDATE HEMOCENTRO SET CODIGO_STATUS = {0} WHERE CODIGO_HEMOCENTRO = {1} ", Helpers.Util_Helper.Constantes.CADASTRO_STATUS.Ativo, _idHemocentro);
+            string strSQL = $" UPDATE HEMOCENTRO SET CODIGO_STATUS = {Constantes.CADASTRO_STATUS.Ativo} WHERE CODIGO_HEMOCENTRO = {_idHemocentro} ";
 
             DataTable dt = (DataTable)context.ExecuteCommand(strSQL, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
         }
@@ -75,8 +76,8 @@ namespace SangueHeroiWeb.DAO
         public bool Editar(HemocentroModel model)
         {
             bool registroOK = true;
-
             string strQuery = "";
+            var enc = new Encrypt();
 
             strQuery = "EXECUTE frmAtualizarHemocentro " + Environment.NewLine
                  + model.CODIGO_HEMOCENTRO + " , " + Environment.NewLine
@@ -84,8 +85,8 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.TextForSql(model.CNPJ) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.RAZAO_SOCIAL) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.LOGIN_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.SENHA_HEMOCENTRO) + " , " + Environment.NewLine
-                 + UtilHelper.TextForSql(model.EMAIL_HEMOCENTRO) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(enc.Encryption(model.SENHA_HEMOCENTRO)) + " , " + Environment.NewLine
+                 + UtilHelper.TextForSql(model.EMAIL) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.TELEFONE_HEMOCENTRO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.PERIODO_FUNCIONAMENTO_HEMOCENTRO) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(model.CIDADE_HEMOCENTRO) + " , " + Environment.NewLine
@@ -114,10 +115,9 @@ namespace SangueHeroiWeb.DAO
         public List<HemocentroModel> Lista(string where = "")
         {
 
-            string strSQL = " SELECT * FROM HEMOCENTRO H " + Environment.NewLine
-                          + " INNER JOIN HEMOCENTRO_ENDERECO HE" + Environment.NewLine
-                          + " ON H.CODIGO_HEMOCENTRO = HE.CODIGO_HEMOCENTRO " + Environment.NewLine
-                          + " WHERE H.CODIGO_HEMOCENTRO = 7";
+            var strSQL = " SELECT * FROM HEMOCENTRO H " + Environment.NewLine
+                            + " INNER JOIN HEMOCENTRO_ENDERECO HE" + Environment.NewLine
+                            + " ON H.CODIGO_HEMOCENTRO = HE.CODIGO_HEMOCENTRO ";
 
             if (where.Trim() != "")
                 strSQL = strSQL + where;
@@ -140,7 +140,7 @@ namespace SangueHeroiWeb.DAO
                         hm.LOGIN_HEMOCENTRO = data["LOGIN_HEMOCENTRO"].ToString();
                         hm.SENHA_HEMOCENTRO = data["SENHA_HEMOCENTRO"].ToString();
                         hm.CODIGO_HEMOCENTRO_PERFIL = Convert.ToInt32(data["CODIGO_HEMOCENTRO_PERFIL"].ToString());
-                        hm.EMAIL_HEMOCENTRO = data["EMAIL"].ToString();
+                        hm.EMAIL = data["EMAIL"].ToString();
                         hm.TELEFONE_HEMOCENTRO = data["TELEFONE_HEMOCENTRO"].ToString();
                         hm.PERIODO_FUNCIONAMENTO_HEMOCENTRO = data["PERIODO_FUNCIONAMENTO"].ToString();
                         hm.CIDADE_HEMOCENTRO = data["CIDADE"].ToString();
@@ -304,7 +304,7 @@ namespace SangueHeroiWeb.DAO
                     hemocentro.LOGIN_HEMOCENTRO = null;
                     hemocentro.SENHA_HEMOCENTRO = null;
                     hemocentro.CODIGO_HEMOCENTRO_PERFIL = Convert.ToInt32(null);
-                    hemocentro.EMAIL_HEMOCENTRO = null;
+                    hemocentro.EMAIL = null;
                     hemocentro.DATA_CRIACAO = Convert.ToDateTime(null);
                     hemocentro.TELEFONE_HEMOCENTRO = null;
                     hemocentro.PERIODO_FUNCIONAMENTO_HEMOCENTRO = null;

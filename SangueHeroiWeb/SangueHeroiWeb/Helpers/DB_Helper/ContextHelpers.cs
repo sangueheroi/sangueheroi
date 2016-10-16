@@ -61,7 +61,7 @@ namespace SangueHeroiWeb.DAO
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao Executar Comando no Banco - " + ex.ToString());
+                return "Erro ao executar comando no banco de dados - " + ex.Message;
             }
             finally
             {

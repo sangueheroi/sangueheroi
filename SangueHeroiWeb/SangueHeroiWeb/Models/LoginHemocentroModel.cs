@@ -26,6 +26,6 @@ namespace SangueHeroiWeb.Models
     {
         [Required]
         [Display(Name = "Email")]
-        public string EMAIL_HEMOCENTRO{ get; set; }
+        public string EMAIL { get; set; }
     }
 }

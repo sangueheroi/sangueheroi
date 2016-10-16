@@ -39,7 +39,7 @@ namespace SangueHeroiWeb.Models
 
         [Required]
         [Display(Name = "E-mail")]
-        public String EMAIL_HEMOCENTRO { get; set; }
+        public String EMAIL { get; set; }
 
         [Required]
         [Display(Name = "Período de Funcionamento")]
