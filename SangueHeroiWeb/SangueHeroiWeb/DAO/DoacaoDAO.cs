@@ -101,15 +101,16 @@ namespace SangueHeroiWeb.DAO
 
         public string[] getInfoDoacao(UsuarioModel model)
         {
-            string[] doacao = new string[4];
+            string[] doacao = new string[5];
 
             string dt_ultima_doacao = "";
             string dt_proxima_doacao = "";
             string nome_hemocentro = "";
+            string sexo = "";
             int consultaOK = (int)SITUACAO.DADOS_INVALIDOS;
 
             var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
-            var strQuerySelectDataUltimaDoacao = String.Format("SELECT UP.DATA_ULTIMA_DOACAO, UP.DATA_PROXIMA_DOACAO, D.NOME_HEMOCENTRO FROM USUARIO_PERFIL UP INNER JOIN USUARIO U ON UP.CODIGO_USUARIO = U.CODIGO_USUARIO INNER JOIN DOACAO D ON UP.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+            var strQuerySelectDataUltimaDoacao = String.Format("SELECT UP.DATA_ULTIMA_DOACAO, UP.DATA_PROXIMA_DOACAO, UP.SEXO, D.NOME_HEMOCENTRO FROM USUARIO_PERFIL UP INNER JOIN USUARIO U ON UP.CODIGO_USUARIO = U.CODIGO_USUARIO INNER JOIN DOACAO D ON UP.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
 
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
@@ -132,13 +133,15 @@ namespace SangueHeroiWeb.DAO
                     dt_ultima_doacao = data["DATA_ULTIMA_DOACAO"].ToString();
                     dt_proxima_doacao = data["DATA_PROXIMA_DOACAO"].ToString();
                     nome_hemocentro = data["NOME_HEMOCENTRO"].ToString();
+                    sexo = data["SEXO"].ToString();
                 }
             }
 
-            doacao[0] = dt_ultima_doacao;
-            doacao[1] = dt_proxima_doacao;
+            doacao[0] = dt_ultima_doacao.Substring(0, 10);
+            doacao[1] = dt_proxima_doacao.Substring(0, 10);
             doacao[2] = nome_hemocentro;
-            doacao[3] = consultaOK.ToString();
+            doacao[3] = sexo;
+            doacao[4] = consultaOK.ToString();
 
             return doacao;
         }
@@ -206,9 +209,9 @@ namespace SangueHeroiWeb.DAO
                 
                 strQueryInsert = "INSERT INTO DOACAO (CODIGO_USUARIO, NOME_HEMOCENTRO, LOGRADOURO_ENDERECO_DOACAO, CEP_ENDERECO_DOACAO, PONTUACAO, QTD_VIDAS_SALVAS, DATA_DOACAO) VALUES (" + codigo_usuario + ", '" + dmodel.NOME_HEMOCENTRO + "', '" + dmodel.LOGRADOURO_ENDERECO_DOACAO + "', '" + dmodel.CEP_ENDERECO_DOACAO + "', '3', '4', " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + ");";
 
-                if(sexo == "M")
+                if(sexo == "M" || sexo == "Masculino")
                     strQueryUpdate = "UPDATE USUARIO_PERFIL SET DATA_ULTIMA_DOACAO = " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + ", DATA_PROXIMA_DOACAO = " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now.AddDays(90)) + " WHERE CODIGO_USUARIO = " + codigo_usuario+ " ;"; 
-                else if (sexo == "F")
+                else if (sexo == "F" || sexo == "Feminino")
                     strQueryUpdate = "UPDATE USUARIO_PERFIL SET DATA_ULTIMA_DOACAO = " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now) + ", DATA_PROXIMA_DOACAO = " + Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(DateTime.Now.AddDays(120)) + " WHERE CODIGO_USUARIO = " + codigo_usuario + " ;";
 
 

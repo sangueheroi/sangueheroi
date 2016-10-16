@@ -647,11 +647,12 @@ namespace SangueHeroiWeb
             }
             else
             {
-                string[] retorno = new string[4];
+                string[] retorno = new string[5];
                 retorno[0] = "Erro Autenticação do Webservice";
                 retorno[1] = "Erro Autenticação do Webservice";
                 retorno[2] = "Erro Autenticação do Webservice";
                 retorno[3] = "Erro Autenticação do Webservice";
+                retorno[4] = "Erro Autenticação do Webservice";
 
                 return retorno; 
             }
