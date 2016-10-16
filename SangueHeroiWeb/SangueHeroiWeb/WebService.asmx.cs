@@ -21,7 +21,7 @@ namespace SangueHeroiWeb
 {
 
     /// <summary>
-    /// WebService utilizado para comunicaCão com a aplicaCão Android
+    /// WebService utilizado para comunicação com a aplicação Android
     /// </summary>
 
     [WebService(Namespace = "http://sangueheroiweb.azurewebsites.net/WebService.asmx")]
@@ -343,12 +343,12 @@ namespace SangueHeroiWeb
             return enc.CompararToken(chave);
         }
 
-        [SoapHeader("Autenticacao")]
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public string consultarUsuarios()
         {
-            if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
-            {
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            //{
                 UsuarioDAO usuario = new UsuarioDAO();
 
                 List<UsuarioModel> lista = usuario.consultarUsuarios();
@@ -356,11 +356,11 @@ namespace SangueHeroiWeb
                 string json = JsonConvert.SerializeObject(lista, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
 
                 return json;
-            }
+            /*}
             else
             {
                 return "ERRO";
-            }
+            }*/
         }
 
         [SoapHeader("Autenticacao")]
@@ -647,12 +647,37 @@ namespace SangueHeroiWeb
             }
             else
             {
-                string[] retorno = new string[3];
+                string[] retorno = new string[5];
                 retorno[0] = "Erro Autenticação do Webservice";
                 retorno[1] = "Erro Autenticação do Webservice";
                 retorno[2] = "Erro Autenticação do Webservice";
+                retorno[3] = "Erro Autenticação do Webservice";
+                retorno[4] = "Erro Autenticação do Webservice";
 
                 return retorno; 
+            }
+        }
+
+        [SoapHeader("Autenticacao")]
+        [WebMethod]
+        public int alterarInfoDoacao(string email_usuario, string dt_proxima_doacao)
+        {
+            if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            {
+                DoacaoDAO ddao = new DoacaoDAO();
+                UsuarioModel umodel = new UsuarioModel();
+
+                umodel.EMAIL_USUARIO = email_usuario;
+                if (dt_proxima_doacao != "")
+                    umodel.DATA_PROXIMA_DOACAO = Convert.ToDateTime(dt_proxima_doacao);
+
+                var retorno = ddao.setInfoDoacao(umodel);
+
+                return retorno;
+            }
+            else
+            {
+                return (int)SITUACAO.ERRO_DE_SISTEMA;
             }
         }
 

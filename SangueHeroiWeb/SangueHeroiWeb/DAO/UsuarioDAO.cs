@@ -133,13 +133,12 @@ namespace SangueHeroiWeb.DAO
         {
             var strQuery = "";
 
-            strQuery =  " SELECT * " + Environment.NewLine
+            strQuery = " SELECT * " + Environment.NewLine
                       + " FROM USUARIO U " + Environment.NewLine
                       + " INNER JOIN USUARIO_PERFIL UP " + Environment.NewLine
                       + " ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO " + Environment.NewLine
                       + " INNER JOIN USUARIO_ENDERECO UE " + Environment.NewLine
-                      + " ON U.CODIGO_USUARIO = UE.CODIGO_USUARIO " + Environment.NewLine
-                      + " WHERE U.CODIGO_USUARIO = 117";       
+                      + " ON U.CODIGO_USUARIO = UE.CODIGO_USUARIO";
 
             var dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
@@ -149,21 +148,29 @@ namespace SangueHeroiWeb.DAO
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    list.Add(new UsuarioModel
+                    try
                     {
-                        CODIGO_USUARIO = Convert.ToInt32(data["CODIGO_USUARIO"].ToString()),
-                        NOME_USUARIO = data["NOME_USUARIO"].ToString(),
-                        EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString(),
-                        TIPO_SANGUINEO = data["TIPO_SANGUINEO"].ToString(),
-                        DATA_NASCIMENTO = Convert.ToDateTime(data["DATA_NASCIMENTO"].ToString()),
-                        DATA_ULTIMA_DOACAO = Convert.ToDateTime(data["DATA_ULTIMA_DOACAO"].ToString()),
-                        SEXO = data["SEXO"].ToString(),
-                        DATA_PROXIMA_DOACAO = Convert.ToDateTime(data["DATA_PROXIMA_DOACAO"].ToString()),
-                        BAIRRO = data["BAIRRO"].ToString(),
-                        CIDADE = data["CIDADE"].ToString(),
-                        ESTADO = data["ESTADO"].ToString(),
-                        CEP = data["CEP"].ToString(),
-                    });
+
+                        list.Add(new UsuarioModel
+                        {
+                            CODIGO_USUARIO = Convert.ToInt32(data["CODIGO_USUARIO"].ToString()),
+                            NOME_USUARIO = data["NOME_USUARIO"].ToString(),
+                            EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString(),
+                            TIPO_SANGUINEO = data["TIPO_SANGUINEO"].ToString(),
+                            DATA_NASCIMENTO = Convert.ToDateTime(data["DATA_NASCIMENTO"].ToString()),
+                            DATA_ULTIMA_DOACAO = Convert.ToDateTime(data["DATA_ULTIMA_DOACAO"].ToString()),
+                            SEXO = data["SEXO"].ToString(),
+                            DATA_PROXIMA_DOACAO = Convert.ToDateTime(data["DATA_PROXIMA_DOACAO"].ToString()),
+                            BAIRRO = data["BAIRRO"].ToString(),
+                            CIDADE = data["CIDADE"].ToString(),
+                            ESTADO = data["ESTADO"].ToString(),
+                            CEP = data["CEP"].ToString(), 
+                        });
+                    }
+                    catch (FormatException e)
+                    {
+                       
+                    }
                 }
             }
 
