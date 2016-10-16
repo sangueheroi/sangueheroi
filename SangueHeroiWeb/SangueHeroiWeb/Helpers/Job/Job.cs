@@ -55,8 +55,8 @@ namespace SangueHeroiWeb.Helpers.Job
 
             foreach (var h in lstHemocentros)
             {
-                //var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO =  {h.CODIGO_HEMOCENTRO}");
-                var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO = 7");
+                var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO =  {h.CODIGO_HEMOCENTRO}");
+                //var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO = 7");
 
                 foreach (var tipoSanguineo in lstNiveisSanguineos)
                 {
