@@ -165,7 +165,7 @@ namespace SangueHeroiWeb.DAO
                 foreach (DataRow data in dt.Rows)
                     codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
 
-                strQueryUpdate = String.Format("UPDATE USUARIO_PERFIL SET DATA_PROXIMA_DOACAO = {0} WHERE CODIGO_USUARIO = {1}", model.DATA_PROXIMA_DOACAO, codigo_usuario);
+                strQueryUpdate = String.Format("UPDATE USUARIO_PERFIL SET DATA_PROXIMA_DOACAO = {0} WHERE CODIGO_USUARIO = {1}", Helpers.Util_Helper.UtilHelper.DateTimeParaSQLDate(model.DATA_PROXIMA_DOACAO), codigo_usuario);
 
                 try
                 {
