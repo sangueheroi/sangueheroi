@@ -133,6 +133,43 @@ namespace SangueHeroiWeb.DAO
             return doacao;
         }
 
+        public int setInfoDoacao(UsuarioModel model)
+        {
+            int atualizacaoOK = (int)SITUACAO.SUCESSO;
+
+            string strQueryUpdate = "";
+
+            string strQueryConsultaEmail = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+
+            DataTable dt = new DataTable();
+
+            dt = (DataTable)context.ExecuteCommand(strQueryConsultaEmail, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+            
+            if (dt.Rows.Count != 0)
+            {
+                int codigo_usuario = 0;
+
+                foreach (DataRow data in dt.Rows)
+                    codigo_usuario = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
+
+                strQueryUpdate = String.Format("UPDATE USUARIO_PERFIL SET DATA_PROXIMA_DOACAO = {0} WHERE CODIGO_USUARIO = {1}", model.DATA_PROXIMA_DOACAO, codigo_usuario);
+
+                try
+                {
+                    var a = context.ExecuteCommand(strQueryUpdate, CommandType.Text, ContextHelpers.TypeCommand.ExecuteReader);
+                    atualizacaoOK = (int)SITUACAO.SUCESSO;
+                }
+                catch (Exception)
+                {
+                    atualizacaoOK = (int)SITUACAO.ERRO_DE_SISTEMA;
+                }
+            }
+            else
+                atualizacaoOK = (int)SITUACAO.NAO_POSSUI_CADASTRO;
+
+            return atualizacaoOK;
+        }
+
         public int CadastrarDoacao(DoacaoModel dmodel)
         {
             int cadastroOK = (int)SITUACAO.DADOS_INVALIDOS;

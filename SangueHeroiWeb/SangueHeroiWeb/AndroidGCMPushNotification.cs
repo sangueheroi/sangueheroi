@@ -99,7 +99,7 @@ public class AndroidGCMPushNotification
 
         wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
 
-        string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
+        string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"campanha\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
 
         Byte[] bytes = Encoding.UTF8.GetBytes(postData);
         wRequest.ContentLength = bytes.Length;
@@ -165,7 +165,7 @@ public class AndroidGCMPushNotification
 
         wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
 
-        string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
+        string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"niveis_sanguineos\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
 
         Byte[] bytes = Encoding.UTF8.GetBytes(postData);
         wRequest.ContentLength = bytes.Length;
@@ -210,6 +210,7 @@ public class AndroidGCMPushNotification
     {
         //try
         //{
+
         string regIds = string.Join("\",\"", deviceRegIds);
 
         string AppId = "AIzaSyB5oZKX53Uw5z4cUmwEEgefWf8k0PFpwvY";
@@ -229,7 +230,7 @@ public class AndroidGCMPushNotification
 
         wRequest.Headers.Add(string.Format("Sender: id={0}", SenderId));
 
-        string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"message\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
+        string postData = "{\"collapse_key\":\"score_update\",\"time_to_live\":2419200,\"delay_while_idle\":true,\"data\": { \"proxima_doacao\" : " + value + ",\"time\": " + "\"" + System.DateTime.Now.ToString() + "\"},\"registration_ids\":[\"" + regIds + "\"]}";
 
         Byte[] bytes = Encoding.UTF8.GetBytes(postData);
         wRequest.ContentLength = bytes.Length;

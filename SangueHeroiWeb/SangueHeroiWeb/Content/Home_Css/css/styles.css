@@ -1077,10 +1077,10 @@ footer .rights a {
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#cccccc, GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
-  color: #336799;
+  color: #cd0000;
 }
 .btn.btn-default:hover {
-  color: #336799;
+  color: #cd0000;
 }
 form .form-control:focus {
   border-color: #cd0000;
@@ -1093,7 +1093,7 @@ form .form-control:focus {
   }
   header .navbar-default ul.navbar-nav li a {
     color: #ffffff;
-    border-bottom: 1px solid #376fa4;
+    border-bottom: 1px solid #e40000;
   }
   header .navbar-default ul.navbar-nav li a.getApp {
     color: #ffffff;
@@ -1102,21 +1102,25 @@ form .form-control:focus {
     display: none;
   }
   header .navbar-default ul.navbar-nav li a:hover {
-    color: #66cdcc;
+    color: black;
   }
+  header .navbar-default ul.navbar-nav li a.getApp:hover {
+    color: black;
+  }
+
   header .navbar-default .navbar-collapse {
-    background: #336799;
+    background: #E40000;
   }
   header .navbar-default.scrolled {
-    background: #336799;
+    background: #E40000;
   }
   header .navbar-default.scrolled ul.navbar-nav li a {
     color: #ffffff;
   }
   header .navbar-default.scrolled ul.navbar-nav li a:hover {
-    color: #66cdcc;
+    color: black;
   }
 }
 .pre-loader {
-  background: #336799;
+  background: #E40000;
 }

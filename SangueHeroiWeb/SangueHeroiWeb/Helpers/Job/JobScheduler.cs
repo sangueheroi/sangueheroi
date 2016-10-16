@@ -12,7 +12,7 @@ namespace SangueHeroiWeb.Helpers.Job
 
         public static void Start()
         {
-            var scheduler = StdSchedulerFactory.GetDefaultScheduler();
+           var scheduler = StdSchedulerFactory.GetDefaultScheduler();
 
             scheduler.Start();
 

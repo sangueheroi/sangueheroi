@@ -501,7 +501,15 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP %285%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP %286%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SangueHeroiWeb - FTP %287%29.pubxml" />
     <None Include="Properties\PublishProfiles\SangueHeroiWeb - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SangueHeroiWeb - Web Deploy %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SangueHeroiWeb - Web Deploy %285%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SangueHeroiWeb - Web Deploy %286%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SangueHeroiWeb - Web Deploy %287%29.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
