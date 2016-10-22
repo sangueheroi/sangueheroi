@@ -13,11 +13,7 @@ namespace SangueHeroiWeb.Controllers
     public class HemocentroController : Controller
     {
         // GET: Hemocentro
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         [HttpGet]
         public ActionResult ParceriaHemocentro()
         {
@@ -32,36 +28,45 @@ namespace SangueHeroiWeb.Controllers
         [HttpPost]
         public ActionResult ParceriaHemocentro(HemocentroModel model)
         {
-            HemocentroDAO dao = new HemocentroDAO();
-            String msg = "Solicitação de Parceira realizada com sucesso!";
-            bool redirect = true;
+            var dao = new HemocentroDAO();
+            var msg = "Solicitação de Parceira realizada com sucesso!";
+            var redirect = true;
+            var enc = new Encrypt();
 
             if (model != null)
             {
-                model.LOGIN_HEMOCENTRO = model.EMAIL_HEMOCENTRO.Split('@')[0];
-                model.SENHA_HEMOCENTRO = Helpers.Util_Helper.GeraSenha.CriaSenha();
-                model.CODIGO_STATUS = Helpers.Util_Helper.Constantes.CADASTRO_STATUS.Bloqueado;
+                model.LOGIN_HEMOCENTRO = model.EMAIL.Split('@')[0];
+                model.SENHA_HEMOCENTRO = enc.Encryption(GeraSenha.CriaSenha());
+                model.CODIGO_STATUS = Constantes.CADASTRO_STATUS.Bloqueado;
 
-                if (dao.ParceriaHemocentro(model))
+                if (dao.ParceriaHemocentro(model) == Constantes.PARCERIA_HEMOCENTRO.SUCESSO)
                 {
                     //Enviar email para admns, avisando que existe cadastro para ser validado
-                    List<String> list = Helpers.Constantes_Helper.EmailAdministradorescs.Email();
+                    var listEmailAdm = Helpers.Constantes_Helper.EmailAdministradorescs.Email();
+                    var body = "Atenção! Existe uma Parceria de um Hemocentro Para ser Validada";
+                    const string subject = "Sangue Heroi - Solicitação de Parceria";
 
-                    foreach (var email in list)
+                    foreach (var email in listEmailAdm)
                     {
-                        var emailAdm = email.ToString().Split('|')[0];
-                        var nomeAdm = email.ToString().Split('|')[1];
+                        var emailAdm = email.Split('|')[0];
+                        var nomeAdm = email.Split('|')[1];
 
-                        EmailHelper.EnviarEmailSolicitacaoPareriaHemocentro(emailAdm, nomeAdm, true);
+                        EmailHelper.EnviarEmail(emailAdm, nomeAdm, body, subject, true);
                     }
 
                     //Envio email para o hemocentro falando que em 24h o cadastro sera validado
-
-                    EmailHelper.EnviaEmailParaHemocentro(model.EMAIL_HEMOCENTRO, model.NOME_HEMOCENTRO, true);
+                    body =
+                        "Atenção! Seu Cadastro Foi Enviado Para nossos Administradores, em até 24horas você receberá um login e uma senha!";
+                    EmailHelper.EnviarEmail(model.EMAIL, model.NOME_HEMOCENTRO, body, subject, true);
                 }
-                else
+                else if (dao.ParceriaHemocentro(model) == Constantes.PARCERIA_HEMOCENTRO.USUARIO_EXISTENTE)
                 {
-                    msg = "Erro ao Solicitar Parceria, contate os administradores do sistema!";
+                    msg = "Atenção! Já existe cadastro com esses dados, para solicitar sua senha, vá em login, depois em 'esqueci minha senha', caso encontre dificuldades entre em contato com um administrador";
+                    redirect = false;
+                }
+                else if (dao.ParceriaHemocentro(model) == Constantes.PARCERIA_HEMOCENTRO.ERRO)
+                {
+                    msg = "Atenção! Ocorreu um Erro, Por gentileza entre em contato com os administradores do sistema";
                     redirect = false;
                 }
             }
@@ -78,10 +83,11 @@ namespace SangueHeroiWeb.Controllers
         public ActionResult Editar()
         {
             var idHemocentro = Session["ID_HEMOCENTRO"];
+            var enc = new Encrypt();
 
             HemocentroDAO hd = new HemocentroDAO();
             HemocentroModel model = hd.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + idHemocentro);
-
+            model.SENHA_HEMOCENTRO = enc.DecryptoRSA(model.SENHA_HEMOCENTRO);
             return View(model);
         }
 

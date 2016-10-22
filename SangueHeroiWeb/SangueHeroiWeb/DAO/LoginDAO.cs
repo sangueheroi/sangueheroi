@@ -25,7 +25,7 @@ namespace SangueHeroiWeb.DAO
         {
             int loginOK = (int) SITUACAO.SUCESSO;
 
-            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+            var strQuery = $"SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{model.EMAIL_USUARIO}'";
 
             DataTable dt = new DataTable();
 
@@ -72,15 +72,15 @@ namespace SangueHeroiWeb.DAO
 
                         model.SENHA = enc.DecryptoRSA(model.SENHA);
                         senha_banco = enc.DecryptoRSA(senha_banco);
-                        
+
                         if (!model.SENHA.Equals(senha_banco))
-                            loginOK = (int)SITUACAO.DADOS_INVALIDOS;
+                            loginOK = (int) SITUACAO.DADOS_INVALIDOS;
                     }
                 }
                 else
                 {
                     nome = "";
-                    loginOK = (int)SITUACAO.NAO_POSSUI_CADASTRO;
+                    loginOK = (int) SITUACAO.NAO_POSSUI_CADASTRO;
                 }
 
                 usuario[0] = nome;
@@ -91,80 +91,83 @@ namespace SangueHeroiWeb.DAO
                 usuario[0] = exception.Message;
                 usuario[1] = exception.Message;
             }
-           
+
             return usuario;
         }
 
         public int LogarHemocentro(HemocentroModel model)
         {
-            int loginOK = (int) SITUACAO.SUCESSO;
-
-            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE LOGIN_HEMOCENTRO = '{0}'", model.LOGIN_HEMOCENTRO);
-
-            DataTable dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-
-            if (dt.Rows.Count > 0)
+            var loginOk = (int) SITUACAO.SUCESSO;
+            var hDao = new HemocentroDAO();
+            var enc = new Encrypt();
+            try
             {
-                foreach (DataRow data in dt.Rows)
+                var hemocentro = hDao.BuscaHemocentro($" WHERE LOGIN_HEMOCENTRO = '{model.LOGIN_HEMOCENTRO}'");
+                if (hemocentro != null)
                 {
-                    if(!(Convert.ToInt32(data["CODIGO_STATUS"]) == Constantes.CADASTRO_STATUS.Bloqueado))
+                    if (Convert.ToInt32(hemocentro.CODIGO_STATUS) != Constantes.CADASTRO_STATUS.Bloqueado)
                     {
-                        if (!model.SENHA_HEMOCENTRO.Equals(data["SENHA_HEMOCENTRO"]))
-                            loginOK = (int)SITUACAO.DADOS_INVALIDOS;
+                        
+
+                        var senhaCadastrada = enc.DecryptoRSA(hemocentro.SENHA_HEMOCENTRO);
+                        if (!senhaCadastrada.Equals(model.SENHA_HEMOCENTRO))
+                            loginOk = (int)SITUACAO.DADOS_INVALIDOS;
                     }
                     else
                     {
-                        loginOK = Convert.ToInt32(SITUACAO.CADASTRO_BLOQUEADO);
+                        loginOk = Convert.ToInt32(SITUACAO.CADASTRO_BLOQUEADO);
                     }
-                   
+                }
+                else
+                {
+                    loginOk = (int)SITUACAO.NAO_POSSUI_CADASTRO;
                 }
             }
-            else
+            catch (Exception)
             {
-                loginOK = (int)SITUACAO.NAO_POSSUI_CADASTRO;
+                loginOk = (int) SITUACAO.ERRO_DE_SISTEMA;
             }
-            return loginOK;
+           
+            return loginOk;
         }
 
         public bool EsqueciMinhaSenha(string emailHemocentro)
         {
-            bool envioEmailOk = true;
+            var envioEmailOk = true;
+            var hDao = new HemocentroDAO();
+            var hemocentro = hDao.BuscaHemocentro($" WHERE H.EMAIL = '{emailHemocentro}'");
+            var enc = new Encrypt();
 
-            var strQuery = String.Format("SELECT * FROM HEMOCENTRO WHERE EMAIL_HEMOCENTRO = '{0}'", emailHemocentro);
-
-            DataTable dt = new DataTable();
-
-            dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-            
-            if (dt != null)
+            try
             {
-                try
+                if (hemocentro != null)
                 {
-                    foreach (DataRow data in dt.Rows)
-                    {
-                        EmailHelper.EnviarEmail(data[""].ToString(), data[""].ToString(), true);
-                    }
-
+                    hemocentro.SENHA_HEMOCENTRO = enc.Encryption(GeraSenha.CriaSenha());
+                    hDao.Editar(hemocentro);
                 }
-                catch (SmtpFailedRecipientException ex)
+                else
                 {
-                    Console.WriteLine("Mensagem : {0} " + ex.Message);
-                }
-                catch (SmtpException ex)
-                {
-                    Console.WriteLine("Mensagem SMPT Fail : {0} " + ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Mensagem Exception : {0} " + ex.Message);
+                    envioEmailOk = false;
                 }
             }
-            else
+            catch (SmtpFailedRecipientException ex)
             {
+                Console.WriteLine("Mensagem : {0} " + ex.Message);
                 envioEmailOk = false;
             }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine("Mensagem SMPT Fail : {0} " + ex.Message);
+                envioEmailOk = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Mensagem Exception : {0} " + ex.Message);
+                envioEmailOk = false;
+            }
+
             return envioEmailOk;
         }
-        
+
     }
 }

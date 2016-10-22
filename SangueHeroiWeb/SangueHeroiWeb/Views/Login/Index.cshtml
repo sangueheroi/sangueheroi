@@ -113,7 +113,7 @@
                         <a href="#about" class="btn btn-primary inverse btn-lg">Saiba Mais</a>
                     </div>
                     <div class="tp-caption sfr hidden-xs" data-x="730" data-y="center" data-hoffset="0" data-voffset="85" data-speed="1500" data-start="1900" data-easing="Power4.easeOut">
-                        <a href="#getApp" class="btn btn-default btn-lg">Baixar App</a>
+                        <a href="#getApp" class="btn btn-default btn-lg getApp">Baixar App</a>
                     </div>
                 </li>
                 <!-- SLIDE 2 -->
@@ -305,17 +305,22 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-8 col-sm-8 scrollpoint sp-effect1">
-                            <form role="form">
+                            <form role="form" id="frmFaleConosco" action="">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Seu nome">
+                                    <label class="form-group" style="color: #cd0101;margin-left:10px">Seu Nome</label>
+                                    <input type="text" class="form-control" id="txtSeuNome" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Seu email">
+                                    <label class="form-group" style="color: #cd0101;margin-left:10px">Seu E-mail</label>
+                                    <input type="email" class="form-control" id="txtSeuEmail" required="required"/>
                                 </div>
                                 <div class="form-group">
-                                    <textarea cols="30" rows="10" class="form-control" placeholder="Sua mensagem"></textarea>
+                                    <label class="form-group" style="color: #cd0101;margin-left:10px">Sua Mensagem</label>
+                                    <textarea cols="30" rows="10" class="form-control" id="txtSuaMensagem" required="required"></textarea>
                                 </div>
+                               
                                 <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+                               
                             </form>
                         </div>
                         <div class="col-md-4 col-sm-4 contact-details scrollpoint sp-effect2">
@@ -380,7 +385,6 @@
 <script src="~/Content/Home_Css/js/scripts.js"></script>
 <script src="~/Scripts/login/login.js"></script>
 <script src="~/Scripts/jquery-ui.js"></script>
-<script src="~/Scripts/notify.min.js">  </script>
 <script src="~/Scripts/jquery.mask.min.js">  </script>
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/respond.js"></script>
@@ -428,12 +432,16 @@
     });
 
     $(document).ready(function () {
-       
         $('#btnParceriaIndex').on("click", function () {
             //$('#modalLogin').modal('hide');
             ModalParceriaHemocentro();
         });
     });
+
+    $('#txtSeuNome').keypress($(this).css('border-color', ''));
+    $('#txtSeuEmail').keypress($(this).css('border-color', ''));
+    $('#txtSuaMensagem').keypress($(this).css('border-color', ''));
+    
 </script>
 
 <style type="text/css">

@@ -20,26 +20,7 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
     {
         ContextHelpers context;
 
-        public static String Encrypto(string value)
-        {
-            MD5 md5 = MD5.Create();
-
-            value = value + Constantes.PALAVRA_CRIPTOGRAFIA;
-
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(value);
-
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-            for (int i = 0; i < hash.Length; i++)
-            {
-                sb.Append(hash[i].ToString("X2"));
-            }
-
-            return sb.ToString();
-        }
-
+        
         private string[] ConsultarChaves()
         {
             context = new ContextHelpers();
@@ -77,6 +58,31 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
             return chaves;
         }
 
+        public string Encryption(string strText)
+        {
+            String[] chaves = ConsultarChaves();
+            var publicKey = chaves[0];
+            string senhaCriptografada;
+
+            var data = Encoding.UTF8.GetBytes(strText);
+
+            using (var rsa = new RSACryptoServiceProvider(1024))
+            {
+                try
+                {
+                    rsa.FromXmlString(publicKey);
+                    var encryptedData = rsa.Encrypt(data, false);
+                    senhaCriptografada = Convert.ToBase64String(encryptedData);
+                }
+                finally
+                {
+                    rsa.PersistKeyInCsp = false;
+                }
+            }
+
+            return senhaCriptografada;
+        }
+
         public string DecryptoRSA(string valor)
         {
             string decryptedString = string.Empty;
@@ -105,9 +111,9 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
             }
             catch (Exception exception)
             {
-                return exception.Message;
+                throw;
             }
-            
+
             return decryptedString;
         }
 
@@ -122,11 +128,11 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
 
                 // For any reference parameters with the correct name.
                 if (h.Name == "Autenticacao")
-                { 
+                {
                     // Read the value of that header. 
                     XmlReader xr = System.ServiceModel.OperationContext.Current.IncomingMessageHeaders.GetReaderAtHeader(i);
                     //apiKey = xr.ReadElementContentAsString(); 
-                    xr.ReadToFollowing("Autenticacao"); 
+                    xr.ReadToFollowing("Autenticacao");
                     token = xr.ReadElementContentAsString();
                 }
             }
