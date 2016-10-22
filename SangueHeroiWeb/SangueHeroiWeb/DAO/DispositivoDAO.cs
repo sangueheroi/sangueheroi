@@ -349,7 +349,7 @@ namespace SangueHeroiWeb.DAO
             string strQueryConsultaCodigoUsuarioDispositivo = "";
   
             strQueryConsultaCodigoUsuario = String.Format("SELECT CODIGO_USUARIO FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", dmodel.EMAIL_USUARIO);
-            strQueryConsultaCodigoUsuarioDispositivo = String.Format("SELECT CODIGO_USUARIO FROM DISPOSITIVO WHERE TOKEN = '{0}'", dmodel.TOKEN);
+            strQueryConsultaCodigoUsuarioDispositivo = String.Format("SELECT D.CODIGO_USUARIO FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", dmodel.EMAIL_USUARIO);
 
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
