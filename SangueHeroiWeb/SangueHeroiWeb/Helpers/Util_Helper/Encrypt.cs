@@ -72,6 +72,7 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
                 {
                     rsa.FromXmlString(publicKey);
                     var encryptedData = rsa.Encrypt(data, false);
+                    
                     senhaCriptografada = Convert.ToBase64String(encryptedData);
                 }
                 finally
@@ -93,7 +94,10 @@ namespace SangueHeroiWeb.Helpers.Util_Helper
                 const string CONTAINER_NAME = "Tracker";
 
                 CspParameters cspParams;
+                
                 cspParams = new CspParameters(PROVIDER_RSA_FULL);
+                cspParams.Flags = CspProviderFlags.UseMachineKeyStore;
+               
                 cspParams.KeyContainerName = CONTAINER_NAME;
                 RSACryptoServiceProvider rsa1 = new RSACryptoServiceProvider(cspParams);
 

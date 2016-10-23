@@ -123,7 +123,7 @@ namespace SangueHeroiWeb.DAO
                     loginOk = (int)SITUACAO.NAO_POSSUI_CADASTRO;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 loginOk = (int) SITUACAO.ERRO_DE_SISTEMA;
             }
@@ -142,7 +142,7 @@ namespace SangueHeroiWeb.DAO
             {
                 if (hemocentro != null)
                 {
-                    hemocentro.SENHA_HEMOCENTRO = enc.Encryption(GeraSenha.CriaSenha());
+                    hemocentro.SENHA_HEMOCENTRO = GeraSenha.CriaSenha();
                     hDao.Editar(hemocentro);
                 }
                 else

@@ -32,7 +32,7 @@ namespace SangueHeroiWeb.Controllers
             
             int loginOK = dao.LogarHemocentro(model);
 
-            if (loginOK == (int) SITUACAO.DADOS_INVALIDOS)
+            if (loginOK == (int)SITUACAO.DADOS_INVALIDOS)
             {
                 return Json(new
                 {
@@ -40,7 +40,7 @@ namespace SangueHeroiWeb.Controllers
                     isRedirect = false
                 });
             }
-            else if (loginOK == (int) SITUACAO.NAO_POSSUI_CADASTRO)
+            else if (loginOK == (int)SITUACAO.NAO_POSSUI_CADASTRO)
             {
                 return Json(new
                 {

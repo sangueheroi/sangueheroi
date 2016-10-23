@@ -9,7 +9,7 @@ using System.Web;
 
 namespace SangueHeroiWeb.Helpers.Job
 {
-    public class Job : IJob
+    public class JobVerificaNiveisSanguineos : IJob
     {
         public void Execute(IJobExecutionContext context)
         {
@@ -40,7 +40,7 @@ namespace SangueHeroiWeb.Helpers.Job
 
             string destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
 
-            disDao.DispararNotificacaoProximaDoacao(usuario.DESTINATARIOS.FirstOrDefault().DATA_PROXIMA_DOACAO, "O dia de sua doação está próximo!", "Identificamos que a data que você pode realizar sua doação está bem próxima! Doe sangue, salve vidas!", destinatarios);
+            disDao.DispararNotificacaoProximaDoacao(usuario.DESTINATARIOS.FirstOrDefault().DATA_PROXIMA_DOACAO_STR, "O dia de sua doação está próximo!", "Identificamos que a data que você pode realizar sua doação está bem próxima! Doe sangue, salve vidas!", destinatarios);
         }
 
         private static void VerificaNiveisSanguineos()

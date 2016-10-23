@@ -16,18 +16,18 @@ namespace SangueHeroiWeb.Helpers.Job
 
             scheduler.Start();
 
-            var job = JobBuilder.Create<Job>().Build();
+            var jobVerificaNiveisSanguineos = JobBuilder.Create<JobVerificaNiveisSanguineos>().Build();
 
             var trigger = TriggerBuilder.Create()
                 .WithIdentity(nameof(Job), "JobGroup")
                 .StartNow()
                 .WithSimpleSchedule(s => s 
-                .WithIntervalInSeconds(500)
+                .WithIntervalInSeconds(120)
                 //.WithIntervalInHours(24)
                 .RepeatForever())
                 .Build();
 
-            scheduler.ScheduleJob(job, trigger);
+            scheduler.ScheduleJob(jobVerificaNiveisSanguineos, trigger);
         }
     }
 }

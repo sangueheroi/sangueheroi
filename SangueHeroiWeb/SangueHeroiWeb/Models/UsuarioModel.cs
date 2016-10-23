@@ -48,6 +48,10 @@ namespace SangueHeroiWeb.Models
 
         public List<UsuarioModel> DESTINATARIOS { get; set; }
 
+        public string DATA_CRIACAO_STR => $"{DATA_CRIACAO.Day}-{DATA_CRIACAO.Month}-{DATA_CRIACAO.Year}";
+        public string DATA_NASCIMENTO_STR => $"{DATA_NASCIMENTO.Day}-{DATA_NASCIMENTO.Month}-{DATA_NASCIMENTO.Year}";
+        public string DATA_ULTIMA_DOACAO_STR => $"{DATA_ULTIMA_DOACAO.Day}-{DATA_ULTIMA_DOACAO.Month}-{DATA_ULTIMA_DOACAO.Year}";
+        public string DATA_PROXIMA_DOACAO_STR => $"{DATA_PROXIMA_DOACAO.Day}-{DATA_PROXIMA_DOACAO.Month}-{DATA_PROXIMA_DOACAO.Year}";
     }
 
     public class UsuarioHeroiModel

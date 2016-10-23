@@ -188,9 +188,9 @@ namespace SangueHeroiWeb.DAO
                         cmodel.NOME_CAMPANHA = data["NOME_CAMPANHA"].ToString();
                     if (cmodel.DESCRICAO_CAMPANHA == "")
                         cmodel.DESCRICAO_CAMPANHA = data["DESCRICAO_CAMPANHA"].ToString();
-                    if (cmodel.NOME_RECEPTOR == "")
+                    if (string.IsNullOrEmpty(cmodel.NOME_RECEPTOR))
                         cmodel.NOME_RECEPTOR = data["NOME_RECEPTOR"].ToString();
-                    if (cmodel.TIPO_SANGUINEO == "")
+                    if (string.IsNullOrEmpty(cmodel.TIPO_SANGUINEO))
                         cmodel.TIPO_SANGUINEO = data["TIPO_SANGUINEO"].ToString();
                     if (cmodel.DATA_INICIO_DT == null)
                         cmodel.DATA_INICIO_DT = Convert.ToDateTime(data["DATA_INICIO"].ToString());
@@ -320,6 +320,7 @@ namespace SangueHeroiWeb.DAO
                     campanha.CODIGO_CAMPANHA = Convert.ToInt32(data["CODIGO_CAMPANHA"].ToString());
                     campanha.NOME_CAMPANHA = data["NOME_CAMPANHA"].ToString();
                     campanha.DESCRICAO_CAMPANHA = data["DESCRICAO_CAMPANHA"].ToString();
+
                     if(Convert.ToInt32(data["CODIGO_HEMOCENTRO"].ToString()) > 1)
                     {
                         campanha.NOME_USUARIO = data["NOME_HEMOCENTRO"].ToString();

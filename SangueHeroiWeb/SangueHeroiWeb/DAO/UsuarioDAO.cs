@@ -134,11 +134,12 @@ namespace SangueHeroiWeb.DAO
             var strQuery = "";
 
             strQuery = " SELECT * " + Environment.NewLine
-                      + " FROM USUARIO U " + Environment.NewLine
-                      + " INNER JOIN USUARIO_PERFIL UP " + Environment.NewLine
-                      + " ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO " + Environment.NewLine
-                      + " INNER JOIN USUARIO_ENDERECO UE " + Environment.NewLine
-                      + " ON U.CODIGO_USUARIO = UE.CODIGO_USUARIO";
+                       + " FROM USUARIO U " + Environment.NewLine
+                       + " INNER JOIN USUARIO_PERFIL UP " + Environment.NewLine
+                       + " ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO " + Environment.NewLine
+                       + " INNER JOIN USUARIO_ENDERECO UE " + Environment.NewLine
+                       + " ON U.CODIGO_USUARIO = UE.CODIGO_USUARIO" + Environment.NewLine
+                       + " WHERE U.CODIGO_USUARIO = 117";
 
             var dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 

@@ -5,8 +5,8 @@ using SangueHeroiWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace SangueHeroiWeb.Controllers
 {
@@ -18,14 +18,15 @@ namespace SangueHeroiWeb.Controllers
             return View();
         }
 
+        public ActionResult Teste()
+        {
+            return View();
+        }
+
         public JsonResult GetListCampanhas()
         {
-            CampanhaDAO campanhaDAO = new CampanhaDAO();
-            HemocentroDAO hemocentroDAO = new HemocentroDAO();
-            List<CampanhaModel> list = new List<CampanhaModel>();
-            HemocentroModel hemocentroModel = new HemocentroModel();
-
-            list = campanhaDAO.consultarCampanhas("  WHERE C.DATA_FIM >= " + UtilHelper.DateTimeParaSQLDate(DateTime.Now));
+            var campanhaDao = new CampanhaDAO();
+            var list = campanhaDao.consultarCampanhas("  WHERE C.DATA_FIM >= " + UtilHelper.DateTimeParaSQLDate(DateTime.Now));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -33,33 +34,75 @@ namespace SangueHeroiWeb.Controllers
         [HttpGet]
         public ActionResult Editar(int idCampanha)
         {
-            CampanhaDAO campanhaDAO = new CampanhaDAO();
-            CampanhaModel model = campanhaDAO.BuscaCampanha(" WHERE C.CODIGO_CAMPANHA = " + idCampanha);
+            var campanhaDao = new CampanhaDAO();
+            var model = campanhaDao.BuscaCampanha(" WHERE C.CODIGO_CAMPANHA = " + idCampanha);
+            ViewBag.TipoSanguineo = TiposSanguineos.GetTiposSanguineos();
 
             Session["NOME_CAMPANHA"] = model.NOME_CAMPANHA;
+            List<String> Estados = new List<string>();
+            Estados.Add("AC");
+            Estados.Add("AL");
+            Estados.Add("AP");
+            Estados.Add("AM");
+            Estados.Add("BA");
+            Estados.Add("CE");
+            Estados.Add("DF");
+            Estados.Add("ES");
+            Estados.Add("GO");
+            Estados.Add("MA");
+            Estados.Add("MT");
+            Estados.Add("MS");
+            Estados.Add("MG");
+            Estados.Add("PA");
+            Estados.Add("PB");
+            Estados.Add("PR");
+            Estados.Add("PE");
+            Estados.Add("PI");
+            Estados.Add("RR");
+            Estados.Add("RO");
+            Estados.Add("RJ");
+            Estados.Add("RN");
+            Estados.Add("RS");
+            Estados.Add("SC");
+            Estados.Add("SP");
+            Estados.Add("SE");
+            Estados.Add("TO");
 
-            return PartialView("_Editar",model);
+            ViewBag.Estados = Estados;
+
+            return PartialView("_Editar", model);
         }
 
         [HttpPost]
         public ActionResult Editar(CampanhaModel model)
         {
-            CampanhaDAO campanhaDAO = new CampanhaDAO();
-            String msg = "Edição Realizada com sucesso";
-            bool redirect = true;
+            var campanhaDao = new CampanhaDAO();
+            var msg = "Edição Realizada com sucesso";
+            var uDao = new UsuarioDAO();
 
-            string destinatario = "";
+            var lstUsuario = uDao.consultarUsuarios();
+            var usuario = new UsuarioModel { DESTINATARIOS = new List<UsuarioModel>() };
 
-            if (campanhaDAO.AlterarCampanha(model, destinatario) != (int)SITUACAO.SUCESSO)
+            foreach (var usu in lstUsuario)
             {
-                msg = "Atenção! Ocorreu um Erro ao realizar a edição, favor contatar um administrador";
-                redirect = false;
+                usuario.DESTINATARIOS.Add(usu);
             }
+
+            var destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+            if (campanhaDao.AlterarCampanha(model, destinatarios) == (int)SITUACAO.SUCESSO)
+                return Json(new
+                {
+                    msg,
+                    isRedirect = true
+                });
+
+            msg = "Atenção! Ocorreu um Erro ao realizar a edição, favor contatar um administrador";
 
             return Json(new
             {
-                msg = msg,
-                isRedirect = redirect
+                msg,
+                isRedirect = false
             });
         }
 
@@ -106,28 +149,38 @@ namespace SangueHeroiWeb.Controllers
         [HttpPost]
         public ActionResult CriarCampanha(CampanhaModel model)
         {
-           
-            String msg = "Campanha Cadastrada com sucesso";
-            bool redirect = true;
+            var msg = "Campanha Cadastrada com sucesso";
+            var redirect = true;
 
-            CampanhaDAO campanhaDAO = new CampanhaDAO();
-            HemocentroDAO hemocentroDAO = new HemocentroDAO();
-            HemocentroModel modelHemocentro = hemocentroDAO.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + Convert.ToInt32(Session["ID_HEMOCENTRO"].ToString()));
-            DispositivoDAO ddao = new DispositivoDAO();
+            var cDao = new CampanhaDAO();
+            var hDao = new HemocentroDAO();
+            var dDo = new DispositivoDAO();
+            var uDao = new UsuarioDAO();
 
-            model.CODIGO_HEMOCENTRO = modelHemocentro.CODIGO_HEMOCENTRO;
-            model.NOME_USUARIO = modelHemocentro.NOME_HEMOCENTRO;
+            var hemocentro = hDao.BuscaHemocentro(" WHERE H.CODIGO_HEMOCENTRO = " + Convert.ToInt32(Session["ID_HEMOCENTRO"].ToString()));
+            model.CODIGO_HEMOCENTRO = hemocentro.CODIGO_HEMOCENTRO;
+            model.NOME_USUARIO = hemocentro.NOME_HEMOCENTRO;
 
             if (model.NOME_RECEPTOR == null)
                 model.NOME_RECEPTOR = "";
             else
                 model.TIPO_SANGUINEO = "";
 
-            var retorno = campanhaDAO.CadastrarCampanhaHemocentro(model);
+            var retorno = cDao.CadastrarCampanhaHemocentro(model);
+
+            var lstUsuario = uDao.consultarUsuarios();
+            var usuario = new UsuarioModel { DESTINATARIOS = new List<UsuarioModel>() };
+
+            foreach (var usu in lstUsuario)
+            {
+                usuario.DESTINATARIOS.Add(usu);
+            }
+
+            var destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
 
             if (retorno == (int)SITUACAO.SUCESSO)
             {
-                ddao.DispararNotificacao(model,true,"");
+                dDo.DispararNotificacao(model, true, destinatarios);
             }
             else
             {
@@ -138,7 +191,7 @@ namespace SangueHeroiWeb.Controllers
 
             return Json(new
             {
-                msg = msg,
+                msg,
                 isRedirect = redirect,
                 url = Url.Action("Index")
             });

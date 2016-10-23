@@ -123,7 +123,10 @@ namespace SangueHeroiWeb.DAO
                 {
                     foreach (var item in destinatarios.DESTINATARIOS)
                     {
-                        string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO INNER JOIN USUARIO_GRUPO UG ON U.CODIGO_USUARIO = UG.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0}", item.CODIGO_GRUPO);
+                        //string strQueryConsultaToken = String.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO INNER JOIN USUARIO_GRUPO UG ON U.CODIGO_USUARIO = UG.CODIGO_USUARIO WHERE UG.CODIGO_GRUPO = {0}", item.CODIGO_GRUPO);
+                        string strQueryConsultaToken = string.Format("SELECT D.TOKEN FROM DISPOSITIVO D INNER JOIN USUARIO U ON U.CODIGO_USUARIO = D.CODIGO_USUARIO INNER JOIN USUARIO_GRUPO UG ON U.CODIGO_USUARIO = UG.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", item.EMAIL_USUARIO);
+
+
                         dt4 = (DataTable)context.ExecuteCommand(strQueryConsultaToken, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
 
                         foreach (DataRow data4 in dt4.Rows)
@@ -234,7 +237,7 @@ namespace SangueHeroiWeb.DAO
             return envio;
         }
 
-        public string DispararNotificacaoProximaDoacao(DateTime data_proxima_doacao, string titulo, string mensagem, string destinatario)
+        public string DispararNotificacaoProximaDoacao(string DATA_PROXIMA_DOACAO_STR, string titulo, string mensagem, string destinatario)
         {
             AndroidGCMPushNotification gcm = new AndroidGCMPushNotification();
             DataTable dt = new DataTable();
@@ -276,7 +279,7 @@ namespace SangueHeroiWeb.DAO
                 }
             }
 
-            envio = gcm.EnviarNotificacaoProximaDoacao(dispositivos, mensagem, titulo, data_proxima_doacao);
+            envio = gcm.EnviarNotificacaoProximaDoacao(dispositivos, mensagem, titulo, DATA_PROXIMA_DOACAO_STR);
 
             return envio;
         }

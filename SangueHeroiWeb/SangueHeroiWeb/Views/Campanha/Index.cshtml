@@ -139,7 +139,8 @@
                 {
                     data: "NOME_USUARIO",
                     render: function (data, type, row) {
-                        if (data == nomeHemocentro)
+                        
+                        if (data === nomeHemocentro)
                             return "<button class='btn btn-danger btn-sm' id='btnEncerrarCampanha' type='button' title='Encerrar Campanha'><span class='glyphicon glyphicon-remove'></span> </button>";
                         else
                             return "<button disabled class='btn btn-danger btn-sm' id='btnEncerrarCampanha' type='button' title='Encerrar Campanha'><span class='glyphicon glyphicon-remove'></span> </button>";
