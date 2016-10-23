@@ -8,7 +8,7 @@
     <div class="centralizar" style="padding-bottom: 10px">
         <h2>Solicitação de Parceria</h2>
     </div>
-    @using (Html.BeginForm("ParceriaHemocentro", "Login", FormMethod.Post, new { @id = "formParceriaHemocentro" }))
+    @using (Html.BeginForm("ParceriaHemocentro", "Hemocentro", FormMethod.Post, new { @id = "formParceriaHemocentro" }))
             {
         @Html.AntiForgeryToken()
 
@@ -50,8 +50,8 @@
                 @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-sm-4">
-                @Html.EditorFor(model => model.EMAIL_HEMOCENTRO, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail", required = "required", type = "mail" } })
-                @Html.ValidationMessageFor(model => model.EMAIL_HEMOCENTRO, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail", required = "required", type = "mail" } })
+                @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-4">
                @Html.EditorFor(model => model.PERIODO_FUNCIONAMENTO_HEMOCENTRO, new { htmlAttributes = new { @class = "form-control", placeholder = "Periodo de Funcionamento", required = "required" } })
@@ -62,92 +62,160 @@
         <div class="row">
             <div class="form-group col-md-12">
                 <input type="submit" value="Enviar" class="btn btn-default btn-lg" style="float: right" />
+                <button type="button" class="btn btn-primary" id="sair" style="float: right; margin-right:20px; height:45px; width:90px; font-size:19px">Sair</button>
             </div>
         </div>
     }
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" id="sair">Sair</button>
 </div>
 
+<script src="~/Scripts/validaCNPJ_CPF.js"></script>
 <script>
 
     $(document).ready(function () {
-        $('#sair').on('click', function () {
-            $('#modalCriarConta').modal('hide');
-            $('body').css({ 'padding-right': '0px' });
-        })
+        $('#sair')
+            .on('click',
+                function() {
+                    $('#modalCriarConta').modal('hide');
+                    $('body').css({ 'padding-right': '0px' });
+                });
     });
 
 
-    $(document).ready(function () {
-        $('form#formParceriaHemocentro').submit(function (e) {
-            //Objeto Model
-            var ObjHemocentro = {
-                NOME_HEMOCENTRO: "",
-                RAZAO_SOCIAL: "",
-                CNPJ: "",
-                CIDADE_HEMOCENTRO: "",
-                ESTADO_HEMOCENTRO: "",
-                CEP: 0,
-                TELEFONE_HEMOCENTRO: "",
-                EMAIL_HEMOCENTRO: 0,
-                PERIODO_FUNCIONAMENTO_HEMOCENTRO: "",
-            };
+    $(document)
+        .ready(function() {
 
-           
-            ObjHemocentro["NOME_HEMOCENTRO"] = $('#NOME_HEMOCENTRO').val();
-            ObjHemocentro["RAZAO_SOCIAL"] = $('#RAZAO_SOCIAL').val();
-            ObjHemocentro["CNPJ"] = $('#CNPJ').val();
-            ObjHemocentro["CIDADE_HEMOCENTRO"] = $('#CIDADE_HEMOCENTRO').val();
-            ObjHemocentro["ESTADO_HEMOCENTRO"] = $('#ESTADO_HEMOCENTRO option:selected').val();
-            ObjHemocentro["CEP"] = $('#CEP').val();
-            ObjHemocentro["TELEFONE_HEMOCENTRO"] = $('#TELEFONE_HEMOCENTRO').val();
-            ObjHemocentro["EMAIL_HEMOCENTRO"] = $('#EMAIL_HEMOCENTRO').val();
-            ObjHemocentro["PERIODO_FUNCIONAMENTO_HEMOCENTRO"] = $('#PERIODO_FUNCIONAMENTO_HEMOCENTRO').val();
-
-        
-            $.ajax({
-                type: 'POST',
-                url: './Hemocentro/ParceriaHemocentro',
-                contentType: 'application/json',
-                data: (JSON.stringify(ObjHemocentro)),
-                dataType: 'json',
-                cache: false,
-                async: true,
-                success: function (data) {
-                    if(!data.isRedirect)
-                    {
-                        $.notify({
-                            message: data.msg,
-                            status: "warning",
-                            timeout: 1000,
-                        });
-                    }
-                    else
-                    {
-                        $.notify({
-                            message: data.msg,
-                            status: "warning",
-                            timeout: 1000,
-                            onClose: function () { window.location.reload(true) }
-
-                        });
-                       
-                    }
-                }
-            });
-            if (e.preventDefault) {
-                e.preventDefault();
-            } else {
-                e.returnValue = false;
+            function limpaCep() {
+                // Limpa valores do formulário de cep.
+                $("#CEP").val("");
             }
+
+            //Quando o campo cep perde o foco.
+            $("#CEP")
+                .blur(function() {
+
+                    //Nova variável "cep" somente com dígitos.
+                    var cep = $(this).val().replace(/\D/g, '');
+
+                    //Verifica se campo cep possui valor informado.
+                    if (cep != "") {
+
+                        //Expressão regular para validar o CEP.
+                        var validacep = /^[0-9]{8}$/;
+
+                        //Valida o formato do CEP.
+                        if (validacep.test(cep)) {
+
+                            //Consulta o webservice viacep.com.br/
+                            $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?",
+                                function(dados) {
+
+                                    if (("erro" in dados)) {
+                                        limpaCep();
+                                        $.notify({
+                                            message: "CEP não encontrado, favor digitar novamente.",
+                                            status: "warning",
+                                            timeout: 1000
+                                        });
+                                    } //end if.
+                                });
+                        } //end if.
+                        else {
+                            //cep é inválido.
+                            limpaCep();
+                            $.notify({
+                                message: "Cep Inválido, digite novamente.",
+                                status: "warning",
+                                timeout: 1000
+                            });
+                        }
+                    } //end if.
+                    else {
+                        //cep sem valor, limpa o campo cep.
+                        limpaCep();
+                    }
+                });
+
+            //Submit
+            $('form#formParceriaHemocentro')
+                .submit(function(e) {
+                    //Objeto Model
+                    var ObjHemocentro = {
+                        NOME_HEMOCENTRO: "",
+                        RAZAO_SOCIAL: "",
+                        CNPJ: "",
+                        CIDADE_HEMOCENTRO: "",
+                        ESTADO_HEMOCENTRO: "",
+                        CEP: 0,
+                        TELEFONE_HEMOCENTRO: "",
+                        EMAIL: 0,
+                        PERIODO_FUNCIONAMENTO_HEMOCENTRO: "",
+                    };
+
+
+                    ObjHemocentro["NOME_HEMOCENTRO"] = $('#NOME_HEMOCENTRO').val();
+                    ObjHemocentro["RAZAO_SOCIAL"] = $('#RAZAO_SOCIAL').val();
+                    ObjHemocentro["CNPJ"] = $('#CNPJ').val();
+                    ObjHemocentro["CIDADE_HEMOCENTRO"] = $('#CIDADE_HEMOCENTRO').val();
+                    ObjHemocentro["ESTADO_HEMOCENTRO"] = $('#ESTADO_HEMOCENTRO option:selected').val();
+                    ObjHemocentro["CEP"] = $('#CEP').val();
+                    ObjHemocentro["TELEFONE_HEMOCENTRO"] = $('#TELEFONE_HEMOCENTRO').val();
+                    ObjHemocentro["EMAIL"] = $('#EMAIL').val();
+                    ObjHemocentro["PERIODO_FUNCIONAMENTO_HEMOCENTRO"] = $('#PERIODO_FUNCIONAMENTO_HEMOCENTRO').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: './Hemocentro/ParceriaHemocentro',
+                        contentType: 'application/json',
+                        data: (JSON.stringify(ObjHemocentro)),
+                        dataType: 'json',
+                        cache: false,
+                        async: true,
+                        success: function(data) {
+                            if (!data.isRedirect) {
+                                $.notify({
+                                    message: data.msg,
+                                    status: "warning",
+                                    timeout: 1000
+                                });
+                            } else {
+                                $.notify({
+                                    message: data.msg,
+                                    status: "warning",
+                                    timeout: 1000,
+                                    onClose: function() { window.location.reload(true) }
+
+                                });
+
+                            }
+                        }
+                    });
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    } else {
+                        e.returnValue = false;
+                    }
+                });
+
+            //Colocando mascaras nos inputs
+            $('#CNPJ').mask("99.999.999/9999-99");
+            $('#CEP').mask('999-99-999');
+            $('#TELEFONE_HEMOCENTRO').mask("(99) 9999-9999");
+
+            //Valida CNPJ
+            $("#CNPJ").blur(function() {
+                if (!formata_cpf_cnpj($(this).val())) {
+                    $("#CNPJ").val("");
+                    $.notify({
+                        message: "CNJP Inválido, digite novamente.",
+                        status: "warning",
+                        timeout: 1000
+                    });
+                } 
+            });
+
         });
-
-        $('#CNPJ').mask("99.999.999/9999-99");
-        $('#CEP').mask('999-99-999');
-        $('#TELEFONE_HEMOCENTRO').mask("(99) 9999-9999");
-    });
-
 </script>

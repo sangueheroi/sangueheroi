@@ -67,8 +67,8 @@ namespace SangueHeroiWeb
         [WebMethod]
         public int cadastrarDispositivo(string token, string email_usuario)
         {
-            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
-            //{
+            if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            {
                 DispositivoDAO ddao = new DispositivoDAO();
                 DispositivoModel dmodel = new DispositivoModel();
 
@@ -78,11 +78,11 @@ namespace SangueHeroiWeb
                 var retorno = ddao.CadastrarDispositivo(dmodel);
 
                 return retorno;
-            //}
-            //else
-            //{
-            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
-            //}
+            }
+            else
+            {
+                return (int)SITUACAO.ERRO_DE_SISTEMA;
+            }
         }
 
         /*[WebMethod]
