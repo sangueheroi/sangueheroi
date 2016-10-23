@@ -63,7 +63,7 @@ namespace SangueHeroiWeb
             }
         }
 
-        [SoapHeader("Autenticacao")]
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public int cadastrarDispositivo(string token, string email_usuario)
         {

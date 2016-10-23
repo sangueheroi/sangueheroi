@@ -14,7 +14,7 @@ namespace SangueHeroiWeb.Helpers.Job
         public void Execute(IJobExecutionContext context)
         {
             //VerificaNiveisSanguineos();
-            //VerificaUltimaDataDoacaoUsuario();
+            VerificaUltimaDataDoacaoUsuario();
         }
 
         private static void VerificaUltimaDataDoacaoUsuario()

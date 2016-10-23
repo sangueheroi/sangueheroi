@@ -960,7 +960,6 @@ section#demo header h1:after {
 /* Get app Section */
 section#getApp {
   background: url("../img/vermelho_abstrato.jpg");
-  background-size: 1350px;
 }
 section#getApp header {
   color: #ffffff;

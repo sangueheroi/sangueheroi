@@ -22,7 +22,7 @@ namespace SangueHeroiWeb.Helpers.Job
                 .WithIdentity(nameof(Job), "JobGroup")
                 .StartNow()
                 .WithSimpleSchedule(s => s 
-                .WithIntervalInSeconds(120)
+                .WithIntervalInSeconds(60)
                 //.WithIntervalInHours(24)
                 .RepeatForever())
                 .Build();
