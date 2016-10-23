@@ -124,9 +124,10 @@ namespace SangueHeroiWeb.DAO
 
             List<HemocentroModel> lista = new List<HemocentroModel>();
 
-            DataTable dt = (DataTable)context.ExecuteCommand(strSQL, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
             try
             {
+                DataTable dt = (DataTable)context.ExecuteCommand(strSQL, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
+
                 if (dt.Rows.Count > 0)
                     foreach (DataRow data in dt.Rows)
                     {

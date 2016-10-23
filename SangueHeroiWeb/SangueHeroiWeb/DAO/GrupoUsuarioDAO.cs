@@ -516,7 +516,7 @@ namespace SangueHeroiWeb.DAO
         {
             String strQuerySelect;
 
-            strQuerySelect = " SELECT U.NOME_USUARIO, " + Environment.NewLine
+            strQuerySelect = " SELECT U.CODIGO_USUARIO, U.NOME_USUARIO, " + Environment.NewLine
                            + " U.EMAIL_USUARIO " + Environment.NewLine
                            + " FROM USUARIO U " + Environment.NewLine  
                            + " INNER JOIN USUARIO_GRUPO UG " + Environment.NewLine 
@@ -538,6 +538,7 @@ namespace SangueHeroiWeb.DAO
                     {
                         UsuarioModel usuario = new UsuarioModel();
 
+                        usuario.CODIGO_USUARIO = Convert.ToInt32(data["CODIGO_USUARIO"].ToString());
                         usuario.NOME_USUARIO = data["NOME_USUARIO"].ToString();
                         usuario.EMAIL_USUARIO = data["EMAIL_USUARIO"].ToString();
 

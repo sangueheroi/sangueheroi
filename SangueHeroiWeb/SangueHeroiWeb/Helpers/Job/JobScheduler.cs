@@ -16,7 +16,7 @@ namespace SangueHeroiWeb.Helpers.Job
 
             scheduler.Start();
 
-            var job = JobBuilder.Create<Job>().Build();
+            var jobVerificaNiveisSanguineos = JobBuilder.Create<JobVerificaNiveisSanguineos>().Build();
 
             var trigger = TriggerBuilder.Create()
                 .WithIdentity(nameof(Job), "JobGroup")
@@ -27,7 +27,7 @@ namespace SangueHeroiWeb.Helpers.Job
                 .RepeatForever())
                 .Build();
 
-            scheduler.ScheduleJob(job, trigger);
+            scheduler.ScheduleJob(jobVerificaNiveisSanguineos, trigger);
         }
     }
 }

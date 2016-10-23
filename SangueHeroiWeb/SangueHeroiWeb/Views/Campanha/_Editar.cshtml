@@ -17,12 +17,12 @@
                 @Html.LabelFor(model => model.CODIGO_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.CODIGO_CAMPANHA, new { htmlAttributes = new { @class = "form-control CODIGO_CAMPANHA", disabled = "true" } })
-                    
+
                 </div>
                 @Html.LabelFor(model => model.NOME_USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.NOME_USUARIO, new { htmlAttributes = new { @class = "form-control NOME_USUARIO", disabled = "true" } })
-                  
+
                 </div>
             </div>
 
@@ -31,12 +31,12 @@
                 @Html.LabelFor(model => model.EMAIL_USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.EMAIL_USUARIO, new { htmlAttributes = new { @class = "form-control EMAIL_USUARIO", disabled = "true" } })
-                    
+
                 </div>
                 @Html.LabelFor(model => model.NOME_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.NOME_CAMPANHA, new { htmlAttributes = new { @class = "form-control NOME_CAMPANHA", disabled = "true" } })
-                 
+
                 </div>
             </div>
 
@@ -44,19 +44,20 @@
                 @Html.LabelFor(model => model.DESCRICAO_CAMPANHA, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextAreaFor(model => model.DESCRICAO_CAMPANHA, new { @class = "form-control DESCRICAO_CAMPANHA", disabled = "true" })
-                 </div>
+                </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.NOME_RECEPTOR, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.NOME_RECEPTOR, new { htmlAttributes = new { @class = "form-control NOME_RECEPTOR", disabled = "true" } })
-                 
+
                 </div>
                 @Html.LabelFor(model => model.TIPO_SANGUINEO, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.TIPO_SANGUINEO, new { htmlAttributes = new { @class = "form-control TIPO_SANGUINEO", disabled = "true" } })
-                    
+                    @Html.DropDownListFor(model => model.TIPO_SANGUINEO, 
+                   new SelectList(ViewBag.TipoSanguineo, "NOME_TIPO_SANGUINEO", "NOME_TIPO_SANGUINEO"), 
+                   string.Empty, new { @class = "form-control", @id = "ddlTipoSanguineos", disabled = "true" })
                 </div>
             </div>
 
@@ -64,12 +65,12 @@
                 @Html.LabelFor(model => model.NOME_HOSPITAL, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.NOME_HOSPITAL, new { htmlAttributes = new { @class = "form-control NOME_HOSPITAL", disabled = "true" } })
-                   
+
                 </div>
                 @Html.LabelFor(model => model.LOGRADOURO, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.LOGRADOURO, new { htmlAttributes = new { @class = "form-control LOGRADOURO", disabled = "true" } })
-                   
+
                 </div>
             </div>
 
@@ -77,25 +78,25 @@
                 @Html.LabelFor(model => model.BAIRRO, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.BAIRRO, new { htmlAttributes = new { @class = "form-control BAIRRO", disabled = "true" } })
-                    
+
                 </div>
                 @Html.LabelFor(model => model.CIDADE, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.CIDADE, new { htmlAttributes = new { @class = "form-control CIDADE", disabled = "true" } })
-                   
+
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.ESTADO, new { htmlAttributes = new { @class = "form-control ESTADO", disabled = "true" } })
-                   
+                    @Html.DropDownListFor(model => model.ESTADO, new SelectList(ViewBag.Estados), String.Empty, new { @class = "form-control", @id = "ddlEstados", disabled = "true" })
+
                 </div>
                 @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { @class = "form-control CEP", disabled = "true" } })
-                   
+
                 </div>
             </div>
 
@@ -103,20 +104,20 @@
                 @Html.LabelFor(model => model.DATA_INICIO_DT, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.DATA_INICIO_DT, new { htmlAttributes = new { @class = "form-control DATA_INICIO_DT", disabled = "true" } })
-                   
+
                 </div>
                 @Html.LabelFor(model => model.DATA_FIM_DT, htmlAttributes: new { @class = "control-label col-md-2", style = "text-align: left;" })
                 <div class="col-md-4">
                     @Html.EditorFor(model => model.DATA_FIM_DT, new { htmlAttributes = new { @class = "form-control DATA_FIM_DT", disabled = "true" } })
-                   
+
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <button class="btn btn-success" id='btnEditarCampanha' type='button' title='Encerrar Campanha'>Editar</button>
-                    <button class="btn btn-info" id='btnSalvar' type='submit' title='Encerrar Campanha' style="visibility:hidden">Salvar</button>
-                    <button class="btn btn-warning" id='btnCancelarEdicao' type='button' title='Encerrar Campanha' style="visibility:hidden">Cancelar</button>
+                    <button class="btn btn-success" id='btnEditarCampanha' type='button' title='Editars Campanha'>Editar</button>
+                    <button class="btn btn-info" id='btnSalvar' type='submit' title='Salvar Campanha' style="visibility:hidden">Salvar</button>
+                    <button class="btn btn-warning" id='btnCancelarEdicao' type='button' title='Cancelar' style="visibility:hidden">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -125,33 +126,32 @@
 }
 
 <div class="modal-footer">
-    <button type="button" id="" class="btn btn-default" data-dismiss="modal" >Sair</button>
+    <button type="button" id="" class="btn btn-default" data-dismiss="modal">Sair</button>
 </div>
 <input type="hidden" value="@Session["NOME_HEMOCENTRO"]" id="NOME_HEMOCENTRO" />
 
 <script type="text/javascript">
     $(document).ready(function () {
-
+        debugger;
         var nomeHemocentro = $('#NOME_HEMOCENTRO').val();
         var nomeCriadorCampanha = $('#NOME_USUARIO').val();
 
-        if (nomeHemocentro == nomeCriadorCampanha) {
-            $('.btnEditarCampanha').prop('disabled', false);
+        if (nomeHemocentro === nomeCriadorCampanha) {
+            $('#btnEditarCampanha').prop('disabled', false);
+        } else {
+            $('#btnEditarCampanha').prop('disabled', true);
         }
 
         $('#btnEditarCampanha').on('click', function () {
-            $('#CODIGO_CAMPANHA').prop('disabled', false);
-            $('#NOME_USUARIO').prop('disabled', false);
-            $('#EMAIL_USUARIO').prop('disabled', false);
             $('#NOME_CAMPANHA').prop('disabled', false);
             $('#DESCRICAO_CAMPANHA').prop('disabled', false);
             $('#NOME_RECEPTOR').prop('disabled', false);
-            $('#TIPO_SANGUINEO').prop('disabled', false);
+            $('#ddlTipoSanguineos').prop('disabled', false);
             $('#NOME_HOSPITAL').prop('disabled', false);
             $('#LOGRADOURO').prop('disabled', false);
             $('#BAIRRO').prop('disabled', false);
             $('#CIDADE').prop('disabled', false);
-            $('#ESTADO').prop('disabled', false);
+            $('#ddlEstados').prop('disabled', false);
             $('#CEP').prop('disabled', false);
             $('#DATA_INICIO_DT').prop('disabled', false);
             $('#DATA_FIM_DT').prop('disabled', false);
@@ -168,23 +168,145 @@
             $('#NOME_CAMPANHA').prop('disabled', true);
             $('#DESCRICAO_CAMPANHA').prop('disabled', true);
             $('#NOME_RECEPTOR').prop('disabled', true);
-            $('#TIPO_SANGUINEO').prop('disabled', true);
+            $('#ddlTipoSanguineos').prop('disabled', true);
             $('#NOME_HOSPITAL').prop('disabled', true);
             $('#LOGRADOURO').prop('disabled', true);
             $('#BAIRRO').prop('disabled', true);
             $('#CIDADE').prop('disabled', true);
-            $('#ESTADO').prop('disabled', true);
+            $('#ddlEstados').prop('disabled', true);
             $('#CEP').prop('disabled', true);
             $('#DATA_INICIO_DT').prop('disabled', true);
             $('#DATA_FIM_DT').prop('disabled', true);
 
             $('#btnEditarCampanha').css('visibility', '');
-            $('#btnSalvar').css('visibility', 'hidden')
+            $('#btnSalvar').css('visibility', 'hidden');
             $('#btnCancelarEdicao').css('visibility', 'hidden')
         });
-    });
 
-    $(document).ready(function () {
+        // Mascara Cep
+        $('#CEP').mask('999-99-999');
+
+        //Validar CEP quando o campo cep perde o foco.
+        $("#CEP").blur(function () {
+
+            //verifica se o estado foi selecionado
+
+            if ($('#ddlEstados').val() !== '') {
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if (validacep.test(cep)) {
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?",
+                            function (dados) {
+
+                                if (("erro" in dados)) {
+                                    limpaCep();
+                                    $.notify({
+                                        message: "CEP não encontrado, favor digitar novamente.",
+                                        status: "warning",
+                                        timeout: 1000
+                                    });
+                                } else if (dados.uf !== $('#ddlEstados').val()) {
+                                    limpaCep();
+                                    $.notify({
+                                        message: "CEP não pertence ao estado selecionado!",
+                                        status: "warning",
+                                        timeout: 1000
+                                    });
+                                } //end if.
+                            });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpaCep();
+                        $.notify({
+                            message: "Cep Inválido, digite novamente.",
+                            status: "warning",
+                            timeout: 1000
+                        });
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa o campo cep.
+                    limpaCep();
+                }
+            } else {
+                limpaCep();
+                $.notify({
+                    message: "Atençã! Informe primeiramente o estado.",
+                    status: "warning",
+                    timeout: 1000
+                });
+            }
+
+
+        });
+
+        function limpaCep() {
+            // Limpa valores do formulário de cep.
+            $("#CEP").val("");
+        }
+
+        // DatePicker das datas
+        $("#DATA_INICIO_DT").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior',
+            onClose: function () {
+                validacaoData();
+            }
+        }).datepicker("setDate", new Date());
+
+        $("#DATA_FIM_DT").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior',
+            onClose: function () {
+                validacaoData();
+            }
+        }).datepicker("setDate", new Date());
+
+        function validacaoData() {
+            var dtIni = $("#DATA_INICIO_DT").val();
+            var dtFim = $("#DATA_FIM_DT").val();
+
+            if (dtIni > dtFim) {
+                var d = new Date();
+
+                $("#DATA_INICIO_DT").val(d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear());
+                $("#DATA_FIM_DT").val(d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear());
+
+                $.notify({
+                    message: 'Atenção! Data Fim maior que Data Inicio',
+                    status: "warning",
+                    timeout: 2000
+                });
+            }
+        }
+
         $('form#formEditarCampanha').submit(function (e) {
             //Objeto Model
             var ObjCampanha = {
@@ -204,19 +326,19 @@
                 DATA_INICIO_DT: 0,
                 DATA_FIM_DT: 0
             };
-          
+
             ObjCampanha["CODIGO_CAMPANHA"] = $('#CODIGO_CAMPANHA').val();
             ObjCampanha["NOME_USUARIO"] = $('#NOME_USUARIO').val();
             ObjCampanha["EMAIL_USUARIO"] = $('#EMAIL_USUARIO').val();
             ObjCampanha["NOME_CAMPANHA"] = $('#NOME_CAMPANHA').val();
             ObjCampanha["DESCRICAO_CAMPANHA"] = $('#DESCRICAO_CAMPANHA').val();
             ObjCampanha["NOME_RECEPTOR"] = $('#NOME_RECEPTOR').val();
-            ObjCampanha["TIPO_SANGUINEO"] = $('#TIPO_SANGUINEO').val();
+            ObjCampanha["TIPO_SANGUINEO"] = $('#ddlTipoSanguineos').val();
             ObjCampanha["NOME_HOSPITAL"] = $('#NOME_HOSPITAL').val();
             ObjCampanha["LOGRADOURO"] = $('#LOGRADOURO').val();
             ObjCampanha["BAIRRO"] = $('#BAIRRO').val();
             ObjCampanha["CIDADE"] = $('#CIDADE').val();
-            ObjCampanha["ESTADO"] = $('#ESTADO').val();
+            ObjCampanha["ESTADO"] = $('#ddlEstados').val();
             ObjCampanha["CEP"] = $('#CEP').val();
             ObjCampanha["DATA_INICIO_DT"] = $('.DATA_INICIO_DT').val();
             ObjCampanha["DATA_FIM_DT"] = $('.DATA_FIM_DT').val();
@@ -254,9 +376,8 @@
                 e.returnValue = false;
             }
         });
+
     });
-
-
 </script>
 
 

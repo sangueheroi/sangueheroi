@@ -33,7 +33,7 @@ public class AndroidGCMPushNotification
     {
         public string Titulo;
         public string Mensagem;
-        public DateTime DATA_PROXIMA_DOACAO;
+        public string DATA_PROXIMA_DOACAO_STR;
     }
 
     private class NotificacaoCompleta
@@ -206,7 +206,7 @@ public class AndroidGCMPushNotification
      }*/
     }
 
-    public string EnviarNotificacaoProximaDoacao(List<string> deviceRegIds, string mensagem, string titulo, DateTime data_proxima_doacao)
+    public string EnviarNotificacaoProximaDoacao(List<string> deviceRegIds, string mensagem, string titulo, string DATA_PROXIMA_DOACAO_STR)
     {
         //try
         //{
@@ -219,7 +219,7 @@ public class AndroidGCMPushNotification
         NotificacaoProximaDoacao n = new NotificacaoProximaDoacao();
         n.Titulo = titulo;
         n.Mensagem = mensagem;
-        n.DATA_PROXIMA_DOACAO = data_proxima_doacao;
+        n.DATA_PROXIMA_DOACAO_STR = DATA_PROXIMA_DOACAO_STR;
         
         var value = new JavaScriptSerializer().Serialize(n);
         WebRequest wRequest;

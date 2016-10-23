@@ -94,8 +94,11 @@
 
             //Quando o campo cep perde o foco.
             $("#CEP")
-                .blur(function() {
+            .blur(function () {
 
+                //verifica se o estado foi selecionado
+
+                if ($('#ESTADO_HEMOCENTRO').val() !== '') {
                     //Nova variável "cep" somente com dígitos.
                     var cep = $(this).val().replace(/\D/g, '');
 
@@ -110,12 +113,19 @@
 
                             //Consulta o webservice viacep.com.br/
                             $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?",
-                                function(dados) {
+                                function (dados) {
 
                                     if (("erro" in dados)) {
                                         limpaCep();
                                         $.notify({
                                             message: "CEP não encontrado, favor digitar novamente.",
+                                            status: "warning",
+                                            timeout: 1000
+                                        });
+                                    } else if (dados.uf !== $('#ESTADO_HEMOCENTRO').val()) {
+                                        limpaCep();
+                                        $.notify({
+                                            message: "CEP não pertence ao estado selecionado!",
                                             status: "warning",
                                             timeout: 1000
                                         });
@@ -136,7 +146,17 @@
                         //cep sem valor, limpa o campo cep.
                         limpaCep();
                     }
-                });
+                } else {
+                    limpaCep();
+                    $.notify({
+                        message: "Atençã! Informe primeiramente o estado.",
+                        status: "warning",
+                        timeout: 1000
+                    });
+                }
+
+
+            });
 
             //Submit
             $('form#formParceriaHemocentro')

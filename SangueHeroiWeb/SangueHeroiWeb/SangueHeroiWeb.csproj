@@ -570,6 +570,7 @@
     <Content Include="Views\Campanha\CriarCampanha.cshtml" />
     <Content Include="Views\GrupoUsuario\Index.cshtml" />
     <Content Include="Views\GrupoUsuario\_UsuariosGrupo.cshtml" />
+    <Content Include="Views\Campanha\Teste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
