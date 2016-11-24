@@ -95,11 +95,12 @@ namespace SangueHeroiWeb.DAO
             return usuario;
         }
 
-        public int LogarHemocentro(HemocentroModel model)
+        public int LogarHemocentro(LoginHemocentroModel model)
         {
             var loginOk = (int) SITUACAO.SUCESSO;
             var hDao = new HemocentroDAO();
             var enc = new Encrypt();
+
             try
             {
                 var hemocentro = hDao.BuscaHemocentro($" WHERE LOGIN_HEMOCENTRO = '{model.LOGIN_HEMOCENTRO}'");
@@ -107,9 +108,8 @@ namespace SangueHeroiWeb.DAO
                 {
                     if (Convert.ToInt32(hemocentro.CODIGO_STATUS) != Constantes.CADASTRO_STATUS.Bloqueado)
                     {
-                        
-
                         var senhaCadastrada = enc.DecryptoRSA(hemocentro.SENHA_HEMOCENTRO);
+
                         if (!senhaCadastrada.Equals(model.SENHA_HEMOCENTRO))
                             loginOk = (int)SITUACAO.DADOS_INVALIDOS;
                     }

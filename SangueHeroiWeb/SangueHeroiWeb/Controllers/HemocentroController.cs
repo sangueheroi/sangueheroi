@@ -151,7 +151,7 @@ namespace SangueHeroiWeb.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpGet]   
         public ActionResult EditarNiveisSanguineos()
         {
             var idHemocentro = Session["ID_HEMOCENTRO"];

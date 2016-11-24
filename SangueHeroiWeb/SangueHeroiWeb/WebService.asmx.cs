@@ -63,7 +63,7 @@ namespace SangueHeroiWeb
             }
         }
 
-        //[SoapHeader("Autenticacao")]
+        [SoapHeader("Autenticacao")]
         [WebMethod]
         public int cadastrarDispositivo(string token, string email_usuario)
         {
@@ -127,8 +127,8 @@ namespace SangueHeroiWeb
         [WebMethod]
         public int registrarUsuario(string nome, string email, string senha, string sexo, string bairro, string cidade, string estado, string cep, string tipo_sanguineo, string dtnascimento, string dtultimadoacao, int codigo_heroi, bool flagCadastroIsRedeSocial)
         {
-            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
-            //{
+            if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            {
                 UsuarioDAO udao = new UsuarioDAO();
                 UsuarioModel umodel = new UsuarioModel();
 
@@ -146,7 +146,7 @@ namespace SangueHeroiWeb
                 if (dtultimadoacao == "")
                 {
                     DateTime dt = DateTime.Now.AddDays(-90);
-                    umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dt);
+                    umodel.DATA_ULTIMA_DOACAO = DateTime.Now;
                 }
                 else
                     umodel.DATA_ULTIMA_DOACAO = Convert.ToDateTime(dtultimadoacao);
@@ -157,11 +157,11 @@ namespace SangueHeroiWeb
                 var retorno = udao.Registrar(umodel);
 
                 return retorno;
-            //}
-            //else
-            //{
-            //    return (int) SITUACAO.ERRO_DE_SISTEMA;
-            //}
+            }
+            else
+            {
+                return (int)SITUACAO.ERRO_DE_SISTEMA;
+            }
         }
 
         [SoapHeader("Autenticacao")]
@@ -189,12 +189,12 @@ namespace SangueHeroiWeb
             }
         }
 
-        [SoapHeader("Autenticacao")]
+        //[SoapHeader("Autenticacao")]
         [WebMethod]
         public int cadastrarCampanha(string email, string nome_campanha, string descricao, string nome_receptor, string tipo_sanguineo, string dtinicio, string dtfim, string nome_hospital, string logradouro, string bairro, string cidade, string estado, string cep, string destinatario)
         {
-            if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
-            {
+            //if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
+            //{
                 CampanhaDAO cdao = new CampanhaDAO();
                 DispositivoDAO ddao = new DispositivoDAO();
                 CampanhaModel cmodel = new CampanhaModel();
@@ -220,11 +220,11 @@ namespace SangueHeroiWeb
                     ddao.DispararNotificacao(cmodel, false, destinatario);
 
                 return retorno;
-            }
-            else
-            {
-                return (int)SITUACAO.ERRO_DE_SISTEMA;
-            }
+            //}
+            //else
+            //{
+            //    return (int)SITUACAO.ERRO_DE_SISTEMA;
+            //}
         }
 
         [SoapHeader("Autenticacao")]
@@ -637,9 +637,8 @@ namespace SangueHeroiWeb
             if (Autenticacao != null && Autenticacao.token == DEV_TOKEN)
             {
                 DoacaoDAO ddao = new DoacaoDAO();
-                UsuarioModel umodel = new UsuarioModel();
+                UsuarioModel umodel = new UsuarioModel { EMAIL_USUARIO = email_usuario };
 
-                umodel.EMAIL_USUARIO = email_usuario;
 
                 var retorno = ddao.getInfoDoacao(umodel);
 
@@ -654,7 +653,7 @@ namespace SangueHeroiWeb
                 retorno[3] = "Erro Autenticação do Webservice";
                 retorno[4] = "Erro Autenticação do Webservice";
 
-                return retorno; 
+                return retorno;
             }
         }
 

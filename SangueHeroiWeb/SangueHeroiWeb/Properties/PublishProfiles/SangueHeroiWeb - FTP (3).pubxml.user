@@ -11,949 +11,952 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
-      <publishTime>09/10/2016 15:55:12</publishTime>
+      <publishTime>10/09/2016 15:55:12</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>09/10/2016 15:55:10</publishTime>
+      <publishTime>10/09/2016 15:55:10</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>09/10/2016 15:55:12</publishTime>
+      <publishTime>10/09/2016 15:55:12</publishTime>
     </File>
     <File Include="bin/Common.Logging.Core.dll">
-      <publishTime>09/10/2016 15:55:10</publishTime>
+      <publishTime>10/09/2016 15:55:10</publishTime>
     </File>
     <File Include="bin/Common.Logging.dll">
-      <publishTime>09/10/2016 15:55:10</publishTime>
+      <publishTime>10/09/2016 15:55:10</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>09/10/2016 15:55:10</publishTime>
+      <publishTime>10/09/2016 15:55:10</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>09/10/2016 15:55:10</publishTime>
+      <publishTime>10/09/2016 15:55:10</publishTime>
     </File>
     <File Include="bin/Facebook.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Web.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.WindowsServer.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.ApplicationInsights.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Facebook.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Google.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.MicrosoftAccount.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/Quartz.dll">
-      <publishTime>09/10/2016 15:55:12</publishTime>
+      <publishTime>10/09/2016 15:55:12</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/SangueHeroiWeb.dll">
-      <publishTime>10/22/2016 17:40:09</publishTime>
+      <publishTime>10/30/2016 16:12:50</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>09/10/2016 15:55:11</publishTime>
+      <publishTime>10/09/2016 15:55:11</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>09/10/2016 15:55:12</publishTime>
+      <publishTime>10/09/2016 15:55:12</publishTime>
     </File>
     <File Include="Content/bootstrap-responsive.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/bootstrap-responsive.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/bootstrap-slider.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/bootstrap-social.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/22/2016 19:34:54</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.bootstrap.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.bootstrap.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.bootstrap4.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.bootstrap4.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.foundation.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.foundation.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.jqueryui.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.jqueryui.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.material.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.material.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.semanticui.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.semanticui.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.uikit.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/dataTables.uikit.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/jquery.dataTables.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/jquery.dataTables.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/css/jquery.dataTables_themeroller.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/images/favicon.ico">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/images/Sorting icons.psd">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/images/sort_asc.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/images/sort_asc_disabled.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/images/sort_both.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/images/sort_desc.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/images/sort_desc_disabled.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.bootstrap.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.bootstrap.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.bootstrap4.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.bootstrap4.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.foundation.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.foundation.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.jqueryui.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.jqueryui.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.material.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.material.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.semanticui.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.semanticui.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.uikit.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/dataTables.uikit.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/jquery.dataTables.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/jquery.dataTables.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/DataTable/js/jquery.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/font-awesome.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/font-awesome.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/css/ajax-loader.gif">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/css/animate.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/css/bootstrap.css.map">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/css/bootstrap.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/css/font-awesome.min.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/css/slick.css">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/css/styles.css">
-      <publishTime>10/16/2016 21:50:55</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/flexslider-icon.eot">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/flexslider-icon.svg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/flexslider-icon.ttf">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/flexslider-icon.woff">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/fontawesome-webfont.eot">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/fontawesome-webfont.svg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/fontawesome-webfont.ttf">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/fontawesome-webfont.woff">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/fonts/FontAwesome.otf">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/berry-angled2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/bk-berry-ga.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/bk-berry.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/iphone-berry.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/logo.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/screens/calendar.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/screens/menu.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/screens/options.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/screens/profile.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/screens/sales.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/screens/signup.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/screens/weather.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/Slides/berry-slide2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/Slides/family-berry.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/berry/Slides/hand-berry.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/bk-eco-ga.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/bk-eco.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/eco-angled2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/iphone-eco.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/logo.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/screens/calendar.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/screens/menu.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/screens/options.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/screens/profile.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/screens/sales.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/screens/signup.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/screens/weather.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/Slides/eco-slide2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/Slides/family-eco.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/eco/Slides/hand-eco.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/equipe/andre.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/equipe/daniel_allan.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/equipe/daniel_florencio.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/equipe/diego.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/equipe/hugo.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/equipe/natalia.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/equipe/yuri.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/bk-freeze-ga.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/bk-freeze.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/freeze-angled2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/iphone-freeze.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/logo.png">
       <publishTime>10/16/2016 21:50:55</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/screens/calendar.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/screens/menu.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/screens/options.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/screens/profile.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/screens/sales.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/screens/signup.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/screens/weather.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/Slides/family-freeze.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/Slides/freeze-slide2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/freeze/Slides/hand-freeze.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/transparent.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/img/vermelho_abstrato.jpg">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/Home_Css/js/bootstrap.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/jquery-1.11.1.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/jquery-1.11.1.min.map">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/less-1.7.0.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/modernizr.custom.32033.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/placeholdem.min.js">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrowleft.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrowright.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrows.psd">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrow_large_left.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrow_large_right.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrow_left.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrow_left2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrow_right.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/arrow_right2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/black50.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/boxed_bgtile.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/bullet.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/bullets.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/bullets.psd">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/bullets2.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/bullet_boxed.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/coloredbg.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/grain.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/gridtile.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/gridtile_3x3.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/gridtile_3x3_white.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/gridtile_white.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/large_left.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/large_right.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/loader.gif">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/loader2.gif">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/navigdots.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/navigdots_bgtile.png">
-      <publishTime>09/10/2016 15:55:13</publishTime>
+      <publishTime>10/09/2016 15:55:13</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/shadow1.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/shadow2.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/shadow3.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/small_arrows.psd">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/small_left.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/small_left_boxed.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/small_right.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/small_right_boxed.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/timer.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/timerdot.png">
-      <publishTime>09/10/2016 15:55:14</publishTime>
+      <publishTime>10/09/2016 15:55:14</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/transparent.jpg">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/assets/white50.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/css/.DS_Store">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/css/settings-ie8.css">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/css/settings.css">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/font/revicons.eot">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/font/revicons.svg">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/font/revicons.ttf">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/font/revicons.woff">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/images/decor_inside.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/images/decor_inside_white.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/images/decor_testimonial.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/images/gradient/g30.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/images/gradient/g40.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/js/.DS_Store">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/js/jquery.themepunch.plugins.min.js">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/js/jquery.themepunch.revolution.js">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/rs-plugin/js/jquery.themepunch.revolution.min.js">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/scripts.js">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/slick.min.js">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/js/waypoints.min.js">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/less/colors.less">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/less/lib.less">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/less/styles.less">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/css/style.css">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/email.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/facebook.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/google.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/key.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/restaurant.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/slash_it.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/Thumbs.db">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/tick.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/twitter.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/Home_Css/modal/images/user.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_55_fbf9ee_1x400.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_65_ffffff_1x400.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_75_dadada_1x400.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_75_e6e6e6_1x400.png">
-      <publishTime>09/10/2016 15:55:15</publishTime>
+      <publishTime>10/09/2016 15:55:15</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_95_fef1ec_1x400.png">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/images/ui-icons_222222_256x240.png">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/images/ui-icons_2e83ff_256x240.png">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/images/ui-icons_454545_256x240.png">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/images/ui-icons_888888_256x240.png">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/images/ui-icons_cd0a0a_256x240.png">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/jquery-ui.css">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/notify.css">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.eot">
-      <publishTime>09/10/2016 15:55:16</publishTime>
+      <publishTime>10/09/2016 15:55:16</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.svg">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.ttf">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.woff">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="fonts/FontAwesome.otf">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>09/10/2016 15:55:17</publishTime>
+      <publishTime>10/09/2016 15:55:17</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/ai.0.15.0-build58334.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/ai.0.15.0-build58334.min.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/bootstrap-slider.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery-ui.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery.mask.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery.mask.min.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/login/login.js">
       <publishTime>10/15/2016 21:17:28</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/notify.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Scripts/validaCNPJ_CPF.js">
       <publishTime>10/16/2016 16:50:22</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>10/16/2016 16:49:03</publishTime>
+      <publishTime>10/22/2016 18:42:07</publishTime>
     </File>
     <File Include="Service References/Application Insights/ConnectedService.json">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Administrador/Index.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Campanha/CriarCampanha.cshtml">
-      <publishTime>10/18/2016 22:51:10</publishTime>
+      <publishTime>10/23/2016 16:34:44</publishTime>
     </File>
     <File Include="Views/Campanha/Index.cshtml">
       <publishTime>10/18/2016 23:03:51</publishTime>
     </File>
+    <File Include="Views/Campanha/Teste.cshtml">
+      <publishTime>10/22/2016 18:38:04</publishTime>
+    </File>
     <File Include="Views/Campanha/_Editar.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/23/2016 20:52:45</publishTime>
     </File>
     <File Include="Views/GrupoUsuario/Index.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/GrupoUsuario/_UsuariosGrupo.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Hemocentro/CadastrarNiveisSanguineos.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Hemocentro/ConsultaNiveisSanguineos.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Hemocentro/Editar.cshtml">
       <publishTime>10/16/2016 21:11:11</publishTime>
     </File>
     <File Include="Views/Hemocentro/EditarNiveisSanguineos.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Hemocentro/_CadastroParceriaHemocentro.cshtml">
-      <publishTime>10/16/2016 17:03:31</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Hemocentro/_Inativar.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>10/16/2016 21:50:55</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Login/LogarFacebook.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Login/_EsqueciMinhaSenha.cshtml">
       <publishTime>10/16/2016 13:29:57</publishTime>
@@ -962,43 +965,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/16/2016 13:38:58</publishTime>
     </File>
     <File Include="Views/RankingDoadores/Index.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Relatorios/NiveisSanguineos.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Relatorios/RelatorioTipoSanguineoLocalidade.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Relatorios/TiposSanguineos.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Shared/TemplateEmail.html">
-      <publishTime>10/15/2016 23:29:29</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/22/2016 16:33:22</publishTime>
+      <publishTime>10/23/2016 21:35:34</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutIndex.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>09/10/2016 15:55:36</publishTime>
+      <publishTime>10/09/2016 15:55:36</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>09/10/2016 15:55:35</publishTime>
+      <publishTime>10/09/2016 15:55:35</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>10/18/2016 23:21:52</publishTime>
     </File>
     <File Include="WebService.asmx">
-      <publishTime>09/10/2016 15:55:36</publishTime>
+      <publishTime>10/09/2016 15:55:36</publishTime>
     </File>
   </ItemGroup>
 </Project>

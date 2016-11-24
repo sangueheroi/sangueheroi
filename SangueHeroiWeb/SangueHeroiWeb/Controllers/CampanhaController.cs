@@ -18,12 +18,7 @@ namespace SangueHeroiWeb.Controllers
             return View();
         }
 
-        public ActionResult Teste()
-        {
-            return View();
-        }
-
-        public JsonResult GetListCampanhas()
+       public JsonResult GetListCampanhas()
         {
             var campanhaDao = new CampanhaDAO();
             var list = campanhaDao.consultarCampanhas("  WHERE C.DATA_FIM >= " + UtilHelper.DateTimeParaSQLDate(DateTime.Now));
@@ -169,14 +164,15 @@ namespace SangueHeroiWeb.Controllers
             var retorno = cDao.CadastrarCampanhaHemocentro(model);
 
             var lstUsuario = uDao.consultarUsuarios();
-            var usuario = new UsuarioModel { DESTINATARIOS = new List<UsuarioModel>() };
+            var lstDestinatarios = new UsuarioModel { DESTINATARIOS = new List<UsuarioModel>() };
+            
 
             foreach (var usu in lstUsuario)
             {
-                usuario.DESTINATARIOS.Add(usu);
+                lstDestinatarios.DESTINATARIOS.Add(usu);
             }
 
-            var destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+            var destinatarios = JsonConvert.SerializeObject(lstDestinatarios, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
 
             if (retorno == (int)SITUACAO.SUCESSO)
             {

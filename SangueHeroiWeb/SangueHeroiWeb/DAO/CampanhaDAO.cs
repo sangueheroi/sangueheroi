@@ -225,7 +225,8 @@ namespace SangueHeroiWeb.DAO
                  + UtilHelper.TextForSql(cmodel.CIDADE) + " , " + Environment.NewLine
                  + UtilHelper.TextForSql(cmodel.ESTADO) + ";";
 
-                strQueryDelete = String.Format("DELETE CG FROM CAMPANHA_GRUPO CG INNER JOIN CAMPANHA C ON CG.CODIGO_CAMPANHA = C.CODIGO_CAMPANHA WHERE C.NOME_CAMPANHA = '{0}'", cmodel.NOME_CAMPANHA);
+                strQueryDelete = $"DELETE CG FROM CAMPANHA_GRUPO CG INNER JOIN CAMPANHA C " +
+                                 $"ON CG.CODIGO_CAMPANHA = C.CODIGO_CAMPANHA WHERE C.NOME_CAMPANHA = '{cmodel.NOME_CAMPANHA}'";
 
                 try
                 {
@@ -242,11 +243,15 @@ namespace SangueHeroiWeb.DAO
 
                 foreach (var item in destinatarios.DESTINATARIOS)
                 {
-                    string strQueryConsultaExistenciaCampanha = String.Format("SELECT CG.CODIGO_CAMPANHA FROM CAMPANHA C INNER JOIN CAMPANHA_GRUPO CG ON CG.CODIGO_CAMPANHA = C.CODIGO_CAMPANHA WHERE CG.CODIGO_GRUPO = {0} AND C.NOME_CAMPANHA = '{1}'", item.CODIGO_GRUPO, cmodel.NOME_CAMPANHA);
-                    string strQueryConsultaCodigoCampanha = String.Format("SELECT C.CODIGO_CAMPANHA FROM CAMPANHA C WHERE C.NOME_CAMPANHA = '{0}'", cmodel.NOME_CAMPANHA);
+                    var strQueryConsultaExistenciaCampanha = $"SELECT CG.CODIGO_CAMPANHA " +
+                                                                $"FROM CAMPANHA C INNER JOIN CAMPANHA_GRUPO CG " +
+                                                                $"ON CG.CODIGO_CAMPANHA = C.CODIGO_CAMPANHA " +
+                                                                $"WHERE CG.CODIGO_GRUPO = {item.CODIGO_GRUPO} AND C.NOME_CAMPANHA = '{cmodel.NOME_CAMPANHA}'";
 
-                    DataTable dt2 = new DataTable();
-                    DataTable dt3 = new DataTable();
+                    var strQueryConsultaCodigoCampanha = $"SELECT C.CODIGO_CAMPANHA FROM CAMPANHA C WHERE C.NOME_CAMPANHA = '{cmodel.NOME_CAMPANHA}'";
+
+                    var dt2 = new DataTable();
+                    var dt3 = new DataTable();
 
                     dt2 = (DataTable)context.ExecuteCommand(strQueryConsultaExistenciaCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
                     dt3 = (DataTable)context.ExecuteCommand(strQueryConsultaCodigoCampanha, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);

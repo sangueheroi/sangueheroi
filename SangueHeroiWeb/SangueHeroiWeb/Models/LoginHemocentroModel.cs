@@ -15,11 +15,12 @@ namespace SangueHeroiWeb.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Senha")]
-        public string SENHA { get; set; }
+        public string SENHA_HEMOCENTRO { get; set; }
 
-        [Display(Name = "Lembrar-me?")]
-        public bool LEMBRAR_ME { get; set; }
-
+        public LoginHemocentroModel getLoginModel()
+        {
+            return new LoginHemocentroModel();
+        }
     }
 
     public class EsqueciMinhaSenhaModel

@@ -14,33 +14,6 @@ namespace SangueHeroiWeb.Helpers.Job
         public void Execute(IJobExecutionContext context)
         {
             //VerificaNiveisSanguineos();
-            VerificaUltimaDataDoacaoUsuario();
-        }
-
-        private static void VerificaUltimaDataDoacaoUsuario()
-        {
-            var uDao = new UsuarioDAO();
-            var dDao = new DoacaoDAO();
-            var disDao = new DispositivoDAO();
-
-            var lstUsuario = uDao.consultarUsuarios();
-
-            var usuario = new UsuarioModel { DESTINATARIOS = new List<UsuarioModel>() };
-
-            foreach (var u in lstUsuario)
-            {
-                var diferenca = u.DATA_PROXIMA_DOACAO - DateTime.Now;
-
-                //Se a diferenca for 0 significa que a data da proxima doacao é o próximo dia então remove o usuario da lista de usuarios que irão receber a notificacao
-                if (diferenca.Days == 0)
-                {
-                    usuario.DESTINATARIOS.Add(u);
-                }
-            }
-
-            string destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
-
-            disDao.DispararNotificacaoProximaDoacao(usuario.DESTINATARIOS.FirstOrDefault().DATA_PROXIMA_DOACAO_STR, "O dia de sua doação está próximo!", "Identificamos que a data que você pode realizar sua doação está bem próxima! Doe sangue, salve vidas!", destinatarios);
         }
 
         private static void VerificaNiveisSanguineos()
@@ -56,7 +29,6 @@ namespace SangueHeroiWeb.Helpers.Job
             foreach (var h in lstHemocentros)
             {
                 var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO =  {h.CODIGO_HEMOCENTRO}");
-                //var lstNiveisSanguineos = hDao.GetNiveisSanguineos($" WHERE HNS.CODIGO_HEMOCENTRO = 7");
 
                 foreach (var tipoSanguineo in lstNiveisSanguineos)
                 {
@@ -79,5 +51,39 @@ namespace SangueHeroiWeb.Helpers.Job
 
         }
 
+    }
+
+    public class JobVerificaUltimaDataDoacaoUsuario : IJob
+    {
+        public void Execute(IJobExecutionContext context)
+        {
+            //VerificaUltimaDataDoacaoUsuario();
+        }
+
+        private static void VerificaUltimaDataDoacaoUsuario()   
+        {
+            var uDao = new UsuarioDAO();
+            var disDao = new DispositivoDAO();
+
+            var lstUsuario = uDao.consultarUsuarios();
+
+            var usuario = new UsuarioModel { DESTINATARIOS = new List<UsuarioModel>() };
+
+            foreach (var u in lstUsuario)
+            {
+                var diferenca = u.DATA_PROXIMA_DOACAO - DateTime.Now;
+
+                //Se a diferenca for 0 significa que a data da proxima doacao é o próximo dia então remove o usuario da lista de usuarios que irão receber a notificacao
+                if (diferenca.Days == 0)
+                {
+                    usuario.DESTINATARIOS.Add(u);
+                }
+            }
+
+            string destinatarios = JsonConvert.SerializeObject(usuario, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+            disDao.DispararNotificacaoProximaDoacao(usuario.DESTINATARIOS.FirstOrDefault().DATA_PROXIMA_DOACAO_STR, "O dia de sua doação está próximo!", "Identificamos que a data que você pode realizar sua doação está bem próxima! Doe sangue, salve vidas!", destinatarios);
+        }
+        
     }
 }

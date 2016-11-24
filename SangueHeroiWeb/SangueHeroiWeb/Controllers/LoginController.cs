@@ -23,16 +23,21 @@ namespace SangueHeroiWeb.Controllers
         {
             return PartialView("_Login");
         }
-
-
+        
         [HttpPost]
-        public ActionResult Login(HemocentroModel model)
+        public ActionResult Login(LoginHemocentroModel model)
         {
-            LoginDAO dao = new LoginDAO();
-            
-            int loginOK = dao.LogarHemocentro(model);
+            var dao = new LoginDAO();
+           
+            var loginModel = new LoginHemocentroModel
+            {
+                LOGIN_HEMOCENTRO = model.LOGIN_HEMOCENTRO,
+                SENHA_HEMOCENTRO = model.SENHA_HEMOCENTRO
+            };
 
-            if (loginOK == (int)SITUACAO.DADOS_INVALIDOS)
+            var loginOk = dao.LogarHemocentro(loginModel);
+
+            if (loginOk == (int)SITUACAO.DADOS_INVALIDOS)
             {
                 return Json(new
                 {
@@ -40,7 +45,7 @@ namespace SangueHeroiWeb.Controllers
                     isRedirect = false
                 });
             }
-            else if (loginOK == (int)SITUACAO.NAO_POSSUI_CADASTRO)
+            else if (loginOk == (int)SITUACAO.NAO_POSSUI_CADASTRO)
             {
                 return Json(new
                 {
@@ -48,7 +53,7 @@ namespace SangueHeroiWeb.Controllers
                     isRedirect = false
                 });
             }
-            else if (loginOK == Convert.ToInt32(SITUACAO.CADASTRO_BLOQUEADO))
+            else if (loginOk == Convert.ToInt32(SITUACAO.CADASTRO_BLOQUEADO))
             {
                 return Json(new
                 {
@@ -56,7 +61,7 @@ namespace SangueHeroiWeb.Controllers
                     isRedirect = false
                 });
             }
-            else if (loginOK == Convert.ToInt32(SITUACAO.ERRO_DE_SISTEMA))
+            else if (loginOk == Convert.ToInt32(SITUACAO.ERRO_DE_SISTEMA))
             {
                 return Json(new
                 {

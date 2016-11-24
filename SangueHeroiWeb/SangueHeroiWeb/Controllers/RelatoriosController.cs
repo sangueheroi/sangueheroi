@@ -19,12 +19,6 @@ namespace SangueHeroiWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult RelatorioTipoSanguineoLocalidade()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public ActionResult NiveisSanguineos()
         {
             HemocentroDAO hd = new HemocentroDAO();

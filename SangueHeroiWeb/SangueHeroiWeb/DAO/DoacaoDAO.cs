@@ -101,47 +101,81 @@ namespace SangueHeroiWeb.DAO
 
         public string[] getInfoDoacao(UsuarioModel model)
         {
-            string[] doacao = new string[5];
+            var doacao = new string[5];
 
-            string dt_ultima_doacao = "";
-            string dt_proxima_doacao = "";
-            string nome_hemocentro = "";
-            string sexo = "";
-            int consultaOK = (int)SITUACAO.DADOS_INVALIDOS;
+            var dtUltimaDoacao = "";
+            var dtProximaDoacao = "";
+            var nomeHemocentro = "";
+            var sexo = "";
+            var consultaOk = (int)SITUACAO.DADOS_INVALIDOS;
 
-            var strQuery = String.Format("SELECT * FROM USUARIO WHERE EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
-            var strQuerySelectDataUltimaDoacao = String.Format("SELECT UP.DATA_ULTIMA_DOACAO, UP.DATA_PROXIMA_DOACAO, UP.SEXO, D.NOME_HEMOCENTRO FROM USUARIO_PERFIL UP INNER JOIN USUARIO U ON UP.CODIGO_USUARIO = U.CODIGO_USUARIO INNER JOIN DOACAO D ON UP.CODIGO_USUARIO = D.CODIGO_USUARIO WHERE U.EMAIL_USUARIO = '{0}'", model.EMAIL_USUARIO);
+            var strQuery = $"SELECT " +
+                           $"   U.DATA_CRIACAO, " +
+                           $"   UP.DATA_ULTIMA_DOACAO, " +
+                           $"   UP.DATA_PROXIMA_DOACAO " +
+                           $"FROM USUARIO U " +
+                           $"JOIN USUARIO_PERFIL UP " +
+                           $"ON U.CODIGO_USUARIO = UP.CODIGO_USUARIO " +
+                           $"WHERE U.EMAIL_USUARIO = '{model.EMAIL_USUARIO}'";
 
-            DataTable dt = new DataTable();
-            DataTable dt2 = new DataTable();
+            var strQuerySelectDataUltimaDoacao = $"SELECT " +
+                                                 $"     TOP 1 " +
+                                                 $"     UP.DATA_ULTIMA_DOACAO, " +
+                                                 $"     UP.DATA_PROXIMA_DOACAO, " +
+                                                 $"     UP.SEXO, " +
+                                                 $"     D.NOME_HEMOCENTRO, " +
+                                                 $"     U.DATA_CRIACAO, " +
+                                                 $"     D.DATA_DOACAO " +
+                                                 $"FROM USUARIO_PERFIL UP " +
+                                                 $"INNER JOIN USUARIO U " +
+                                                 $"ON UP.CODIGO_USUARIO = U.CODIGO_USUARIO " +
+                                                 $"LEFT JOIN DOACAO D " +
+                                                 $"ON UP.CODIGO_USUARIO = D.CODIGO_USUARIO " +
+                                                 $"WHERE U.EMAIL_USUARIO = '{model.EMAIL_USUARIO}' " +
+                                                 $"order by d.data_doacao desc"; 
+
+            var dt = new DataTable();
+            var dt2 = new DataTable();
 
             try
             {
                 dt = (DataTable)context.ExecuteCommand(strQuery, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
                 dt2 = (DataTable)context.ExecuteCommand(strQuerySelectDataUltimaDoacao, CommandType.Text, ContextHelpers.TypeCommand.ExecuteDataTable);
-                consultaOK = (int)SITUACAO.SUCESSO;
+                consultaOk = (int)SITUACAO.SUCESSO;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                consultaOK = (int)SITUACAO.ERRO_DE_SISTEMA;
+                consultaOk = (int)SITUACAO.ERRO_DE_SISTEMA;
             }
             
             if (dt.Rows.Count > 0)
             {
-                foreach (DataRow data in dt2.Rows)
+                foreach (DataRow data in dt.Rows)
                 {
-                    dt_ultima_doacao = data["DATA_ULTIMA_DOACAO"].ToString();
-                    dt_proxima_doacao = data["DATA_PROXIMA_DOACAO"].ToString();
-                    nome_hemocentro = data["NOME_HEMOCENTRO"].ToString();
-                    sexo = data["SEXO"].ToString();
+
+                    var dtCriacaoUsuario = Convert.ToDateTime(data["DATA_CRIACAO"]).ToShortDateString();
+                    var dtUltimaDoacaoUsuario = Convert.ToDateTime(data["DATA_ULTIMA_DOACAO"]).ToShortDateString();
+                    var dtProximaDoacaoUsuario = Convert.ToDateTime(data["DATA_PROXIMA_DOACAO"]).ToShortDateString();
+
+                    if (dtCriacaoUsuario != dtUltimaDoacaoUsuario || dtCriacaoUsuario != dtProximaDoacaoUsuario)
+                        foreach (DataRow data2 in dt2.Rows)
+                        {
+                            dtUltimaDoacao = dtCriacaoUsuario != dtUltimaDoacaoUsuario ? Convert.ToDateTime(data2["DATA_ULTIMA_DOACAO"].ToString()).ToShortDateString() : " ";
+                            dtProximaDoacao = dtCriacaoUsuario != dtProximaDoacao ? Convert.ToDateTime(data2["DATA_PROXIMA_DOACAO"].ToString()).ToShortDateString() : " ";
+                            nomeHemocentro = dtCriacaoUsuario != dtUltimaDoacaoUsuario ? data2["NOME_HEMOCENTRO"].ToString() : " ";
+                            sexo = data2["SEXO"].ToString();
+                        }
+                    else
+                        consultaOk = 5;
                 }
+                
             }
 
-            doacao[0] = dt_ultima_doacao.Substring(0, 10);
-            doacao[1] = dt_proxima_doacao.Substring(0, 10);
-            doacao[2] = nome_hemocentro;
+            doacao[0] = dtUltimaDoacao;
+            doacao[1] = dtProximaDoacao;
+            doacao[2] = nomeHemocentro;
             doacao[3] = sexo;
-            doacao[4] = consultaOK.ToString();
+            doacao[4] = consultaOk.ToString();
 
             return doacao;
         }
